@@ -1,10 +1,17 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
 
-	<ui:define name="body">
+	<ui:define name="atius-body-left-ui">
+		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Email')}">
+			<ui:include src="/pages/email/menu.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Sites')}">
+			<ui:include src="/pages/sites/menu.xhtml" />
+		</h:panelGroup>
+	</ui:define>
+	<ui:define name="atius-body-right-ui">
 		<p:panel>
-			#{messages['main.app.welcome']}
+			xxxxxxxxxx
 		</p:panel>
 	</ui:define>
 

@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.prime.com.tr/ui">
+	<h:panelGroup>
+		<h:form prependId="false">
+			<!-- MENU LADO ESQUERDO -->
+			<p:commandLink value="E-mail" actionListener="#{menuContext.select('MenuTop', 'Email')}"
+				styleClass="#{menuContext.menu['MenuTop']['Email']['Style']}" ajax="false" immediate="true" action="/index.jsf" />
+			<h:outputText value="|" styleClass="separator" />
+			<p:commandLink value="Sites" actionListener="#{menuContext.select('MenuTop', 'Sites')}"
+				styleClass="#{menuContext.menu['MenuTop']['Sites']['Style']}" ajax="false" immediate="true" action="/index.jsf" />
+
+			<!-- MENU LADO DIREITO -->
+			<p:commandLink value="Sair" style="float: right; margin-right: 20px;" ajax="false" immediate="true" action="#{authMB.logout}" />
+			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;" />
+			<p:commandLink value="Fulano da Silva" style="float: right" actionListener="#{menuContext.select('MenuTop', 'User')}"
+				styleClass="#{menuContext.menu['MenuTop']['User']['Style']}" ajax="false" immediate="true" action="/index.jsf" />
+			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;" />
+			<p:commandLink value="Ajuda" style="float: right" actionListener="#{menuContext.select('MenuTop', 'Ajuda')}"
+				styleClass="#{menuContext.menu['MenuTop']['Ajuda']['Style']}" ajax="false" immediate="true" onclick="alert:'Implementar...'" />
+		</h:form>
+	</h:panelGroup>
+</ui:composition>

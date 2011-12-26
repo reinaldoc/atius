@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.prime.com.tr/ui">
+	<h:form prependId="false">
+		<h:panelGroup>
+			<p:commandLink value="Institucional" actionListener="#{menuContext.select('MenuSites', 'Institucional')}" ajax="false" immediate="true"
+				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Institucional']['Style']}" />
+
+			<p:commandLink value="Institutos" actionListener="#{menuContext.select('MenuSites', 'Institutos')}" ajax="false" immediate="true"
+				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Institutos']['Style']}" />
+
+			<p:commandLink value="Faculdades" actionListener="#{menuContext.select('MenuSites', 'Faculdades')}" ajax="false" immediate="true"
+				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Faculdades']['Style']}" />
+
+			<p:commandLink value="Docentes" actionListener="#{menuContext.select('MenuSites', 'Docentes')}" ajax="false" immediate="true"
+				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Docentes']['Style']}" />
+
+			<p:commandLink value="Administrativos" actionListener="#{menuContext.select('MenuSites', 'Administrativos')}" ajax="false"
+				immediate="true" action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Administrativos']['Style']}" />
+
+			<p:commandLink value="Projetos" actionListener="#{menuContext.select('MenuSites', 'Projetos')}" ajax="false" immediate="true"
+				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Projetos']['Style']}" />
+
+			<p:commandLink value="Eventos" actionListener="#{menuContext.select('MenuSites', 'Eventos')}" ajax="false" immediate="true"
+				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Eventos']['Style']}" />
+
+		</h:panelGroup>
+	</h:form>
+	<!-- 
+	<ui:include src="pages/sites/edit.xhtml" />
+ -->
+</ui:composition>
