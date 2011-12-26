@@ -1,1 +1,129 @@
 @CHARSET "UTF-8";
+
+/*
+	CSS for Layout
+*/
+html {
+	font-family: Tahoma, Arial, Verdana !important;
+	font-size: 12px;
+	text-shadow: 1px 1px 9px #D6D6D6;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#atius-top-id {
+	width: 100%;
+	background-color: #E8E8E8;
+	height: 25px;
+	border-bottom: solid 1px #AFAFAF;
+}
+
+#atius-top-id a {
+	color: #045491;
+	text-decoration: none;
+	display: inline-block;
+	line-height: 25px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#atius-top-id a.right-menu-item {
+	float: right;;
+}
+
+#atius-top-id a:HOVER {
+	background-color: #CECECE;
+}
+
+#atius-top-id a.selected {
+	background-color: gray;
+	color: white;
+	font-weight: bold;
+}
+
+#atius-header-id {
+	margin-top: 5px;
+}
+
+#atius-body-left-id {
+	float: left;
+	width: 180px;
+	padding-top: 20px;
+}
+
+#atius-body-left-id a {
+	display: block;
+	padding-top: 4px;
+	padding-left: 15px;
+	padding-bottom: 4px;
+}
+
+#atius-body-left-id a.selected {
+	background-color: gray;
+	color: white;
+	font-weight: bold;
+}
+
+#atius-body-left-id a:hover {
+	background-color: #CECECE;
+	color: #045491;
+	font-weight: normal;
+}
+
+#atius-body-right-id {
+	margin-top: 10px;
+	margin-left: 180px;
+	right: 1px;
+	border: 3px solid gray;
+	min-height: 200px;
+	border-radius: 7px 7px 7px 7px;
+}
+
+#atius-footer-id {
+	width: 90%;
+	text-align: center;
+	margin-top: 50px;
+	margin-left: 70px;
+}
+
+/*
+	CSS for HTML tags
+*/
+
+td.top {
+	vertical-align: top;
+}
+
+/*
+	CSS for Tables
+*/
+
+.atius-table {
+	width: 100%;
+	border: 1px solid inherit;
+}
+
+.atius-table th {
+	padding: 4px 10px;
+	background: #DDDDDD none repeat scroll 0 0 !important;
+	border: 0 none !important;
+	color: #2854BB !important;
+	font-weight: bold !important;
+	padding-bottom: 4px !important;
+	padding-top: 4px !important;
+	text-align: left !important;
+	-moz-background-clip: border !important;
+	-moz-background-inline-policy: continuous !important;
+	-moz-background-origin: padding !important;
+}
+
+.atius-table td {
+	padding: 2px 4px 3px;
+	border-color: -moz-use-text-color -moz-use-text-color #D6D6D6 !important;
+	border-style: none none solid !important;
+	border-width: 0 0 1px !important;
+}

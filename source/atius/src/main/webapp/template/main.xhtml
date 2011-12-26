@@ -14,7 +14,7 @@
 	<div id="atius-top-id">
 		<ui:insert name="atius-top-ui">
 			<!-- @TopMenu  -->
-			<ui:include src="/menu.xhtml" />
+			<ui:include src="/pages/menu.xhtml" />
 		</ui:insert>
 	</div>
 	<div id="atius-header-id">
@@ -26,8 +26,8 @@
 						<ui:insert name="atius-header-left-ui">
 							<!-- Begin @HeaderLeft  -->
 							<h:form prependId="false">
-								<p:commandLink actionListener="#{menuContext.select('Security', 'User')}" ajax="false" immediate="true" action="/security/admin.jsf">
-									<h:graphicImage library="images" name="aelis.png" width="165px" height="44px" alt="Acompanhamento Eleitoral"
+								<p:commandLink actionListener="#{menuContext.select('TopMenu', 'Sites')}" ajax="false" immediate="true" action="/index.jsf">
+									<h:graphicImage library="images" name="atius.png" width="165px" height="44px" alt="Atius"
 										style="border: 0px; margin-left: 0px; margin-top: 5px; margin-right: 8px;" />
 								</p:commandLink>
 							</h:form>
@@ -38,19 +38,7 @@
 				<h:panelGroup>
 					<div id="atius-header-right-id">
 						<ui:insert name="atius-header-right-ui">
-							<!-- Begin @HeaderRight  - ->
-							<h:form prependId="false">
-								<h:panelGroup style="border: 2px solid gray; " layout="block">
-									<h:inputText value="#{filterContex.searchKey}"
-										style="width: 250px; font-weight: bold; border: 0px solid gray; border-right: none; height: 18px;"
-										styleClass="#{filterContex.filtered ? 'filtered': ''}" />
-									<p:commandButton value="X" style="border: 0px !important" styleClass="sds-custom-button" rendered="#{filterContex.filtered}"
-										actionListener="#{filterContex.clear}" ajax="false" />
-									<p:commandButton value="Buscar" action="/security/admin.jsf" ajax="false" actionListener="#{filterContex.search('TODOS')}"
-										style="border: 0px !important; right: 0px;" />
-								</h:panelGroup>
-							</h:form>
-							<!- - End @HeaderRight  -->
+							<!-- @HeaderRight  -->
 						</ui:insert>
 					</div>
 				</h:panelGroup>
@@ -60,17 +48,18 @@
 	</div>
 	<div id="atius-body-id">
 		<ui:insert name="atius-body-ui">
+			<!-- Begin @Body  -->
 			<div id="atius-body-left-id">
 				<ui:insert name="atius-body-left-ui">
-					<!-- @Menu -->
-					<ui:include src="/security/menu.xhtml" />
+					<!-- @BodyLeft -->
 				</ui:insert>
 			</div>
 			<div id="atius-body-right-id">
 				<ui:insert name="atius-body-right-ui">
-					<!-- @Content -->
+					<!-- @BodyRight -->
 				</ui:insert>
 			</div>
+			<!-- End @Body  -->
 		</ui:insert>
 	</div>
 </h:body>
