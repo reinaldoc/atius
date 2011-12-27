@@ -1,6 +1,6 @@
 # ATIUS
 
-Sistema de gestão de TI Univertitário.
+Sistema de gestão de TI Universitário.
 
 # Licença
 
