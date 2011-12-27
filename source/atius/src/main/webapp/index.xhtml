@@ -1,18 +1,15 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
 
-	<ui:define name="atius-body-left-ui">
+	<ui:define name="atius-body-ui">
+		<!-- Begin @Body  -->
 		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Email')}">
-			<ui:include src="/pages/email/menu.xhtml" />
+			<ui:include src="/pages/email/main.xhtml" />
 		</h:panelGroup>
 		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Sites')}">
-			<ui:include src="/pages/sites/menu.xhtml" />
+			<ui:include src="/pages/sites/main.xhtml" />
 		</h:panelGroup>
-	</ui:define>
-	<ui:define name="atius-body-right-ui">
-		<p:panel>
-			xxxxxxxxxx
-		</p:panel>
+		<!-- End @Body  -->
 	</ui:define>
 
 </ui:composition>
