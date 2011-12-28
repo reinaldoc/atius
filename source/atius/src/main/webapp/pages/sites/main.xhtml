@@ -8,7 +8,12 @@
 	</div>
 	<div id="atius-body-right-id">
 		<!-- Begin @BodyRight  -->
-		<ui:include src="list.xhtml" />
+		<h:panelGroup rendered="#{menuContext.isSelected('MenuSites', 'Configuração')}">
+			<ui:include src="config.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{!menuContext.isSelected('MenuSites', 'Configuração')}">
+			<ui:include src="list.xhtml" />
+		</h:panelGroup>
 		<!-- Begin @BodyRight  -->
 	</div>
 </ui:composition>
