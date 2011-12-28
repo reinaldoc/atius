@@ -37,6 +37,7 @@ public abstract class AbstractMenuContext implements Serializable {
 
 	/**
 	 * Retrive menu from XHTML;
+	 * 
 	 * @return
 	 */
 	public Map<String, Map<String, Map<String, String>>> getMenu() {
@@ -68,6 +69,14 @@ public abstract class AbstractMenuContext implements Serializable {
 		menu.put(menuName, items);
 	}
 
+	private String getValue(String menuName, String itemName, String keyName) {
+		try {
+			return menu.get(menuName).get(KEY_CONFIG).get(KEY_SELECTION_MODE);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	private void unselectAll(String menuName) {
 		if (SELECTION_MODE_SINGLE.equals(getSelectionMode(menuName))) {
 			Map<String, Map<String, String>> items = new HashMap<String, Map<String, String>>();
@@ -90,7 +99,6 @@ public abstract class AbstractMenuContext implements Serializable {
 		unselectAll(menuName);
 		setValue(menuName, itemName, KEY_STYLECLASS, styleClass);
 	}
-
 
 	public boolean isSelected(String menuName, String itemName) {
 		try {
@@ -115,7 +123,11 @@ public abstract class AbstractMenuContext implements Serializable {
 	}
 
 	public int getCounter(String menuName, String itemName) {
-		return 0;
+		String count = getValue(menuName, KEY_CONFIG, KEY_SELECTION_MODE);
+		if (count == null)
+			return 0;
+		else
+			return new Long(count).intValue();
 	}
 
 	public void setCounter(String menuName, String itemName, int count) {
@@ -131,12 +143,7 @@ public abstract class AbstractMenuContext implements Serializable {
 	}
 
 	public String getSelectionMode(String menuName) {
-		String selectionMode = null;
-		try {
-			selectionMode = menu.get(menuName).get(KEY_CONFIG).get(KEY_SELECTION_MODE);
-		} catch (Exception e) {
-			// Ignore
-		}
+		String selectionMode = getValue(menuName, KEY_CONFIG, KEY_SELECTION_MODE);
 		if (selectionMode == null) {
 			if (isSingleSelection())
 				selectionMode = SELECTION_MODE_SINGLE;
@@ -156,15 +163,11 @@ public abstract class AbstractMenuContext implements Serializable {
 
 	public boolean isPermitUnselect(String menuName) {
 		boolean permitUnselect = isPermitedUnselect();
-		try {
-			String tmpPermitUnselect = menu.get(menuName).get(KEY_CONFIG).get(KEY_PERMIT_UNSELECT);
-			if (PERMIT_UNSELECT_TRUE.equals(tmpPermitUnselect))
-				permitUnselect = true;
-			else
-				permitUnselect = false;
-		} catch (Exception e) {
-			// Ignore
-		}
+		String permitUnselectStr = getValue(menuName, KEY_CONFIG, KEY_PERMIT_UNSELECT);
+		if (PERMIT_UNSELECT_TRUE.equals(permitUnselectStr))
+			permitUnselect = true;
+		else if (PERMIT_UNSELECT_FALSE.equals(permitUnselectStr))
+			permitUnselect = false;
 		return permitUnselect;
 	}
 
