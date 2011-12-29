@@ -2,6 +2,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.prime.com.tr/ui">
 	<h:form prependId="false">
 		<h:panelGroup>
+
+			<p:dataGrid value="#{websiteCategoryListMB.websiteCategory}" var="category" columns="1">
+				<p:commandLink value="#{category.name}" ajax="false" immediate="true" action="#{menuContext.selectByParameters}"
+					styleClass="#{menuContext.menu['MenuSites'][category.name]['Style']}">
+					<f:param name="menuName" value="MenuSites" />
+					<f:param name="itemName" value="#{category.name}" />
+				</p:commandLink>
+			</p:dataGrid>
+			<!-- 
 			<p:commandLink value="Institucional" actionListener="#{menuContext.select('MenuSites', 'Institucional')}" ajax="false" immediate="true"
 				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Institucional']['Style']}" />
 
@@ -22,8 +31,8 @@
 
 			<p:commandLink value="Eventos" actionListener="#{menuContext.select('MenuSites', 'Eventos')}" ajax="false" immediate="true"
 				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Eventos']['Style']}" />
-
 			<p:spacer height="10px" />
+ -->
 
 			<p:commandLink value="Configuração" actionListener="#{menuContext.select('MenuSites', 'Configuração')}" ajax="false" immediate="true"
 				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Configuração']['Style']}" />
