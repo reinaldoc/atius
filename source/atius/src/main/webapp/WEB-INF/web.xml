@@ -28,6 +28,11 @@
 		<auth-constraint />
 	</security-constraint>
 
+	<context-param>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 	<!-- Permit POST generate viewIds to avoid ViewExpiredException -->
 	<context-param>
 		<param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
