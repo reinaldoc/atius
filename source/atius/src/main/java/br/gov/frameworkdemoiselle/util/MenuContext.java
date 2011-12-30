@@ -20,7 +20,7 @@ public class MenuContext extends AbstractMenuContext {
 	private Parameter<String> itemName;
 
 	public MenuContext() {
-		select("MenuTop", "Email");
+		select("MenuTop", "Sites");
 		select("MenuEmail", "Institucional");
 		select("MenuSites", "Institucional");
 	}
