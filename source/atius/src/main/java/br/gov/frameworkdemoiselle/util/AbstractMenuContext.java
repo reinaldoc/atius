@@ -93,7 +93,6 @@ public abstract class AbstractMenuContext implements Serializable {
 	public void select(String menuName, String itemName) {
 		unselectAll(menuName);
 		setValue(menuName, itemName, KEY_STYLECLASS, getSelectedStyleClass());
-		int x = 0;
 	}
 
 	public void select(String menuName, String itemName, String styleClass) {
