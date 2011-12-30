@@ -120,7 +120,6 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		final String jpql = "select this from " + getBeanClass().getSimpleName() + " this";
 		final EntryQuery query = getEntryManager().createQuery(jpql);
@@ -141,6 +140,7 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 	 * 
 	 * @return the row count
 	 */
+	@SuppressWarnings("unused")
 	private Long countAll() {
 		final EntryQuery query = getEntryManager().createQuery(
 				"select count(this) from " + beanClass.getSimpleName() + " this");
