@@ -21,7 +21,7 @@ public class EntryManager implements Serializable {
 	private EntryQuery query;
 
 	private int protocol = 3;
-
+	
 	/**
 	 * Set LDAP Protocol for LDAP BIND operation when not using resource
 	 * configuration;
@@ -79,19 +79,54 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * Update not implemented
+	 * Insert not implemented
 	 */
-	@SuppressWarnings("unused")
-	private void update() {
+	public void persist(Object entity) {
 
 	}
 
 	/**
-	 * Insert not implemented
+	 * Update not implemented
 	 */
-	@SuppressWarnings("unused")
-	private void insert() {
+	public void merge(Object entity) {
 
+	}
+
+	/**
+	 * Remove not implemented
+	 */
+	public void remove(Object entity) {
+
+	}
+
+	/**
+	 * Find not implemented
+	 */
+	public <T> T find(Class<T> entityClass, Object dn) {
+		T entity = null;
+		try {
+			entity = entityClass.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * Find not implemented
+	 */
+	public <T> T getReference(Class<T> entityClass, Object dn) {
+		T entity = null;
+		try {
+			entity = entityClass.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return entity;
 	}
 
 	/**
