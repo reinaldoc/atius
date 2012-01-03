@@ -2,6 +2,7 @@ package br.gov.frameworkdemoiselle.ldap.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -69,7 +70,7 @@ public class EntryQuery implements Serializable {
 	public void setScope(int scope) {
 		this.scope = scope;
 	}
-	
+
 	public void setFilter(String ldapFilter) {
 		this.ldapFilter = ldapFilter;
 	}
@@ -91,8 +92,7 @@ public class EntryQuery implements Serializable {
 	private Map<String, LDAPEntry> find() {
 		Map<String, LDAPEntry> resultMap = new HashMap<String, LDAPEntry>();
 		try {
-			LDAPSearchResults searchResults = getConnection().search(basedn, scope, ldapFilter, resultAttributes,
-					false, ldapConstraints);
+			LDAPSearchResults searchResults = getConnection().search(basedn, scope, ldapFilter, resultAttributes, false, ldapConstraints);
 			while (searchResults != null && searchResults.hasMore()) {
 				try {
 					LDAPEntry entry = searchResults.next();
@@ -149,6 +149,10 @@ public class EntryQuery implements Serializable {
 			resultMap.put(dn, entryMap);
 		}
 		return resultMap;
+	}
+
+	public Collection<Map<String, String[]>> getResultCollection() {
+		return getResult().values();
 	}
 
 	/**
