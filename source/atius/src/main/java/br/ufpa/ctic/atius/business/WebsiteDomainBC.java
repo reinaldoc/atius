@@ -10,4 +10,13 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 
 	private static final long serialVersionUID = 1L;
 
+	public boolean domainAvailable(String serverName) {
+		if (serverName != null && serverName.length() > 8) {
+			WebsiteDomain websiteDomain = getDelegate().findByServerName(serverName);
+			if (websiteDomain.getServerName() == null)
+				return true;
+		}
+		return false;
+	}
+
 }
