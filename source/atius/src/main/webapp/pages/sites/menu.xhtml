@@ -2,7 +2,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.prime.com.tr/ui">
 	<h:form prependId="false">
 		<h:panelGroup>
-
 			<p:dataGrid value="#{websiteCategoryListMB.websiteCategories}" var="category" columns="1">
 				<p:column>
 					<p:commandLink value="#{category.name}" ajax="false" immediate="true"
@@ -18,10 +17,7 @@
 
 			<p:commandLink value="Configuração" actionListener="#{menuContext.select('MenuSites', 'Configuração')}" ajax="false" immediate="true"
 				styleClass="#{menuContext.menu['MenuSites']['Configuração']['Style']}" />
-
 		</h:panelGroup>
 	</h:form>
-	<!-- 
-	<ui:include src="pages/sites/edit.xhtml" />
- -->
+	<ui:include src="edit.xhtml" />
 </ui:composition>
