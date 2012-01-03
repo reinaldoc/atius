@@ -35,4 +35,8 @@ public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, Web
 
 	}
 
+	public List<String> getWebsiteProfiles() {
+		return getDelegate().getWebsiteProfiles();
+	}
+	
 }
