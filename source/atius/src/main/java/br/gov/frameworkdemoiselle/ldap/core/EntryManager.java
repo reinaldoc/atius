@@ -6,6 +6,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.ldap.internal.ConnectionManager;
+import br.gov.frameworkdemoiselle.ldap.internal.EntryCore;
 
 import com.novell.ldap.LDAPException;
 
@@ -20,8 +21,11 @@ public class EntryManager implements Serializable {
 	@Inject
 	private EntryQuery query;
 
+	@Inject
+	private EntryCore core;
+
 	private int protocol = 3;
-	
+
 	/**
 	 * Set LDAP Protocol for LDAP BIND operation when not using resource
 	 * configuration;
@@ -81,52 +85,36 @@ public class EntryManager implements Serializable {
 	/**
 	 * Insert not implemented
 	 */
-	public void persist(Object entity) {
-
+	public void persist(Object entry) {
+		core.persist(entry);
 	}
 
 	/**
 	 * Update not implemented
 	 */
-	public void merge(Object entity) {
-
+	public void merge(Object entry) {
+		core.merge(entry);
 	}
 
 	/**
 	 * Remove not implemented
 	 */
 	public void remove(Object entity) {
-
+		core.remove(entity);
 	}
 
 	/**
 	 * Find not implemented
 	 */
-	public <T> T find(Class<T> entityClass, Object dn) {
-		T entity = null;
-		try {
-			entity = entityClass.newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return entity;
+	public <T> T find(Class<T> entryClass, Object dn) {
+		return core.find(entryClass, dn);
 	}
 
 	/**
 	 * Find not implemented
 	 */
-	public <T> T getReference(Class<T> entityClass, Object dn) {
-		T entity = null;
-		try {
-			entity = entityClass.newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return entity;
+	public <T> T getReference(Class<T> entryClass, Object dn) {
+		return core.getReference(entryClass, dn);
 	}
 
 	/**
