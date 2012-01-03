@@ -3,14 +3,15 @@
 
 	<h:form prependId="false">
 
+		<p:confirmDialog message="Deseja desativar o website?" header="Atenção!" severity="alert" widgetVar="atius_sites_confirmation">
+			<p:commandButton value="Sim" oncomplete="atius_sites_confirmation.hide()" update="atius-sites-list-datatable-id,growl" />
+			<p:commandButton value="Não" onclick="atius_sites_confirmation.hide()" type="button" />
+		</p:confirmDialog>
+
 		<h:panelGroup id="atius-sites-list-panel-id">
-			<p:growl id="growl" showDetail="false" />
 			<p:dataTable id="atius-sites-list-datatable-id" widgetVar="atius_sites_list_datatable" styleClass="sds-datatable"
 				emptyMessage="Não há registros" value="#{websiteDomainListMB.resultList}" var="domain" rows="30" paginator="true"
 				paginatorAlwaysVisible="false" pageLinks="5" paginatorPosition="bottom">
-				<p:column style="width: 1px">
-					<h:selectBooleanCheckbox styleClass="ui-selection-column" value="#{websiteDomainListMB.selection[pessoa.id]}" />
-				</p:column>
 				<p:column headerText="Site" style="width:200px" sortBy="#{domain.cn}">
 					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
 						<h:outputText value="#{domain.cn} " />
@@ -30,6 +31,11 @@
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 						<h:outputText value="#{domain.websiteProfile}" />
 					</h:panelGroup>
+				</p:column>
+				<p:column style="text-align: right;">
+					<p:commandButton image="ui-icon-search" style="icon" oncomplete="atius_sites_confirmation.show()" update="atius-sites-list-datatable-id" />
+					<p:commandButton image="ui-icon-unlocked" style="icon" oncomplete="atius_sites_confirmation.show()" update="atius-sites-list-datatable-id" />
+					<p:commandButton image="ui-icon-trash" style="icon" oncomplete="atius_sites_confirmation.show()" update="atius-sites-list-datatable-id" />
 				</p:column>
 			</p:dataTable>
 		</h:panelGroup>
