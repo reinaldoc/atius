@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form prependId="false">
+		<h:panelGrid columns="2">
+			<h:panelGroup layout="block">
+				<h:inputText value="" style="width: 270px; font-weight: bold; border: 2px solid gray; height: 22px; margin-right: 3px;" />
+				<p:commandButton image="ui-icon ui-icon-search" value="Buscar" ajax="false" style="border: 0px !important; right: 0px; width: 80px" />
+			</h:panelGroup>
+			<p:commandButton image="ui-icon-plusthick" value="Novo Site" action="#{websiteDomainEditMB.create}" immediate="true"
+				update="atius-sites-edit-dlg-body-id" oncomplete="atius_sites_edit_dlg.show()" style="margin-left: 45px;"/>
+		</h:panelGrid>
+	</h:form>
+
+</ui:composition>
