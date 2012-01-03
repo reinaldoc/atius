@@ -1,5 +1,12 @@
 @CHARSET "UTF-8";
 
+/* Font */
+.ui-widget {
+	font: small-caption !important;
+	font-size: 12px !important;
+	text-shadow: 1px 1px 9px #D6D6D6;
+}
+
 /*  Permit no spacing in <p:dataGrid>  */
 .ui-datagrid-data {
 	border-collapse: collapse;
@@ -7,6 +14,31 @@
 
 .ui-datagrid-column {
 	padding: 0px !important;
+}
+
+/* Buttons */
+.ui-button {
+	margin-right: 7px;
+	background: none !important;
+	background-color: #74ffcc !important;
+	border: 0px solid #DEE5F2 !important;
+	border-radius: 6px;
+	font-weight: bold !important;
+}
+
+.ui-button:hover {
+	background: none;
+	background-color: #2EC890 !important;
+	border: 0px solid #DEE5F2;
+	border-radius: 6px;
+	color: white;
+	font-weight: bold;
+}
+
+button.ui-button-icon-only {
+	height: 24px;
+	width: 24px;
+	margin-right: 12px;
 }
 
 /*  DataTable  */
@@ -21,8 +53,6 @@
 	padding-top: 4px !important;
 	padding-bottom: 4px !important;
 	text-align: left !important;
-	color: #2854BB !important;
-	font-weight: bold !important;
 }
 
 .ui-datatable-data tr {
@@ -47,3 +77,27 @@
 	padding-top: 2px !important;
 	padding-bottom: 3px !important;
 }
+
+/* Dialog */
+.ui-dialog {
+	padding: 0px !important;
+	border: 3px solid white;
+	border-radius: 3px 3px 3px 3px !important;
+	-moz-box-shadow: 2px 2px 2px #aaa;
+	-webkit-box-shadow: 2px 2px 2px #aaa;
+	box-shadow: 2px 2px 2px 2px #aaa;
+}
+
+.ui-dialog-titlebar {
+	border-radius: 2px 2px 2px 2px !important;
+	margin: 0px !important;
+	border: 0px !important;
+	background-image: none !important;
+	background-color: #2EC890;
+	color: white;
+	padding: 0px !important;
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+	padding-left: 7px !important;
+}
+

@@ -14,7 +14,6 @@ body {
 	padding: 0px;
 }
 
-
 #atius-top-id {
 	width: 100%;
 	background-color: #E8E8E8;
@@ -106,6 +105,15 @@ td.top {
 	vertical-align: top;
 }
 
+fieldset {
+	border: 0px !important;
+	border-top: 2px solid #BBC5CD !important;
+	border-radius: 0px !important;
+	margin: 0px !important;
+	padding: 0px !important;
+	padding-top: 5px;
+}
+
 /*
 	CSS for Tables
 */
@@ -134,4 +142,34 @@ td.top {
 	border-color: -moz-use-text-color -moz-use-text-color #D6D6D6 !important;
 	border-style: none none solid !important;
 	border-width: 0 0 1px !important;
+}
+
+/*
+	CSS for Dialog
+*/
+
+.dialog-body {
+	width: 100%;
+	border-bottom: 2px solid #AFAFAF;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}
+
+.dialog-body td {
+	color: #3F586D;
+	font-weight: bold;
+}
+
+.dialog-body input[type=text],textarea {
+	width: 375px;
+	border: 1px solid #BBC5CD !important;
+	padding: 3px !important;
+	border-radius: 0px !important;
+	box-shadow: none !important;
+	color: black;
+}
+
+.dialog-body input[type=text]:focus {
+	border: 1px solid #BBC5CD;
+	background-color: #FFFFE0;
 }
