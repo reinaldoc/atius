@@ -17,6 +17,10 @@ public class WebsiteDomain {
 
 	private String uid;
 
+	private String ownerId;
+
+	private String adminId;
+
 	public String getCn() {
 		return cn;
 	}
@@ -76,5 +80,22 @@ public class WebsiteDomain {
 	public void setObjectClass(String[] objectClass) {
 		this.objectClass = objectClass;
 	}
+
+	public String getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public String getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
+	}
+
 
 }
