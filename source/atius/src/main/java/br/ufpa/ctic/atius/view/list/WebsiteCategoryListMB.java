@@ -16,6 +16,8 @@ public class WebsiteCategoryListMB extends AbstractListPageBean<WebsiteCategory,
 
 	List<WebsiteCategory> websiteCategories;
 
+	List<String> websiteProfiles;
+
 	@Inject
 	private WebsiteCategoryBC bc;
 
@@ -27,6 +29,16 @@ public class WebsiteCategoryListMB extends AbstractListPageBean<WebsiteCategory,
 	public void setWebsiteCategories() {
 		if (websiteCategories == null)
 			websiteCategories = bc.getOrderedWebsiteCategories();
+	}
+
+	public List<String> getWebsiteProfiles() {
+		setWebsiteProfiles();
+		return websiteProfiles;
+	}
+
+	public void setWebsiteProfiles() {
+		if (websiteProfiles == null)
+			websiteProfiles = bc.getWebsiteProfiles();
 	}
 
 	@Override
