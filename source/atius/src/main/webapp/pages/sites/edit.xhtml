@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form prependId="false">
+		<h:panelGrid id="atius-sites-edit-panel-id">
+			<p:dialog id="atius-sites-edit-dlg-id" header="ATIUS - Cadastro de Websites" widgetVar="atius_sites_edit_dlg" modal="true" width="600"
+				resizable="false">
+				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-sites-edit-dlg-body-id">
+					<h:outputText value="Nome:" />
+					<h:inputText value="#{websiteDomainEditMB.bean.cn}" onkeypress="return event.keyCode!=13" />
+
+					<h:outputText value="Domínio:" />
+					<h:panelGroup>
+						<h:inputText value="#{websiteDomainEditMB.bean.serverName}" onkeypress="return event.keyCode!=13" />
+						<p:commandButton image="ui-icon-gear" title="Verificar" action="#{websiteDomainEditMB.domainAvailable}"
+							update="atius-growl-id" />
+					</h:panelGroup>
+
+					<h:outputText value="Categoria:" />
+					<h:selectOneMenu value="#{websiteDomainEditMB.bean.websiteCategory}" effect="fade">
+						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
+						<f:selectItems value="#{websiteCategoryListMB.websiteCategories}" var="category" itemLabel="#{category.name}"
+							itemValue="#{category.name}" />
+					</h:selectOneMenu>
+
+					<h:outputText value="Tipo:" />
+					<h:selectOneMenu value="#{websiteDomainEditMB.bean.websiteProfile}" effect="fade">
+						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
+						<f:selectItems value="#{websiteCategoryListMB.websiteProfiles}" var="profile" itemLabel="#{profile}" itemValue="#{profile}" />
+					</h:selectOneMenu>
+
+					<h:outputText value="Contato Administrativo:" />
+					<p:autoComplete value="#{websiteDomainEditMB.bean.ownerId}"
+						completeMethod="" forceSelection="true" maxResults="10" minQueryLength="3"
+						selectListener="" 
+						onkeypress="return event.keyCode!=13"/>
+
+					<h:outputText value="Contato Técnico:" />
+					<p:autoComplete value="#{websiteDomainEditMB.bean.adminId}"
+						completeMethod="" forceSelection="true" maxResults="10" minQueryLength="3"
+						selectListener="" 
+						onkeypress="return event.keyCode!=13"/>
+				</h:panelGrid>
+
+				<h:panelGroup id="atius-sites-edit-dlg-buttons-id">
+				</h:panelGroup>
+
+			</p:dialog>
+		</h:panelGrid>
+	</h:form>
+
+
+</ui:composition>
