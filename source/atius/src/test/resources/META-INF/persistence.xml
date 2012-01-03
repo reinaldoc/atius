@@ -7,7 +7,7 @@
 	-->
 	<persistence-unit name="bookmark-ds" transaction-type="RESOURCE_LOCAL">
 
-		<class>br.ufpa.ctic.atius.domain.Bookmark</class>
+		<!--  <class>br.ufpa.ctic.atius.domain.Bookmark</class> -->
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
