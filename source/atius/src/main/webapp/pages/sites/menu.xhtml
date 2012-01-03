@@ -3,7 +3,7 @@
 	<h:form prependId="false">
 		<h:panelGroup>
 
-			<p:dataGrid value="#{websiteCategoryListMB.websiteCategory}" var="category" columns="1">
+			<p:dataGrid value="#{websiteCategoryListMB.websiteCategories}" var="category" columns="1">
 				<p:column>
 					<p:commandLink value="#{category.name}" ajax="false" immediate="true"
 						actionListener="#{menuContext.select('MenuSites', category.name)}"
@@ -11,10 +11,13 @@
 				</p:column>
 			</p:dataGrid>
 
+			<p:commandLink value="Todos" actionListener="#{menuContext.select('MenuSites', 'Todos')}" ajax="false" immediate="true"
+				styleClass="#{menuContext.menu['MenuSites']['Todos']['Style']}" />
+
 			<p:spacer height="10px" />
 
 			<p:commandLink value="Configuração" actionListener="#{menuContext.select('MenuSites', 'Configuração')}" ajax="false" immediate="true"
-				action="/index.jsf" styleClass="#{menuContext.menu['MenuSites']['Configuração']['Style']}" />
+				styleClass="#{menuContext.menu['MenuSites']['Configuração']['Style']}" />
 
 		</h:panelGroup>
 	</h:form>

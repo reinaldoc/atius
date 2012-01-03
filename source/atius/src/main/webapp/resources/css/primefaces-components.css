@@ -1,9 +1,6 @@
 @CHARSET "UTF-8";
 
-/*
-	Permit no spacing in <p:dataGrid>
-*/
-
+/*  Permit no spacing in <p:dataGrid>  */
 .ui-datagrid-data {
 	border-collapse: collapse;
 }
@@ -12,3 +9,41 @@
 	padding: 0px !important;
 }
 
+/*  DataTable  */
+.ui-datatable {
+	font-family: inherit !important;
+}
+
+.ui-datatable th {
+	background: none !important;
+	background-color: #dddddd !important;
+	border: 0px !important;
+	padding-top: 4px !important;
+	padding-bottom: 4px !important;
+	text-align: left !important;
+	color: #2854BB !important;
+	font-weight: bold !important;
+}
+
+.ui-datatable-data tr {
+	background: none;
+	color: #3f586d;
+	border: 0px !important;
+	border-bottom: 1px solid #b9c7d3;
+	background-color: #F5F5F5;
+}
+
+.ui-datatable-data-empty tr {
+	border: 0px !important;
+	text-align: center !important;
+	height: 200px;
+}
+
+.ui-datatable td,.ui-datatable-data-empty td {
+	border: 0px !important;
+	border-bottom: 1px solid #D6D6D6 !important;
+	padding-left: 4px !important;
+	padding-right: 4px !important;
+	padding-top: 2px !important;
+	padding-bottom: 3px !important;
+}
