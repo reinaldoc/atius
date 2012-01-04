@@ -16,6 +16,10 @@
 	padding: 0px !important;
 }
 
+.ui-widget-content {
+	border: none;
+}
+
 /* Buttons */
 .ui-button {
 	margin-right: 7px;
@@ -78,6 +82,10 @@ button.ui-button-icon-only {
 	padding-bottom: 3px !important;
 }
 
+.ui-state-default {
+    box-shadow: none;
+}
+
 /* Dialog */
 .ui-dialog {
 	padding: 0px !important;
@@ -95,9 +103,11 @@ button.ui-button-icon-only {
 	background-image: none !important;
 	background-color: #2EC890;
 	color: white;
-	padding: 0px !important;
-	padding-top: 5px !important;
-	padding-bottom: 5px !important;
-	padding-left: 7px !important;
+	padding: 0px 0px 5px 7px !important;
+	height: 19px;
+}
+
+.ui-state-hover, .ui-state-focus {
+	background: none !important;
 }
 

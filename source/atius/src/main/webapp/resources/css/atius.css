@@ -86,7 +86,7 @@ body {
 	margin-left: 180px;
 	right: 1px;
 	border: 3px solid #2ec890;
-	min-height: 200px;
+	min-height: 400px;
 	border-radius: 7px 7px 7px 7px;
 }
 
@@ -100,7 +100,6 @@ body {
 /*
 	CSS for HTML tags
 */
-
 td.top {
 	vertical-align: top;
 }
@@ -117,7 +116,6 @@ fieldset {
 /*
 	CSS for Tables
 */
-
 .atius-table {
 	width: 100%;
 	border: 1px solid inherit;
@@ -147,20 +145,20 @@ fieldset {
 /*
 	CSS for Dialog
 */
-
 .dialog-body {
 	width: 100%;
 	border-bottom: 2px solid #AFAFAF;
-	padding-bottom: 5px;
-	margin-bottom: 5px;
+	padding: 15px 20px 25px 30px;
+	margin-bottom: 10px;
 }
 
 .dialog-body td {
+	padding-top: 4px;
 	color: #3F586D;
 	font-weight: bold;
 }
 
-.dialog-body input[type=text],textarea {
+.dialog-body input[type=text],textarea,select {
 	width: 375px;
 	border: 1px solid #BBC5CD !important;
 	padding: 3px !important;
@@ -169,7 +167,70 @@ fieldset {
 	color: black;
 }
 
+.dialog-body select {
+	width: 383px;
+	background-color: white;
+}
+
 .dialog-body input[type=text]:focus {
 	border: 1px solid #BBC5CD;
 	background-color: #FFFFE0;
+}
+
+.dialog-selectonemenu {
+	width: 382px !important;
+}
+
+ul.dialog-messages {
+	margin: 0px;
+	list-style: square;
+	padding: 0px;
+	padding-left: 14px;
+}
+
+ul.dialog-messages li {
+	margin: 0px;
+	font-size: 11px;
+}
+
+.dialog-commandbutton {
+	background: none !important;
+	border: 0px solid #DEE5F2 !important;
+	background-color: #5A6986 !important;
+	border-radius: 2px;
+}
+
+.dialog-commandbutton:hover {
+	border: 0px solid #DEE5F2;
+	background-color: #408080 !important;
+	color: white;
+	border-radius: 2px;
+}
+
+.dialog-message-success {
+	color: black;
+	font-weight: bold;
+	padding-left: 20px;
+	margin-left: 3px;
+	background-repeat: no-repeat;
+	background-image:
+		url('/atius/javax.faces.resource/success.gif.jsf?ln=images');
+}
+
+.dialog-close-link {
+	color: #3F586D;
+	text-decoration: underline;
+	margin-right: 25px;
+	padding-top: 5px;
+	float: right;
+}
+
+.dialog-message-saving {
+	padding-left: 20px;
+	margin-left: 3px;
+	color: black;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-image:
+		url('/atius/javax.faces.resource/wait.gif.jsf?ln=images');
 }

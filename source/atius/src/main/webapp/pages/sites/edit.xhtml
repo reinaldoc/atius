@@ -1,48 +1,51 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.prime.com.tr/ui"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:atius="http://java.sun.com/jsf/composite/atius">
 
 	<h:form prependId="false">
 		<h:panelGrid id="atius-sites-edit-panel-id">
-			<p:dialog id="atius-sites-edit-dlg-id" header="ATIUS - Cadastro de Websites" widgetVar="atius_sites_edit_dlg" modal="true" width="600"
+			<p:dialog id="atius-sites-edit-dlg-id" header="ATIUS - Cadastro de Websites" widgetVar="atius_sites_edit_dlg" modal="true" width="480"
 				resizable="false">
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-sites-edit-dlg-body-id">
-					<h:outputText value="Nome:" />
+					<h:outputText value="Entidade:" />
 					<h:inputText value="#{websiteDomainEditMB.bean.cn}" onkeypress="return event.keyCode!=13" />
 
 					<h:outputText value="Domínio:" />
 					<h:panelGroup>
-						<h:inputText value="#{websiteDomainEditMB.bean.serverName}" onkeypress="return event.keyCode!=13" />
+						<h:inputText id="atius-sites-edit-servername-id" value="#{websiteDomainEditMB.bean.serverName}" onkeypress="return event.keyCode!=13"
+							style="width: 337px;" />
 						<p:commandButton image="ui-icon-gear" title="Verificar" action="#{websiteDomainEditMB.domainAvailable}"
-							update="atius-growl-id" />
+							update="atius-sites-edit-dlg-save-id:messages" style="margin-left: 10px; margin-right: 0px; vertical-align: bottom;"
+							process="@this, atius-sites-edit-servername-id" oncomplete="showNotification('atius-sites-edit-dlg-save-id');" />
 					</h:panelGroup>
 
 					<h:outputText value="Categoria:" />
-					<h:selectOneMenu value="#{websiteDomainEditMB.bean.websiteCategory}" effect="fade">
+					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteCategory}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
 						<f:selectItems value="#{websiteCategoryListMB.websiteCategories}" var="category" itemLabel="#{category.name}"
 							itemValue="#{category.name}" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 
 					<h:outputText value="Tipo:" />
-					<h:selectOneMenu value="#{websiteDomainEditMB.bean.websiteProfile}" effect="fade">
+					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteProfile}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
 						<f:selectItems value="#{websiteCategoryListMB.websiteProfiles}" var="profile" itemLabel="#{profile}" itemValue="#{profile}" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 
 					<h:outputText value="Contato Administrativo:" />
-					<p:autoComplete value="#{websiteDomainEditMB.bean.ownerId}"
-						completeMethod="" forceSelection="true" maxResults="10" minQueryLength="3"
-						selectListener="" 
-						onkeypress="return event.keyCode!=13"/>
+					<p:autoComplete value="#{websiteDomainEditMB.bean.ownerId}" completeMethod="#{websiteDomainEditMB.findPerson}" forceSelection="true"
+						maxResults="10" minQueryLength="1" var="person" itemLabel="#{person.cnMail}" itemValue="#{person.mail}"
+						onkeypress="return event.keyCode!=13" />
 
 					<h:outputText value="Contato Técnico:" />
-					<p:autoComplete value="#{websiteDomainEditMB.bean.adminId}"
-						completeMethod="" forceSelection="true" maxResults="10" minQueryLength="3"
-						selectListener="" 
-						onkeypress="return event.keyCode!=13"/>
+					<p:autoComplete value="#{websiteDomainEditMB.bean.adminId}" completeMethod="#{websiteDomainEditMB.findPerson}" forceSelection="true"
+						maxResults="10" minQueryLength="1" var="person" itemLabel="#{person.cnMail}" itemValue="#{person.mail}"
+						onkeypress="return event.keyCode!=13" />
+
 				</h:panelGrid>
 
 				<h:panelGroup id="atius-sites-edit-dlg-buttons-id">
+					<atius:dialogButtons id="atius-sites-edit-dlg-save-id" dialogId="atius-sites-edit-dlg-id" styleClass="dialog-commandbutton"
+						editFlag="#{websiteDomainEditMB.updateMode}" updateAction="#{websiteDomainEditMB.update}" insertAction="#{websiteDomainEditMB.insert}" />
 				</h:panelGroup>
 
 			</p:dialog>
