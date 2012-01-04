@@ -1,5 +1,8 @@
 package br.ufpa.ctic.atius.domain;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class WebsiteDomain {
 
@@ -7,18 +10,24 @@ public class WebsiteDomain {
 
 	private String[] objectClass = new String[] { "websiteCategory", "posixAccount" };
 
+	@Size(min = 10, max = 128, message="Identifique melhor a entidade responsável pelo site.")
 	private String cn;
 
+	@Size(min = 10, max = 128, message="Especifique o domínio.")
 	private String serverName;
 
+	@NotEmpty(message="Selecione o tipo do site requerido.")
 	private String websiteProfile;
 
+	@NotEmpty(message="Selecione a categoria do site requerido.")
 	private String websiteCategory;
 
 	private String uid;
 
+	@NotEmpty(message="Especifique o proprietário do site.")
 	private String ownerId;
 
+	@NotEmpty(message="Especifique o contato técnico do site.")
 	private String adminId;
 
 	public String getCn() {
@@ -96,6 +105,5 @@ public class WebsiteDomain {
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
-
 
 }
