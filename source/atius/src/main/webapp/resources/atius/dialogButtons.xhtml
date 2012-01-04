@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<composite:interface>
+		<composite:attribute name="id" required="true" />
+		<composite:attribute name="updateAction" method-signature="java.lang.String f()" required="true" />
+		<composite:attribute name="insertAction" method-signature="java.lang.String f()" required="true" />
+		<composite:attribute name="editFlag" required="true" />
+		<composite:attribute name="dialogId" required="true" />
+		<composite:attribute name="styleClass" />
+		<composite:attribute name="closeAjax" default="false" />
+		<composite:attribute name="onClickClose" />
+		<composite:attribute name="updateOnClose" default="@none" />
+		<composite:attribute name="renderedUpdate" default="true" />
+		<composite:attribute name="renderedInsert" default="true" />
+	</composite:interface>
+	<composite:implementation>
+
+		<h:panelGroup id="error-bar" style="float: right;  display: none; margin-right: 15px;">
+			<p:commandButton id="message-link" image="ui-icon-alert" />
+		</h:panelGroup>
+
+		<h:panelGroup id="default-bar">
+			<!-- Salvar insert -->
+			<p:commandButton id="save-button-insert" value="Salvar" action="#{cc.attrs.insertAction}"
+				rendered="#{!cc.attrs.editFlag and cc.attrs.renderedInsert}" styleClass="#{cc.attrs.styleClass}" update="#{cc.clientId}:messages"
+				onstart="startSave('#{cc.attrs.dialogId}', '#{cc.clientId}')"
+				oncomplete="completeSave(xhr,status, args, '#{cc.attrs.dialogId}', '#{cc.clientId}')" />
+
+			<!-- Salvar update -->
+			<p:commandButton id="save-button-update" value="Atualizar" action="#{cc.attrs.updateAction}"
+				rendered="#{cc.attrs.editFlag and cc.attrs.renderedUpdate}" styleClass="#{cc.attrs.styleClass}" update="#{cc.clientId}:messages"
+				onstart="startSave('#{cc.attrs.dialogId}', '#{cc.clientId}')"
+				oncomplete="completeSave(xhr,status, args, '#{cc.attrs.dialogId}', '#{cc.clientId}')" />
+
+			<!-- Fechar -->
+			<p:commandLink value="Fechar" immediate="true" ajax="#{cc.attrs.closeAjax}" update="#{cc.attrs.updateOnClose}"
+				styleClass="dialog-close-link" onclick="#{cc.attrs.onClickClose}" />
+		</h:panelGroup>
+
+		<!-- Barra de Salvando -->
+		<h:panelGroup id="saving-bar" style="display: none; height: 30px;">
+			<h:outputText value="Salvando dados..." styleClass="dialog-message-saving" />
+		</h:panelGroup>
+
+		<!-- Barra de Sucesso -->
+		<h:panelGroup id="success-bar" style="display: none; line-height: 20px;">
+			<h:outputText value="Dados salvo com sucesso!" styleClass="dialog-message-success" />
+			<p:commandLink value="Fechar" immediate="true" ajax="#{cc.attrs.closeAjax}" update="#{cc.attrs.updateOnClose}"
+				styleClass="dialog-close-link" onclick="#{cc.attrs.onClickClose}" />
+		</h:panelGroup>
+
+		<!-- Componente de mensagem -->
+		<h:messages id="messages" style="display: none;" styleClass="dialog-messages" />
+	</composite:implementation>
+</ui:composition>
