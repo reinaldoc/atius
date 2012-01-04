@@ -1,7 +1,10 @@
 package br.ufpa.ctic.atius.business;
 
+import java.util.List;
+
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
+import br.ufpa.ctic.atius.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.domain.WebsiteDomain;
 import br.ufpa.ctic.atius.persistence.WebsiteDomainDAO;
 
@@ -17,6 +20,10 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 				return true;
 		}
 		return false;
+	}
+	
+	public List<InetOrgPerson> findPerson(String search) {
+		return getDelegate().findPerson(search);
 	}
 
 }

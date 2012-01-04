@@ -5,8 +5,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import br.gov.frameworkdemoiselle.ldap.core.EntryQuery;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import br.gov.frameworkdemoiselle.template.LDAPCrud;
+import br.ufpa.ctic.atius.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.domain.WebsiteDomain;
 
 @PersistenceController
@@ -41,5 +43,24 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 			websiteDomain = entry2websiteDomain(entry);
 		}
 		return websiteDomain;
+	}
+
+	private InetOrgPerson entry2inetOrgPerson(Map<String, String[]> entry) {
+		InetOrgPerson inetOrgPerson = new InetOrgPerson();
+		inetOrgPerson.setCn(entry.get("cn")[0]);
+		inetOrgPerson.setMail(entry.get("mail")[0]);
+		return inetOrgPerson;
+	}
+
+	public List<InetOrgPerson> findPerson(String search) {
+		List<InetOrgPerson> inetOrgPersons = new ArrayList<InetOrgPerson>();
+		EntryQuery query = getEntryManager().createQuery(
+				"(&(objectClass=inetOrgPerson)(|(cn=*" + search + "*)(mail=*" + search + "*)))");
+		query.setMaxResults(10);
+		Collection<Map<String, String[]>> entries = query.getResultCollection();
+		for (Map<String, String[]> entry : entries) {
+			inetOrgPersons.add(entry2inetOrgPerson(entry));
+		}
+		return inetOrgPersons;
 	}
 }
