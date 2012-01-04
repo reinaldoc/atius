@@ -1,5 +1,5 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.prime.com.tr/ui"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:form prependId="false">
 		<h:panelGrid columns="2">
@@ -11,5 +11,6 @@
 				update="atius-sites-edit-dlg-body-id" oncomplete="atius_sites_edit_dlg.show()" style="margin-left: 45px;"/>
 		</h:panelGrid>
 	</h:form>
+	<ui:include src="edit.xhtml" />
 
 </ui:composition>
