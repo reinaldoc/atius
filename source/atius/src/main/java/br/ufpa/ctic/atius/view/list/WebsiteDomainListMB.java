@@ -17,10 +17,24 @@ public class WebsiteDomainListMB extends AbstractListPageBean<WebsiteDomain, Str
 	@Inject
 	private WebsiteDomainBC bc;
 
+	private String searchDomain;
+
 	@Override
 	protected List<WebsiteDomain> handleResultList() {
-		// TODO Auto-generated method stub
 		return bc.findAll();
+	}
+
+	public String search() {
+		setResultList(bc.findWebsiteDomain(searchDomain));
+		return null;
+	}
+
+	public String getSearchDomain() {
+		return searchDomain;
+	}
+
+	public void setSearchDomain(String searchDomain) {
+		this.searchDomain = searchDomain;
 	}
 
 }
