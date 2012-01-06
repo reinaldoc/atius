@@ -1,5 +1,6 @@
 package br.ufpa.ctic.atius.domain;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -10,25 +11,25 @@ public class WebsiteDomain {
 
 	private String[] objectClass = new String[] { "websiteCategory", "posixAccount" };
 
-	@Size(min = 10, max = 128, message="Identifique melhor a entidade responsável pelo site.")
+	@Size(min = 10, max = 128, message = "Identifique melhor a entidade responsável.")
 	private String cn;
 
-	@Size(min = 10, max = 128, message="Especifique o domínio.")
+	@Size(min = 10, max = 128, message = "Especifique o domínio.")
 	private String serverName;
 
-	@NotEmpty(message="Selecione o tipo do site requerido.")
+	@NotEmpty(message = "Selecione o tipo do site requerido.")
 	private String websiteProfile;
 
-	@NotEmpty(message="Selecione a categoria do site requerido.")
+	@NotEmpty(message = "Selecione a categoria do site requerido.")
 	private String websiteCategory;
 
 	private String uid;
 
-	@NotEmpty(message="Especifique o proprietário do site.")
-	private String ownerId;
+	@NotNull(message = "Especifique o proprietário do site.")
+	private InetOrgPerson ownerId;
 
-	@NotEmpty(message="Especifique o contato técnico do site.")
-	private String adminId;
+	@NotNull(message = "Especifique o contato técnico do site.")
+	private InetOrgPerson adminId;
 
 	public String getCn() {
 		return cn;
@@ -90,19 +91,19 @@ public class WebsiteDomain {
 		this.objectClass = objectClass;
 	}
 
-	public String getOwnerId() {
+	public InetOrgPerson getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(String ownerId) {
+	public void setOwnerId(InetOrgPerson ownerId) {
 		this.ownerId = ownerId;
 	}
 
-	public String getAdminId() {
+	public InetOrgPerson getAdminId() {
 		return adminId;
 	}
 
-	public void setAdminId(String adminId) {
+	public void setAdminId(InetOrgPerson adminId) {
 		this.adminId = adminId;
 	}
 
