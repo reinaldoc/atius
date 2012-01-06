@@ -25,7 +25,6 @@ function getErrorBar(componentId) {
 
 function startSave(dialog, componentId) {
 	getDefaultBar(componentId).hide();
-	getErrorBar(componentId).hide();
 	getSuccessBar(componentId).hide();
 	getSavingBar(componentId).show();
 	blockDialogInputs(dialog);
@@ -36,6 +35,8 @@ function blockDialogInputs(dialog) {
 			'readonly', 'readonly');
 	jQuery('#' + dialog + ' .dialog-body textarea:not(.sds-readonly)').attr(
 			'readonly', 'readonly');
+	jQuery('#' + dialog + ' .dialog-body select:not(.sds-readonly)').attr(
+			'readonly', 'readonly');
 }
 
 function unBlockDialogInputs(dialog) {
@@ -43,6 +44,8 @@ function unBlockDialogInputs(dialog) {
 			'readonly');
 	jQuery('#' + dialog + ' .dialog-body textarea:not(.sds-readonly)')
 			.removeAttr('readonly');
+	jQuery('#' + dialog + ' .dialog-body select:not(.sds-readonly)')
+	.removeAttr('readonly');
 }
 
 function showNotificationClass(componentId, qtipStyleClass) {
@@ -50,9 +53,7 @@ function showNotificationClass(componentId, qtipStyleClass) {
 	lId = id(componentId + ':message-link');
 
 	jQuery(lId).qtip({
-
 		content : {
-
 			text : jQuery(mId)
 		},
 		events : {
@@ -80,6 +81,16 @@ function showNotification(componentId) {
 	showNotificationClass(componentId, 'ui-tooltip-green');
 }
 
+function hideNotification(componentId) {
+	if (jQuery(id(componentId + ':message-link')).qtip('api') !== undefined)
+		jQuery(id(componentId + ':message-link')).qtip('api').hide();
+}
+
+function hideDialog(dialogObj) {
+	if (dialogObj !== undefined)
+		dialogObj.hide();
+}
+
 function completeSave(xhr, status, args, dialog, componentId) {
 	if (args.validationFailed || args.appValidationFailed) {
 
@@ -93,11 +104,10 @@ function completeSave(xhr, status, args, dialog, componentId) {
 		getSavingBar(componentId).hide();
 
 	} else {
-
 		getDefaultBar(componentId).hide();
 		getErrorBar(componentId).hide();
 		getSavingBar(componentId).hide();
-
 		getSuccessBar(componentId).show();
+		hideNotification(componentId);
 	}
 }
