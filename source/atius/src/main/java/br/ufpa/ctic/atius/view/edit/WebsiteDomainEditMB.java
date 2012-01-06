@@ -2,12 +2,13 @@ package br.ufpa.ctic.atius.view.edit;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
+import br.gov.frameworkdemoiselle.util.Faces;
 import br.ufpa.ctic.atius.business.WebsiteDomainBC;
 import br.ufpa.ctic.atius.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.domain.WebsiteDomain;
@@ -20,30 +21,26 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	@Inject
 	private WebsiteDomainBC bc;
 
-	@Inject
-	private FacesContext facesContext;
-
 	@Override
 	public String delete() {
-		// TODO Auto-generated method stub
+		bc.delete(getId());
 		return null;
 	}
 
-	@Override
 	public String insert() {
-		System.out.println("========> Insert() "+getBean().getServerName());
 		if (!bc.domainAvailable(getBean().getServerName())) {
-			facesContext.addMessage("sites", new FacesMessage("Domínio indisponível, escolha outro."));
-			facesContext.validationFailed();
+			Faces.addMessage("sites", new DefaultMessage("Domínio indisponível, escolha outro."));
+			Faces.validationFailed();
+			return null;
 		}
-		// TODO Auto-generated method stub
+		bc.insert(getBean());
 		return null;
 	}
 
 	@Override
 	public String update() {
-		System.out.println("========> Update()");
-		// TODO Auto-generated method stub
+		System.out.println("==========> update()");
+		//bc.update(getBean());
 		return null;
 	}
 
@@ -53,18 +50,56 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 
 	}
 
+	public List<InetOrgPerson> findPerson(String search) {
+		return bc.findPerson(search);
+	}
+
+	/*
+	 * chamada a partir do commandButton para adição de um registro. O método
+	 * Faces.resetValidation() limpará o estado da validação de todos os inputs
+	 * da visão.
+	 */
+	public String create() {
+		setId(null);
+		setBean(new WebsiteDomain());
+		Faces.resetValidation();
+		return null;
+	}
+
+	/*
+	 * chamada a partir do commandButton que carrega para edição um registro. Se
+	 * o método resetParentFormValidation() foi chamado a patir do mesmo botao
+	 * via actionListener não é necessário chamar Faces.resetValidation() aqui;
+	 */
+	public String loadByServerName(String serverName) {
+		setId(serverName);
+		setBean(bc.load(serverName));
+		Faces.resetValidation();
+		return null;
+	}
+
+	/*
+	 * OPCIONALMENTE: chamado a partir de um actionListener a partir de um
+	 * commandButton dentro do mesmo form. O método
+	 * Faces.resetParentFormValidation limpará o estado da validação de cada
+	 * input SOMENTE DESTE form. Logo é mais perfomatico que o
+	 * Faces.resetValidation();
+	 */
+	public void resetParentFormValidation(ActionEvent ae) {
+		Faces.resetParentFormValidation(ae.getComponent());
+	}
+
+	/*
+	 * chamado a
+	 */
 	public String domainAvailable() {
 		if (bc.domainAvailable(getBean().getServerName()))
-			facesContext.addMessage("sites", new FacesMessage("O domínio " + getBean().getServerName()
-					+ " está disponível"));
+			Faces.addMessage(new DefaultMessage("O domínio " + getBean().getServerName() + " está disponível"));
 		else {
-			facesContext.addMessage("sites", new FacesMessage("Domínio indisponível, escolha outro."));
-			facesContext.validationFailed();
+			Faces.addMessage(new DefaultMessage("Domínio indisponível, escolha outro."));
+			Faces.validationFailed();
 		}
 		return null;
 	}
 
-	public List<InetOrgPerson> findPerson(String search) {
-		return bc.findPerson(search);
-	}
 }
