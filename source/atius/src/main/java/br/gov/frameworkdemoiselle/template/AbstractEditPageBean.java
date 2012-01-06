@@ -44,6 +44,7 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.DemoiselleException;
 import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.util.Beans;
+import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.Parameter;
 import br.gov.frameworkdemoiselle.util.Reflections;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
@@ -55,7 +56,6 @@ public abstract class AbstractEditPageBean<T, I> extends AbstractPageBean implem
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	@RequestScoped
 	private Parameter<String> id;
 
 	private T bean;
@@ -71,18 +71,12 @@ public abstract class AbstractEditPageBean<T, I> extends AbstractPageBean implem
 	@Inject
 	private FacesContext facesContext;
 
-	protected void clear() {
-		this.id = null;
+	public void clear() {
 		this.bean = null;
 	}
 
 	protected T createBean() {
 		return Beans.getReference(getBeanClass());
-	}
-
-	public String create() {
-		initBean();
-		return null;
 	}
 
 	@Override
@@ -154,11 +148,16 @@ public abstract class AbstractEditPageBean<T, I> extends AbstractPageBean implem
 		this.bean = bean;
 	}
 
-	// protected void setId(final I id) {
-	// clear();
-	// String value = getIdConverter().getAsString(getFacesContext(),
-	// getFacesContext().getViewRoot(), id);
-	// this.id.setValue(value);
-	// }
+	protected void setId(final I id) {
+		String value;
+		if (id == null)
+			value = null;
+		else if (id instanceof String)
+			value = (String) id;
+		else
+			value = getIdConverter().getAsString(FacesContext.getCurrentInstance(),
+					FacesContext.getCurrentInstance().getViewRoot(), id);
+		this.id.setValue(value);
+	}
 
 }
