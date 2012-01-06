@@ -1,9 +1,12 @@
 package br.ufpa.ctic.atius.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class InetOrgPerson {
 
 	private String cn;
 
+	@NotEmpty(message="Identifique o contato")
 	private String mail;
 
 	public String getCn() {
@@ -23,7 +26,9 @@ public class InetOrgPerson {
 	}
 
 	public String getCnMail() {
-		return cn + " (" + mail + ")";
+		if (cn != null && !cn.isEmpty())
+			return cn + " (" + mail + ")";
+		return mail;
 	}
 
 }
