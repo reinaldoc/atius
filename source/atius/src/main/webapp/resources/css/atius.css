@@ -219,14 +219,15 @@ ul.dialog-messages li {
 
 .dialog-close-link {
 	color: #3F586D;
-	text-decoration: underline;
+	font-weight: bold;
+	text-decoration: none;
 	margin-right: 25px;
 	padding-top: 5px;
 	float: right;
 }
 
 .dialog-message-saving {
-	padding-left: 20px;
+	padding-left: 35px;
 	margin-left: 3px;
 	color: black;
 	font-weight: bold;

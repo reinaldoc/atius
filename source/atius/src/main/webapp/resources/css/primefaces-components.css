@@ -107,7 +107,11 @@ button.ui-button-icon-only {
 	height: 19px;
 }
 
-.ui-state-hover, .ui-state-focus {
+.ui-state-hover {
 	background: none !important;
+}
+
+.ui-state-focus {
+	background: #74FFCC !important;
 }
 
