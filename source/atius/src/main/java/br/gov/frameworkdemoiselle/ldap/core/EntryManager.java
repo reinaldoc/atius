@@ -1,12 +1,17 @@
 package br.gov.frameworkdemoiselle.ldap.core;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+
+import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.internal.ConnectionManager;
 import br.gov.frameworkdemoiselle.ldap.internal.EntryCore;
+import br.gov.frameworkdemoiselle.ldap.internal.EntryCoreMap;
 
 import com.novell.ldap.LDAPException;
 
@@ -14,6 +19,8 @@ import com.novell.ldap.LDAPException;
 public class EntryManager implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	private Logger logger = LoggerProducer.create(EntryManager.class);
 
 	@Inject
 	private ConnectionManager connectionManager;
@@ -23,6 +30,9 @@ public class EntryManager implements Serializable {
 
 	@Inject
 	private EntryCore core;
+
+	@Inject
+	private EntryCoreMap coreMap;
 
 	private int protocol = 3;
 
@@ -83,35 +93,74 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * Insert not implemented
+	 * 
+	 */
+	public void persist(Map<String, String[]> entry, String dn) {
+		try {
+			coreMap.persist(entry, dn);
+		} catch (LDAPException e) {
+			logger.error("Error adding entry " + dn);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void merge(Map<String, String[]> entry, String dn) {
+		coreMap.merge(entry, dn);
+	}
+
+	/**
+	 * Remove not implemented
+	 */
+	public void remove(String dn) {
+		coreMap.remove(dn);
+	}
+
+	/**
+	 * Find not implemented
+	 */
+	public Map<String, String[]> find(String rdn) {
+		return coreMap.find(rdn);
+	}
+
+	/**
+	 * Find not implemented
+	 */
+	public String getReference(String rdn) {
+		return coreMap.getReference(rdn);
+	}
+
+	/**
+	 * Future support for POJO. Not implemented.
 	 */
 	public void persist(Object entry) {
 		core.persist(entry);
 	}
 
 	/**
-	 * Update not implemented
+	 * Future support for POJO. Not implemented.
 	 */
 	public void merge(Object entry) {
 		core.merge(entry);
 	}
 
 	/**
-	 * Remove not implemented
+	 * Future support for POJO. Not implemented.
 	 */
 	public void remove(Object entity) {
 		core.remove(entity);
 	}
 
 	/**
-	 * Find not implemented
+	 * Future support for POJO. Not implemented.
 	 */
 	public <T> T find(Class<T> entryClass, Object dn) {
 		return core.find(entryClass, dn);
 	}
 
 	/**
-	 * Find not implemented
+	 * Future support for POJO. Not implemented.
 	 */
 	public <T> T getReference(Class<T> entryClass, Object dn) {
 		return core.getReference(entryClass, dn);
