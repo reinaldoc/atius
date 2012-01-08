@@ -28,14 +28,4 @@ public class WebsiteCategoryDAO extends LDAPCrud<WebsiteCategory, String> {
 		return websiteCategories;
 	}
 
-	public List<String> getWebsiteProfiles() {
-		List<String> websiteProfiles = new ArrayList<String>();
-		Collection<Map<String, String[]>> entries = getEntryManager().createQuery("objectClass=categoryContainer")
-				.getResultCollection();
-		for (Map<String, String[]> entry : entries) {
-			for (String profile : entry.get("websiteProfileModel"))
-				websiteProfiles.add(profile);
-		}
-		return websiteProfiles;
-	}
 }
