@@ -3,9 +3,18 @@
 
 	<h:form prependId="false">
 
-		<p:confirmDialog message="Deseja desativar o website?" header="Atenção!" severity="alert" widgetVar="atius_sites_confirmation">
-			<p:commandButton value="Sim" oncomplete="atius_sites_confirmation.hide()" update="atius-sites-list-datatable-id,growl" />
-			<p:commandButton value="Não" onclick="atius_sites_confirmation.hide()" type="button" />
+		<p:confirmDialog message="Deseja excluir o website: #{websiteDomainEditMB.bean.serverName} ?" header="Atenção!" severity="alert"
+			id="atius-sites-delete-dlg-id" widgetVar="atius_sites_delete_dlg">
+			<p:commandButton value="Sim" oncomplete="atius_sites_delete_dlg.hide()" update="atius-sites-list-datatable-id, atius-growl-id"
+				action="#{websiteDomainEditMB.delete}" actionListener="#{websiteDomainListMB.clearResultList}" style="margin-right: 20px;" />
+			<p:commandButton value="Não" onclick="atius_sites_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+		</p:confirmDialog>
+
+		<p:confirmDialog message="Deseja desativar o website: #{websiteDomainEditMB.bean.serverName} ?" header="Atenção!" severity="alert"
+			id="atius-sites-disable-dlg-id" widgetVar="atius_sites_disable_dlg">
+			<p:commandButton value="Sim" oncomplete="atius_sites_disable_dlg.hide()" update="atius-sites-list-datatable-id, atius-growl-id"
+				action="#{websiteDomainEditMB.disable}" actionListener="#{websiteDomainListMB.clearResultList}" style="margin-right: 20px;" />
+			<p:commandButton value="Não" onclick="atius_sites_disable_dlg.hide()" type="button" style="margin-left: 20px;" />
 		</p:confirmDialog>
 
 		<h:panelGroup id="atius-sites-list-panel-id">
@@ -34,13 +43,15 @@
 				</p:column>
 				<p:column style="text-align: right; padding: 0px">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<p:commandButton image="ui-icon-search" style="icon" action="#{websiteDomainEditMB.loadByServerName(domain.serverName)}"
-							update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id" title="Editar Informações"
-							oncomplete="atius_sites_edit_dlg.show()" immediate="true" />
-						<p:commandButton image="ui-icon-unlocked" style="icon" oncomplete="atius_sites_confirmation.show()"
-							update="atius-sites-list-datatable-id" />
-						<p:commandButton image="ui-icon-trash" style="icon" oncomplete="atius_sites_confirmation.show()"
-							update="atius-sites-list-datatable-id" />
+						<p:commandButton image="ui-icon-search" style="icon" title="Editar Informações" oncomplete="atius_sites_edit_dlg.show()"
+							action="#{websiteDomainEditMB.editBean(domain)}" update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id"
+							immediate="true" />
+						<p:commandButton image="ui-icon-document" style="icon" title="Imprimir Termo" />
+						<p:commandButton image="ui-icon-folder-collapsed" style="icon" title="Enviar Termo Digitalizado" />
+						<p:commandButton image="ui-icon-unlocked" style="icon" title="Desativar Website" oncomplete="atius_sites_disable_dlg.show()"
+							action="#{websiteDomainEditMB.editBean(domain)}" update="atius-sites-disable-dlg-id" />
+						<p:commandButton image="ui-icon-trash" style="icon" title="Excluir Website" oncomplete="atius_sites_delete_dlg.show()"
+							action="#{websiteDomainEditMB.editBean(domain)}" update="atius-sites-delete-dlg-id" />
 					</h:panelGroup>
 				</p:column>
 			</p:dataTable>
