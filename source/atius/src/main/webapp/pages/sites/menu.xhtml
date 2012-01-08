@@ -2,16 +2,18 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:form prependId="false">
-		<h:panelGroup>
-			<p:dataGrid value="#{websiteCategoryListMB.websiteCategories}" var="category" columns="1">
+		<h:panelGroup id="atius-sites-menu-id">
+			<p:dataGrid value="#{websiteDomainListMB.websiteCategories}" var="category" columns="1">
 				<p:column>
-					<p:commandLink value="#{category.name}" ajax="false" immediate="true"
+					<p:commandLink value="#{category.name}" immediate="true" update="atius-sites-list-datatable-id, atius-sites-menu-id"
+						action="#{websiteDomainListMB.setSearchDomain(websiteDomainListMB.searchDomain)}"
 						actionListener="#{menuContext.select('MenuSites', category.name)}"
 						styleClass="#{menuContext.menu['MenuSites'][category.name]['Style']}" />
 				</p:column>
 			</p:dataGrid>
 
-			<p:commandLink value="Todos" actionListener="#{menuContext.select('MenuSites', 'Todos')}" ajax="false" immediate="true"
+			<p:commandLink value="Todos" update="atius-sites-list-datatable-id, atius-sites-menu-id" immediate="true"
+				action="#{websiteDomainListMB.clearResultList}" actionListener="#{menuContext.select('MenuSites', 'Todos')}"
 				styleClass="#{menuContext.menu['MenuSites']['Todos']['Style']}" />
 
 			<p:spacer height="10px" />
