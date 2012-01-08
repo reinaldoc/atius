@@ -1,8 +1,10 @@
 package br.gov.frameworkdemoiselle.util;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractMenuContext implements Serializable {
@@ -120,6 +122,56 @@ public abstract class AbstractMenuContext implements Serializable {
 			// Ignore
 		}
 		return false;
+	}
+
+	public String getSelected(String menuName) {
+		try {
+			for (String itemName : menu.get(menuName).keySet()) {
+				if (isSelected(menuName, itemName))
+					return itemName;
+			}
+		} catch (Exception e) {
+			// Ignore
+		}
+		return "";
+	}
+
+	public String getSelected(String menuName, String styleClass) {
+		try {
+			for (String itemName : menu.get(menuName).keySet()) {
+				if (isSelected(menuName, itemName, styleClass))
+					return itemName;
+			}
+		} catch (Exception e) {
+			// Ignore
+		}
+		return "";
+	}
+
+	public List<String> getSelecteds(String menuName) {
+		List<String> selectedList = new ArrayList<String>();
+		try {
+			for (String itemName : menu.get(menuName).keySet()) {
+				if (isSelected(menuName, itemName))
+					selectedList.add(itemName);
+			}
+		} catch (Exception e) {
+			// Ignore
+		}
+		return selectedList;
+	}
+
+	public List<String> getSelecteds(String menuName, String styleClass) {
+		List<String> selectedList = new ArrayList<String>();
+		try {
+			for (String itemName : menu.get(menuName).keySet()) {
+				if (isSelected(menuName, itemName, styleClass))
+					selectedList.add(itemName);
+			}
+		} catch (Exception e) {
+			// Ignore
+		}
+		return selectedList;
 	}
 
 	public int getCounter(String menuName, String itemName) {

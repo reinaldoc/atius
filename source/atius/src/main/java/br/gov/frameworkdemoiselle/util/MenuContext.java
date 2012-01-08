@@ -22,7 +22,6 @@ public class MenuContext extends AbstractMenuContext {
 	public MenuContext() {
 		select("MenuTop", "Sites");
 		select("MenuEmail", "Institucional");
-		select("MenuSites", "Institucional");
 	}
 
 	@Override
