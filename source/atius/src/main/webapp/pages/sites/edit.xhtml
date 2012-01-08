@@ -21,14 +21,14 @@
 					<h:outputText value="Categoria:" />
 					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteCategory}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
-						<f:selectItems value="#{websiteCategoryListMB.websiteCategories}" var="category" itemLabel="#{category.name}"
+						<f:selectItems value="#{websiteDomainListMB.websiteCategories}" var="category" itemLabel="#{category.name}"
 							itemValue="#{category.name}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Tipo:" />
 					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteProfile}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
-						<f:selectItems value="#{websiteCategoryListMB.websiteProfiles}" var="profile" itemLabel="#{profile}" itemValue="#{profile}" />
+						<f:selectItems value="#{websiteDomainListMB.websiteProfiles}" var="profile" itemLabel="#{profile}" itemValue="#{profile}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Contato Administrativo:" />
@@ -46,7 +46,7 @@
 				<h:panelGroup id="atius-sites-edit-dlg-buttons-id">
 					<atius:dialogButtons id="atius-sites-edit-dlg-save-id" dialogId="atius-sites-edit-dlg-id" dialogWidgetVar="atius_sites_edit_dlg"
 						styleClass="dialog-commandbutton" updateMode="#{websiteDomainEditMB.updateMode}" actionUpdater="#{websiteDomainEditMB.update}"
-						actionInserter="#{websiteDomainEditMB.insert}" actionCloser="#{websiteDomainListMB.setResultList(null)}"
+						actionInserter="#{websiteDomainEditMB.insert}" actionCloser="#{websiteDomainListMB.clearValidation}"
 						updateOnClose="atius-sites-list-datatable-id" />
 				</h:panelGroup>
 
