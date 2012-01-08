@@ -41,11 +41,13 @@ import java.util.List;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
+import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.ldap.core.EntryManager;
 import br.gov.frameworkdemoiselle.ldap.core.EntryQuery;
+import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.pagination.Pagination;
 import br.gov.frameworkdemoiselle.pagination.PaginationContext;
-import br.gov.frameworkdemoiselle.transaction.Transactional;
+import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.Reflections;
 
 /**
@@ -95,31 +97,23 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 		return getEntryManager().createQuery(ql);
 	}
 
-	@Override
-	@Transactional
 	public void insert(final T entity) {
 		getEntryManager().persist(entity);
 	}
 
-	@Override
-	@Transactional
 	public void delete(final I id) {
 		T entity = getEntryManager().getReference(getBeanClass(), id);
 		getEntryManager().remove(entity);
 	}
 
-	@Override
-	@Transactional
 	public void update(final T entity) {
 		getEntryManager().merge(entity);
 	}
 
-	@Override
 	public T load(final Object id) {
 		return getEntryManager().find(getBeanClass(), id);
 	}
 
-	@Override
 	public List<T> findAll() {
 		final String jpql = "select this from " + getBeanClass().getSimpleName() + " this";
 		final EntryQuery query = getEntryManager().createQuery(jpql);
@@ -127,11 +121,11 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 		final Pagination pagination = getPagination();
 		if (pagination != null) {
 			pagination.setTotalResults(this.countAll().intValue());
-			//query.setFirstResult(pagination.getFirstResult());
+			// query.setFirstResult(pagination.getFirstResult());
 			query.setMaxResults(pagination.getPageSize());
 		}
 
-		List<T> lista = null; //query.getResultList();
+		List<T> lista = null; // query.getResultList();
 		return lista;
 	}
 
@@ -142,9 +136,8 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 	 */
 	@SuppressWarnings("unused")
 	private Long countAll() {
-		final EntryQuery query = getEntryManager().createQuery(
-				"select count(this) from " + beanClass.getSimpleName() + " this");
-		return new Long(0); //(Long) query.getSingleResult();
+		final EntryQuery query = getEntryManager().createQuery("select count(this) from " + beanClass.getSimpleName() + " this");
+		return new Long(0); // (Long) query.getSingleResult();
 	}
 
 }
