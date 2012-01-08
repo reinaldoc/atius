@@ -28,15 +28,14 @@ public class EntryCoreMap implements Serializable {
 	}
 
 	/**
-	 * Insert not implemented
+	 * Insert LDAP Entry
 	 * 
 	 * @throws LDAPException
 	 */
 	public void persist(Map<String, String[]> entry, String dn) throws LDAPException {
 		LDAPAttributeSet attributeSet = new LDAPAttributeSet();
 		for (Map.Entry<String, String[]> attrMap : entry.entrySet()) {
-			for (String value : attrMap.getValue())
-				attributeSet.add(new LDAPAttribute(attrMap.getKey(), value));
+			attributeSet.add(new LDAPAttribute(attrMap.getKey(), attrMap.getValue()));
 		}
 		LDAPEntry newEntry = new LDAPEntry(dn, attributeSet);
 		getConnection().add(newEntry);
@@ -50,25 +49,27 @@ public class EntryCoreMap implements Serializable {
 	}
 
 	/**
-	 * Remove not implemented
+	 * Remove LDAP Entry
+	 * 
+	 * @throws LDAPException
 	 */
-	public void remove(String dn) {
-
+	public void remove(String dn) throws LDAPException {
+		getConnection().delete(dn);
 	}
 
 	/**
-	 * Find not implemented
+	 * Find a LDAP Entry
 	 */
-	public Map<String, String[]> find(String rdn) {
-		query.setFilter(rdn);
+	public Map<String, String[]> find(String dnSearchFilter) {
+		query.setFilter(dnSearchFilter);
 		return query.getSingleResult();
 	}
 
 	/**
-	 * Find not implemented
+	 * Find a LDAP Entry DN
 	 */
-	public String getReference(String rdn) {
-		query.setFilter(rdn);
+	public String getReference(String dnSearchFilter) {
+		query.setFilter(dnSearchFilter);
 		return query.getSingleDn();
 	}
 

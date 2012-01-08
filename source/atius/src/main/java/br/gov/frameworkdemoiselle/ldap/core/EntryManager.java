@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
+import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.ldap.internal.ConnectionManager;
 import br.gov.frameworkdemoiselle.ldap.internal.EntryCore;
 import br.gov.frameworkdemoiselle.ldap.internal.EntryCoreMap;
@@ -93,28 +94,34 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Persist LDAP Entry
 	 */
 	public void persist(Map<String, String[]> entry, String dn) {
 		try {
 			coreMap.persist(entry, dn);
 		} catch (LDAPException e) {
 			logger.error("Error adding entry " + dn);
+			throw new EntryException();
 		}
 	}
 
 	/**
-	 * 
+	 * Update LDAP Entry
 	 */
 	public void merge(Map<String, String[]> entry, String dn) {
 		coreMap.merge(entry, dn);
 	}
 
 	/**
-	 * Remove not implemented
+	 * Remove LDAP Entry
 	 */
 	public void remove(String dn) {
-		coreMap.remove(dn);
+		try {
+			coreMap.remove(dn);
+		} catch (LDAPException e) {
+			logger.error("Error deleting entry " + dn);
+			throw new EntryException();
+		}
 	}
 
 	/**
