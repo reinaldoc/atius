@@ -70,7 +70,7 @@ button.ui-button-icon-only {
 .ui-datatable-data-empty tr {
 	border: 0px !important;
 	text-align: center !important;
-	height: 200px;
+	height: 342px;
 }
 
 .ui-datatable td,.ui-datatable-data-empty td {
@@ -83,7 +83,7 @@ button.ui-button-icon-only {
 }
 
 .ui-state-default {
-    box-shadow: none;
+	box-shadow: none;
 }
 
 /* Dialog */
@@ -115,3 +115,40 @@ button.ui-button-icon-only {
 	background: #74FFCC !important;
 }
 
+/* Confirm Dialog*/
+.ui-confirm-dialog .ui-dialog-buttonpane {
+	text-align: center !important;
+	padding: 0 1em 0.5em 0.4em;
+}
+
+.ui-confirm-dialog .ui-dialog-content {
+	padding: 10px 20px 0 !important;
+}
+
+.ui-confirm-dialog .ui-dialog-content .ui-icon {
+	background-image:
+		url("/atius/javax.faces.resource/growl/images/info.png.jsf?ln=primefaces");
+	height: 32px;
+	width: 32px;
+	margin-right: 20px;
+}
+
+.ui-confirm-dialog .ui-dialog-content .ui-icon-alert {
+	background-position: 0 0 !important;
+}
+
+/* Growl */
+.ui-growl {
+	right: 100px;
+	top: 10px;
+	width: 380px;
+}
+
+.ui-growl .ui-widget-content {
+	background: none repeat scroll 0 0 #2EC890;
+	border: 1px solid #A8A8A8 !important;
+}
+
+.ui-growl-message {
+	width: 300px;
+}
