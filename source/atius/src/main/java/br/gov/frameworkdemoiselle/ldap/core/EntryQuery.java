@@ -25,6 +25,8 @@ import com.novell.ldap.LDAPException;
 import com.novell.ldap.LDAPReferralException;
 import com.novell.ldap.LDAPSearchConstraints;
 import com.novell.ldap.LDAPSearchResults;
+import com.novell.ldap.controls.LDAPSortControl;
+import com.novell.ldap.controls.LDAPSortKey;
 
 @RequestScoped
 public class EntryQuery implements Serializable {
@@ -73,6 +75,33 @@ public class EntryQuery implements Serializable {
 
 	public void setFilter(String ldapFilter) {
 		this.ldapFilter = ldapFilter;
+	}
+
+	public void setAttrSorting(Map<String, Boolean> sorting) {
+		LDAPSortKey[] key = new LDAPSortKey[sorting.size()];
+		int i = 0;
+		for (Map.Entry<String, Boolean> entry : sorting.entrySet()) {
+			key[i] = new LDAPSortKey(entry.getKey(), !entry.getValue().booleanValue());
+			i++;
+		}
+		LDAPSortControl sortControl = new LDAPSortControl(key, false);
+		ldapConstraints.setControls(sortControl);
+	}
+
+	public void setAttrSortingAsc(String... sorting) {
+		LDAPSortKey[] key = new LDAPSortKey[sorting.length];
+		for (int i = 0; i < sorting.length; i++)
+			key[i] = new LDAPSortKey(sorting[i]);
+		LDAPSortControl sortControl = new LDAPSortControl(key, false);
+		ldapConstraints.setControls(sortControl);
+	}
+
+	public void setAttrSortingDesc(String... sorting) {
+		LDAPSortKey[] key = new LDAPSortKey[sorting.length];
+		for (int i = 0; i < sorting.length; i++)
+			key[i] = new LDAPSortKey(sorting[i], true);
+		LDAPSortControl sortControl = new LDAPSortControl(key, false);
+		ldapConstraints.setControls(sortControl);
 	}
 
 	public void setResultAttributes(String... resultAttributes) {
