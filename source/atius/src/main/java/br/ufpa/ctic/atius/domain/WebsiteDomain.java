@@ -1,6 +1,7 @@
 package br.ufpa.ctic.atius.domain;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -9,12 +10,13 @@ public class WebsiteDomain {
 
 	private String dn;
 
-	private String[] objectClass = new String[] { "websiteCategory", "posixAccount" };
+	private String[] objectClass = new String[] { "websiteDomain", "posixAccount", "shadowAccount" };
 
 	@Size(min = 10, max = 128, message = "Identifique melhor a entidade responsável.")
 	private String cn;
 
 	@Size(min = 10, max = 128, message = "Especifique o domínio.")
+	@Pattern(regexp = "^(?!www\\.).*$", message = "Não use www no domínio.")
 	private String serverName;
 
 	@NotEmpty(message = "Selecione o tipo do site requerido.")
@@ -23,13 +25,47 @@ public class WebsiteDomain {
 	@NotEmpty(message = "Selecione a categoria do site requerido.")
 	private String websiteCategory;
 
-	private String uid;
-
 	@NotNull(message = "Especifique o proprietário do site.")
 	private InetOrgPerson ownerId;
 
 	@NotNull(message = "Especifique o contato técnico do site.")
 	private InetOrgPerson adminId;
+
+	private Integer blockCount = new Integer(0);
+
+	private Integer inodeCount = new Integer(0);
+
+	private String availability = "enabled";
+
+	private String documentRoot;
+
+	private String serverAlias;
+
+	private String uid;
+
+	private String uidNumber;
+
+	private String gidNumber = "100";
+
+	private String homeDirectory;
+
+	private String loginShell = "/bin/false";
+
+	public String getDn() {
+		return dn;
+	}
+
+	public void setDn(String dn) {
+		this.dn = dn;
+	}
+
+	public String[] getObjectClass() {
+		return objectClass;
+	}
+
+	public void setObjectClass(String[] objectClass) {
+		this.objectClass = objectClass;
+	}
 
 	public String getCn() {
 		return cn;
@@ -63,34 +99,6 @@ public class WebsiteDomain {
 		this.websiteCategory = websiteCategory;
 	}
 
-	public String getUid() {
-		return uid;
-	}
-
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
-
-	public WebsiteDomain() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public String getDn() {
-		return dn;
-	}
-
-	public void setDn(String dn) {
-		this.dn = dn;
-	}
-
-	public String[] getObjectClass() {
-		return objectClass;
-	}
-
-	public void setObjectClass(String[] objectClass) {
-		this.objectClass = objectClass;
-	}
-
 	public InetOrgPerson getOwnerId() {
 		return ownerId;
 	}
@@ -105,6 +113,94 @@ public class WebsiteDomain {
 
 	public void setAdminId(InetOrgPerson adminId) {
 		this.adminId = adminId;
+	}
+
+	public Integer getBlockCount() {
+		return blockCount;
+	}
+
+	public void setBlockCount(Integer blockCount) {
+		this.blockCount = blockCount;
+	}
+
+	public Integer getInodeCount() {
+		return inodeCount;
+	}
+
+	public void setInodeCount(Integer inodeCount) {
+		this.inodeCount = inodeCount;
+	}
+
+	public String getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(String availability) {
+		this.availability = availability;
+	}
+
+	public String getDocumentRoot() {
+		if (documentRoot == null && serverName != null)
+			documentRoot = "/var/www/" + serverName.split("\\.")[0];
+		return documentRoot;
+	}
+
+	public void setDocumentRoot(String documentRoot) {
+		this.documentRoot = documentRoot;
+	}
+
+	public String getServerAlias() {
+		if (serverAlias == null && serverName != null)
+			serverAlias = "www." + serverName;
+		return serverAlias;
+	}
+
+	public void setServerAlias(String serverAlias) {
+		this.serverAlias = serverAlias;
+	}
+
+	public String getUid() {
+		if (uid == null && serverName != null)
+			uid = serverName.split("\\.")[0];
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public String getUidNumber() {
+		return uidNumber;
+	}
+
+	public void setUidNumber(String uidNumber) {
+		this.uidNumber = uidNumber;
+	}
+
+	public String getGidNumber() {
+		return gidNumber;
+	}
+
+	public void setGidNumber(String gidNumber) {
+		this.gidNumber = gidNumber;
+	}
+
+	public String getHomeDirectory() {
+		if (homeDirectory == null)
+			homeDirectory = getDocumentRoot();
+		return homeDirectory;
+	}
+
+	public void setHomeDirectory(String homeDirectory) {
+		this.homeDirectory = homeDirectory;
+	}
+
+	public String getLoginShell() {
+		return loginShell;
+	}
+
+	public void setLoginShell(String loginShell) {
+		this.loginShell = loginShell;
 	}
 
 }
