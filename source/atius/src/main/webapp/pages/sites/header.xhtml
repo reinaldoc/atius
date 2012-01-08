@@ -4,12 +4,12 @@
 	<h:form prependId="false">
 		<h:panelGrid columns="2">
 			<h:panelGroup layout="block">
-				<h:inputText id="atius-sites-search-domain" value="#{websiteDomainListMB.searchDomain}"
+				<h:inputText id="atius-sites-search-domain" value="#{websiteDomainListMB.searchDomain}" autocomplete="off"
 					style="width: 270px; font-weight: bold; border: 2px solid gray; height: 22px; margin-right: 3px;" />
-				<p:commandButton image="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.search}"
+				<p:commandButton image="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.clearResultList}"
 					update="atius-sites-list-datatable-id" process="atius-sites-search-domain, @this" />
 			</h:panelGroup>
-			<p:commandButton image="ui-icon-plusthick" value="Novo Site" immediate="true" action="#{websiteDomainEditMB.create}"
+			<p:commandButton image="ui-icon-plusthick" value="Novo Site" immediate="true" action="#{websiteDomainEditMB.editBean}"
 				update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id" oncomplete="atius_sites_edit_dlg.show()" style="margin-left: 45px;" />
 		</h:panelGrid>
 	</h:form>
