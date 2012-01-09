@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
+import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.Faces;
 import br.ufpa.ctic.atius.business.WebsiteDomainBC;
 import br.ufpa.ctic.atius.domain.InetOrgPerson;
@@ -21,26 +22,25 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 
 	public String delete() {
 		bc.delete(getBean().getServerName());
-		Faces.addMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " excluído com sucesso."));
+		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " excluído com sucesso."));
 		return null;
 	}
 
 	public String disable() {
 		// bc.disable(getBean().getServerName());
-		Faces.addMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " desativado com sucesso."));
+		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " desativado com sucesso."));
 		return null;
 	}
 
 	public String enable() {
 		// bc.enable(getBean().getServerName());
-		Faces.addMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " ativado com sucesso."));
+		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " ativado com sucesso."));
 		return null;
 	}
 
 	public String insert() {
 		if (!bc.domainAvailable(getBean().getServerName())) {
-			Faces.addMessage(new DefaultMessage("Domínio indisponível, escolha outro."));
-			Faces.validationFailed();
+			Faces.validationFailed(new DefaultMessage("Domínio indisponível, escolha outro."));
 			return null;
 		}
 		bc.insert(getBean());
@@ -61,17 +61,9 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 		if (bc.domainAvailable(getBean().getServerName()))
 			Faces.addMessage(new DefaultMessage("O domínio " + getBean().getServerName() + " está disponível"));
 		else {
-			Faces.addMessage(new DefaultMessage("Domínio indisponível, escolha outro."));
-			Faces.validationFailed();
+			Faces.validationFailed(new DefaultMessage("Domínio indisponível, escolha outro."));
 		}
 		return null;
-	}
-
-	@Override
-	protected WebsiteDomain loadBean(String serverName) {
-		System.out.println("===> handleLoad()");
-		// TODO Auto-generated method stub
-		return bc.load(serverName);
 	}
 
 }
