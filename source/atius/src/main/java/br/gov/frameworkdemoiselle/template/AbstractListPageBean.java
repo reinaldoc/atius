@@ -34,7 +34,7 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-package br.ufpa.ctic.atius.view.list;
+package br.gov.frameworkdemoiselle.template;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,9 +51,6 @@ import org.primefaces.model.SortOrder;
 
 import br.gov.frameworkdemoiselle.pagination.Pagination;
 import br.gov.frameworkdemoiselle.pagination.PaginationContext;
-import br.gov.frameworkdemoiselle.template.AbstractPageBean;
-import br.gov.frameworkdemoiselle.template.ListPageBean;
-import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.Reflections;
 
 public abstract class AbstractListPageBean<T, I> extends AbstractPageBean implements ListPageBean<T, I> {
@@ -61,6 +58,8 @@ public abstract class AbstractListPageBean<T, I> extends AbstractPageBean implem
 	private static final long serialVersionUID = 1L;
 
 	private List<T> resultList;
+
+	private String resultFilter;
 
 	private transient DataModel<T> dataModel;
 
@@ -183,6 +182,14 @@ public abstract class AbstractListPageBean<T, I> extends AbstractPageBean implem
 
 	public void setLazyDataModelInitialSortAttribute(String lazyDataModelInitialSortAttribute) {
 		this.lazyDataModelInitialSortAttribute = lazyDataModelInitialSortAttribute;
+	}
+
+	public String getResultFilter() {
+		return resultFilter;
+	}
+
+	public void setResultFilter(String resultFilter) {
+		this.resultFilter = resultFilter;
 	}
 
 }

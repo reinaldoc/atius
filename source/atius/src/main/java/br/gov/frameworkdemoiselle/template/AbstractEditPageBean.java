@@ -34,9 +34,8 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-package br.ufpa.ctic.atius.view.edit;
+package br.gov.frameworkdemoiselle.template;
 
-import br.gov.frameworkdemoiselle.template.AbstractPageBean;
 import br.gov.frameworkdemoiselle.util.Beans;
 import br.gov.frameworkdemoiselle.util.Reflections;
 
@@ -50,7 +49,9 @@ public abstract class AbstractEditPageBean<T, I> extends AbstractPageBean {
 
 	private boolean updateMode = false;
 
-	protected abstract T loadBean(I id);
+	public abstract String insert();
+
+	public abstract String update();
 
 	protected Class<T> getBeanClass() {
 		if (this.beanClass == null) {
@@ -78,11 +79,6 @@ public abstract class AbstractEditPageBean<T, I> extends AbstractPageBean {
 	public void editBean(T bean) {
 		updateMode = true;
 		setBean(bean);
-	}
-
-	public void editBeanById(I id) {
-		updateMode = true;
-		setBean(loadBean(id));
 	}
 
 	public boolean isUpdateMode() {
