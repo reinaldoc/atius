@@ -34,20 +34,18 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-package br.gov.frameworkdemoiselle.template;
+package br.gov.frameworkdemoiselle.ldap.template;
 
 import java.util.List;
 
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
-import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.ldap.core.EntryManager;
 import br.gov.frameworkdemoiselle.ldap.core.EntryQuery;
-import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.pagination.Pagination;
 import br.gov.frameworkdemoiselle.pagination.PaginationContext;
-import br.gov.frameworkdemoiselle.util.Faces;
+import br.gov.frameworkdemoiselle.template.Crud;
 import br.gov.frameworkdemoiselle.util.Reflections;
 
 /**
