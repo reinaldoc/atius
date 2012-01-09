@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.gov.frameworkdemoiselle.message.DefaultMessage;
+import br.gov.frameworkdemoiselle.ldap.template.LDAPCrud;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.template.LDAPCrud;
-import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.StringUtils;
 import br.ufpa.ctic.atius.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.domain.WebsiteDomain;
@@ -23,9 +21,9 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 		Map<String, String[]> entry = new HashMap<String, String[]>();
 		entry.put("objectClass", websiteDomain.getObjectClass());
 		entry.put("cn", new String[] { websiteDomain.getCn() });
-		entry.put("serverAlias", new String[] { websiteDomain.getServerAlias() });
 		entry.put("serverName", new String[] { websiteDomain.getServerName() });
 		entry.put("documentRoot", new String[] { websiteDomain.getDocumentRoot() });
+		entry.put("serverAlias", new String[] { websiteDomain.getServerAlias() });
 		entry.put("availability", new String[] { websiteDomain.getAvailability() });
 		entry.put("adminId", new String[] { websiteDomain.getAdminId().getMail() });
 		entry.put("ownerId", new String[] { websiteDomain.getOwnerId().getMail() });
@@ -34,7 +32,7 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 		entry.put("blockCount", new String[] { websiteDomain.getBlockCount().toString() });
 		entry.put("inodeCount", new String[] { websiteDomain.getInodeCount().toString() });
 		entry.put("uid", new String[] { websiteDomain.getUid() });
-		entry.put("uidNumber", new String[] { "4000" });
+		entry.put("uidNumber", new String[] { websiteDomain.getUidNumber().toString() });
 		entry.put("gidNumber", new String[] { websiteDomain.getGidNumber() });
 		entry.put("loginShell", new String[] { websiteDomain.getLoginShell() });
 		entry.put("homeDirectory", new String[] { websiteDomain.getHomeDirectory() });
@@ -43,39 +41,39 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 
 	private WebsiteDomain entry2websiteDomain(Map<String, String[]> entry) {
 		WebsiteDomain websiteDomain = new WebsiteDomain();
-		try {
-			websiteDomain.setObjectClass(entry.get("objectClass"));
-			websiteDomain.setCn(entry.get("cn")[0]);
-			websiteDomain.setServerName(entry.get("serverName")[0]);
-			websiteDomain.setWebsiteCategory(entry.get("websiteCategory")[0]);
-			websiteDomain.setWebsiteProfile(entry.get("websiteProfile")[0]);
-			InetOrgPerson inetOrgPerson = new InetOrgPerson();
-			inetOrgPerson.setMail(entry.get("adminId")[0]);
-			websiteDomain.setAdminId(inetOrgPerson);
-			inetOrgPerson = new InetOrgPerson();
-			inetOrgPerson.setMail(entry.get("ownerId")[0]);
-			websiteDomain.setOwnerId(inetOrgPerson);
-		} catch (Exception e) {
-		}
+		if (entry.size() == 0)
+			return websiteDomain;
+		websiteDomain.setDn(entry.get("dn")[0]);
+		websiteDomain.setObjectClass(entry.get("objectClass"));
+		websiteDomain.setCn(entry.get("cn")[0]);
+		websiteDomain.setServerName(entry.get("serverName")[0]);
+		websiteDomain.setDocumentRoot(entry.get("documentRoot")[0]);
+		websiteDomain.setServerAlias(entry.get("serverAlias")[0]);
+		websiteDomain.setAvailability(entry.get("availability")[0]);
+		InetOrgPerson inetOrgPerson = new InetOrgPerson();
+		inetOrgPerson.setMail(entry.get("adminId")[0]);
+		websiteDomain.setAdminId(inetOrgPerson);
+		inetOrgPerson = new InetOrgPerson();
+		inetOrgPerson.setMail(entry.get("ownerId")[0]);
+		websiteDomain.setOwnerId(inetOrgPerson);
+		websiteDomain.setWebsiteCategory(entry.get("websiteCategory")[0]);
+		websiteDomain.setWebsiteProfile(entry.get("websiteProfile")[0]);
+		websiteDomain.setBlockCount(new Integer(entry.get("blockCount")[0]));
+		websiteDomain.setInodeCount(new Integer(entry.get("inodeCount")[0]));
+		websiteDomain.setUid(entry.get("uid")[0]);
+		websiteDomain.setUidNumber(entry.get("uidNumber")[0]);
+		websiteDomain.setGidNumber(entry.get("gidNumber")[0]);
+		websiteDomain.setLoginShell(entry.get("loginShell")[0]);
+		websiteDomain.setHomeDirectory(entry.get("homeDirectory")[0]);
 		return websiteDomain;
 	}
 
-	public WebsiteDomain load(String serverName) {
-		return findByServerName(serverName);
-	}
-
 	public void insert(WebsiteDomain websiteDomain) {
-		try {
-			String serverDn = getEntryManager().getReference("(&(objectClass=domainContainer)(cn=atalaia.ufpa.br))");
-			getEntryManager().persist(websiteDomain2entry(websiteDomain), "serverName=" + websiteDomain.getServerName() + "," + serverDn);
-		} catch (Exception e) {
-			Faces.addMessage(new DefaultMessage("Ocorreu um erro ao acessar a base LDAP."));
-			Faces.validationFailed();
-		}
+		getEntryManager().persist(websiteDomain2entry(websiteDomain), websiteDomain.getDn());
 	}
 
 	public void delete(String serverName) {
-		String dn = getEntryManager().getReference(String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName));
+		String dn = getEntryManager().findReference(String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName));
 		getEntryManager().remove(dn);
 	}
 
@@ -113,14 +111,14 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 				category, search));
 	}
 
-	public WebsiteDomain findByServerName(String serverName) {
-		serverName = StringUtils.null2empty(serverName);
-		Map<String, String[]> entry = getEntryManager().createQuery(
-				String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName)).getSingleResult();
-		if (entry.size() != 0) {
-			return entry2websiteDomain(entry);
+	public WebsiteDomain load(String serverName) {
+		WebsiteDomain websiteDomain = new WebsiteDomain();
+		if (!StringUtils.isBlank(serverName)) {
+			Map<String, String[]> entry = getEntryManager().createQuery(
+					String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName)).getSingleResult();
+			websiteDomain = entry2websiteDomain(entry);
 		}
-		return new WebsiteDomain();
+		return websiteDomain;
 	}
 
 }
