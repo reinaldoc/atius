@@ -6,6 +6,9 @@
 		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Sites')}">
 			<ui:include src="/pages/sites/header.xhtml" />
 		</h:panelGroup>
+		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Segurança')}">
+			<ui:include src="/security/header.xhtml" />
+		</h:panelGroup>
 	</ui:define>
 
 	<ui:define name="atius-body-ui">
@@ -15,6 +18,12 @@
 		</h:panelGroup>
 		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Sites')}">
 			<ui:include src="/pages/sites/main.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Usuário')}">
+			<ui:include src="/security/info.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Segurança')}">
+			<ui:include src="/security/main.xhtml" />
 		</h:panelGroup>
 		<!-- End @Body  -->
 	</ui:define>
