@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import br.gov.frameworkdemoiselle.ldap.template.LDAPCrud;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.template.LDAPCrud;
 import br.ufpa.ctic.atius.domain.WebsiteCategory;
 
 @PersistenceController
