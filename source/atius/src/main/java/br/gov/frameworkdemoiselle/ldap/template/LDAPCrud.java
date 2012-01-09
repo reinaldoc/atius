@@ -108,7 +108,7 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 		getEntryManager().merge(entity);
 	}
 
-	public T load(final Object id) {
+	public T load(final I id) {
 		return getEntryManager().find(getBeanClass(), id);
 	}
 
@@ -136,6 +136,12 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 	private Long countAll() {
 		final EntryQuery query = getEntryManager().createQuery("select count(this) from " + beanClass.getSimpleName() + " this");
 		return new Long(0); // (Long) query.getSingleResult();
+	}
+
+	@Override
+	public List<T> findByExample(T example) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
