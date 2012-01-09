@@ -94,7 +94,7 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * Persist LDAP Entry
+	 * Persist a LDAP Entry. Use LDAP Add Operation
 	 */
 	public void persist(Map<String, String[]> entry, String dn) {
 		try {
@@ -106,10 +106,29 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * Update LDAP Entry
+	 * Update LDAP Entry from declared attributes only (ignore others) Use LDAP
+	 * Modify Operation
 	 */
 	public void merge(Map<String, String[]> entry, String dn) {
-		coreMap.merge(entry, dn);
+		try {
+			coreMap.merge(entry, dn);
+		} catch (LDAPException e) {
+			logger.error("Error adding entry " + dn);
+			throw new EntryException();
+		}
+	}
+
+	/**
+	 * Update LDAP Entry to declared attributes only (remove others). Use LDAP
+	 * Modify Operation
+	 */
+	public void update(Map<String, String[]> entry, String dn) {
+		try {
+			coreMap.update(entry, dn);
+		} catch (LDAPException e) {
+			logger.error("Error adding entry " + dn);
+			throw new EntryException();
+		}
 	}
 
 	/**
@@ -125,17 +144,24 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * Find not implemented
+	 * Find a LDAP Entry by LDAP Search Filter (RFC 4515)
 	 */
-	public Map<String, String[]> find(String rdn) {
-		return coreMap.find(rdn);
+	public Map<String, String[]> find(String searchFilter) {
+		return coreMap.find(searchFilter);
 	}
 
 	/**
-	 * Find not implemented
+	 * Find a LDAP Entry DN by DN (RFC 1485)
 	 */
-	public String getReference(String rdn) {
-		return coreMap.getReference(rdn);
+	public Map<String, String[]> getReference(String dn) {
+		return coreMap.getReference(dn);
+	}
+
+	/**
+	 * Find a LDAP Entry DN by LDAP Search Filter (RFC 4515)
+	 */
+	public String findReference(String searchFilter) {
+		return coreMap.findReference(searchFilter);
 	}
 
 	/**
