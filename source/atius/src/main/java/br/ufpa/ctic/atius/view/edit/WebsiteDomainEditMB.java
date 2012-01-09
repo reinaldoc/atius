@@ -27,13 +27,19 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 
 	public String disable() {
 		// bc.disable(getBean().getServerName());
-		Faces.addMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " desabilitado com sucesso."));
+		Faces.addMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " desativado com sucesso."));
+		return null;
+	}
+
+	public String enable() {
+		// bc.enable(getBean().getServerName());
+		Faces.addMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " ativado com sucesso."));
 		return null;
 	}
 
 	public String insert() {
 		if (!bc.domainAvailable(getBean().getServerName())) {
-			Faces.addMessage("sites", new DefaultMessage("Domínio indisponível, escolha outro."));
+			Faces.addMessage(new DefaultMessage("Domínio indisponível, escolha outro."));
 			Faces.validationFailed();
 			return null;
 		}
