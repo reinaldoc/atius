@@ -17,7 +17,7 @@ public class InetOrgPersonBC extends DelegateCrud<InetOrgPerson, String, InetOrg
 	}
 
 	public InetOrgPerson loadByEmail(String mail) {
-		return getDelegate().findByEmail(mail);
+		return getDelegate().load(mail);
 	}
 
 }
