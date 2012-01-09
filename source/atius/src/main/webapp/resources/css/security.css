@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+.loginTable {
+	border: 6px solid #C6C8CD;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 140px;
+}
+
+.loginInput {
+	width: 300px;
+	border: 2px solid #AFAFAF;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 3px;
+}
+
+.loginText {
+	font-family: Arial, 'Lucida Grande', 'Lucida Sans Unicode', Verdana,
+		'Jamrul', sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.loginTextInfo {
+	font-family: Arial, 'Lucida Grande', 'Lucida Sans Unicode', Verdana,
+		'Jamrul', sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.loginRowCenter {
+	text-align: center;
+}
+
+.loginLogo {
+	border: 0px;
+	margin-left: 0px;
+	margin-top: 5px;
+	margin-right: 8px;
+	padding-bottom: 15px;
+}
+
+.loginBody {
+	background-image:
+		url(/atius/javax.faces.resource/bg-main.png.jsf?ln=images);
+	background-repeat: repeat-x;
+}
+
+.loginButton {
+	font-family: Arial, 'Lucida Grande', 'Lucida Sans Unicode', Verdana,
+		'Jamrul', sans-serif;
+	font-size: 12px;
+	margin-left: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 1px solid #AFAFAF;
+	background: #F0F0F0 none repeat-x scroll 0 0;
+	color: #000000;
+	cursor: pointer;
+	display: inline-block;
+	overflow: visible;
+	position: relative;
+	text-align: center;
+	text-decoration: none !important;
+}

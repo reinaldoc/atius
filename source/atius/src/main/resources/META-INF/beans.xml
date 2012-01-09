@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
 
 	<alternatives>
+		<!-- <class>br.gov.frameworkdemoiselle.transaction.JTATransaction</class> -->
 		<class>br.gov.frameworkdemoiselle.transaction.JPATransaction</class>
-		
-		<!--
-		<class>br.gov.frameworkdemoiselle.transaction.JTATransaction</class>
-		-->
+		<class>br.gov.frameworkdemoiselle.fuselage.core.Authenticator</class>
+		<class>br.gov.frameworkdemoiselle.fuselage.core.Authorizer</class>
+		<class>br.gov.frameworkdemoiselle.fuselage.core.PublicResource</class>
 	</alternatives>
 </beans>

@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form prependId="false">
+		<h:panelGroup id="faa-userlist-id">
+			<p:dataTable id="faa-userlist-datatable-id" widgetVar="faa_user_dt_wv"
+				emptyMessage="Não há registros" value="#{userListMB.lazyDataModel}" var="faa_user_dt_row" rows="#{proxyMB.paginationConfig.pageSize}"
+				paginator="true" paginatorAlwaysVisible="false" lazy="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}"
+				paginatorPosition="bottom">
+				<p:column style="width: 1%">
+					<h:outputText styleClass="faa-label-user" value="User" />
+				</p:column>
+				<p:column headerText="Nome" sortBy="#{faa_user_dt_row.name}">
+					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
+						<h:outputText value="#{faa_user_dt_row.name} " />
+					</h:panelGroup>
+				</p:column>
+				<p:column headerText="Login" sortBy="#{faa_user_dt_row.login}">
+					<h:panelGroup layout="block" style="width: 100px; overflow: hidden; white-space: pre">
+						<h:outputText value="#{faa_user_dt_row.login}" />
+					</h:panelGroup>
+				</p:column>
+				<p:column headerText="Unidade" sortBy="#{faa_user_dt_row.orgunit}">
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+						<h:outputText value="#{faa_user_dt_row.orgunit}" />
+					</h:panelGroup>
+				</p:column>
+			</p:dataTable>
+		</h:panelGroup>
+	</h:form>
+
+</ui:composition>

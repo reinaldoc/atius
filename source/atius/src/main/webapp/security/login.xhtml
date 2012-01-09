@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="security.css" />
+	<h:outputScript library="javascript" name="security.js" />
+	<meta http-equiv="refresh" content="300" />
+	<title><ui:insert name="title">Autenticação</ui:insert></title>
+</h:head>
+
+<h:body styleClass="loginBody" onload="setLoginFocus('faa-input-username', 'faa-input-password');">
+	<h:form prependId="false" onsubmit="if (!requireIE8()) return false;">
+		<h:panelGrid columns="1" styleClass="loginTable" rowClasses="loginRowCenter,,,,,,loginRowCenter,loginRowCenter">
+			<h:graphicImage library="images" name="logo.png" styleClass="loginLogo" alt="ATIUS" />
+			<h:outputText styleClass="loginText" value="Usuário:" />
+			<h:inputText styleClass="loginInput" value="#{credential.username}" id="faa-input-username" autocomplete="off" />
+			<h:outputText styleClass="loginText" value="Senha:" />
+			<h:panelGroup>
+				<h:inputSecret styleClass="loginInput" value="#{credential.password}" id="faa-input-password" />
+				<h:commandButton styleClass="loginButton" value="Entrar" action="#{authMB.login}" />
+			</h:panelGroup>
+			<br />
+			<br />
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

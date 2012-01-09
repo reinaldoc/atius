@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form prependId="false">
+		<h:panelGroup id="faa-rolelist-id">
+			<p:dataTable id="faa-rolelist-datatable-id" widgetVar="faa_role_dt_wv" emptyMessage="Não há registros"
+				value="#{roleListMB.lazyDataModel}" var="faa_role_dt_row" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
+				paginatorAlwaysVisible="false" lazy="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+				<p:column style="width: 1px">
+					<h:selectBooleanCheckbox styleClass="ui-selection-column" value="#{roleListMB.selection[user.id]}" />
+				</p:column>
+				<p:column style="width: 1%">
+					<h:outputText styleClass="faa-label-role" value="Role" />
+				</p:column>
+				<p:column headerText="Nome" style="width:200px" sortBy="#{faa_role_dt_row.name}">
+					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
+						<h:outputText value="#{faa_role_dt_row.name} " />
+					</h:panelGroup>
+				</p:column>
+				<p:column headerText="Descrição" style="width: 80%" sortBy="#{faa_role_dt_row.description}">
+					<h:panelGroup layout="block" style="width: 500px; overflow: hidden; white-space: pre">
+						<h:outputText value="#{faa_role_dt_row.description}" />
+					</h:panelGroup>
+				</p:column>
+			</p:dataTable>
+		</h:panelGroup>
+	</h:form>
+
+</ui:composition>

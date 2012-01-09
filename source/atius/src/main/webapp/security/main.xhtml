@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<div id="atius-body-left-id">
+		<!-- Begin @BodyLeft  -->
+		<ui:include src="menu.xhtml" />
+		<!-- End @BodyLeft  -->
+	</div>
+	<div id="atius-body-right-id">
+		<!-- Begin @BodyRight  -->
+		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'User')}">
+			<ui:include src="userList.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Profile')}">
+			<ui:include src="profileList.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Role')}">
+			<ui:include src="roleList.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Resource')}">
+			<ui:include src="resourceList.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Configuração')}">
+			<ui:include src="config.xhtml" />
+		</h:panelGroup>
+		<!-- Begin @BodyRight  -->
+	</div>
+
+</ui:composition>
