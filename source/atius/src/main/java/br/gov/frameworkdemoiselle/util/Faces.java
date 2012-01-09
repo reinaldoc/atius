@@ -92,17 +92,17 @@ public class Faces {
 		Severity result = null;
 
 		switch (severityType) {
-			case INFO:
-				result = SEVERITY_INFO;
-				break;
-			case WARN:
-				result = SEVERITY_WARN;
-				break;
-			case ERROR:
-				result = SEVERITY_ERROR;
-				break;
-			case FATAL:
-				result = SEVERITY_FATAL;
+		case INFO:
+			result = SEVERITY_INFO;
+			break;
+		case WARN:
+			result = SEVERITY_WARN;
+			break;
+		case ERROR:
+			result = SEVERITY_ERROR;
+			break;
+		case FATAL:
+			result = SEVERITY_FATAL;
 		}
 
 		return result;
@@ -168,6 +168,22 @@ public class Faces {
 	}
 
 	public static void validationFailed() {
+		getFacesContext().validationFailed();
+	}
+
+	public static boolean isValidationFailed() {
+		return getFacesContext().isValidationFailed();
+	}
+
+	public static void addValidMessage(Message... messageList) {
+		if (!getFacesContext().isValidationFailed())
+			for (Message message : messageList)
+				addMessage(message);
+	}
+
+	public static void validationFailed(Message... messageList) {
+		for (Message message : messageList)
+			addMessage(message);
 		getFacesContext().validationFailed();
 	}
 
