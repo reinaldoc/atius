@@ -1,10 +1,8 @@
 package br.ufpa.ctic.atius.domain;
 
-public class WebsiteProfile {
+import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
-	private String dn;
-
-	private String[] objectClass = new String[] { "websiteProfile" };
+public class WebsiteProfile extends Entry {
 
 	private String name;
 
@@ -12,20 +10,8 @@ public class WebsiteProfile {
 
 	private String schemaserverName;
 
-	public String getDn() {
-		return dn;
-	}
-
-	public void setDn(String dn) {
-		this.dn = dn;
-	}
-
-	public String[] getObjectClass() {
-		return objectClass;
-	}
-
-	public void setObjectClass(String[] objectClass) {
-		this.objectClass = objectClass;
+	protected String[] objectClass() {
+		return new String[] { "websiteProfile" };
 	}
 
 	public String getName() {

@@ -6,11 +6,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class WebsiteDomain {
+import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
-	private String dn;
-
-	private String[] objectClass = new String[] { "websiteDomain", "posixAccount", "shadowAccount" };
+public class WebsiteDomain extends Entry {
 
 	@Size(min = 10, max = 128, message = "Identifique melhor a entidade responsável.")
 	private String cn;
@@ -51,20 +49,8 @@ public class WebsiteDomain {
 
 	private String loginShell = "/bin/false";
 
-	public String getDn() {
-		return dn;
-	}
-
-	public void setDn(String dn) {
-		this.dn = dn;
-	}
-
-	public String[] getObjectClass() {
-		return objectClass;
-	}
-
-	public void setObjectClass(String[] objectClass) {
-		this.objectClass = objectClass;
+	protected String[] objectClass() {
+		return new String[] { "websiteDomain", "posixAccount", "shadowAccount" };
 	}
 
 	public String getCn() {
@@ -133,6 +119,12 @@ public class WebsiteDomain {
 
 	public String getAvailability() {
 		return availability;
+	}
+
+	public boolean isAvailabilityEnabled() {
+		if ("enabled".equals(availability))
+			return true;
+		return false;
 	}
 
 	public void setAvailability(String availability) {

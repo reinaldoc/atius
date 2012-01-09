@@ -1,23 +1,15 @@
 package br.ufpa.ctic.atius.domain;
 
+import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
-public class WebsiteCategory {
-
-	private String dn;
-
-	private String[] objectClass = new String[] { "websiteCategory" };
+public class WebsiteCategory extends Entry {
 
 	private String name;
 
 	private String order;
 
-	public WebsiteCategory() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public WebsiteCategory(String name, String order) {
-		this.name = name;
-		this.order = order;
+	protected String[] objectClass() {
+		return new String[] { "websiteCategory" };
 	}
 
 	public String getName() {
@@ -34,22 +26,6 @@ public class WebsiteCategory {
 
 	public void setOrder(String order) {
 		this.order = order;
-	}
-
-	public String getDn() {
-		return dn;
-	}
-
-	public void setDn(String dn) {
-		this.dn = dn;
-	}
-
-	public String[] getObjectClass() {
-		return objectClass;
-	}
-
-	public void setObjectClass(String[] objectClass) {
-		this.objectClass = objectClass;
 	}
 
 }
