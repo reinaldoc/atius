@@ -113,6 +113,14 @@ fieldset {
 	padding-top: 5px;
 }
 
+input[type=text].filter {
+	width: 270px;
+	font-weight: bold;
+	border: 2px solid gray;
+	height: 22px;
+	margin-right: 3px;
+}
+
 /*
 	CSS for Tables
 */
