@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
+import br.gov.frameworkdemoiselle.template.AbstractListPageBean;
 import br.gov.frameworkdemoiselle.util.Faces;
 import br.ufpa.ctic.atius.business.WebsiteDomainBC;
 import br.ufpa.ctic.atius.domain.WebsiteCategory;
