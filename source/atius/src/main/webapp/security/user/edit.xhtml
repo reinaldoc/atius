@@ -1,5 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:atius="http://java.sun.com/jsf/composite/atius">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
 
 	<h:form prependId="false">
 		<h:panelGrid id="faa-user-edit-panel-id">
@@ -28,7 +28,7 @@
 				</h:panelGrid>
 
 				<h:panelGroup id="faa-user-edit-dlg-buttons-id">
-					<atius:dialogButtons id="faa-user-edit-dlg-save-id" dialogId="faa-user-edit-dlg-id" dialogWidgetVar="faa_user_edit_dlg"
+					<faa:dialogButtons id="faa-user-edit-dlg-save-id" dialogId="faa-user-edit-dlg-id" dialogWidgetVar="faa_user_edit_dlg"
 						styleClass="dialog-commandbutton" updateMode="#{userEditMB.updateMode}" actionUpdater="#{userEditMB.update}"
 						actionInserter="#{userEditMB.insert}" actionCloser="#{userListMB.clearValidation}"
 						updateOnClose="faa-user-list-datatable-id" />

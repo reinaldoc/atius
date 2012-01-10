@@ -1,5 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:atius="http://java.sun.com/jsf/composite/atius">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
 
 	<h:form prependId="false">
 		<h:panelGrid id="atius-sites-edit-panel-id">
@@ -45,7 +45,7 @@
 				</h:panelGrid>
 
 				<h:panelGroup id="atius-sites-edit-dlg-buttons-id">
-					<atius:dialogButtons id="atius-sites-edit-dlg-save-id" dialogId="atius-sites-edit-dlg-id" dialogWidgetVar="atius_sites_edit_dlg"
+					<faa:dialogButtons id="atius-sites-edit-dlg-save-id" dialogId="atius-sites-edit-dlg-id" dialogWidgetVar="atius_sites_edit_dlg"
 						styleClass="dialog-commandbutton" updateMode="#{websiteDomainEditMB.updateMode}" actionUpdater="#{websiteDomainEditMB.update}"
 						actionInserter="#{websiteDomainEditMB.insert}" actionCloser="#{websiteDomainListMB.clearValidation}"
 						updateOnClose="atius-sites-list-datatable-id" />
