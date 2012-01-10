@@ -51,6 +51,7 @@ import org.primefaces.model.SortOrder;
 
 import br.gov.frameworkdemoiselle.pagination.Pagination;
 import br.gov.frameworkdemoiselle.pagination.PaginationContext;
+import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.Reflections;
 
 public abstract class AbstractListPageBean<T, I> extends AbstractPageBean implements ListPageBean<T, I> {
@@ -102,6 +103,12 @@ public abstract class AbstractListPageBean<T, I> extends AbstractPageBean implem
 	public void clearResultList() {
 		this.dataModel = null;
 		this.resultList = null;
+	}
+
+	public String clearValidation() {
+		Faces.resetValidation();
+		clearResultList();
+		return null;
 	}
 
 	private Class<T> beanClass;

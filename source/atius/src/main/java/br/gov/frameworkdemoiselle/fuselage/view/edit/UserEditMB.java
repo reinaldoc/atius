@@ -26,5 +26,9 @@ public class UserEditMB extends AbstractEditPageBean<SecurityUser, Long> {
 		bc.update(getBean());
 		return null;
 	}
+	
+	public String userAvailable() {
+		return null;
+	}
 
 }
