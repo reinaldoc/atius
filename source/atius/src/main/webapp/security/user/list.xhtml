@@ -3,12 +3,11 @@
 
 	<h:form prependId="false">
 		<h:panelGroup id="faa-userlist-id">
-			<p:dataTable id="faa-userlist-datatable-id" widgetVar="faa_user_dt_wv"
-				emptyMessage="Não há registros" value="#{userListMB.lazyDataModel}" var="faa_user_dt_row" rows="#{proxyMB.paginationConfig.pageSize}"
-				paginator="true" paginatorAlwaysVisible="false" lazy="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}"
-				paginatorPosition="bottom">
-				<p:column style="width: 1%">
-					<h:outputText styleClass="faa-label-user" value="User" />
+			<p:dataTable id="faa-userlist-datatable-id" widgetVar="faa_user_dt_wv" emptyMessage="Não há registros"
+				value="#{userListMB.lazyDataModel}" var="faa_user_dt_row" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
+				paginatorAlwaysVisible="false" lazy="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+				<p:column styleClass="faa-label faa-label-user">
+					<h:outputText value="User" />
 				</p:column>
 				<p:column headerText="Nome" sortBy="#{faa_user_dt_row.name}">
 					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">

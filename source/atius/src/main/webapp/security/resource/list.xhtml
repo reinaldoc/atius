@@ -6,18 +6,15 @@
 			<p:dataTable id="faa-resourcelist-datatable-id" widgetVar="faa_resource_dt_wv" emptyMessage="Não há registros"
 				value="#{resourceListMB.lazyDataModel}" var="faa_resource_dt_row" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
 				paginatorAlwaysVisible="true" lazy="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
-				<p:column>
-					<h:selectBooleanCheckbox styleClass="ui-selection-column" value="#{resourceListMB.selection[user.id]}" />
+				<p:column styleClass="faa-label faa-label-resource">
+					<h:outputText value="Resource" />
 				</p:column>
-				<p:column>
-					<h:outputText styleClass="faa-label-resource" value="Resource" />
-				</p:column>
-				<p:column headerText="Nome" style="width:200px" sortBy="#{faa_resource_dt_row.name}">
+				<p:column headerText="Nome" sortBy="#{faa_resource_dt_row.name}">
 					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
 						<h:outputText value="#{faa_resource_dt_row.name} " />
 					</h:panelGroup>
 				</p:column>
-				<p:column headerText="Valor" style="width: 80%" sortBy="#{faa_resource_dt_row.value}">
+				<p:column headerText="Valor" sortBy="#{faa_resource_dt_row.value}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 						<h:outputText value="#{faa_resource_dt_row.value}" />
 					</h:panelGroup>
