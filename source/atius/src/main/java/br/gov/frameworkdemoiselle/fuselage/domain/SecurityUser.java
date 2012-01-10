@@ -12,8 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class SecurityUser implements Serializable {
@@ -25,23 +28,35 @@ public class SecurityUser implements Serializable {
 	@SequenceGenerator(name = "system-uuid", sequenceName = "guid")
 	private Long id;
 
-	@NotEmpty
+	@NotBlank(message = "Especifique melhor o login")
+	@Size(min = 3, max = 255, message = "Especifique melhor o login")
 	@Column
 	private String login;
 
 	@Column
+	@NotBlank(message = "Especifique melhor o nome")
+	@Size(min = 3, max = 255, message = "Especifique melhor o nome")
 	private String name;
 
 	@Column
+	@Size(max = 255, message = "Especifique melhor a senha")
 	private String password;
 
 	@Column
+	@Transient
+	@Size(max = 255, message = "Especifique melhor a senha")
+	private String passwordrepeat;
+
+	@Column
+	@Size(max = 255, message = "Especifique melhor a organização")
 	private String orgunit;
 
 	@Column
+	@Size(max = 255, message = "Especifique melhor a descrição")
 	private String description;
 
 	@Column
+	@NotNull
 	private Integer available;
 
 	@ManyToMany
@@ -56,6 +71,8 @@ public class SecurityUser implements Serializable {
 		this.login = login;
 		this.name = name;
 		this.password = password;
+		this.passwordrepeat = password;
+		this.available = 1;
 	}
 
 	public Long getId() {
@@ -120,6 +137,20 @@ public class SecurityUser implements Serializable {
 
 	public void setAvailable(Integer available) {
 		this.available = available;
+	}
+
+	public boolean isEnabled() {
+		if (this.available != null && this.available.intValue() == 1)
+			return true;
+		return false;
+	}
+
+	public String getPasswordrepeat() {
+		return passwordrepeat;
+	}
+
+	public void setPasswordrepeat(String passwordrepeat) {
+		this.passwordrepeat = passwordrepeat;
 	}
 
 }
