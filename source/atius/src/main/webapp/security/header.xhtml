@@ -5,22 +5,22 @@
 		<h:panelGrid columns="2">
 			<h:panelGroup layout="block" rendered="#{menuContext.isSelected('Security', 'User')}">
 				<h:inputText id="faa-header-userFilter-id" value="#{userListMB.resultFilter}" autocomplete="off" styleClass="filter" />
-				<p:commandButton image="ui-icon-search" value="Buscar" action="#{userListMB.clearResultList}" update="faa-userlist-datatable-id"
+				<p:commandButton image="ui-icon-search" value="Buscar" action="#{userListMB.clearResultList}" update="faa-user-list-datatable-id"
 					process="faa-header-userFilter-id, @this" />
 			</h:panelGroup>
 			<h:panelGroup layout="block" rendered="#{menuContext.isSelected('Security', 'Profile')}">
 				<h:inputText id="faa-header-profileFilter-id" value="#{profileListMB.resultFilter}" autocomplete="off" styleClass="filter" />
-				<p:commandButton image="ui-icon-search" value="Buscar" action="#{profileListMB.clearResultList}" update="faa-profilelist-datatable-id"
+				<p:commandButton image="ui-icon-search" value="Buscar" action="#{profileListMB.clearResultList}" update="faa-profile-list-datatable-id"
 					process="faa-header-profileFilter-id, @this" />
 			</h:panelGroup>
 			<h:panelGroup layout="block" rendered="#{menuContext.isSelected('Security', 'Role')}">
 				<h:inputText id="faa-header-roleFilter-id" value="#{roleListMB.resultFilter}" autocomplete="off" styleClass="filter" />
-				<p:commandButton image="ui-icon-search" value="Buscar" action="#{roleListMB.clearResultList}" update="faa-rolelist-datatable-id"
+				<p:commandButton image="ui-icon-search" value="Buscar" action="#{roleListMB.clearResultList}" update="faa-role-list-datatable-id"
 					process="faa-header-roleFilter-id, @this" />
 			</h:panelGroup>
 			<h:panelGroup layout="block" rendered="#{menuContext.isSelected('Security', 'Resource')}">
 				<h:inputText id="faa-header-resourceFilter-id" value="#{resourceListMB.resultFilter}" autocomplete="off" styleClass="filter" />
-				<p:commandButton image="ui-icon-search" value="Buscar" action="#{resourceListMB.clearResultList}" update="faa-resourcelist-datatable-id"
+				<p:commandButton image="ui-icon-search" value="Buscar" action="#{resourceListMB.clearResultList}" update="faa-resource-list-datatable-id"
 					process="faa-header-resourceFilter-id, @this" />
 			</h:panelGroup>
 
