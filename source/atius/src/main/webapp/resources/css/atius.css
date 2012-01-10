@@ -243,3 +243,39 @@ ul.dialog-messages li {
 	background-image:
 		url('/atius/javax.faces.resource/wait.gif.jsf?ln=images');
 }
+
+
+/*
+	CSS for Fuselage
+*/
+
+tbody tr td .faa-label {
+	text-align: center;
+	font-size: 10px;
+	font-family: Tahoma;
+	white-space: pre;
+	color: #FFFFD4;
+	display: block;
+	width: 30px;
+}
+
+tbody tr td .faa-label-user {
+	background-color: #636330;
+	border-color: #636330;
+}
+
+tbody tr td .faa-label-profile {
+	background-color: #5A6986;
+	border-color: #5A6986;
+}
+
+tbody tr td .faa-label-role {
+	background-color: #6FA8DC;
+	border-color: #6FA8DC;
+}
+
+tbody tr td .faa-label-resource {
+	background-color: #EC7000;
+	border-color: #EC7000;
+	width: 50px;
+}
