@@ -23,15 +23,14 @@
 					</h:panelGroup>
 
 					<h:outputText value="Password:" />
-					<h:inputText value="#{userEditMB.bean.password}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:inputSecret value="#{userEditMB.bean.password}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
 				</h:panelGrid>
 
 				<h:panelGroup id="faa-user-edit-dlg-buttons-id">
 					<faa:dialogButtons id="faa-user-edit-dlg-save-id" dialogId="faa-user-edit-dlg-id" dialogWidgetVar="faa_user_edit_dlg"
 						styleClass="dialog-commandbutton" updateMode="#{userEditMB.updateMode}" actionUpdater="#{userEditMB.update}"
-						actionInserter="#{userEditMB.insert}" actionCloser="#{userListMB.clearValidation}"
-						updateOnClose="faa-user-list-datatable-id" />
+						actionInserter="#{userEditMB.insert}" actionCloser="#{userListMB.clearValidation}" updateOnClose="faa-user-list-datatable-id" />
 				</h:panelGroup>
 
 			</p:dialog>
