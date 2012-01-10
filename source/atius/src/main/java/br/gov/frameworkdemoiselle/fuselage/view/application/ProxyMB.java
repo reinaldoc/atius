@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.view.application;
+package br.gov.frameworkdemoiselle.fuselage.view.application;
 
 import java.io.Serializable;
 
