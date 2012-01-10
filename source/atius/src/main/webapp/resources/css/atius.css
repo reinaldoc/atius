@@ -166,7 +166,7 @@ input[type=text].filter {
 	font-weight: bold;
 }
 
-.dialog-body input[type=text],textarea,select {
+.dialog-body input[type=text],input[type=password],textarea,select {
 	width: 375px;
 	border: 1px solid #BBC5CD !important;
 	padding: 3px !important;
@@ -180,7 +180,7 @@ input[type=text].filter {
 	background-color: white;
 }
 
-.dialog-body input[type=text]:focus {
+.dialog-body input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus {
 	border: 1px solid #BBC5CD;
 	background-color: #FFFFE0;
 }
@@ -257,6 +257,7 @@ tbody tr td .faa-label {
 	color: #FFFFD4;
 	display: block;
 	width: 30px;
+	padding: 4px 20px !important;
 }
 
 tbody tr td .faa-label-user {
