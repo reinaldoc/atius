@@ -66,4 +66,9 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 		return null;
 	}
 
+	@Override
+	public WebsiteDomain load(String id) {
+		return null;
+	}
+
 }
