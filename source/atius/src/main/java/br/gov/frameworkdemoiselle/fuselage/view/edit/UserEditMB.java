@@ -26,8 +26,29 @@ public class UserEditMB extends AbstractEditPageBean<SecurityUser, Long> {
 		bc.update(getBean());
 		return null;
 	}
-	
+
+	@Override
+	public String delete() {
+		bc.delete(getBean().getId());
+		return null;
+	}
+
+	public String disable() {
+		bc.disable(getBean());
+		return null;
+	}
+
+	public String enable() {
+		bc.enable(getBean());
+		return null;
+	}
+
 	public String userAvailable() {
+		return null;
+	}
+
+	@Override
+	public SecurityUser load(Long id) {
 		return null;
 	}
 

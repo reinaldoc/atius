@@ -55,4 +55,14 @@ public class UserBC extends DelegateCrud<SecurityUser, Long, UserDAO> {
 		return getDelegate().findByExample(userLoad);
 	}
 
+	public void disable(SecurityUser securityUser) {
+		securityUser.setAvailable(0);
+		update(securityUser);
+	}
+
+	public void enable(SecurityUser securityUser) {
+		securityUser.setAvailable(1);
+		update(securityUser);
+	}
+
 }
