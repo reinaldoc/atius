@@ -7,6 +7,7 @@ import br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser;
 import br.gov.frameworkdemoiselle.fuselage.persistence.UserDAO;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
+import br.gov.frameworkdemoiselle.util.StringUtils;
 
 public class UserBC extends DelegateCrud<SecurityUser, Long, UserDAO> {
 	private static final long serialVersionUID = 1L;
@@ -19,18 +20,24 @@ public class UserBC extends DelegateCrud<SecurityUser, Long, UserDAO> {
 		}
 	}
 
-	public void insert(String login, String name, String orgunit, String description) {
-		if (login != null && !login.isEmpty()) {
-			SecurityUser bean = loadByLogin(login);
+	public SecurityUser loadAndUpdate(SecurityUser securityUser) {
+		if (securityUser != null && StringUtils.isNotBlank(securityUser.getLogin())) {
+			SecurityUser bean = loadByLogin(securityUser.getLogin());
 			if (bean.getId() == null) {
-				insert(new SecurityUser(login, name, orgunit, description));
-			} else {
-				bean.setName(name);
-				bean.setOrgunit(orgunit);
-				bean.setDescription(description);
+				bean = securityUser;
+				bean.setAvailable(1);
+				insert(bean);
+			} else if (bean.getAvailable() == null || bean.getAvailable() != 1)
+				return null;
+			else {
+				bean.setName(securityUser.getName());
+				bean.setOrgunit(securityUser.getOrgunit());
+				bean.setDescription(securityUser.getDescription());
 				update(bean);
 			}
+			return bean;
 		}
+		return null;
 	}
 
 	public SecurityUser loadByLogin(String login) {

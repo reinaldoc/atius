@@ -41,51 +41,21 @@ public class SecurityUser implements Serializable {
 	@Column
 	private String description;
 
+	@Column
+	private Integer available;
+
 	@ManyToMany
 	@JoinTable(name = "SECURITYUSER_PROFILE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "PROFILE_ID") })
 	private List<SecurityProfile> profiles;
 
 	public SecurityUser() {
-		
+
 	}
 
-	public SecurityUser(String login) {
-		this.login = login;
-	}
-
-	public SecurityUser(String login, String name) {
+	public SecurityUser(String login, String name, String password) {
 		this.login = login;
 		this.name = name;
-	}
-
-	public SecurityUser(String login, String name, String organizationUnit) {
-		this.login = login;
-		this.name = name;
-		this.orgunit = organizationUnit;
-	}
-
-	public SecurityUser(String login, String name, String organizationUnit, String description) {
-		this.login = login;
-		this.name = name;
-		this.orgunit = organizationUnit;
-		this.description = description;
-	}
-
-	public SecurityUser(String login, String name, String organizationUnit, String description, String password) {
-		this.login = login;
-		this.name = name;
-		this.orgunit = organizationUnit;
-		this.description = description;
 		this.password = password;
-	}
-
-	public SecurityUser(String login, String name, String organizationUnit, String description, String password, List<SecurityProfile> profiles) {
-		this.login = login;
-		this.name = name;
-		this.orgunit = organizationUnit;
-		this.description = description;
-		this.password = password;
-		this.profiles = profiles;
 	}
 
 	public Long getId() {
@@ -142,6 +112,14 @@ public class SecurityUser implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Integer getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(Integer available) {
+		this.available = available;
 	}
 
 }

@@ -59,28 +59,34 @@ public class Authenticator implements br.gov.frameworkdemoiselle.security.Authen
 	public boolean authenticate() {
 		user = null;
 		authResults = new AuthenticatorResults();
-		boolean auth = callAuthenticationModules();
-		if (auth) {
+		SecurityUser authUser = callAuthenticationModules();
+		if (authUser != null) {
 			user = new User();
-			SecurityUser userLoaded = userBC.loadByLogin(credential.getUsername());
-			user.setId(userLoaded.getName());
-			user.setAttribute("user", userLoaded);
-			setUserPermissions(userLoaded);
+			user.setId(authUser.getName());
+			user.setAttribute("user", authUser);
+			setUserPermissions(authUser);
+			return true;
 		}
-		return auth;
+		return false;
 	}
 
-	private boolean callAuthenticationModules() {
+	private SecurityUser callAuthenticationModules() {
+		SecurityUser authUser = null;
 		boolean auth = localAuthenticator.authenticate(credential.getUsername(), credential.getPassword());
 		authResults = localAuthenticator.getResults();
 		if (!auth) {
 			auth = ldapAuthenticator.authenticate(credential.getUsername(), credential.getPassword());
 			if (auth) {
 				authResults = ldapAuthenticator.getResults();
-				userBC.insert(credential.getUsername(), authResults.getCommonName(), authResults.getOrganizationalUnit(), authResults.getDescription());
+				authUser = new SecurityUser();
+				authUser.setLogin(credential.getUsername());
+				authUser.setName(authResults.getCommonName());
+				authUser.setOrgunit(authResults.getOrganizationalUnit());
+				authUser.setDescription(authResults.getDescription());
+				authUser = userBC.loadAndUpdate(authUser);
 			}
 		}
-		return auth;
+		return authUser;
 	}
 
 	private void setUserPermissions(SecurityUser userLoad) {
