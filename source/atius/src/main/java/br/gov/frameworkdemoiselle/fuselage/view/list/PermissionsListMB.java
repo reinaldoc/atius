@@ -21,15 +21,19 @@ public class PermissionsListMB {
 	private SecurityContext securityContext;
 
 	public SecurityUser getUser() {
-		return ((SecurityUser) securityContext.getUser().getAttribute("user"));
+		try {
+			return ((SecurityUser) securityContext.getUser().getAttribute("user"));
+		} catch (Exception e) {
+			return new SecurityUser();
+		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<String> getProfileList() {
 		List<String> listResult = new ArrayList<String>();
 		try {
 			Set<String> setResult = ((Set<String>) securityContext.getUser().getAttribute("profile_names"));
-			listResult = Arrays.asList(setResult.toArray(new String[]{}));
+			listResult = Arrays.asList(setResult.toArray(new String[] {}));
 		} catch (Exception e) {
 			// Ignore
 		}
@@ -42,7 +46,7 @@ public class PermissionsListMB {
 		List<String> listResult = new ArrayList<String>();
 		try {
 			Set<String> setResult = ((Set<String>) securityContext.getUser().getAttribute("roles"));
-			listResult = Arrays.asList(setResult.toArray(new String[]{}));
+			listResult = Arrays.asList(setResult.toArray(new String[] {}));
 		} catch (Exception e) {
 			// Ignore
 		}
@@ -55,7 +59,7 @@ public class PermissionsListMB {
 		List<String> listResult = new ArrayList<String>();
 		try {
 			Set<String> setResult = ((Set<String>) securityContext.getUser().getAttribute("role_names"));
-			listResult = Arrays.asList(setResult.toArray(new String[]{}));
+			listResult = Arrays.asList(setResult.toArray(new String[] {}));
 		} catch (Exception e) {
 			// Ignore
 		}
@@ -73,12 +77,12 @@ public class PermissionsListMB {
 		}
 		return resourceMap;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<String> getResourcesList() {
 		List<String> listResult = new ArrayList<String>();
 		try {
-			listResult = Arrays.asList(((Map<String, String>) securityContext.getUser().getAttribute("resources")).keySet().toArray(new String[]{}));
+			listResult = Arrays.asList(((Map<String, String>) securityContext.getUser().getAttribute("resources")).keySet().toArray(new String[] {}));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
