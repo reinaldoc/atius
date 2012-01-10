@@ -27,4 +27,15 @@ public class ResourceEditMB extends AbstractEditPageBean<SecurityResource, Long>
 		return null;
 	}
 
+	@Override
+	public String delete() {
+		bc.delete(getBean().getId());
+		return null;
+	}
+
+	@Override
+	public SecurityResource load(Long id) {
+		return null;
+	}
+
 }

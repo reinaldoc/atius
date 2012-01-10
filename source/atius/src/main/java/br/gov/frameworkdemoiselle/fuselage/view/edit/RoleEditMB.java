@@ -25,4 +25,15 @@ public class RoleEditMB extends AbstractEditPageBean<SecurityRole, Long> {
 		return null;
 	}
 
+	@Override
+	public String delete() {
+		bc.delete(getBean().getId());
+		return null;
+	}
+
+	@Override
+	public SecurityRole load(Long id) {
+		return null;
+	}
+
 }

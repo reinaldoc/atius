@@ -27,4 +27,15 @@ public class ProfileEditMB extends AbstractEditPageBean<SecurityProfile, Long> {
 		return null;
 	}
 
+	@Override
+	public String delete() {
+		bc.delete(getBean().getId());
+		return null;
+	}
+
+	@Override
+	public SecurityProfile load(Long id) {
+		return null;
+	}
+
 }

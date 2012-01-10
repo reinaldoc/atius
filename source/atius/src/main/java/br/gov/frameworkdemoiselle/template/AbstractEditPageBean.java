@@ -53,6 +53,10 @@ public abstract class AbstractEditPageBean<T, I> extends AbstractPageBean {
 
 	public abstract String update();
 
+	public abstract String delete();
+
+	public abstract T load(I id);
+
 	protected Class<T> getBeanClass() {
 		if (this.beanClass == null) {
 			this.beanClass = Reflections.getGenericTypeArgument(this.getClass(), 0);
@@ -79,6 +83,10 @@ public abstract class AbstractEditPageBean<T, I> extends AbstractPageBean {
 	public void editBean(T bean) {
 		updateMode = true;
 		setBean(bean);
+	}
+
+	public void editById(I id) {
+		setBean(load(id));
 	}
 
 	public boolean isUpdateMode() {
