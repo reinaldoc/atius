@@ -2,7 +2,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:form prependId="false">
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="3" styleClass="atius-header-items">
 			<h:panelGroup layout="block" rendered="#{menuContext.isSelected('Security', 'User')}">
 				<h:inputText id="faa-header-userFilter-id" value="#{userListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 				<p:commandButton image="ui-icon-search" value="Buscar" action="#{userListMB.clearResultList}" update="faa-user-list-datatable-id"
@@ -20,8 +20,8 @@
 			</h:panelGroup>
 			<h:panelGroup layout="block" rendered="#{menuContext.isSelected('Security', 'Resource')}">
 				<h:inputText id="faa-header-resourceFilter-id" value="#{resourceListMB.resultFilter}" autocomplete="off" styleClass="filter" />
-				<p:commandButton image="ui-icon-search" value="Buscar" action="#{resourceListMB.clearResultList}" update="faa-resource-list-datatable-id"
-					process="faa-header-resourceFilter-id, @this" />
+				<p:commandButton image="ui-icon-search" value="Buscar" action="#{resourceListMB.clearResultList}"
+					update="faa-resource-list-datatable-id" process="faa-header-resourceFilter-id, @this" />
 			</h:panelGroup>
 
 			<p:menuButton value="Novo" effectDuration="20">
@@ -37,6 +37,10 @@
 				<p:menuitem value="Recurso" oncomplete="faa_resource_edit_dlg.show()" action="#{resourceEditMB.editBean()}" immediate="true"
 					update="faa-resource-edit-dlg-body-id, faa-resource-edit-dlg-buttons-id" />
 			</p:menuButton>
+
+			<h:panelGroup layout="block" rendered="#{menuContext.isSelected('Security', 'User')}">
+				<p:commandButton image="ui-icon-print" value="Imprimir" action="#{userListMB.print}" process="@this"  ajax="false"/>
+			</h:panelGroup>
 
 		</h:panelGrid>
 	</h:form>
