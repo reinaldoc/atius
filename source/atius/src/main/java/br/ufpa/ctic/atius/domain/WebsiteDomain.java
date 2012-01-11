@@ -29,15 +29,27 @@ public class WebsiteDomain extends Entry {
 	@NotNull(message = "Especifique o contato técnico do site.")
 	private InetOrgPerson adminId;
 
+	private Integer blockSoftLimit;
+
+	private Integer blockHardLimit;
+
+	private Integer inodeSoftLimit;
+
+	private Integer inodeHardLimit;
+
 	private Integer blockCount = new Integer(0);
 
 	private Integer inodeCount = new Integer(0);
+
+	private String graceTimeCountdown;
 
 	private String availability = "enabled";
 
 	private String documentRoot;
 
 	private String serverAlias;
+
+	private Boolean suPhpEngine;
 
 	private String uid;
 
@@ -101,6 +113,38 @@ public class WebsiteDomain extends Entry {
 		this.adminId = adminId;
 	}
 
+	public Integer getBlockSoftLimit() {
+		return blockSoftLimit;
+	}
+
+	public void setBlockSoftLimit(Integer blockSoftLimit) {
+		this.blockSoftLimit = blockSoftLimit;
+	}
+
+	public Integer getBlockHardLimit() {
+		return blockHardLimit;
+	}
+
+	public void setBlockHardLimit(Integer blockHardLimit) {
+		this.blockHardLimit = blockHardLimit;
+	}
+
+	public Integer getInodeSoftLimit() {
+		return inodeSoftLimit;
+	}
+
+	public void setInodeSoftLimit(Integer inodeSoftLimit) {
+		this.inodeSoftLimit = inodeSoftLimit;
+	}
+
+	public Integer getInodeHardLimit() {
+		return inodeHardLimit;
+	}
+
+	public void setInodeHardLimit(Integer inodeHardLimit) {
+		this.inodeHardLimit = inodeHardLimit;
+	}
+
 	public Integer getBlockCount() {
 		return blockCount;
 	}
@@ -115,6 +159,14 @@ public class WebsiteDomain extends Entry {
 
 	public void setInodeCount(Integer inodeCount) {
 		this.inodeCount = inodeCount;
+	}
+
+	public String getGraceTimeCountdown() {
+		return graceTimeCountdown;
+	}
+
+	public void setGraceTimeCountdown(String graceTimeCountdown) {
+		this.graceTimeCountdown = graceTimeCountdown;
 	}
 
 	public String getAvailability() {
@@ -149,6 +201,14 @@ public class WebsiteDomain extends Entry {
 
 	public void setServerAlias(String serverAlias) {
 		this.serverAlias = serverAlias;
+	}
+
+	public Boolean getSuPhpEngine() {
+		return suPhpEngine;
+	}
+
+	public void setSuPhpEngine(Boolean suPhpEngine) {
+		this.suPhpEngine = suPhpEngine;
 	}
 
 	public String getUid() {
