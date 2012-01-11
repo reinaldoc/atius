@@ -6,10 +6,6 @@ import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-
-import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
-import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.ldap.internal.ConnectionManager;
 import br.gov.frameworkdemoiselle.ldap.internal.EntryCore;
 import br.gov.frameworkdemoiselle.ldap.internal.EntryCoreMap;
@@ -20,8 +16,6 @@ import com.novell.ldap.LDAPException;
 public class EntryManager implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private Logger logger = LoggerProducer.create(EntryManager.class);
 
 	@Inject
 	private ConnectionManager connectionManager;
@@ -97,12 +91,7 @@ public class EntryManager implements Serializable {
 	 * Persist a LDAP Entry. Use LDAP Add Operation
 	 */
 	public void persist(Map<String, String[]> entry, String dn) {
-		try {
-			coreMap.persist(entry, dn);
-		} catch (LDAPException e) {
-			logger.error("Error adding entry " + dn);
-			throw new EntryException();
-		}
+		coreMap.persist(entry, dn);
 	}
 
 	/**
@@ -110,12 +99,7 @@ public class EntryManager implements Serializable {
 	 * Modify Operation
 	 */
 	public void merge(Map<String, String[]> entry, String dn) {
-		try {
-			coreMap.merge(entry, dn);
-		} catch (LDAPException e) {
-			logger.error("Error adding entry " + dn);
-			throw new EntryException();
-		}
+		coreMap.merge(entry, dn);
 	}
 
 	/**
@@ -123,24 +107,14 @@ public class EntryManager implements Serializable {
 	 * Modify Operation
 	 */
 	public void update(Map<String, String[]> entry, String dn) {
-		try {
-			coreMap.update(entry, dn);
-		} catch (LDAPException e) {
-			logger.error("Error adding entry " + dn);
-			throw new EntryException();
-		}
+		coreMap.update(entry, dn);
 	}
 
 	/**
 	 * Remove LDAP Entry
 	 */
 	public void remove(String dn) {
-		try {
-			coreMap.remove(dn);
-		} catch (LDAPException e) {
-			logger.error("Error deleting entry " + dn);
-			throw new EntryException();
-		}
+		coreMap.remove(dn);
 	}
 
 	/**
@@ -181,8 +155,8 @@ public class EntryManager implements Serializable {
 	/**
 	 * Future support for POJO. Not implemented.
 	 */
-	public void remove(Object entity) {
-		core.remove(entity);
+	public void remove(Object entry) {
+		core.remove(entry);
 	}
 
 	/**
@@ -197,6 +171,13 @@ public class EntryManager implements Serializable {
 	 */
 	public <T> T getReference(Class<T> entryClass, Object dn) {
 		return core.getReference(entryClass, dn);
+	}
+
+	/**
+	 * Future support for POJO. Not implemented.
+	 */
+	public String findReference(Object entry) {
+		return core.findReference(entry);
 	}
 
 	/**

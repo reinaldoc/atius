@@ -21,9 +21,16 @@ public class EntryCore implements Serializable {
 	}
 
 	/**
+	 * Update not implemented
+	 */
+	public void update(Object entry) {
+
+	}
+
+	/**
 	 * Remove not implemented
 	 */
-	public void remove(Object entity) {
+	public void remove(Object entry) {
 
 	}
 
@@ -43,7 +50,7 @@ public class EntryCore implements Serializable {
 	}
 
 	/**
-	 * Find not implemented
+	 * getReference not implemented
 	 */
 	public <T> T getReference(Class<T> entryClass, Object dn) {
 		T entry = null;
@@ -55,6 +62,13 @@ public class EntryCore implements Serializable {
 			e.printStackTrace();
 		}
 		return entry;
+	}
+
+	/**
+	 * findReference not implemented
+	 */
+	public String findReference(Object entry) {
+		return "";
 	}
 
 }
