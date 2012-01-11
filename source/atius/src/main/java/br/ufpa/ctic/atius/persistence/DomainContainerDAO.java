@@ -5,9 +5,8 @@ import java.util.Map;
 
 import br.gov.frameworkdemoiselle.ldap.template.LDAPCrud;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.util.StringUtils;
+import br.gov.frameworkdemoiselle.util.Strings;
 import br.ufpa.ctic.atius.domain.DomainContainer;
-import br.ufpa.ctic.atius.domain.WebsiteDomain;
 
 @PersistenceController
 public class DomainContainerDAO extends LDAPCrud<DomainContainer, String> {
@@ -41,7 +40,7 @@ public class DomainContainerDAO extends LDAPCrud<DomainContainer, String> {
 
 	public DomainContainer load(String domainContainerName) {
 		DomainContainer domainContainer = new DomainContainer();
-		if (!StringUtils.isBlank(domainContainerName)) {
+		if (!Strings.isBlank(domainContainerName)) {
 			Map<String, String[]> entry = getEntryManager().createQuery("(&(objectClass=domainContainer)(cn=" + domainContainerName + "))")
 					.getSingleResult();
 			domainContainer = entry2domainContainer(entry);

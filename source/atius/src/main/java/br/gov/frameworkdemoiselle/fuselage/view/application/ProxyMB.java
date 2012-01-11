@@ -7,7 +7,7 @@ import javax.inject.Named;
 
 import br.gov.frameworkdemoiselle.internal.configuration.PaginationConfig;
 import br.gov.frameworkdemoiselle.security.SecurityContext;
-import br.gov.frameworkdemoiselle.util.StringUtils;
+import br.gov.frameworkdemoiselle.util.Strings;
 
 @Named
 public class ProxyMB implements Serializable {
@@ -30,7 +30,7 @@ public class ProxyMB implements Serializable {
 
 	public String getUserNameProperCase() {
 		try {
-			return StringUtils.capitalizeBr(this.securityContext.getUser().getId().toLowerCase());
+			return Strings.capitalizeBr(this.securityContext.getUser().getId().toLowerCase());
 		} catch (Exception e) {
 			return "null";
 		}

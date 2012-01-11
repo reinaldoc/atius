@@ -8,7 +8,7 @@ import java.util.Map;
 import br.gov.frameworkdemoiselle.ldap.core.EntryQuery;
 import br.gov.frameworkdemoiselle.ldap.template.LDAPCrud;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.util.StringUtils;
+import br.gov.frameworkdemoiselle.util.Strings;
 import br.ufpa.ctic.atius.domain.InetOrgPerson;
 
 @PersistenceController
@@ -28,7 +28,7 @@ public class InetOrgPersonDAO extends LDAPCrud<InetOrgPerson, String> {
 	}
 
 	public List<InetOrgPerson> findPerson(String search) {
-		search = StringUtils.null2empty(search);
+		search = Strings.null2empty(search);
 		List<InetOrgPerson> inetOrgPersons = new ArrayList<InetOrgPerson>();
 		EntryQuery query = getEntryManager().createQuery("(&(objectClass=inetOrgPerson)(|(cn=*" + search + "*)(mail=*" + search + "*)))");
 		query.setMaxResults(10);
@@ -41,7 +41,7 @@ public class InetOrgPersonDAO extends LDAPCrud<InetOrgPerson, String> {
 
 	public InetOrgPerson load(String mail) {
 		InetOrgPerson inetOrgPerson = new InetOrgPerson();
-		if (!StringUtils.isBlank(mail)) {
+		if (!Strings.isBlank(mail)) {
 			Map<String, String[]> entry = getEntryManager().createQuery("(&(objectClass=inetOrgPerson)(mail=" + mail + "))")
 					.getSingleResult();
 			inetOrgPerson = entry2inetOrgPerson(entry);

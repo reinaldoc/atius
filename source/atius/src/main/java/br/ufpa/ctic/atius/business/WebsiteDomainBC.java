@@ -9,7 +9,7 @@ import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.MenuContext;
-import br.gov.frameworkdemoiselle.util.StringUtils;
+import br.gov.frameworkdemoiselle.util.Strings;
 import br.ufpa.ctic.atius.domain.DomainContainer;
 import br.ufpa.ctic.atius.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.domain.WebsiteCategory;
@@ -56,7 +56,7 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	public void insert(WebsiteDomain websiteDomain) {
 		try {
 			WebsiteProfile websiteProfile = websiteProfileBC.load(websiteDomain.getWebsiteProfile());
-			if (StringUtils.isBlank(websiteProfile.getWebserverName())) {
+			if (Strings.isBlank(websiteProfile.getWebserverName())) {
 				Faces.addMessage(new DefaultMessage("Não foi possível identificar o webserver do tipo " + websiteDomain.getWebsiteProfile()));
 				Faces.validationFailed();
 				return;

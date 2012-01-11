@@ -8,7 +8,7 @@ import java.util.Map;
 
 import br.gov.frameworkdemoiselle.ldap.template.LDAPCrud;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.util.StringUtils;
+import br.gov.frameworkdemoiselle.util.Strings;
 import br.ufpa.ctic.atius.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.domain.WebsiteDomain;
 
@@ -99,22 +99,22 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 	}
 
 	public List<WebsiteDomain> find(String search) {
-		if (StringUtils.isBlank(search))
+		if (Strings.isBlank(search))
 			return findAll();
 		return findBySearchFilter(String.format("(&(objectClass=websiteDomain)(|(cn=*%1$s*)(serverName=*%1$s*)))",
 				search));
 	}
 
 	public List<WebsiteDomain> findByCategory(String category) {
-		if (StringUtils.isBlank(category))
+		if (Strings.isBlank(category))
 			return findAll();
 		return findBySearchFilter(String.format("(&(objectClass=websiteDomain)(websiteCategory=%1$s))", category));
 	}
 
 	public List<WebsiteDomain> findByCategory(String category, String search) {
-		if (StringUtils.isBlank(category))
+		if (Strings.isBlank(category))
 			return find(search);
-		if (StringUtils.isBlank(search))
+		if (Strings.isBlank(search))
 			return findByCategory(category);
 		return findBySearchFilter(String.format(
 				"(&(objectClass=websiteDomain)(websiteCategory=%1$s)(|(cn=*%2$s*)(serverName=*%2$s*)))", category,
@@ -123,7 +123,7 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 
 	public WebsiteDomain load(String serverName) {
 		WebsiteDomain websiteDomain = new WebsiteDomain();
-		if (!StringUtils.isBlank(serverName)) {
+		if (!Strings.isBlank(serverName)) {
 			Map<String, String[]> entry = getEntryManager().createQuery(
 					String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName)).getSingleResult();
 			websiteDomain = entry2websiteDomain(entry);

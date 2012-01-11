@@ -7,7 +7,7 @@ import java.util.Map;
 
 import br.gov.frameworkdemoiselle.ldap.template.LDAPCrud;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.util.StringUtils;
+import br.gov.frameworkdemoiselle.util.Strings;
 import br.ufpa.ctic.atius.domain.WebsiteProfile;
 
 @PersistenceController
@@ -42,7 +42,7 @@ public class WebsiteProfileDAO extends LDAPCrud<WebsiteProfile, String> {
 
 	public WebsiteProfile load(String profileName) {
 		WebsiteProfile websiteProfile = new WebsiteProfile();
-		if (!StringUtils.isBlank(profileName)) {
+		if (!Strings.isBlank(profileName)) {
 			Map<String, String[]> entry = getEntryManager().createQuery(
 					String.format("(&(objectClass=websiteProfile)(cn=%s))", profileName)).getSingleResult();
 			websiteProfile = entry2websiteProfile(entry);
