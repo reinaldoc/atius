@@ -17,6 +17,7 @@ public class UserEditMB extends AbstractEditPageBean<SecurityUser, Long> {
 
 	@Override
 	public String insert() {
+		getBean().setAvailable(1);
 		bc.insert(getBean());
 		return null;
 	}

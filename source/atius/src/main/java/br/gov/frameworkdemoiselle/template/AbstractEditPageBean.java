@@ -86,6 +86,7 @@ public abstract class AbstractEditPageBean<T, I> extends AbstractPageBean {
 	}
 
 	public void editById(I id) {
+		updateMode = true;
 		setBean(load(id));
 	}
 
