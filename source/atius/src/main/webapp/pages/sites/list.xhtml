@@ -46,7 +46,8 @@
 						<p:commandButton image="ui-icon-search" style="icon" title="Editar Informações" oncomplete="atius_sites_edit_dlg.show()"
 							action="#{websiteDomainEditMB.editBean(domain)}" update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id"
 							immediate="true" />
-						<p:commandButton image="ui-icon-document" style="icon" title="Imprimir Termo" />
+						<p:commandButton image="ui-icon-document" style="icon" title="Imprimir Termo"
+							onclick="openReport('websiteDomain','#{domain.serverName}'); return false;" />
 						<p:commandButton image="ui-icon-folder-collapsed" style="icon" title="Enviar Termo Digitalizado" />
 						<p:commandButton image="ui-icon-unlocked" style="icon" title="Desativar Website" oncomplete="atius_sites_disable_dlg.show()"
 							action="#{websiteDomainEditMB.editBean(domain)}" update="atius-sites-disable-dlg-id" rendered="#{domain.availabilityEnabled}" />

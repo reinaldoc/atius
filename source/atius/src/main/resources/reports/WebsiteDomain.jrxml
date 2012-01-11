@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WebsiteDomain" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from websiteDomain]]>
+	</queryString>
+	<field name="cn" class="java.lang.Object"/>
+	<field name="serverName" class="java.lang.Object"/>
+	<field name="documentRoot" class="java.lang.Object"/>
+	<field name="availability" class="java.lang.Object"/>
+	<field name="adminId" class="java.lang.Object"/>
+	<field name="ownerId" class="java.lang.Object"/>
+	<field name="serverAlias" class="java.lang.Object"/>
+	<field name="suPhpEngine" class="java.lang.Object"/>
+	<field name="blockCount" class="java.lang.Object"/>
+	<field name="inodeCount" class="java.lang.Object"/>
+	<field name="graceTimeCountdown" class="java.lang.Object"/>
+	<field name="websiteProfile" class="java.lang.Object"/>
+	<field name="websiteCategory" class="java.lang.Object"/>
+	<field name="blockSoftLimit" class="java.lang.Object"/>
+	<field name="blockHardLimit" class="java.lang.Object"/>
+	<field name="inodeSoftLimit" class="java.lang.Object"/>
+	<field name="inodeHardLimit" class="java.lang.Object"/>
+	<field name="objectClass" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="81" y="0" width="360" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidade Federal do Pará]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="18" width="360" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centro de Tecnologia da Informação e Comunicação - CTIC]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="35"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="11" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="11"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="80" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="80"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="20" width="158" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Domínio:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="158" y="0" width="217" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""+$F{cn}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="158" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Entidade:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="158" y="20" width="217" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""+$F{serverName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="40" width="158" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Categoria:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="158" y="40" width="217" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""+$F{websiteCategory}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="60" width="158" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Tipo:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="158" y="60" width="217" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""+$F{websiteProfile}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="144" y="0" width="191" height="20"/>
+				<textElement/>
+				<text><![CDATA[_________________________________________]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

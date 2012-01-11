@@ -1,4 +1,17 @@
 /**
+ * 
+ */
+
+function openWindow(URL) {
+	window.open(URL,'_blank', 'width=800, height=600, top=100, left=100, scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+}
+
+function openReport(reportName, reportId) {
+	openWindow("/atius/report?reportName="+reportName+"&id="+reportId);
+}
+
+
+/**
  * saveAndCloseButtons methods
  * 
  * @author J. Riba Cruz - jribacruz@gmail.com
