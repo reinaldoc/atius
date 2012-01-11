@@ -150,6 +150,10 @@ input[type=text].filter {
 	border-width: 0 0 1px !important;
 }
 
+.atius-header-items td {
+	padding-right: 25px;
+}
+
 /*
 	CSS for Dialog
 */
