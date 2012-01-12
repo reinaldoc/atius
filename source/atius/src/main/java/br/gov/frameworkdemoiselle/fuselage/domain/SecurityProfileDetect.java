@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class SecurityProfileDetect implements Serializable {
@@ -24,21 +27,30 @@ public class SecurityProfileDetect implements Serializable {
 	private Long id;
 
 	@Column
+	@NotBlank(message = "Especifique melhor o nome da regra")
+	@Size(min = 3, max = 255, message = "Especifique melhor o nome da regra")
 	private String name;
 
 	@Column
+	@NotBlank(message = "Descreva melhor a regra")
+	@Size(min = 10, max = 255, message = "Descreva melhor a regra")
 	private String description;
 
 	@Column
+	@NotBlank(message = "Selecione a implementação")
+	@Size(min = 3, max = 255, message = "Selecione a implementação")
 	private String implementation;
 
 	@Column
+	@Size(max = 255, message = "Identifique melhor o nome da chave")
 	private String keyname;
 
 	@Column
+	@Size(max = 255, message = "Identifique melhor o valor da chave")
 	private String value;
 
 	@Column
+	@Size(max = 255, message = "Identifique melhor a notação da chave")
 	private String valuenotation;
 
 	@ManyToMany

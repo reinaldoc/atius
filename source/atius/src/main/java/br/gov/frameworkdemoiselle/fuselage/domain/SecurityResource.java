@@ -12,8 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class SecurityResource implements Serializable {
@@ -21,24 +22,26 @@ public class SecurityResource implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="system-uuid")
-	@SequenceGenerator(name = "system-uuid", sequenceName="guid")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
+	@SequenceGenerator(name = "system-uuid", sequenceName = "guid")
 	private Long id;
 
-	@NotEmpty
 	@Column
+	@NotBlank(message = "Especifique melhor o identificador do recurso")
+	@Size(min = 3, max = 255, message = "Especifique melhor o identificador do recurso")
 	private String name;
 
-	@NotEmpty
 	@Column
+	@NotBlank(message = "Especifique melhor o valor do recurso")
+	@Size(min = 3, max = 255, message = "Especifique melhor o valor do recurso")
 	private String value;
 
 	@ManyToMany
-	@JoinTable(name="SECURITYROLE_RESOURCE", joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	@JoinTable(name = "SECURITYROLE_RESOURCE", joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	private List<SecurityRole> roles;
 
 	public SecurityResource() {
-		
+
 	}
 
 	public SecurityResource(String resourceName) {

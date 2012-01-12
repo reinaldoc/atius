@@ -13,8 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class SecurityProfile implements Serializable {
@@ -26,11 +27,14 @@ public class SecurityProfile implements Serializable {
 	@SequenceGenerator(name = "system-uuid", sequenceName = "guid")
 	private Long id;
 
-	@NotEmpty
 	@Column
+	@NotBlank(message = "Especifique melhor o nome do perfil")
+	@Size(min = 3, max = 255, message = "Especifique melhor o nome do perfil")
 	private String name;
 
 	@Column
+	@NotBlank(message = "Descreva melhor o perfil")
+	@Size(min = 20, max = 255, message = "Descreva melhor o perfil")
 	private String description;
 
 	@Column
