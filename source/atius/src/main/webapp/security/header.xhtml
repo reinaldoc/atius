@@ -27,16 +27,16 @@
 
 				<p:menuButton value="Novo" effectDuration="20">
 					<p:menuitem value="Usuário" oncomplete="faa_user_edit_dlg.show()" action="#{userEditMB.editBean()}" immediate="true"
-						update="faa-user-edit-dlg-body-id, faa-user-edit-dlg-buttons-id" />
+						actionListener="#{menuContext.select('Security', 'User')}" update="atius-body-id, atius-header-id" />
 
 					<p:menuitem value="Perfil" oncomplete="faa_profile_edit_dlg.show()" action="#{profileEditMB.editBean()}" immediate="true"
-						update="faa-profile-edit-dlg-body-id, faa-profile-edit-dlg-buttons-id" />
+						actionListener="#{menuContext.select('Security', 'Profile')}" update="atius-body-id, atius-header-id" />
 
 					<p:menuitem value="Papel" oncomplete="faa_role_edit_dlg.show()" action="#{roleEditMB.editBean()}" immediate="true"
-						update="faa-role-edit-dlg-body-id, faa-role-edit-dlg-buttons-id" />
+						actionListener="#{menuContext.select('Security', 'Role')}" update="atius-body-id, atius-header-id" />
 
 					<p:menuitem value="Recurso" oncomplete="faa_resource_edit_dlg.show()" action="#{resourceEditMB.editBean()}" immediate="true"
-						update="faa-resource-edit-dlg-body-id, faa-resource-edit-dlg-buttons-id" />
+						actionListener="#{menuContext.select('Security', 'Resource')}" update="atius-body-id, atius-header-id" />
 				</p:menuButton>
 
 				<h:panelGroup layout="block" rendered="#{menuContext.isSelected('Security', 'User')}">
