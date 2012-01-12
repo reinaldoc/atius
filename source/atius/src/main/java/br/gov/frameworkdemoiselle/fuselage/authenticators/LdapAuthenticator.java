@@ -14,7 +14,7 @@ public class LdapAuthenticator implements AuthenticatorModule {
 	private EntryManager entryManager;
 
 	@Inject
-	LdapAuthenticatorConfig ldapAuthConfig;
+	private LdapAuthenticatorConfig ldapAuthConfig;
 
 	private AuthenticatorResults results = new AuthenticatorResults();
 
