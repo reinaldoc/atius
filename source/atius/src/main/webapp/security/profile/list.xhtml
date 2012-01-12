@@ -2,26 +2,41 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:form prependId="false">
-		<h:panelGroup id="faa-profilelist-id">
-			<p:dataTable id="faa-profilelist-datatable-id" widgetVar="faa_profile_dt_wv" emptyMessage="Não há registros"
+
+		<p:confirmDialog message="Deseja excluir o perfil: #{profileEditMB.bean.name} ?" header="Atenção!" severity="alert"
+			id="faa-profile-delete-dlg-id" widgetVar="faa_profile_delete_dlg">
+			<p:commandButton value="Sim" oncomplete="faa_profile_delete_dlg.hide()" update="faa-profile-list-datatable-id, faa-growl-id"
+				action="#{profileEditMB.delete}" actionListener="#{profileListMB.clearResultList}" style="margin-right: 20px;" />
+			<p:commandButton value="Não" onclick="faa_profile_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+		</p:confirmDialog>
+
+		<h:panelGroup id="faa-profile-list-id">
+			<p:dataTable id="faa-profile-list-datatable-id" widgetVar="faa_profile_dt_wv" emptyMessage="Não há registros"
 				value="#{profileListMB.lazyDataModel}" var="faa_profile_dt_row" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
 				paginatorAlwaysVisible="false" lazy="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
-				<p:column style="width: 1px">
-					<h:selectBooleanCheckbox styleClass="ui-selection-column" value="#{profileListMB.selection[user.id]}" />
+				<p:column styleClass="faa-label faa-label-profile">
+					<h:outputText value="Profile" />
 				</p:column>
-				<p:column style="width: 1%">
-					<h:outputText styleClass="faa-label-profile" value="Profile" />
-				</p:column>
-				<p:column headerText="Nome" style="width:200px" sortBy="#{faa_profile_dt_row.name}">
+				<p:column headerText="Nome" sortBy="#{faa_profile_dt_row.name}">
 					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
 						<h:outputText value="#{faa_profile_dt_row.name} " />
 					</h:panelGroup>
 				</p:column>
-				<p:column headerText="Descrição" style="width: 80%" sortBy="#{faa_profile_dt_row.description}">
-					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+				<p:column headerText="Descrição" sortBy="#{faa_profile_dt_row.description}">
+					<h:panelGroup layout="block" style="width: 400px; overflow: hidden; white-space: pre">
 						<h:outputText value="#{faa_profile_dt_row.description}" />
 					</h:panelGroup>
 				</p:column>
+				<p:column style="float: right; text-align: right; padding: 0px">
+					<h:panelGroup layout="block" style="width: 100px; overflow: hidden; white-space: pre">
+						<p:commandButton image="ui-icon-search" style="icon" immediate="true"
+							update="faa-profile-edit-dlg-body-id, faa-profile-edit-dlg-buttons-id" action="#{profileEditMB.editBean(faa_profile_dt_row)}"
+							oncomplete="faa_profile_edit_dlg.show()" title="Editar Informações" />
+						<p:commandButton image="ui-icon-trash" style="icon" immediate="true" update="faa-profile-delete-dlg-id"
+							action="#{profileEditMB.editBean(faa_profile_dt_row)}" oncomplete="faa_profile_delete_dlg.show()" title="Excluir Recurso" />
+					</h:panelGroup>
+				</p:column>
+
 			</p:dataTable>
 		</h:panelGroup>
 	</h:form>

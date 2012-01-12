@@ -1,5 +1,31 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
 
+	<h:form prependId="false">
+		<h:panelGrid id="faa-role-edit-panel-id">
+			<p:dialog id="faa-role-edit-dlg-id" header="FAA - Cadastro de Papéis" widgetVar="faa_role_edit_dlg" modal="true" width="480"
+				resizable="false" closable="false">
+				<h:panelGrid columns="1" styleClass="dialog-body" id="faa-role-edit-dlg-body-id">
+					<h:outputText value="Nome:" />
+					<h:inputText value="#{roleEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
+					<h:outputText value="Descrição curta:" />
+					<h:inputText value="#{roleEditMB.bean.shortDescription}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+
+					<h:outputText value="Descrição:" />
+					<h:inputTextarea value="#{roleEditMB.bean.description}" onkeypress="return event.keyCode!=13" />
+
+					<h:outputText value="Restritiva:" />
+					<h:selectBooleanCheckbox value="#{roleEditMB.bean.restriction}" onkeypress="return event.keyCode!=13" />
+				</h:panelGrid>
+
+				<h:panelGroup id="faa-role-edit-dlg-buttons-id">
+					<faa:dialogButtons id="faa-role-edit-dlg-save-id" dialogId="faa-role-edit-dlg-id" dialogWidgetVar="faa_role_edit_dlg"
+						styleClass="dialog-commandbutton" updateMode="#{roleEditMB.updateMode}" actionUpdater="#{roleEditMB.update}"
+						actionInserter="#{roleEditMB.insert}" actionCloser="#{roleListMB.clearValidation}" updateOnClose="faa-role-list-datatable-id" />
+				</h:panelGroup>
+
+			</p:dialog>
+		</h:panelGrid>
+	</h:form>
 </ui:composition>

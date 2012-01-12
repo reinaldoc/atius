@@ -1,5 +1,26 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
 
+	<h:form prependId="false">
+		<h:panelGrid id="faa-profile-edit-panel-id">
+			<p:dialog id="faa-profile-edit-dlg-id" header="FAA - Cadastro de Perfis" widgetVar="faa_profile_edit_dlg" modal="true" width="480"
+				resizable="false" closable="false">
+				<h:panelGrid columns="1" styleClass="dialog-body" id="faa-profile-edit-dlg-body-id">
+					<h:outputText value="Nome:" />
+					<h:inputText value="#{profileEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
+					<h:outputText value="Descrição:" />
+					<h:inputTextarea value="#{profileEditMB.bean.description}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+
+				</h:panelGrid>
+
+				<h:panelGroup id="faa-profile-edit-dlg-buttons-id">
+					<faa:dialogButtons id="faa-profile-edit-dlg-save-id" dialogId="faa-profile-edit-dlg-id" dialogWidgetVar="faa_profile_edit_dlg"
+						styleClass="dialog-commandbutton" updateMode="#{profileEditMB.updateMode}" actionUpdater="#{profileEditMB.update}"
+						actionInserter="#{profileEditMB.insert}" actionCloser="#{profileListMB.clearValidation}" updateOnClose="faa-profile-list-datatable-id" />
+				</h:panelGroup>
+
+			</p:dialog>
+		</h:panelGrid>
+	</h:form>
 </ui:composition>
