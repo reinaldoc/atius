@@ -7,7 +7,7 @@
 				resizable="false" closable="false">
 				<h:panelGrid columns="1" styleClass="dialog-body" id="faa-resource-edit-dlg-body-id">
 					<h:outputText value="Nome:" />
-					<h:inputText value="#{resourceEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<p:autoComplete value="#{resourceEditMB.bean.name}" completeMethod="#{resourceEditMB.names}" onkeypress="return event.keyCode!=13" />
 
 					<h:outputText value="Valor:" />
 					<h:inputText value="#{resourceEditMB.bean.value}" autocomplete="off" onkeypress="return event.keyCode!=13" />
