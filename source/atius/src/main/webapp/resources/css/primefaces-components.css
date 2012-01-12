@@ -154,9 +154,10 @@ button.ui-button-icon-only {
 
 /* Menu */
 .ui-menu {
-	background: #FFFFFF;
+	background: #FAFAFA;
 	border-radius: 6px;
 	border: 2px solid #74ffcc;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 
 .ui-menu .ui-menu-list .ui-state-hover {

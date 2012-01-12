@@ -1,18 +1,19 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<h:form prependId="false">
-		<h:panelGrid columns="2">
-			<h:panelGroup layout="block">
-				<h:inputText id="atius-sites-search-domain" value="#{websiteDomainListMB.searchDomain}" autocomplete="off" styleClass="filter" />
-				<p:commandButton image="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.clearResultList}"
-					update="atius-sites-list-datatable-id" process="atius-sites-search-domain, @this" />
-			</h:panelGroup>
-			<p:commandButton image="ui-icon-plusthick" value="Novo Site" immediate="true" action="#{websiteDomainEditMB.editBean}"
-				update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id" oncomplete="atius_sites_edit_dlg.show()"
-				style="margin-left: 45px;" />
-		</h:panelGrid>
-	</h:form>
-	<ui:include src="edit.xhtml" />
+	<h:panelGrid columns="2">
+		<h:form prependId="false">
+			<h:panelGrid columns="2" styleClass="faa-header-items">
+				<h:panelGroup layout="block">
+					<h:inputText id="atius-sites-search-domain" value="#{websiteDomainListMB.searchDomain}" autocomplete="off" styleClass="filter" />
+					<p:commandButton image="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.clearResultList}"
+						update="atius-sites-list-datatable-id" process="atius-sites-search-domain, @this" />
+				</h:panelGroup>
+				<p:commandButton image="ui-icon-plusthick" value="Novo Site" immediate="true" action="#{websiteDomainEditMB.editBean}"
+					update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id" oncomplete="atius_sites_edit_dlg.show()" />
+			</h:panelGrid>
+		</h:form>
+		<ui:include src="edit.xhtml" />
+	</h:panelGrid>
 
 </ui:composition>
