@@ -4,8 +4,10 @@ import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.fuselage.business.RoleBC;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityRole;
+import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 
+@ViewController
 public class RoleEditMB extends AbstractEditPageBean<SecurityRole, Long> {
 
 	private static final long serialVersionUID = 1L;
