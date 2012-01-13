@@ -159,10 +159,17 @@ input[type=text].filter {
 	margin-bottom: 10px;
 }
 
+.dialog-body-role {
+	padding: 0px;
+}
+
+
 .dialog-body td {
 	padding-top: 4px;
 	color: #3F586D;
 	font-weight: bold;
+	vertical-align: top;
+	text-align: left;
 }
 
 .dialog-body input[type=text],input[type=password],textarea,select {
