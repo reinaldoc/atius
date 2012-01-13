@@ -3,22 +3,27 @@
 
 	<h:form prependId="false">
 		<h:panelGrid id="faa-role-edit-panel-id">
-			<p:dialog id="faa-role-edit-dlg-id" header="FAA - Cadastro de Papéis" widgetVar="faa_role_edit_dlg" modal="true" width="480"
+			<p:dialog id="faa-role-edit-dlg-id" header="FAA - Cadastro de Papéis" widgetVar="faa_role_edit_dlg" modal="true" width="960"
 				resizable="false" closable="false">
-				<h:panelGrid columns="1" styleClass="dialog-body" id="faa-role-edit-dlg-body-id">
-					<h:outputText value="Nome:" />
-					<h:inputText value="#{roleEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+				<h:panelGrid columns="2" styleClass="dialog-body dialog-body-role" id="faa-role-edit-dlg-body-id">
+					<h:panelGrid columns="1">
+						<h:outputText value="Nome:" />
+						<h:inputText value="#{roleEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="Descrição curta:" />
-					<h:inputText value="#{roleEditMB.bean.shortDescription}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+						<h:outputText value="Descrição curta:" />
+						<h:inputText value="#{roleEditMB.bean.shortDescription}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="Descrição:" />
-					<h:inputTextarea value="#{roleEditMB.bean.description}" onkeypress="return event.keyCode!=13" />
+						<h:outputText value="Descrição:" />
+						<h:inputTextarea value="#{roleEditMB.bean.description}" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="Restritiva:" />
-					<h:selectBooleanCheckbox value="#{roleEditMB.bean.restriction}" onkeypress="return event.keyCode!=13" />
+						<h:outputText value="Restritiva:" />
+						<h:selectBooleanCheckbox value="#{roleEditMB.bean.restriction}" onkeypress="return event.keyCode!=13" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:panelGroup id="faa-role-edit-resource-list-id">
+						</h:panelGroup>
+					</h:panelGrid>
 				</h:panelGrid>
-
 				<h:panelGroup id="faa-role-edit-dlg-buttons-id">
 					<faa:dialogButtons id="faa-role-edit-dlg-save-id" dialogId="faa-role-edit-dlg-id" dialogWidgetVar="faa_role_edit_dlg"
 						styleClass="dialog-commandbutton" updateMode="#{roleEditMB.updateMode}" actionUpdater="#{roleEditMB.update}"
