@@ -61,8 +61,23 @@ public class WebsiteDomain extends Entry {
 
 	private String loginShell = "/bin/false";
 
+	public WebsiteDomain() {
+		super();
+	}
+
+	public WebsiteDomain(boolean setObjectClass) {
+		super(setObjectClass);
+	}
+
 	protected String[] objectClass() {
 		return new String[] { "websiteDomain", "posixAccount", "shadowAccount" };
+	}
+
+	public void setValuesByServerName() {
+		setDocumentRoot();
+		setServerAlias();
+		setUid();
+		setHomeDirectory();
 	}
 
 	public String getCn() {
@@ -184,8 +199,6 @@ public class WebsiteDomain extends Entry {
 	}
 
 	public String getDocumentRoot() {
-		if (documentRoot == null && serverName != null)
-			documentRoot = "/var/www/" + serverName.split("\\.")[0];
 		return documentRoot;
 	}
 
@@ -193,14 +206,22 @@ public class WebsiteDomain extends Entry {
 		this.documentRoot = documentRoot;
 	}
 
+	public void setDocumentRoot() {
+		if (serverName != null)
+			documentRoot = "/var/www/" + serverName.split("\\.")[0];
+	}
+
 	public String getServerAlias() {
-		if (serverAlias == null && serverName != null)
-			serverAlias = "www." + serverName;
 		return serverAlias;
 	}
 
 	public void setServerAlias(String serverAlias) {
 		this.serverAlias = serverAlias;
+	}
+
+	public void setServerAlias() {
+		if (serverName != null)
+			serverAlias = "www." + serverName;
 	}
 
 	public Boolean getSuPhpEngine() {
@@ -212,13 +233,16 @@ public class WebsiteDomain extends Entry {
 	}
 
 	public String getUid() {
-		if (uid == null && serverName != null)
-			uid = serverName.split("\\.")[0];
 		return uid;
 	}
 
 	public void setUid(String uid) {
 		this.uid = uid;
+	}
+
+	public void setUid() {
+		if (serverName != null)
+			uid = serverName.split("\\.")[0];
 	}
 
 	public String getUidNumber() {
@@ -238,13 +262,16 @@ public class WebsiteDomain extends Entry {
 	}
 
 	public String getHomeDirectory() {
-		if (homeDirectory == null)
-			homeDirectory = getDocumentRoot();
 		return homeDirectory;
 	}
 
 	public void setHomeDirectory(String homeDirectory) {
 		this.homeDirectory = homeDirectory;
+	}
+
+	public void setHomeDirectory() {
+		if (serverName != null)
+			homeDirectory = "/var/www/" + serverName.split("\\.")[0];
 	}
 
 	public String getLoginShell() {

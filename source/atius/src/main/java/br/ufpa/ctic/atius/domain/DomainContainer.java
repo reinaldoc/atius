@@ -8,6 +8,14 @@ public class DomainContainer extends Entry {
 
 	private Integer nextUidNumber;
 
+	public DomainContainer() {
+		super();
+	}
+
+	public DomainContainer(boolean setObjectClass) {
+		super(setObjectClass);
+	}
+
 	protected String[] objectClass() {
 		return new String[] { "domainContainer" };
 	}
