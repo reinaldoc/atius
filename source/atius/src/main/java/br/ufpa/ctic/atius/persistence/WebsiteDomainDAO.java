@@ -2,7 +2,6 @@ package br.ufpa.ctic.atius.persistence;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,28 +15,6 @@ import br.ufpa.ctic.atius.domain.WebsiteDomain;
 public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 
 	private static final long serialVersionUID = 1L;
-
-	private Map<String, String[]> websiteDomain2entry(WebsiteDomain websiteDomain) {
-		Map<String, String[]> entry = new HashMap<String, String[]>();
-		entry.put("objectClass", websiteDomain.getObjectClass());
-		entry.put("cn", new String[] { websiteDomain.getCn() });
-		entry.put("serverName", new String[] { websiteDomain.getServerName() });
-		entry.put("documentRoot", new String[] { websiteDomain.getDocumentRoot() });
-		entry.put("serverAlias", new String[] { websiteDomain.getServerAlias() });
-		entry.put("availability", new String[] { websiteDomain.getAvailability() });
-		entry.put("adminId", new String[] { websiteDomain.getAdminId().getMail() });
-		entry.put("ownerId", new String[] { websiteDomain.getOwnerId().getMail() });
-		entry.put("websiteCategory", new String[] { websiteDomain.getWebsiteCategory() });
-		entry.put("websiteProfile", new String[] { websiteDomain.getWebsiteProfile() });
-		entry.put("blockCount", new String[] { websiteDomain.getBlockCount().toString() });
-		entry.put("inodeCount", new String[] { websiteDomain.getInodeCount().toString() });
-		entry.put("uid", new String[] { websiteDomain.getUid() });
-		entry.put("uidNumber", new String[] { websiteDomain.getUidNumber().toString() });
-		entry.put("gidNumber", new String[] { websiteDomain.getGidNumber() });
-		entry.put("loginShell", new String[] { websiteDomain.getLoginShell() });
-		entry.put("homeDirectory", new String[] { websiteDomain.getHomeDirectory() });
-		return entry;
-	}
 
 	private WebsiteDomain entry2websiteDomain(Map<String, String[]> entry) {
 		WebsiteDomain websiteDomain = new WebsiteDomain();
@@ -76,7 +53,9 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 	}
 
 	public void insert(WebsiteDomain websiteDomain) {
-		getEntryManager().persist(websiteDomain2entry(websiteDomain), websiteDomain.getDn());
+		getEntryManager().setVerbose(true);
+		getEntryManager().persist(websiteDomain);
+		//getEntryManager().persist(websiteDomain2entry(websiteDomain), websiteDomain.getDn());
 	}
 
 	public void delete(String serverName) {
