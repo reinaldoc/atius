@@ -14,7 +14,12 @@ public abstract class Entry {
 	protected abstract String[] objectClass();
 
 	public Entry() {
-		objectClass = objectClass();
+		setObjectClass(objectClass());
+	}
+
+	public Entry(boolean setObjectClass) {
+		if (setObjectClass)
+			setObjectClass(objectClass());
 	}
 
 	public String getDn() {
@@ -26,8 +31,6 @@ public abstract class Entry {
 	}
 
 	public String[] getObjectClass() {
-		if (objectClass == null)
-			objectClass = objectClass();
 		return objectClass;
 	}
 
