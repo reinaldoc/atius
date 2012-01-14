@@ -32,6 +32,8 @@ public class EntryCoreMap implements Serializable {
 
 	@Inject
 	private EntryQuery query;
+	
+	private boolean verbose = false;
 
 	private LDAPConnection getConnection() {
 		return this.conn.initialized();
@@ -100,6 +102,14 @@ public class EntryCoreMap implements Serializable {
 	public String findReference(String searchFilter) {
 		query.setFilter(searchFilter);
 		return query.getSingleDn();
+	}
+
+	public boolean isVerbose() {
+		return verbose;
+	}
+
+	public void setVerbose(boolean verbose) {
+		this.verbose = verbose;
 	}
 
 }

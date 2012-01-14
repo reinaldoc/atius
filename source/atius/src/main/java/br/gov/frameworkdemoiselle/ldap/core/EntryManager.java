@@ -291,4 +291,22 @@ public class EntryManager implements Serializable {
 		return query;
 	}
 
+	/**
+	 * Get verbose status.
+	 * 
+	 * @return true if enabled
+	 */
+	public boolean isVerbose() {
+		return coreMap.isVerbose();
+	}
+
+	/**
+	 * Enable or disabled verbose. If enabled entry processing is logged.
+	 * 
+	 * @param verbose
+	 */
+	public void setVerbose(boolean verbose) {
+		coreMap.setVerbose(verbose);
+	}
+
 }
