@@ -37,4 +37,8 @@ public class InetOrgPerson extends Entry {
 		return mail;
 	}
 
+	public String toString() {
+		return mail;
+	}
+
 }
