@@ -47,13 +47,13 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	}
 
 	public String disable() {
-		// bc.disable(getBean().getServerName());
+		bc.disable(getBean());
 		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " desativado com sucesso."));
 		return null;
 	}
 
 	public String enable() {
-		// bc.enable(getBean().getServerName());
+		bc.enable(getBean());
 		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " ativado com sucesso."));
 		return null;
 	}
@@ -63,13 +63,15 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 			Faces.validationFailed(new DefaultMessage("Domínio indisponível, escolha outro."));
 			return null;
 		}
+		getBean().setValuesByServerName();
 		bc.insert(getBean());
+		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " cadastrado com sucesso."));
 		return null;
 	}
 
 	public String update() {
-		System.out.println("==========> update()");
-		// bc.update(getBean());
+		bc.update(getBean());
+		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " atualizado com sucesso."));
 		return null;
 	}
 

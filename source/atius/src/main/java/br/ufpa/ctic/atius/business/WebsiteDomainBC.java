@@ -85,6 +85,16 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 		getDelegate().delete(serverName);
 	}
 
+	public void disable(WebsiteDomain websiteDomain) {
+		websiteDomain.setAvailability("disabled");
+		getDelegate().update(websiteDomain);
+	}
+
+	public void enable(WebsiteDomain websiteDomain) {
+		websiteDomain.setAvailability("enabled");
+		getDelegate().update(websiteDomain);
+	}
+
 	public boolean domainAvailable(String serverName) {
 		if (serverName != null && serverName.length() > 8) {
 			WebsiteDomain websiteDomain = getDelegate().load(serverName);
