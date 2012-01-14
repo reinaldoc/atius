@@ -306,7 +306,10 @@ public class EntryManager implements Serializable {
 	 * @param verbose
 	 */
 	public void setVerbose(boolean verbose) {
+		connectionManager.setVerbose(verbose);
+		core.setVerbose(verbose);
 		coreMap.setVerbose(verbose);
+		query.setVerbose(verbose);
 	}
 
 }
