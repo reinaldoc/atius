@@ -1,14 +1,15 @@
 package br.gov.frameworkdemoiselle.fuselage.view.edit;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.fuselage.business.RoleBC;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityResource;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityRole;
-import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
-import br.gov.frameworkdemoiselle.util.Faces;
 
 @ViewController
 public class RoleEditMB extends AbstractEditPageBean<SecurityRole, Long> {
@@ -38,33 +39,37 @@ public class RoleEditMB extends AbstractEditPageBean<SecurityRole, Long> {
 
 	@Override
 	public SecurityRole load(Long id) {
-		return null;
+		return bc.load(id);
 	}
 
-	public String addResource(SecurityResource resource) {
-		System.out.println("==> add " + resource.getName() + ":" + resource.getValue());
-		if (getBean().getResource() != null)
-			getBean().getResource().add(resource);
-		else
-			Faces.validationFailed(new DefaultMessage("Oooopppsss... a operação não pode ser realizada"));
-		return null;
+	/**
+	 * Get all SecurityResources for datatable
+	 * 
+	 * @return list of all SecurityResources
+	 */
+	public List<SecurityResource> getResourceList() {
+		return bc.getResources();
 	}
 
-	public String delResource(SecurityResource resource) {
-		System.out.println("==> del " + resource.getName() + ":" + resource.getValue());
-		if (getBean().getResource() != null) {
-			for (int i = 0; i < getBean().getResource().size(); i++) {
-				SecurityResource securityResource = getBean().getResource().get(i);
-				System.out.println("==> compare " + securityResource.getName() + ":" + resource.getName());
-				if (securityResource == resource) {
-					System.out.println("==> compare " + securityResource.getName() + ":" + resource.getName() + " true");
-					getBean().getResource().remove(i);
-					i--;
-				}
-			}
-		} else
-			Faces.validationFailed(new DefaultMessage("Oooopppsss... a operação não pode ser realizada"));
-		return null;
+	/**
+	 * Get SecurityResources from current bean as array for datatable selection
+	 * 
+	 * @return
+	 */
+	public SecurityResource[] getResourceArray() {
+		if (getBean().getResource() == null)
+			return null;
+		return getBean().getResource().toArray(new SecurityResource[0]);
+	}
+
+	/**
+	 * Set SecurityResources on current bean from datatable selection array
+	 * 
+	 * @param resources
+	 *            array of SecurityResources to set current bean
+	 */
+	public void setResourceArray(SecurityResource[] resources) {
+		getBean().setResource(Arrays.asList(resources));
 	}
 
 }
