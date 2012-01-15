@@ -6,7 +6,7 @@
 html {
 	font: small-caption;
 	font-size: 12px;
-	text-shadow: 1px 1px 9px #D6D6D6;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 body {
@@ -24,7 +24,6 @@ body {
 #atius-top-id a {
 	color: #4F4F4F;
 	text-decoration: none;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 	font-weight: bold;
 	display: inline-block;
 	line-height: 25px;
@@ -268,7 +267,7 @@ ul.dialog-messages li {
 }
 
 .dialog-datatable td {
-	font-weight: normal;	
+	font-weight: normal;
 }
 
 .dialog-datatable .ui-datatable-data .ui-dt-c {
