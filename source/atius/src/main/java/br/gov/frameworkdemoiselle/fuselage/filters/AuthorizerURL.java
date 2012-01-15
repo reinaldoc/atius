@@ -100,6 +100,8 @@ public class AuthorizerURL implements Filter {
 	}
 
 	private String getContext() {
+		if (request.getServletContext() == null)
+			return null;
 		return request.getServletContext().getContextPath();
 	}
 
