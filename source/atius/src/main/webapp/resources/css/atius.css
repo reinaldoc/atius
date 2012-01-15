@@ -267,16 +267,24 @@ ul.dialog-messages li {
 		url('/atius/javax.faces.resource/wait.gif.jsf?ln=images');
 }
 
-.dialog-datatable-role .ui-datatable-data-empty tr {
-	height: 175px;
+.dialog-datatable td {
+	font-weight: normal;	
 }
 
-.dialog-datatable-role .ui-sortable-column {
+.dialog-datatable .ui-datatable-data .ui-dt-c {
+	padding: 2px !important;
+}
+
+.dialog-datatable .ui-sortable-column {
 	background: none;
 }
 
-.dialog-datatable-role table thead tr th {
+.dialog-datatable table thead tr th {
 	background: none !important;
+}
+
+.dialog-datatable-role .ui-datatable-data-empty tr {
+	height: 175px;
 }
 
 /*

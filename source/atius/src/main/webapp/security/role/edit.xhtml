@@ -23,7 +23,8 @@
 
 						<h:outputText value="Restritiva:" />
 						<h:panelGroup>
-							<h:selectBooleanCheckbox value="#{roleEditMB.bean.restriction}" onkeypress="return event.keyCode!=13" />
+							<h:selectBooleanCheckbox id="faa-role-edit-restriction-id" value="#{roleEditMB.bean.restriction}" onkeypress="return event.keyCode!=13" />
+							<p:tooltip for="faa-role-edit-restriction-id" value="Apenas indica que este papél não deve ser adicionado a perfis administrativos."/>
 							<p:commandButton image="ui-icon-plus" style="float: right;" immediate="true" update="faa-role-edit-resource-panel-id"
 								oncomplete="faa_role_edit_resource_dlg.show()" title="Adicionar recurso" />
 						</h:panelGroup>
@@ -33,8 +34,8 @@
 					<h:panelGrid columns="1">
 
 						<p:dataTable id="faa-role-edit-datatable-resource-id" widgetVar="faa_role_dt_resource_wv" emptyMessage="Não há recursos associados"
-							value="#{roleEditMB.bean.resource}" var="faa_role_dt_resource_row" rows="5" paginator="true" paginatorAlwaysVisible="true"
-							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable-role">
+							value="#{roleEditMB.bean.resource}" var="faa_role_dt_resource_row" rows="7" paginator="true" paginatorAlwaysVisible="true"
+							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-role">
 
 							<p:column headerText="Recursos:" sortBy="#{faa_role_dt_resource_row.name}">
 								<h:panelGroup layout="block" style="width: 150px; overflow: hidden; white-space: pre; float: left">
@@ -75,7 +76,7 @@
 
 					<p:dataTable id="faa-role-edit-datatable-resource-select-id" widgetVar="faa_role_dt_resource_select_wv" emptyMessage="Não há recursos"
 						value="#{roleEditMB.resourceList}" var="faa_role_dt_resource_select_row" rows="5" paginator="true" paginatorAlwaysVisible="true"
-						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable-role"
+						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-role"
 						selection="#{roleEditMB.resourceArray}" rowKey="#{faa_role_dt_resource_select_row.id}">
 
 						<p:column selectionMode="multiple" style="text-align: center" />

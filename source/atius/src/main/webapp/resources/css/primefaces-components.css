@@ -66,13 +66,14 @@ button.ui-button-icon-only {
 	background: none repeat scroll 0 0 #F3F3F3;
 }
 
-.ui-datatable td,.ui-datatable-data-empty td {
+.ui-datatable td {
 	border: 0px !important;
 	border-bottom: 1px solid #D6D6D6 !important;
-	padding-left: 4px !important;
-	padding-right: 4px !important;
-	padding-top: 2px !important;
-	padding-bottom: 3px !important;
+	padding: 2px 4px 3px !important;
+}
+
+.ui-datatable-data-empty td {
+	border-bottom: 0px !important;
 }
 
 .ui-datatable-data tr {
