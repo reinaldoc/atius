@@ -22,8 +22,10 @@ body {
 }
 
 #atius-top-id a {
-	color: black;
+	color: #4F4F4F;
 	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	font-weight: bold;
 	display: inline-block;
 	line-height: 25px;
 	padding-left: 10px;
@@ -34,14 +36,12 @@ body {
 	float: right;
 }
 
-#atius-top-id a:HOVER {
-	background-color: #CECECE;
+#atius-top-id a:hover {
+	background-color: #D0D0D0;
 }
 
 #atius-top-id a.selected {
-	background-color: gray;
-	color: white;
-	font-weight: bold;
+	background-color: #CCCCCC;
 }
 
 #atius-body-left-id {
@@ -163,7 +163,6 @@ input[type=text].filter {
 	padding: 0px;
 }
 
-
 .dialog-body td {
 	padding-top: 4px;
 	color: #3F586D;
@@ -186,9 +185,26 @@ input[type=text].filter {
 	background-color: white;
 }
 
-.dialog-body input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus {
+.dialog-body input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus
+	{
 	border: 1px solid #BBC5CD;
 	background-color: #FFFFE0;
+}
+
+.dialog-body table {
+	width: 100%;
+}
+
+.dialog-body .ui-paginator-top {
+	border: 0px;
+}
+
+.dialog-body-role tbody tr td {
+	width: 400px;
+}
+
+.dialog-body-role .ui-widget-header {
+	background: none;
 }
 
 .dialog-selectonemenu {
@@ -219,6 +235,7 @@ ul.dialog-messages li {
 	background-color: #408080 !important;
 	color: white;
 	border-radius: 2px;
+	box-shadow: none;
 }
 
 .dialog-message-success {
@@ -250,11 +267,21 @@ ul.dialog-messages li {
 		url('/atius/javax.faces.resource/wait.gif.jsf?ln=images');
 }
 
+.dialog-datatable-role .ui-datatable-data-empty tr {
+	height: 175px;
+}
+
+.dialog-datatable-role .ui-sortable-column {
+	background: none;
+}
+
+.dialog-datatable-role table thead tr th {
+	background: none !important;
+}
 
 /*
 	CSS for Fuselage
 */
-
 tbody tr td .faa-label {
 	text-align: center;
 	font-size: 10px;
@@ -267,8 +294,8 @@ tbody tr td .faa-label {
 }
 
 tbody tr td .faa-label-user {
-	background-color: #636330;
-	border-color: #636330;
+	background-color: #ae7c4f;
+	border-color: #ae7c4f;
 }
 
 tbody tr td .faa-label-profile {
@@ -282,8 +309,8 @@ tbody tr td .faa-label-role {
 }
 
 tbody tr td .faa-label-resource {
-	background-color: #EC7000;
-	border-color: #EC7000;
+	background-color: #dc9f68;
+	border-color: #dc9f68;
 	width: 50px;
 }
 

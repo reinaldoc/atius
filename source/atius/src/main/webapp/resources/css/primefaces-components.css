@@ -51,25 +51,19 @@ button.ui-button-icon-only {
 
 .ui-datatable th {
 	background: none !important;
-	background-color: #dddddd !important;
+	background-color: #E8E8E8 !important;
 	border: 0px !important;
-	padding-top: 4px !important;
-	padding-bottom: 4px !important;
+	padding-top: 2px !important;
+	padding-bottom: 2px !important;
 	text-align: left !important;
 }
 
-.ui-datatable-data tr {
-	background: none;
-	color: #3f586d;
-	border: 0px !important;
-	border-bottom: 1px solid #b9c7d3;
-	background-color: #F5F5F5;
+.ui-datatable-odd {
+	background: none repeat scroll 0 0 #F9F9F9;
 }
 
-.ui-datatable-data-empty tr {
-	border: 0px !important;
-	text-align: center !important;
-	height: 342px;
+.ui-datatable-even {
+	background: none repeat scroll 0 0 #F3F3F3;
 }
 
 .ui-datatable td,.ui-datatable-data-empty td {
@@ -79,6 +73,28 @@ button.ui-button-icon-only {
 	padding-right: 4px !important;
 	padding-top: 2px !important;
 	padding-bottom: 3px !important;
+}
+
+.ui-datatable-data tr {
+	color: #3f586d;
+	border: 0px !important;
+	border-bottom: 1px solid #b9c7d3;
+}
+
+.ui-datatable-data .ui-state-highlight {
+	background: #74FFCC;
+	text-shadow: 1px 1px 1px #AAAAAA;
+}
+
+.ui-datatable-data-empty tr {
+	border: 0px !important;
+	text-align: center !important;
+	height: 347px;
+}
+
+.ui-datatable-data-empty tr td div {
+	text-align: center;
+	margin-top: 20px;
 }
 
 .ui-state-default {
@@ -110,8 +126,17 @@ button.ui-button-icon-only {
 	background: none !important;
 }
 
-.ui-state-focus {
-	background: #74FFCC !important;
+label.ui-state-focus {
+	background: none !important;
+}
+
+input[type=text].ui-state-focus,input[type=password].ui-state-focus,textarea.ui-state-focus,select.ui-state-focus
+	{
+	background-color: #FFFFE0 !important;
+}
+
+.ui-selectonemenu-panel {
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Confirm Dialog*/
