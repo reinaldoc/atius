@@ -3,13 +3,16 @@
  */
 
 function openWindow(URL) {
-	window.open(URL,'_blank', 'width=800, height=600, top=100, left=100, scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+	window
+			.open(
+					URL,
+					'_blank',
+					'width=800, height=600, top=100, left=100, scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
 }
 
 function openReport(reportName, reportId) {
-	openWindow("/atius/report?reportName="+reportName+"&id="+reportId);
+	openWindow("/atius/report?reportName=" + reportName + "&id=" + reportId);
 }
-
 
 /**
  * saveAndCloseButtons methods
@@ -44,21 +47,25 @@ function startSave(dialog, componentId) {
 }
 
 function blockDialogInputs(dialog) {
-	jQuery('#' + dialog + ' .dialog-body input:not(.sds-readonly)').attr(
+	jQuery('#' + dialog + ' .dialog-body input:not(.readonly)').attr(
 			'readonly', 'readonly');
-	jQuery('#' + dialog + ' .dialog-body textarea:not(.sds-readonly)').attr(
+	jQuery('#' + dialog + ' .dialog-body textarea:not(.readonly)').attr(
 			'readonly', 'readonly');
-	jQuery('#' + dialog + ' .dialog-body select:not(.sds-readonly)').attr(
+	jQuery('#' + dialog + ' .dialog-body select:not(.readonly)').attr(
 			'readonly', 'readonly');
+	jQuery('#' + dialog + ' .dialog-body button:not(.readonly)').attr(
+			'disabled', 'disabled');
 }
 
 function unBlockDialogInputs(dialog) {
-	jQuery('#' + dialog + ' .dialog-body input:not(.sds-readonly)').removeAttr(
+	jQuery('#' + dialog + ' .dialog-body input:not(.readonly)').removeAttr(
 			'readonly');
-	jQuery('#' + dialog + ' .dialog-body textarea:not(.sds-readonly)')
-			.removeAttr('readonly');
-	jQuery('#' + dialog + ' .dialog-body select:not(.sds-readonly)')
-	.removeAttr('readonly');
+	jQuery('#' + dialog + ' .dialog-body textarea:not(.readonly)').removeAttr(
+			'readonly');
+	jQuery('#' + dialog + ' .dialog-body select:not(.readonly)').removeAttr(
+			'readonly');
+	jQuery('#' + dialog + ' .dialog-body button:not(.readonly)').removeAttr(
+			'disabled');
 }
 
 function showNotificationClass(componentId, qtipStyleClass) {
