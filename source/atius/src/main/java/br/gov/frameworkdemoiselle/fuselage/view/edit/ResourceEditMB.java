@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.fuselage.business.ResourceBC;
 import br.gov.frameworkdemoiselle.fuselage.configuration.ViewConfig;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityResource;
-import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
@@ -62,7 +61,13 @@ public class ResourceEditMB extends AbstractEditPageBean<SecurityResource, Long>
 
 	@Override
 	public SecurityResource load(Long id) {
-		return bc.load(id);
+		try {
+			return bc.load(id);
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.load.failed", SeverityType.ERROR));
+		}
+		return new SecurityResource();
 	}
 
 	public List<String> names(String query) {

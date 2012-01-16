@@ -7,7 +7,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-import br.gov.frameworkdemoiselle.message.DefaultMessage;
+import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.report.Report;
 import br.gov.frameworkdemoiselle.report.Type;
 import br.gov.frameworkdemoiselle.report.annotation.Path;
@@ -30,7 +30,7 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	private WebsiteDomainBC bc;
 
 	@Inject
-	@Path("reports/WebsiteDomain.jrxml")
+	@Path("reports/WebsiteDomain.jasper")
 	private Report report;
 
 	@Inject
@@ -41,69 +41,125 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	private Parameter<String> id;
 
 	public String delete() {
-		bc.delete(getBean().getServerName());
-		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " excluído com sucesso."));
+		try {
+			bc.delete(getBean().getServerName());
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.delete.success", getBean().getServerName()));
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.delete.failed", SeverityType.ERROR));
+		}
 		return null;
 	}
 
 	public String disable() {
-		bc.disable(getBean());
-		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " desativado com sucesso."));
+		try {
+			bc.disable(getBean());
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.disable.success", getBean().getServerName()));
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.disable.failed", SeverityType.ERROR));
+		}
 		return null;
 	}
 
 	public String enable() {
-		bc.enable(getBean());
-		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " ativado com sucesso."));
+		try {
+			bc.enable(getBean());
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.enable.success", getBean().getServerName()));
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.enable.failed", SeverityType.ERROR));
+		}
 		return null;
 	}
 
 	public String insert() {
-		if (!bc.domainAvailable(getBean().getServerName())) {
-			Faces.validationFailed(new DefaultMessage("Domínio indisponível, escolha outro."));
-			return null;
+		try {
+			if (!bc.domainAvailable(getBean().getServerName())) {
+				Faces.validationFailed();
+				Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.available.unavailable"));
+				return null;
+			}
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.available.failed", SeverityType.ERROR));
 		}
+
 		getBean().setValuesByServerName();
-		bc.insert(getBean());
-		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " cadastrado com sucesso."));
+		try {
+			bc.insert(getBean());
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.insert.success", getBean().getServerName()));
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.insert.failed", SeverityType.ERROR));
+		}
 		return null;
 	}
 
 	public String update() {
-		bc.update(getBean());
-		Faces.addValidMessage(new DefaultMessage("Domínio " + getBean().getServerName() + " atualizado com sucesso."));
+		try {
+			bc.update(getBean());
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.update.success", getBean().getServerName()));
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.update.failed", SeverityType.ERROR));
+		}
 		return null;
 	}
 
 	public String print() {
-		if (Strings.isNotBlank(id.getValue())) {
-			WebsiteDomain websiteDomain = load(id.getValue());
-			if (websiteDomain != null && Strings.isNotBlank(websiteDomain.getServerName())) {
-				List<WebsiteDomain> beanReport = new ArrayList<WebsiteDomain>();
-				beanReport.add(websiteDomain);
-				byte[] buffer = report.export(beanReport, new HashMap<String, Object>(), Type.PDF);
-				this.renderer.render(buffer, FileRenderer.ContentType.PDF, "websiteDomain.pdf");
+		try {
+			if (Strings.isNotBlank(id.getValue())) {
+				WebsiteDomain websiteDomain = load(id.getValue());
+				if (websiteDomain != null && Strings.isNotBlank(websiteDomain.getServerName())) {
+					List<WebsiteDomain> beanReport = new ArrayList<WebsiteDomain>();
+					beanReport.add(websiteDomain);
+					byte[] buffer = report.export(beanReport, new HashMap<String, Object>(), Type.PDF);
+					this.renderer.render(buffer, FileRenderer.ContentType.PDF, "websiteDomain.pdf");
+				}
 			}
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.report.failed", SeverityType.ERROR));
 		}
 		return null;
 	}
 
 	public List<InetOrgPerson> findPerson(String search) {
-		return bc.findPerson(search);
+		try {
+			return bc.findPerson(search);
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.owner.failed", SeverityType.ERROR));
+		}
+		return new ArrayList<InetOrgPerson>();
 	}
 
 	public String domainAvailable() {
-		if (bc.domainAvailable(getBean().getServerName()))
-			Faces.addMessage(new DefaultMessage("O domínio " + getBean().getServerName() + " está disponível"));
-		else {
-			Faces.validationFailed(new DefaultMessage("Domínio indisponível, escolha outro."));
+		try {
+			if (bc.domainAvailable(getBean().getServerName()))
+				Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.available.success", getBean().getServerName()));
+			else {
+				Faces.validationFailed();
+				Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.available.unavailable"));
+			}
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.available.failed", SeverityType.ERROR));
 		}
+
 		return null;
 	}
 
 	@Override
 	public WebsiteDomain load(String id) {
-		return bc.load(id);
+		try {
+			return bc.load(id);
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.load.failed", SeverityType.ERROR));
+		}
+		return new WebsiteDomain();
 	}
 
 }
