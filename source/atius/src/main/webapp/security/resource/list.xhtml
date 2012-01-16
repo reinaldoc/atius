@@ -3,8 +3,8 @@
 
 	<h:form prependId="false">
 
-		<p:confirmDialog message="Deseja excluir o recurso: #{resourceEditMB.bean.name} ?" header="Atenção!" severity="alert"
-			id="faa-resource-delete-dlg-id" widgetVar="faa_resource_delete_dlg">
+		<p:confirmDialog message="Deseja excluir o recurso: #{resourceEditMB.bean.name}->#{resourceEditMB.bean.value} ?" header="Atenção!"
+			severity="alert" id="faa-resource-delete-dlg-id" widgetVar="faa_resource_delete_dlg">
 			<p:commandButton value="Sim" oncomplete="faa_resource_delete_dlg.hide()" update="faa-resource-list-datatable-id, faa-growl-id"
 				action="#{resourceEditMB.delete}" actionListener="#{resourceListMB.clearResultList}" style="margin-right: 20px;" />
 			<p:commandButton value="Não" onclick="faa_resource_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
