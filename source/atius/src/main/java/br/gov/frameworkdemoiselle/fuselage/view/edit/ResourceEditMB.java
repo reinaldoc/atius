@@ -27,7 +27,7 @@ public class ResourceEditMB extends AbstractEditPageBean<SecurityResource, Long>
 	public String insert() {
 		try {
 			bc.insert(getBean());
-			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.insert.sucess", getBean().getName()));
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.insert.success", getBean().getName()));
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.insert.failed", SeverityType.ERROR));
@@ -39,8 +39,9 @@ public class ResourceEditMB extends AbstractEditPageBean<SecurityResource, Long>
 	public String update() {
 		try {
 			bc.update(getBean());
-			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.update.sucess", getBean().getName()));
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.update.success", getBean().getName()));
 		} catch (RuntimeException e) {
+			e.printStackTrace();
 			Faces.validationFailed();
 			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.update.failed", SeverityType.ERROR));
 		}
@@ -51,7 +52,7 @@ public class ResourceEditMB extends AbstractEditPageBean<SecurityResource, Long>
 	public String delete() {
 		try {
 			bc.delete(getBean().getId());
-			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.delete.sucess", getBean().getName()));
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.delete.success", getBean().getName()));
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.resource.delete.failed", SeverityType.ERROR));
