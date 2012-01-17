@@ -75,7 +75,7 @@ public class AuthorizerURL implements Filter {
 			return;
 		}
 
-		if (securityContext.hasPermission("url", url)) {
+		if (securityContext.hasPermission("private_url", url)) {
 			info("permitted by resource", url);
 		} else {
 			info("denied by resource, redirect to welcome page", url);
