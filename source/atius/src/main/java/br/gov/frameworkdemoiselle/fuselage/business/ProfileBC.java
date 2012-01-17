@@ -1,5 +1,6 @@
 package br.gov.frameworkdemoiselle.fuselage.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +28,13 @@ public class ProfileBC extends DelegateCrud<SecurityProfile, Long, ProfileDAO> {
 		if (findAll().isEmpty()) {
 			// insert(new SecurityProfile());
 		}
+	}
+
+	public List<Long> getUsedPrioritiesExceptMyself(SecurityProfile securityProfile) {
+		List<Long> usedPriorities = new ArrayList<Long>();
+		for (Long usedPriority : getDelegate().getUsedPrioritiesExceptMyself(securityProfile))
+			usedPriorities.add(usedPriority);
+		return usedPriorities;
 	}
 
 	public List<SecurityRole> getRoles() {

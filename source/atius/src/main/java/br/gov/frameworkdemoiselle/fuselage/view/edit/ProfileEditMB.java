@@ -44,10 +44,12 @@ public class ProfileEditMB extends AbstractEditPageBean<SecurityProfile, Long> {
 		return bc.load(id);
 	}
 
-	public List<Long> resourcePrio() {
+	public List<Long> getResourcePriorities() {
 		List<Long> priorities = new ArrayList<Long>();
-		for (int i = 1; i < 101; i++)
-			priorities.add(new Long(i));
+		List<Long> usedPriorities = bc.getUsedPrioritiesExceptMyself(getBean());
+		for (int i = 1; i < 100; i++)
+			if (!usedPriorities.contains(new Long(i)))
+				priorities.add(new Long(i));
 		return priorities;
 	}
 
