@@ -27,8 +27,8 @@ public class SecurityResource implements Serializable {
 	private Long id;
 
 	@Column
-	@NotBlank(message = "Especifique melhor o identificador do recurso")
-	@Size(min = 3, max = 255, message = "Especifique melhor o identificador do recurso")
+	@NotBlank(message = "Melhore o nome deste recurso")
+	@Size(min = 3, max = 255, message = "Melhore o nome deste recurso")
 	private String name;
 
 	@Column(unique = true)
@@ -83,6 +83,10 @@ public class SecurityResource implements Serializable {
 
 	public void setRoles(List<SecurityRole> roles) {
 		this.roles = roles;
+	}
+
+	public String getLabel() {
+		return value + " (" + name + ")";
 	}
 
 }
