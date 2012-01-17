@@ -54,12 +54,12 @@ public class RoleEditMB extends AbstractEditPageBean<SecurityRole, Long> {
 	/**
 	 * Get SecurityResources from current bean as array for datatable selection
 	 * 
-	 * @return
+	 * @return array of bean SecurityResources
 	 */
 	public SecurityResource[] getResourceArray() {
-		if (getBean().getResource() == null)
+		if (getBean().getResources() == null)
 			return null;
-		return getBean().getResource().toArray(new SecurityResource[0]);
+		return getBean().getResources().toArray(new SecurityResource[0]);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class RoleEditMB extends AbstractEditPageBean<SecurityRole, Long> {
 	 *            array of SecurityResources to set current bean
 	 */
 	public void setResourceArray(SecurityResource[] resources) {
-		getBean().setResource(Arrays.asList(resources));
+		getBean().setResources(Arrays.asList(resources));
 	}
 
 }
