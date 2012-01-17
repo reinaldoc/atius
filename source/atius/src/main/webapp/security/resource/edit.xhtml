@@ -6,7 +6,7 @@
 			<p:dialog id="faa-resource-edit-dlg-id" header="FAA - Cadastro de Recursos" widgetVar="faa_resource_edit_dlg" modal="true" width="480"
 				resizable="false" closable="false">
 				<h:panelGrid columns="1" styleClass="dialog-body" id="faa-resource-edit-dlg-body-id">
-					<h:outputText value="Nome:" />
+					<h:outputText value="Tipo:" />
 					<p:autoComplete value="#{resourceEditMB.bean.name}" completeMethod="#{resourceEditMB.names}" onkeypress="return event.keyCode!=13" />
 
 					<h:outputText value="Valor:" />
