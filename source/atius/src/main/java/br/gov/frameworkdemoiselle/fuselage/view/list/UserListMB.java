@@ -25,7 +25,7 @@ public class UserListMB extends AbstractListPageBean<SecurityUser, Long> {
 	private UserBC bc;
 
 	@Inject
-	@Path("reports/SecurityUser.jasper")
+	@Path("reports/SecurityUsers.jasper")
 	private Report report;
 	
 	@Inject
