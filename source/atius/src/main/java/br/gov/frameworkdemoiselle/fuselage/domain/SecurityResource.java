@@ -36,6 +36,11 @@ public class SecurityResource implements Serializable {
 	@Size(min = 3, max = 255, message = "Especifique melhor o valor do recurso")
 	private String value;
 
+	@Column
+	@NotBlank(message = "Melhore a descrição deste recurso")
+	@Size(min = 10, max = 255, message = "Melhore a descrição deste recurso")
+	private String description;
+
 	@ManyToMany
 	@JoinTable(name = "SECURITYROLE_RESOURCE", joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	private List<SecurityRole> roles;
@@ -87,6 +92,14 @@ public class SecurityResource implements Serializable {
 
 	public String getLabel() {
 		return value + " (" + name + ")";
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
