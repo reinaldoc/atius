@@ -3,8 +3,8 @@
 
 	<h:form prependId="false">
 
-		<p:confirmDialog message="Deseja excluir o perfil: #{profileEditMB.bean.name} ?" header="Atenção!" severity="alert" id="faa-profile-delete-dlg-id"
-			widgetVar="faa_profile_delete_dlg">
+		<p:confirmDialog message="Deseja excluir o perfil: #{profileEditMB.bean.name} ?" header="Atenção!" severity="alert"
+			id="faa-profile-delete-dlg-id" widgetVar="faa_profile_delete_dlg">
 			<p:commandButton value="Sim" oncomplete="faa_profile_delete_dlg.hide()" update="faa-profile-list-datatable-id, faa-growl-id"
 				action="#{profileEditMB.delete}" actionListener="#{profileListMB.clearResultList}" style="margin-right: 20px;" />
 			<p:commandButton value="Não" onclick="faa_profile_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
@@ -19,12 +19,12 @@
 				</p:column>
 				<p:column headerText="Nome" sortBy="#{faa_profile_dt_row.name}">
 					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
-						<h:outputText value="#{faa_profile_dt_row.name} " />
+						<h:outputText value="#{faa_profile_dt_row.name}" title="#{faa_profile_dt_row.shortDescription}" />
 					</h:panelGroup>
 				</p:column>
 				<p:column headerText="Descrição" sortBy="#{faa_profile_dt_row.description}">
 					<h:panelGroup layout="block" style="width: 400px; overflow: hidden; white-space: pre">
-						<h:outputText value="#{faa_profile_dt_row.description}" />
+						<h:outputText value="#{faa_profile_dt_row.description}" title="#{faa_profile_dt_row.description}" />
 					</h:panelGroup>
 				</p:column>
 				<p:column style="float: right; text-align: right; padding: 0px">

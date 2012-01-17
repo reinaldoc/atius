@@ -25,13 +25,13 @@
 				
 				<p:column headerText="Nome" sortBy="#{faa_role_dt_row.name}">
 					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
-						<h:outputText value="#{faa_role_dt_row.name} " />
+						<h:outputText value="#{faa_role_dt_row.name}" title="#{faa_role_dt_row.shortDescription}" />
 					</h:panelGroup>
 				</p:column>
 				
-				<p:column headerText="Descrição curta" sortBy="#{faa_role_dt_row.shortDescription}">
+				<p:column headerText="Descrição" sortBy="#{faa_role_dt_row.description}">
 					<h:panelGroup layout="block" style="width: 500px; overflow: hidden; white-space: pre">
-						<h:outputText value="#{faa_role_dt_row.shortDescription}" />
+						<h:outputText value="#{faa_role_dt_row.description}" title="#{faa_role_dt_row.description}" />
 					</h:panelGroup>
 				</p:column>
 				
