@@ -10,8 +10,8 @@ function openWindow(URL) {
 					'width=800, height=600, top=100, left=100, scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
 }
 
-function openReport(reportName, reportId) {
-	openWindow("/atius/report?reportName=" + reportName + "&id=" + reportId);
+function openReport(reportPath, reportId) {
+	openWindow("/atius/" + reportPath + "/report?id=" + reportId);
 }
 
 /**
