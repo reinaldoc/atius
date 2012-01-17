@@ -3,8 +3,8 @@
 
 	<h:form prependId="false">
 
-		<p:confirmDialog message="Deseja excluir o perfil: #{profileEditMB.bean.name} ?" header="Atenção!" severity="alert"
-			id="faa-profile-delete-dlg-id" widgetVar="faa_profile_delete_dlg">
+		<p:confirmDialog message="Deseja excluir o perfil: #{profileEditMB.bean.name} ?" header="Atenção!" severity="alert" id="faa-profile-delete-dlg-id"
+			widgetVar="faa_profile_delete_dlg">
 			<p:commandButton value="Sim" oncomplete="faa_profile_delete_dlg.hide()" update="faa-profile-list-datatable-id, faa-growl-id"
 				action="#{profileEditMB.delete}" actionListener="#{profileListMB.clearResultList}" style="margin-right: 20px;" />
 			<p:commandButton value="Não" onclick="faa_profile_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
@@ -29,11 +29,10 @@
 				</p:column>
 				<p:column style="float: right; text-align: right; padding: 0px">
 					<h:panelGroup layout="block" style="width: 100px; overflow: hidden; white-space: pre">
-						<p:commandButton image="ui-icon-search" style="icon" immediate="true"
-							update="faa-profile-edit-dlg-body-id, faa-profile-edit-dlg-buttons-id" action="#{profileEditMB.editBean(faa_profile_dt_row)}"
-							oncomplete="faa_profile_edit_dlg.show()" title="Editar Informações" />
-						<p:commandButton image="ui-icon-trash" style="icon" immediate="true" update="faa-profile-delete-dlg-id"
-							action="#{profileEditMB.editBean(faa_profile_dt_row)}" oncomplete="faa_profile_delete_dlg.show()" title="Excluir Recurso" />
+						<p:commandButton image="ui-icon-search" immediate="true" update="faa-profile-edit-dlg-body-id, faa-profile-edit-dlg-buttons-id"
+							action="#{profileEditMB.editById(faa_profile_dt_row.id)}" oncomplete="faa_profile_edit_dlg.show()" title="Editar Informações" />
+						<p:commandButton image="ui-icon-trash" immediate="true" update="faa-profile-delete-dlg-id"
+							action="#{profileEditMB.editById(faa_profile_dt_row.id)}" oncomplete="faa_profile_delete_dlg.show()" title="Excluir Perfil" />
 					</h:panelGroup>
 				</p:column>
 
