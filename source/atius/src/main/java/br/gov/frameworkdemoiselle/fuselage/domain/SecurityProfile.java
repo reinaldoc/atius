@@ -33,8 +33,13 @@ public class SecurityProfile implements Serializable {
 	private String name;
 
 	@Column
-	@NotBlank(message = "Descreva melhor o perfil")
-	@Size(min = 20, max = 255, message = "Descreva melhor o perfil")
+	@NotBlank(message = "Melhore a descrição curta deste perfil")
+	@Size(min = 10, max = 255, message = "Melhore a descrição curta deste perfil")
+	private String shortDescription;
+
+	@Column
+	@NotBlank(message = "Melhore a descrição deste perfil")
+	@Size(min = 20, max = 255, message = "Melhore a descrição deste perfil")
 	private String description;
 
 	@Column
@@ -93,6 +98,14 @@ public class SecurityProfile implements Serializable {
 
 	public void setProfiledefault(List<SecurityProfileDetect> profiledefault) {
 		this.profiledefault = profiledefault;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
 	}
 
 	public String getDescription() {
