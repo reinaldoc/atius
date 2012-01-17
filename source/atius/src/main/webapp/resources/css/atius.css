@@ -162,7 +162,7 @@ input[type=text].filter {
 	padding: 0;
 }
 
-.dialog-body-profile {
+.dialog-body-profile,.dialog-body-user {
 	padding: 0 0 7px;
 }
 
@@ -202,11 +202,12 @@ input[type=text].filter {
 	border: 0px;
 }
 
-.dialog-body-role tbody tr td,.dialog-body-profile tbody tr td {
+.dialog-body-role tbody tr td,.dialog-body-profile tbody tr td,.dialog-body-user tbody tr td
+	{
 	width: 400px;
 }
 
-.dialog-body-role .ui-widget-header,.dialog-body-profile .ui-widget-header
+.dialog-body-role .ui-widget-header,.dialog-body-profile .ui-widget-header,.dialog-body-user .ui-widget-header
 	{
 	background: none;
 }
@@ -220,6 +221,7 @@ input[type=text].filter {
 	display: block;
 	overflow: hidden;
 }
+
 .dialog-selectonemenu a label {
 	white-space: nowrap;
 }
@@ -300,7 +302,7 @@ ul.dialog-messages li {
 	background: none !important;
 }
 
-.dialog-datatable-role .ui-datatable-data-empty tr,.dialog-datatable-profile .ui-datatable-data-empty tr
+.dialog-datatable-role .ui-datatable-data-empty tr,.dialog-datatable-profile .ui-datatable-data-empty tr,.dialog-datatable-user .ui-datatable-data-empty tr
 	{
 	height: 175px;
 }

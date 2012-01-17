@@ -2,7 +2,10 @@ package br.gov.frameworkdemoiselle.fuselage.business;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import br.gov.frameworkdemoiselle.annotation.Startup;
+import br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfile;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser;
 import br.gov.frameworkdemoiselle.fuselage.persistence.UserDAO;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
@@ -12,12 +15,28 @@ import br.gov.frameworkdemoiselle.util.Strings;
 public class UserBC extends DelegateCrud<SecurityUser, Long, UserDAO> {
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private ProfileBC profileBC;
+
 	@Transactional
 	@Startup
 	public void startup() {
 		if (findAll().isEmpty()) {
 			insert(new SecurityUser("faa-admin", "Usuário Administrador", "adminpass"));
 		}
+	}
+
+	public List<SecurityProfile> getProfiles() {
+		return profileBC.findAll();
+	}
+
+	public boolean userAvailable(String login) {
+		if (login != null && login.length() > 2) {
+			List<SecurityUser> userList = findByLogin(login);
+			if (userList.size() == 0)
+				return true;
+		}
+		return false;
 	}
 
 	public SecurityUser loadAndUpdate(SecurityUser securityUser) {
