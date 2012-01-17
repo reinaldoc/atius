@@ -34,16 +34,16 @@
 					<h:panelGrid columns="1">
 
 						<p:dataTable id="faa-role-edit-datatable-resource-id" widgetVar="faa_role_dt_resource_wv" emptyMessage="Não há recursos associados"
-							value="#{roleEditMB.bean.resource}" var="faa_role_dt_resource_row" rows="7" paginator="true" paginatorAlwaysVisible="true"
+							value="#{roleEditMB.bean.resources}" var="faa_role_dt_resource_row" rows="7" paginator="true" paginatorAlwaysVisible="true"
 							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-role">
 
 							<p:column headerText="Recursos:" sortBy="#{faa_role_dt_resource_row.name}">
 								<h:panelGroup layout="block" style="width: 150px; overflow: hidden; white-space: pre; float: left">
-									<h:outputText value="#{faa_role_dt_resource_row.name} " />
+									<h:outputText value="#{faa_role_dt_resource_row.name}" title="#{faa_role_dt_resource_row.name}" />
 								</h:panelGroup>
 
 								<h:panelGroup layout="block" style="width: 180px; overflow: hidden; white-space: pre; float: right">
-									<h:outputText value="#{faa_role_dt_resource_row.value} " />
+									<h:outputText value="#{faa_role_dt_resource_row.value}" title="#{faa_role_dt_resource_row.value}" />
 								</h:panelGroup>
 							</p:column>
 
@@ -83,10 +83,10 @@
 
 						<p:column headerText="Recurso:">
 							<h:panelGroup layout="block" style="width: 130px; overflow: hidden; white-space: pre; float: left">
-								<h:outputText value="#{faa_role_dt_resource_select_row.name} " />
+								<h:outputText value="#{faa_role_dt_resource_select_row.name}" title="#{faa_role_dt_resource_select_row.name}" />
 							</h:panelGroup>
 							<h:panelGroup layout="block" style="width: 340px; overflow: hidden; white-space: pre; float: right">
-								<h:outputText value="#{faa_role_dt_resource_select_row.value} " />
+								<h:outputText value="#{faa_role_dt_resource_select_row.value}" title="#{faa_role_dt_resource_select_row.value}" />
 							</h:panelGroup>
 						</p:column>
 
