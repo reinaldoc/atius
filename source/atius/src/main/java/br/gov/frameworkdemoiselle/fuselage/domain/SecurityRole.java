@@ -33,14 +33,14 @@ public class SecurityRole implements Serializable {
 	private String name;
 
 	@Column
-	@NotBlank(message = "Descreva melhor o papél")
-	@Size(min = 20, max = 255, message = "Descreva melhor o papél")
-	private String description;
+	@NotBlank(message = "Melhore a descrição curta deste papél")
+	@Size(min = 10, max = 255, message = "Melhore a descrição curta deste papél")
+	private String shortDescription;
 
 	@Column
-	@NotBlank(message = "Especifique melhor a descrição curta do papél")
-	@Size(min = 10, max = 255, message = "Descreva melhor o papél")
-	private String shortDescription;
+	@NotBlank(message = "Melhore a descrição deste papél")
+	@Size(min = 20, max = 255, message = "Melhore a descrição deste papél")
+	private String description;
 
 	@Column
 	@NotNull
@@ -48,7 +48,7 @@ public class SecurityRole implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "SECURITYROLE_RESOURCE", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "RESOURCE_ID") })
-	private List<SecurityResource> resource;
+	private List<SecurityResource> resources;
 
 	@ManyToMany
 	@JoinTable(name = "SECURITYPROFILE_ROLE", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "PROFILE_ID") })
@@ -78,22 +78,6 @@ public class SecurityRole implements Serializable {
 		this.description = description;
 	}
 
-	public List<SecurityResource> getResource() {
-		return resource;
-	}
-
-	public void setResource(List<SecurityResource> resource) {
-		this.resource = resource;
-	}
-
-	public List<SecurityProfile> getProfiles() {
-		return profiles;
-	}
-
-	public void setProfiles(List<SecurityProfile> profiles) {
-		this.profiles = profiles;
-	}
-
 	public String getShortDescription() {
 		return shortDescription;
 	}
@@ -108,6 +92,22 @@ public class SecurityRole implements Serializable {
 
 	public void setRestriction(Boolean restriction) {
 		this.restriction = restriction;
+	}
+
+	public List<SecurityResource> getResources() {
+		return resources;
+	}
+
+	public void setResources(List<SecurityResource> resources) {
+		this.resources = resources;
+	}
+
+	public List<SecurityProfile> getProfiles() {
+		return profiles;
+	}
+
+	public void setProfiles(List<SecurityProfile> profiles) {
+		this.profiles = profiles;
 	}
 
 }

@@ -176,7 +176,7 @@ public class Authenticator implements br.gov.frameworkdemoiselle.security.Authen
 			for (SecurityRole role : roleList) {
 				roles.add(role.getName());
 				rolesNames.add(role.getShortDescription());
-				List<SecurityResource> resourceList = role.getResource();
+				List<SecurityResource> resourceList = role.getResources();
 				if (resourceList != null) {
 					for (SecurityResource resource : resourceList)
 						resourceMap.put(resource.getValue(), resource.getName());
