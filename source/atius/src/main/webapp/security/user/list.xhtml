@@ -49,10 +49,10 @@
 						<p:commandButton image="ui-icon-search" style="icon" immediate="true" update="faa-user-edit-dlg-body-id, faa-user-edit-dlg-buttons-id"
 							action="#{userEditMB.editBean(faa_user_dt_row)}" oncomplete="faa_user_edit_dlg.show()" title="Editar Informações" />
 						<p:commandButton image="#{!faa_user_dt_row.enabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }" style="icon" immediate="true"
-							update="faa-user-status-dlg-id" action="#{userEditMB.editBean(faa_user_dt_row)}" oncomplete="faa_user_status_dlg.show()"
+							update="faa-user-status-dlg-id" action="#{userEditMB.editById(faa_user_dt_row.id)}" oncomplete="faa_user_status_dlg.show()"
 							title="#{!faa_user_dt_row.enabled ? 'Ativar' : 'Desativar' } Usuário" />
 						<p:commandButton image="ui-icon-trash" style="icon" immediate="true" update="faa-user-delete-dlg-id"
-							action="#{userEditMB.editBean(faa_user_dt_row)}" oncomplete="faa_user_delete_dlg.show()" title="Excluir Usuário" />
+							action="#{userEditMB.editById(faa_user_dt_row.id)}" oncomplete="faa_user_delete_dlg.show()" title="Excluir Usuário" />
 					</h:panelGroup>
 				</p:column>
 
