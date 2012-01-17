@@ -158,7 +158,7 @@ input[type=text].filter {
 	margin-bottom: 10px;
 }
 
-.dialog-body-role {
+.dialog-body-role, .dialog-body-profile {
 	padding: 0px;
 }
 
@@ -198,11 +198,11 @@ input[type=text].filter {
 	border: 0px;
 }
 
-.dialog-body-role tbody tr td {
+.dialog-body-role tbody tr td, .dialog-body-profile tbody tr td {
 	width: 400px;
 }
 
-.dialog-body-role .ui-widget-header {
+.dialog-body-role .ui-widget-header, .dialog-body-profile .ui-widget-header {
 	background: none;
 }
 
@@ -282,7 +282,7 @@ ul.dialog-messages li {
 	background: none !important;
 }
 
-.dialog-datatable-role .ui-datatable-data-empty tr {
+.dialog-datatable-role .ui-datatable-data-empty tr, .dialog-datatable-profile .ui-datatable-data-empty tr {
 	height: 175px;
 }
 
