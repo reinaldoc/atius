@@ -84,7 +84,7 @@ public class PermissionsListMB {
 		try {
 			listResult = Arrays.asList(((Map<String, String>) securityContext.getUser().getAttribute("resources")).keySet().toArray(new String[] {}));
 		} catch (Exception e) {
-			// TODO: handle exception
+			// Ignore
 		}
 		Collections.sort(listResult);
 		return listResult;
