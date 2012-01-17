@@ -25,7 +25,7 @@
 						<h:panelGroup>
 							<h:selectBooleanCheckbox id="faa-role-edit-restriction-id" value="#{roleEditMB.bean.restriction}" onkeypress="return event.keyCode!=13" />
 							<p:tooltip for="faa-role-edit-restriction-id" value="Apenas indica que este papél não deve ser adicionado a perfis administrativos."/>
-							<p:commandButton image="ui-icon-transferthick-e-w" style="float: right;" immediate="true" update="faa-role-edit-resource-panel-id"
+							<p:commandButton image="ui-icon-transferthick-e-w" style="float: right; margin-bottom: 2px;" immediate="true" update="faa-role-edit-resource-panel-id"
 								oncomplete="faa_role_edit_resource_dlg.show()" title="Selecionar recursos" />
 						</h:panelGroup>
 
