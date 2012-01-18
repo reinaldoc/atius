@@ -21,24 +21,23 @@
 }
 
 /* Buttons */
-.ui-button {
-	background: none !important;
-	background-color: #74ffcc !important;
+button.ui-button, button.ui-button-text-only {
+	background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #74FFCC !important;
 	border: 0px solid #DEE5F2 !important;
 	border-radius: 6px;
 	font-weight: bold !important;
+	box-shadow: 2px 2px 4px #CCCCCC;
 }
 
-.ui-button:hover {
-	background: none;
-	background-color: #2EC890 !important;
-	border: 0px solid #DEE5F2;
+button.ui-button:hover {
+	background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)) repeat scroll 0 0 #2EC890 !important;
+	border: 0px;
 	border-radius: 6px;
-	color: white;
 	font-weight: bold;
 }
 
-button.ui-button-icon-only {
+button.ui-button-icon-only, button.ui-button-icon-only.ui-state-default {
+	background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #74FFCC;
 	height: 24px;
 	width: 24px;
 	margin-right: 12px;
@@ -190,4 +189,37 @@ div.ui-growl-message {
 	background-color: #74ffcc !important;
 	color: white;
 	font-weight: bold;
+}
+
+/* TavView */
+div.ui-tabs ul.ui-helper-clearfix {
+	display: inline-block;
+}
+
+div.ui-tabs div.ui-tabs-panel {
+	padding: 8px 4px 2px;
+}
+
+div.ui-tabs ul.ui-tabs-nav {
+	background: none;
+}
+
+div.ui-tabs ul.ui-tabs-nav li {
+	border-bottom: 1px solid #A8A8A8 !important;
+	background-color: #74ffcc;
+}
+
+div.ui-tabs ul.ui-tabs-nav li.ui-tabs-selected {
+	padding-bottom: 0;
+	border-bottom: 1px solid #A8A8A8 !important;
+	background-color: #54dfac;
+	box-shadow: 4px 4px 4px #CCCCCC;
+}
+
+div.ui-tabs ul.ui-tabs-nav li.ui-tabs-selected.ui-state-hover {
+	background-color: #54dfac !important;
+}
+
+div.ui-tabs ul.ui-tabs-nav li.ui-state-hover {
+	background-color: #64efbc !important;
 }
