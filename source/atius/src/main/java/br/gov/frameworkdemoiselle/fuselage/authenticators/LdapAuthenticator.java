@@ -30,17 +30,27 @@ public class LdapAuthenticator implements AuthenticatorModule {
 	private AuthenticatorResults results = new AuthenticatorResults();
 
 	@Override
+	public String getModuleName() {
+		return "LdapAuthenticator";
+	}
+
+	@Override
+	public AuthenticatorResults getResults() {
+		return results;
+	}
+
+	@Override
 	public boolean authenticate(String username, String password) {
 		results = new AuthenticatorResults();
-		results.setAuthenticatorModuleName(getClass().getSimpleName());
+		results.setAuthenticatorModuleName(getModuleName());
 		results.setLoggedIn(login(username, password));
 		if (ldapAuthConfig.isVerbose()) {
 			if (results.isLoggedIn())
-				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.success", username, results.getAuthenticatorModuleName()));
+				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.success", username, getModuleName()));
 			else
-				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.failed", username, results.getAuthenticatorModuleName()));
+				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.failed", username, getModuleName()));
 			if (results.isUserUnavailable())
-				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.unavailable", username, results.getAuthenticatorModuleName()));
+				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.unavailable", username, getModuleName()));
 		}
 		return results.isLoggedIn();
 	}
@@ -85,11 +95,6 @@ public class LdapAuthenticator implements AuthenticatorModule {
 			if (entry.getValue() != null)
 				results.getGenericResults().put(entry.getKey().toLowerCase(), entry.getValue());
 		}
-	}
-
-	@Override
-	public AuthenticatorResults getResults() {
-		return results;
 	}
 
 }

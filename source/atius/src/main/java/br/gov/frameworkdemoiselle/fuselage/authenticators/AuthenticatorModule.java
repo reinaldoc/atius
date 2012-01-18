@@ -6,4 +6,6 @@ public interface AuthenticatorModule {
 
 	public AuthenticatorResults getResults();
 
+	public String getModuleName();
+
 }
