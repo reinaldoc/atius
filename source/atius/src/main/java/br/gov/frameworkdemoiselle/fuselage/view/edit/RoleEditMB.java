@@ -8,8 +8,10 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.fuselage.business.RoleBC;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityResource;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityRole;
+import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
+import br.gov.frameworkdemoiselle.util.Faces;
 
 @ViewController
 public class RoleEditMB extends AbstractEditPageBean<SecurityRole, Long> {
@@ -21,25 +23,49 @@ public class RoleEditMB extends AbstractEditPageBean<SecurityRole, Long> {
 
 	@Override
 	public String insert() {
-		bc.insert(getBean());
+		try {
+			bc.insert(getBean());
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.role.insert.success", getBean().getName()));
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.role.insert.failed", SeverityType.ERROR));
+		}
 		return null;
 	}
 
 	@Override
 	public String update() {
-		bc.update(getBean());
+		try {
+			bc.update(getBean());
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.role.update.success", getBean().getName()));
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.role.update.failed", SeverityType.ERROR));
+		}
 		return null;
 	}
 
 	@Override
 	public String delete() {
-		bc.delete(getBean().getId());
+		try {
+			bc.delete(getBean().getId());
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.role.delete.success", getBean().getName()));
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.role.delete.failed", SeverityType.ERROR));
+		}
 		return null;
 	}
 
 	@Override
 	public SecurityRole load(Long id) {
-		return bc.load(id);
+		try {
+			return bc.load(id);
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.role.load.failed", SeverityType.ERROR));
+		}
+		return new SecurityRole();
 	}
 
 	/**
