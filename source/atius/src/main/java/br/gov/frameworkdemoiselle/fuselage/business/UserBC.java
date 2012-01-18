@@ -10,7 +10,6 @@ import br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser;
 import br.gov.frameworkdemoiselle.fuselage.persistence.UserDAO;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
-import br.gov.frameworkdemoiselle.util.Strings;
 
 public class UserBC extends DelegateCrud<SecurityUser, Long, UserDAO> {
 	private static final long serialVersionUID = 1L;
@@ -39,24 +38,12 @@ public class UserBC extends DelegateCrud<SecurityUser, Long, UserDAO> {
 		return false;
 	}
 
-	public SecurityUser loadAndUpdate(SecurityUser securityUser) {
-		if (securityUser != null && Strings.isNotBlank(securityUser.getLogin())) {
-			SecurityUser bean = loadByLogin(securityUser.getLogin());
-			if (bean.getId() == null) {
-				bean = securityUser;
-				bean.setAvailable(1);
-				insert(bean);
-			} else if (bean.getAvailable() == null || bean.getAvailable() != 1)
-				return null;
-			else {
-				bean.setName(securityUser.getName());
-				bean.setOrgunit(securityUser.getOrgunit());
-				bean.setDescription(securityUser.getDescription());
-				update(bean);
-			}
-			return bean;
-		}
-		return null;
+	public void insertOrUpdate(SecurityUser securityUser) {
+		if (securityUser.getId() == null) {
+			securityUser.setAvailable(1);
+			getDelegate().insert(securityUser);
+		} else
+			getDelegate().update(securityUser);
 	}
 
 	public SecurityUser loadByLogin(String login) {
