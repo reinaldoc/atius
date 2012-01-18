@@ -25,6 +25,9 @@ public class LdapAuthenticatorConfig implements Serializable {
 	@Name("userSearchFilter")
 	private String userSearchFilter = "(uid=%u)";
 
+	@Name("verbose")
+	private boolean verbose = false;
+
 	public String getUidAttr() {
 		return uidAttr;
 	}
@@ -63,6 +66,14 @@ public class LdapAuthenticatorConfig implements Serializable {
 
 	public void setUserSearchFilter(String userSearchFilter) {
 		this.userSearchFilter = userSearchFilter;
+	}
+
+	public boolean isVerbose() {
+		return verbose;
+	}
+
+	public void setVerbose(boolean verbose) {
+		this.verbose = verbose;
 	}
 
 }
