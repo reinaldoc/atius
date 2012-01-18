@@ -5,8 +5,8 @@
 
 		<h:panelGrid id="faa-role-edit-panel-id">
 
-			<p:dialog id="faa-role-edit-dlg-id" header="FAA - Cadastro de Papéis" widgetVar="faa_role_edit_dlg" modal="true" width="800"
-				resizable="false" closable="false">
+			<p:dialog id="faa-role-edit-dlg-id" header="FAA - Cadastro de Papéis" widgetVar="faa_role_edit_dlg" modal="true" width="800" resizable="false"
+				closable="false">
 
 				<h:panelGrid columns="2" styleClass="dialog-body dialog-body-role" id="faa-role-edit-dlg-body-id">
 
@@ -24,9 +24,9 @@
 						<h:outputText value="Restritiva:" />
 						<h:panelGroup>
 							<h:selectBooleanCheckbox id="faa-role-edit-restriction-id" value="#{roleEditMB.bean.restriction}" onkeypress="return event.keyCode!=13" />
-							<p:tooltip for="faa-role-edit-restriction-id" value="Apenas indica que este papél não deve ser adicionado a perfis administrativos."/>
-							<p:commandButton image="ui-icon-transferthick-e-w" style="float: right; margin-bottom: 2px;" immediate="true" update="faa-role-edit-resource-panel-id"
-								oncomplete="faa_role_edit_resource_dlg.show()" title="Selecionar recursos" />
+							<p:tooltip for="faa-role-edit-restriction-id" value="Apenas indica que este papél não deve ser adicionado a perfis administrativos." />
+							<p:commandButton image="ui-icon-transferthick-e-w" style="float: right; margin-bottom: 2px;" immediate="true"
+								update="faa-role-edit-resource-panel-id" oncomplete="faa_role_edit_resource_dlg.show()" title="Selecionar recursos" />
 						</h:panelGroup>
 
 					</h:panelGrid>
@@ -56,8 +56,8 @@
 				<h:panelGroup id="faa-role-edit-dlg-buttons-id">
 
 					<faa:dialogButtons id="faa-role-edit-dlg-save-id" dialogId="faa-role-edit-dlg-id" dialogWidgetVar="faa_role_edit_dlg"
-						styleClass="dialog-commandbutton" updateMode="#{roleEditMB.updateMode}" actionUpdater="#{roleEditMB.update}"
-						actionInserter="#{roleEditMB.insert}" actionCloser="#{roleListMB.clearValidation}" updateOnClose="faa-role-list-datatable-id" />
+						updateMode="#{roleEditMB.updateMode}" actionUpdater="#{roleEditMB.update}" actionInserter="#{roleEditMB.insert}"
+						actionCloser="#{roleListMB.clearValidation}" updateOnClose="faa-role-list-datatable-id" />
 
 				</h:panelGroup>
 
@@ -69,8 +69,8 @@
 
 		<h:panelGrid id="faa-role-edit-resource-panel-id">
 
-			<p:dialog id="faa-role-edit-resource-dlg-id" header="FAA - Seleção de Recursos" widgetVar="faa_role_edit_resource_dlg" modal="true"
-				width="600" resizable="false" closable="false">
+			<p:dialog id="faa-role-edit-resource-dlg-id" header="FAA - Seleção de Recursos" widgetVar="faa_role_edit_resource_dlg" modal="true" width="600"
+				resizable="false" closable="false">
 
 				<h:panelGrid columns="1" styleClass="dialog-body dialog-body-role">
 
@@ -96,11 +96,9 @@
 
 				<h:panelGroup id="faa-role-edit-resource-dlg-buttons-id">
 
-					<p:commandButton value="Selecionar" styleClass="dialog-commandbutton" update="faa-role-edit-datatable-resource-id"
-						oncomplete="faa_role_edit_resource_dlg.hide()" />
+					<p:commandButton value="Selecionar" update="faa-role-edit-datatable-resource-id" oncomplete="faa_role_edit_resource_dlg.hide()" />
 
-					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this"
-						onclick="faa_role_edit_resource_dlg.hide()" />
+					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this" onclick="faa_role_edit_resource_dlg.hide()" />
 
 				</h:panelGroup>
 

@@ -26,15 +26,13 @@
 							styleClass="dialog-selectonemenu">
 
 							<f:selectItem itemLabel="--- selecione ---" itemValue="" />
-							<f:selectItems value="#{profileEditMB.resourceList}" var="selectResource" itemLabel="#{selectResource.label}"
-								itemValue="#{selectResource}" />
+							<f:selectItems value="#{profileEditMB.resourceList}" var="selectResource" itemLabel="#{selectResource.label}" itemValue="#{selectResource}" />
 
 						</p:selectOneMenu>
 
 						<h:outputText value="Prioridade:" />
 						<h:panelGroup layout="block" style="display: block;">
-							<p:selectOneMenu value="#{profileEditMB.bean.welcomePagePriority}" effect="fade" style="float: left;"
-								styleClass="dialog-selectonemenu-numbers">
+							<p:selectOneMenu value="#{profileEditMB.bean.welcomePagePriority}" effect="fade" style="float: left;" styleClass="dialog-selectonemenu-numbers">
 								<f:selectItem itemLabel="-" itemValue="" />
 								<f:selectItems value="#{profileEditMB.resourcePriorities}" />
 							</p:selectOneMenu>
@@ -71,8 +69,8 @@
 				<h:panelGroup id="faa-profile-edit-dlg-buttons-id">
 
 					<faa:dialogButtons id="faa-profile-edit-dlg-save-id" dialogId="faa-profile-edit-dlg-id" dialogWidgetVar="faa_profile_edit_dlg"
-						styleClass="dialog-commandbutton" updateMode="#{profileEditMB.updateMode}" actionUpdater="#{profileEditMB.update}"
-						actionInserter="#{profileEditMB.insert}" actionCloser="#{profileListMB.clearValidation}" updateOnClose="faa-profile-list-datatable-id" />
+						updateMode="#{profileEditMB.updateMode}" actionUpdater="#{profileEditMB.update}" actionInserter="#{profileEditMB.insert}"
+						actionCloser="#{profileListMB.clearValidation}" updateOnClose="faa-profile-list-datatable-id" />
 
 				</h:panelGroup>
 
@@ -84,8 +82,8 @@
 
 		<h:panelGrid id="faa-profile-edit-role-panel-id">
 
-			<p:dialog id="faa-profile-edit-role-dlg-id" header="FAA - Seleção de Papéis" widgetVar="faa_profile_edit_role_dlg" modal="true"
-				width="600" resizable="false" closable="false">
+			<p:dialog id="faa-profile-edit-role-dlg-id" header="FAA - Seleção de Papéis" widgetVar="faa_profile_edit_role_dlg" modal="true" width="600"
+				resizable="false" closable="false">
 
 				<h:panelGrid columns="1" styleClass="dialog-body dialog-body-profile">
 
@@ -111,11 +109,9 @@
 
 				<h:panelGroup id="faa-profile-edit-role-dlg-buttons-id">
 
-					<p:commandButton value="Selecionar" styleClass="dialog-commandbutton" update="faa-profile-edit-datatable-role-id"
-						oncomplete="faa_profile_edit_role_dlg.hide()" />
+					<p:commandButton value="Selecionar" update="faa-profile-edit-datatable-role-id" oncomplete="faa_profile_edit_role_dlg.hide()" />
 
-					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this"
-						onclick="faa_profile_edit_role_dlg.hide()" />
+					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this" onclick="faa_profile_edit_role_dlg.hide()" />
 
 				</h:panelGroup>
 

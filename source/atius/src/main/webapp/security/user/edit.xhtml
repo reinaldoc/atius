@@ -66,8 +66,8 @@
 				<h:panelGroup id="faa-user-edit-dlg-buttons-id">
 
 					<faa:dialogButtons id="faa-user-edit-dlg-save-id" dialogId="faa-user-edit-dlg-id" dialogWidgetVar="faa_user_edit_dlg"
-						styleClass="dialog-commandbutton" updateMode="#{userEditMB.updateMode}" actionUpdater="#{userEditMB.update}"
-						actionInserter="#{userEditMB.insert}" actionCloser="#{userListMB.clearValidation}" updateOnClose="faa-user-list-datatable-id" />
+						updateMode="#{userEditMB.updateMode}" actionUpdater="#{userEditMB.update}" actionInserter="#{userEditMB.insert}"
+						actionCloser="#{userListMB.clearValidation}" updateOnClose="faa-user-list-datatable-id" />
 
 				</h:panelGroup>
 
@@ -106,7 +106,7 @@
 
 				<h:panelGroup id="faa-user-edit-profile-dlg-buttons-id">
 
-					<p:commandButton value="Selecionar" styleClass="dialog-commandbutton" update="faa-user-edit-datatable-profile-id"
+					<p:commandButton value="Selecionar" update="faa-user-edit-datatable-profile-id"
 						oncomplete="faa_user_edit_profile_dlg.hide()" />
 
 					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this" onclick="faa_user_edit_profile_dlg.hide()" />
@@ -118,6 +118,5 @@
 		</h:panelGrid>
 
 	</h:form>
-
 
 </ui:composition>
