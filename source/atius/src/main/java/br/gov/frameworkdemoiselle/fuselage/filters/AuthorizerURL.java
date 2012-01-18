@@ -24,8 +24,7 @@ import br.gov.frameworkdemoiselle.security.SecurityContext;
 @WebFilter(urlPatterns = { "/*" })
 public class AuthorizerURL implements Filter {
 
-	@Inject
-	private Logger logger;
+	private Logger logger = LoggerProducer.create(AuthorizerURL.class);
 
 	@Inject
 	private SecurityContext securityContext;
@@ -47,7 +46,6 @@ public class AuthorizerURL implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		this.logger = LoggerProducer.create(AuthorizerURL.class);
 		this.request = (HttpServletRequest) request;
 		String url = this.request.getRequestURI().replaceAll("^/.+?/", "/");
 
@@ -93,10 +91,13 @@ public class AuthorizerURL implements Filter {
 	}
 
 	private String getUsername() {
-		if (securityContext.isLoggedIn())
-			return ((SecurityUser) securityContext.getUser().getAttribute("user")).getLogin();
-		else
-			return null;
+		try {
+			if (securityContext.isLoggedIn())
+				return ((SecurityUser) securityContext.getUser().getAttribute("user")).getLogin();
+		} catch (Exception e) {
+			// Ignore
+		}
+		return null;
 	}
 
 	private String getContext() {
