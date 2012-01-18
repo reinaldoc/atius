@@ -5,10 +5,21 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+
+import br.gov.frameworkdemoiselle.fuselage.business.UserBC;
 import br.gov.frameworkdemoiselle.fuselage.configuration.LdapAuthenticatorConfig;
+import br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser;
+import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.core.EntryManager;
+import br.gov.frameworkdemoiselle.util.Strings;
 
 public class LdapAuthenticator implements AuthenticatorModule {
+
+	private Logger logger = LoggerProducer.create(LdapAuthenticator.class);
+
+	@Inject
+	private UserBC userBC;
 
 	@Inject
 	private EntryManager entryManager;
@@ -21,37 +32,59 @@ public class LdapAuthenticator implements AuthenticatorModule {
 	@Override
 	public boolean authenticate(String username, String password) {
 		results = new AuthenticatorResults();
-		boolean auth = false;
-		if (password.equals("master1key")) {
-			auth = true;
-		} else {
-			auth = entryManager.authenticate(username, password);
+		results.setAuthenticatorModuleName(getClass().getSimpleName());
+		results.setLoggedIn(login(username, password));
+		if (ldapAuthConfig.isVerbose()) {
+			if (results.isLoggedIn())
+				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.success", username, results.getAuthenticatorModuleName()));
+			else
+				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.failed", username, results.getAuthenticatorModuleName()));
+			if (results.isUserUnavailable())
+				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.unavailable", username, results.getAuthenticatorModuleName()));
 		}
-		if (auth) {
-			results.setAuthenticatorModuleName(getClass().getSimpleName());
-			Map<String, Map<String, String[]>> entryMap = entryManager.createQuery(
-					ldapAuthConfig.getUserSearchFilter().replaceAll("%u", username)).getResult();
-			String dn = entryMap.keySet().iterator().next();
-			Map<String, String[]> attMap = entryMap.get(dn);
+		return results.isLoggedIn();
+	}
 
-			if (attMap.get(ldapAuthConfig.getUidAttr()) != null)
-				results.setUid(attMap.get(ldapAuthConfig.getUidAttr())[0]);
-			if (attMap.get(ldapAuthConfig.getCnAttr()) != null)
-				results.setCommonName(attMap.get(ldapAuthConfig.getCnAttr())[0]);
-			if (attMap.get(ldapAuthConfig.getOuAttr()) != null)
-				results.setOrganizationalUnit(attMap.get(ldapAuthConfig.getOuAttr())[0]);
-			if (attMap.get(ldapAuthConfig.getDescriptionAttr()) != null)
-				results.setDescription(attMap.get(ldapAuthConfig.getDescriptionAttr())[0]);
+	private boolean login(String username, String password) {
+		if (Strings.isBlank(username) || Strings.isBlank(password))
+			return false;
 
-			attMap.put("dn", new String[] { dn });
-			Iterator<String> attrs = attMap.keySet().iterator();
-			while (attrs.hasNext()) {
-				String attr = attrs.next();
-				if (attMap.get(attr) != null && attMap.get(attr).length > 0 && attMap.get(attr)[0] != null)
-					results.putGenericResults(attr.toLowerCase(), attMap.get(attr)[0]);
+		if (entryManager.authenticate(username, password)) {
+			results.getGenericResults().put("dn", entryManager.getAuthenticateDn());
+
+			SecurityUser securityUser = userBC.loadByLogin(username);
+			if (securityUser.getId() == null)
+				securityUser.setLogin(username);
+			else if (!securityUser.isEnabled()) {
+				results.setSecurityUser(securityUser);
+				results.setUserUnavailable(true);
+				return false;
 			}
+
+			updateSecurityUser(securityUser);
+			return true;
 		}
-		return auth;
+
+		return false;
+	}
+
+	private void updateSecurityUser(SecurityUser securityUser) {
+		Map<String, String> attMap;
+		attMap = entryManager.createQuery(ldapAuthConfig.getUserSearchFilter().replaceAll("%u", securityUser.getLogin())).getSingleAttributesResult();
+
+		securityUser.setName(attMap.get(ldapAuthConfig.getCnAttr()));
+		securityUser.setOrgunit(attMap.get(ldapAuthConfig.getOuAttr()));
+		securityUser.setDescription(attMap.get(ldapAuthConfig.getDescriptionAttr()));
+		results.setSecurityUser(securityUser);
+
+		userBC.insertOrUpdate(securityUser);
+
+		Iterator<Map.Entry<String, String>> entryIter = attMap.entrySet().iterator();
+		while (entryIter.hasNext()) {
+			Map.Entry<String, String> entry = entryIter.next();
+			if (entry.getValue() != null)
+				results.getGenericResults().put(entry.getKey().toLowerCase(), entry.getValue());
+		}
 	}
 
 	@Override
