@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.fuselage.business.UserBC;
-import br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfile;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser;
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.report.Report;
@@ -20,6 +19,7 @@ import br.gov.frameworkdemoiselle.template.AbstractListPageBean;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.FileRenderer;
+import br.gov.frameworkdemoiselle.util.Strings;
 
 @ViewController
 public class UserListMB extends AbstractListPageBean<SecurityUser, Long> {
@@ -43,7 +43,10 @@ public class UserListMB extends AbstractListPageBean<SecurityUser, Long> {
 	@Override
 	protected List<SecurityUser> handleResultList() {
 		try {
-			return bc.findAll();
+			if (Strings.isBlank(getResultFilter()))
+				return bc.findAll();
+			else
+				return bc.findUsers(getResultFilter());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.generic.business.error", SeverityType.ERROR));
