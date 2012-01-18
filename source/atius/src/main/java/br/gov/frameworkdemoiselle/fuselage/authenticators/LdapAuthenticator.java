@@ -5,18 +5,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-
 import br.gov.frameworkdemoiselle.fuselage.business.UserBC;
 import br.gov.frameworkdemoiselle.fuselage.configuration.LdapAuthenticatorConfig;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser;
-import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.core.EntryManager;
 import br.gov.frameworkdemoiselle.util.Strings;
 
-public class LdapAuthenticator implements AuthenticatorModule {
-
-	private Logger logger = LoggerProducer.create(LdapAuthenticator.class);
+public class LdapAuthenticator extends AbstractAuthenticatorModule<LdapAuthenticator> {
 
 	@Inject
 	private UserBC userBC;
@@ -29,12 +24,6 @@ public class LdapAuthenticator implements AuthenticatorModule {
 
 	private AuthenticatorResults results = new AuthenticatorResults();
 
-	@Override
-	public String getModuleName() {
-		return "LdapAuthenticator";
-	}
-
-	@Override
 	public AuthenticatorResults getResults() {
 		return results;
 	}
@@ -44,13 +33,15 @@ public class LdapAuthenticator implements AuthenticatorModule {
 		results = new AuthenticatorResults();
 		results.setAuthenticatorModuleName(getModuleName());
 		results.setLoggedIn(login(username, password));
+		System.out.println("ldap ==> " + results);
+		System.out.println("ldap ==> " + results.isLoggedIn());
 		if (ldapAuthConfig.isVerbose()) {
 			if (results.isLoggedIn())
-				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.success", username, getModuleName()));
+				getLogger().info(getBundle().getString("fuselage.authenticators.login.success", username, getModuleName()));
 			else
-				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.failed", username, getModuleName()));
+				getLogger().info(getBundle().getString("fuselage.authenticators.login.failed", username, getModuleName()));
 			if (results.isUserUnavailable())
-				logger.info(userBC.getBundle().getString("fuselage.authenticators.login.unavailable", username, getModuleName()));
+				getLogger().info(getBundle().getString("fuselage.authenticators.login.unavailable", username, getModuleName()));
 		}
 		return results.isLoggedIn();
 	}
