@@ -60,20 +60,18 @@ body {
 
 #atius-body-left-id a:hover {
 	background-color: #74ffcc;
-	font-weight: normal;
 	font-weight: bold;
 }
 
 #atius-body-left-id a.selected {
 	background-color: #2ec890;
 	color: white;
-	font-weight: bold;
 }
 
 #atius-body-left-id a.selected:hover {
 	background-color: #2ec890;
 	color: white;
-	font-weight: bold;
+	font-weight: normal;
 }
 
 #atius-body-right-id {
@@ -162,7 +160,7 @@ input[type=text].filter {
 	padding: 0;
 }
 
-.dialog-body-profile,.dialog-body-user {
+.dialog-body-profile,.dialog-body-user,.dialog-body-profileByRule {
 	padding: 0 0 7px;
 }
 
@@ -202,12 +200,12 @@ input[type=text].filter {
 	border: 0px;
 }
 
-.dialog-body-role tbody tr td,.dialog-body-profile tbody tr td,.dialog-body-user tbody tr td
+.dialog-body-role tbody tr td,.dialog-body-profile tbody tr td,.dialog-body-user tbody tr td,.dialog-body-profileByRule tbody tr td
 	{
 	width: 400px;
 }
 
-.dialog-body-role .ui-widget-header,.dialog-body-profile .ui-widget-header,.dialog-body-user .ui-widget-header
+.dialog-body-role .ui-widget-header,.dialog-body-profile .ui-widget-header,.dialog-body-user .ui-widget-header,.dialog-body-profileByRule .ui-widget-header
 	{
 	background: none;
 }
@@ -240,21 +238,6 @@ ul.dialog-messages {
 ul.dialog-messages li {
 	margin: 0px;
 	font-size: 11px;
-}
-
-.dialog-commandbutton {
-	background: none !important;
-	border: 0px solid #DEE5F2 !important;
-	background-color: #5A6986 !important;
-	border-radius: 2px;
-}
-
-.dialog-commandbutton:hover {
-	border: 0px solid #DEE5F2;
-	background-color: #408080 !important;
-	color: white;
-	border-radius: 2px;
-	box-shadow: none;
 }
 
 .dialog-message-success {
@@ -302,7 +285,7 @@ ul.dialog-messages li {
 	background: none !important;
 }
 
-.dialog-datatable-role .ui-datatable-data-empty tr,.dialog-datatable-profile .ui-datatable-data-empty tr,.dialog-datatable-user .ui-datatable-data-empty tr
+.dialog-datatable-role .ui-datatable-data-empty tr,.dialog-datatable-profile .ui-datatable-data-empty tr,.dialog-datatable-user .ui-datatable-data-empty tr,.dialog-datatable-profileByRule .ui-datatable-data-empty tr
 	{
 	height: 175px;
 }
@@ -340,6 +323,11 @@ tbody tr td .faa-label-resource {
 	background-color: #dc9f68;
 	border-color: #dc9f68;
 	width: 50px;
+}
+
+tbody tr td .faa-label-profileByRule {
+	background-color: #aaaaaa;
+	border-color: #aaaaaa;
 }
 
 .faa-header-items td {
