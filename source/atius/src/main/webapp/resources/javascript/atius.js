@@ -102,7 +102,8 @@ function showNotification(componentId) {
 }
 
 function hideNotification(componentId) {
-	if (jQuery(id(componentId + ':message-link')).qtip('api') !== undefined)
+	if (jQuery(id(componentId + ':message-link')).qtip('api') !== null
+			&& jQuery(id(componentId + ':message-link')).qtip('api') !== undefined)
 		jQuery(id(componentId + ':message-link')).qtip('api').hide();
 }
 
