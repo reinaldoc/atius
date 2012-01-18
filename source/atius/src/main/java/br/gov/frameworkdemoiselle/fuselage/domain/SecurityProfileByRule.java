@@ -12,12 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class SecurityProfileDetect implements Serializable {
+public class SecurityProfileByRule implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -53,8 +54,12 @@ public class SecurityProfileDetect implements Serializable {
 	@Size(max = 255, message = "Identifique melhor a notação da chave")
 	private String valuenotation;
 
+	@Column
+	@NotNull
+	private Integer available;
+
 	@ManyToMany
-	@JoinTable(name = "SECURITYPROFILE_PROFILEDETECT", joinColumns = { @JoinColumn(name = "DETECT_ID") }, inverseJoinColumns = { @JoinColumn(name = "PROFILE_ID") })
+	@JoinTable(name = "SECURITYPROFILE_BYRULE", joinColumns = { @JoinColumn(name = "RULE_ID") }, inverseJoinColumns = { @JoinColumn(name = "PROFILE_ID") })
 	private List<SecurityProfile> profiles;
 
 	public Long getId() {
@@ -89,11 +94,11 @@ public class SecurityProfileDetect implements Serializable {
 		this.implementation = implementation;
 	}
 
-	public String getKeyName() {
+	public String getKeyname() {
 		return keyname;
 	}
 
-	public void setKeyName(String keyname) {
+	public void setKeyname(String keyname) {
 		this.keyname = keyname;
 	}
 
@@ -119,6 +124,20 @@ public class SecurityProfileDetect implements Serializable {
 
 	public void setProfiles(List<SecurityProfile> profiles) {
 		this.profiles = profiles;
+	}
+
+	public Integer getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(Integer available) {
+		this.available = available;
+	}
+
+	public boolean isEnabled() {
+		if (this.available != null && this.available.intValue() == 1)
+			return true;
+		return false;
 	}
 
 }

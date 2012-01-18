@@ -13,10 +13,10 @@ import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.fuselage.authenticators.AuthenticatorModule;
 import br.gov.frameworkdemoiselle.fuselage.authenticators.AuthenticatorResults;
-import br.gov.frameworkdemoiselle.fuselage.business.ProfileDetectBC;
+import br.gov.frameworkdemoiselle.fuselage.business.ProfileByRuleBC;
 import br.gov.frameworkdemoiselle.fuselage.configuration.AuthenticatorConfig;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfile;
-import br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfileDetect;
+import br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfileByRule;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityResource;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityRole;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser;
@@ -45,7 +45,7 @@ public class Authenticator implements br.gov.frameworkdemoiselle.security.Authen
 	private AuthenticatorResults authResults;
 
 	@Inject
-	private ProfileDetectBC profileDetectBC;
+	private ProfileByRuleBC profileDetectBC;
 
 	@Override
 	public void unAuthenticate() {
@@ -108,9 +108,9 @@ public class Authenticator implements br.gov.frameworkdemoiselle.security.Authen
 		/*
 		 * SecurityProfileDetect.implementation.ALL-LOGGED-IN
 		 */
-		List<SecurityProfileDetect> allLoggedIn = profileDetectBC.findByImplementation("ALL-LOGGED-IN");
+		List<SecurityProfileByRule> allLoggedIn = profileDetectBC.findByImplementation("ALL-LOGGED-IN");
 		if (allLoggedIn != null)
-			for (SecurityProfileDetect profileDetect : allLoggedIn)
+			for (SecurityProfileByRule profileDetect : allLoggedIn)
 				setPermissionsByProfiles(profileDetect.getProfiles());
 
 		/*
@@ -120,16 +120,16 @@ public class Authenticator implements br.gov.frameworkdemoiselle.security.Authen
 			/*
 			 * SecurityProfileDetect.implementation.LDAP-USER-ATTR
 			 */
-			List<SecurityProfileDetect> ldapUserAttr = profileDetectBC.findByImplementation("LDAP-USER-ATTR");
+			List<SecurityProfileByRule> ldapUserAttr = profileDetectBC.findByImplementation("LDAP-USER-ATTR");
 			if (ldapUserAttr != null) {
-				for (SecurityProfileDetect profileDetect : ldapUserAttr) {
-					if (profileDetect.getKeyName() != null && profileDetect.getValue() != null && profileDetect.getValuenotation() != null) {
+				for (SecurityProfileByRule profileDetect : ldapUserAttr) {
+					if (profileDetect.getKeyname() != null && profileDetect.getValue() != null && profileDetect.getValuenotation() != null) {
 						if (profileDetect.getValuenotation().equalsIgnoreCase("EXACT")) {
 							if (profileDetect.getValue().equalsIgnoreCase(
-									authResults.getGenericResults().get(profileDetect.getKeyName().toLowerCase())))
+									authResults.getGenericResults().get(profileDetect.getKeyname().toLowerCase())))
 								setPermissionsByProfiles(profileDetect.getProfiles());
 						} else if (profileDetect.getValuenotation().equalsIgnoreCase("CONTAINS")) {
-							String value = authResults.getGenericResults().get(profileDetect.getKeyName().toLowerCase());
+							String value = authResults.getGenericResults().get(profileDetect.getKeyname().toLowerCase());
 							if (value != null && value.toLowerCase().contains(profileDetect.getValue().toLowerCase()))
 								setPermissionsByProfiles(profileDetect.getProfiles());
 						} else
@@ -142,9 +142,9 @@ public class Authenticator implements br.gov.frameworkdemoiselle.security.Authen
 			/*
 			 * SecurityProfileDetect.implementation.LDAP-USER-DN
 			 */
-			List<SecurityProfileDetect> ldapUserDn = profileDetectBC.findByImplementation("LDAP-USER-DN");
+			List<SecurityProfileByRule> ldapUserDn = profileDetectBC.findByImplementation("LDAP-USER-DN");
 			if (ldapUserDn != null)
-				for (SecurityProfileDetect profileDetect : ldapUserDn)
+				for (SecurityProfileByRule profileDetect : ldapUserDn)
 					if (profileDetect.getValue() != null && profileDetect.getValuenotation() != null)
 						if (profileDetect.getValuenotation().equalsIgnoreCase("EXACT-PARENT")) {
 							String dn = authResults.getGenericResults().get("dn");

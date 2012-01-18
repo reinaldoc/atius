@@ -10,7 +10,7 @@
 
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfile</class>
-		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfileDetect</class>
+		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfileByRule</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityRole</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityResource</class>
 

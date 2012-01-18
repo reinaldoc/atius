@@ -57,8 +57,8 @@ public class SecurityProfile implements Serializable {
 	private List<SecurityRole> roles;
 
 	@ManyToMany
-	@JoinTable(name = "SECURITYPROFILE_PROFILEDETECT", joinColumns = { @JoinColumn(name = "PROFILE_ID") }, inverseJoinColumns = { @JoinColumn(name = "DETECT_ID") })
-	private List<SecurityProfileDetect> profiledefault;
+	@JoinTable(name = "SECURITYPROFILE_BYRULE", joinColumns = { @JoinColumn(name = "PROFILE_ID") }, inverseJoinColumns = { @JoinColumn(name = "RULE_ID") })
+	private List<SecurityProfileByRule> rules;
 
 	public Long getId() {
 		return id;
@@ -74,30 +74,6 @@ public class SecurityProfile implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<SecurityRole> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<SecurityRole> roles) {
-		this.roles = roles;
-	}
-
-	public List<SecurityUser> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<SecurityUser> users) {
-		this.users = users;
-	}
-
-	public List<SecurityProfileDetect> getProfiledefault() {
-		return profiledefault;
-	}
-
-	public void setProfiledefault(List<SecurityProfileDetect> profiledefault) {
-		this.profiledefault = profiledefault;
 	}
 
 	public String getShortDescription() {
@@ -130,6 +106,30 @@ public class SecurityProfile implements Serializable {
 
 	public void setWelcomePage(SecurityResource welcomePage) {
 		this.welcomePage = welcomePage;
+	}
+
+	public List<SecurityUser> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<SecurityUser> users) {
+		this.users = users;
+	}
+
+	public List<SecurityRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SecurityRole> roles) {
+		this.roles = roles;
+	}
+
+	public List<SecurityProfileByRule> getRules() {
+		return rules;
+	}
+
+	public void setRules(List<SecurityProfileByRule> rules) {
+		this.rules = rules;
 	}
 
 }
