@@ -1,8 +1,10 @@
 package br.gov.frameworkdemoiselle.ldap.core;
 
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -31,6 +33,11 @@ public class EntryManager implements Serializable {
 	private EntryCoreMap coreMap;
 
 	private int protocol = 3;
+
+	@PostConstruct
+	public void init() {
+		setVerbose(true);
+	}
 
 	/**
 	 * Set LDAP Protocol for LDAP BIND operation when not using resource
@@ -89,6 +96,17 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
+	 * Get DN used on bind operation
+	 * 
+	 * @return A DN used on bind method
+	 * @throws LDAPException
+	 * @throws URISyntaxException
+	 */
+	public String getBindDn() {
+		return connectionManager.getBindDn();
+	}
+
+	/**
 	 * This is a isolated method that use a alternative connection to validate a
 	 * dn or user and a password. This method don't touch current connection
 	 * authentication.
@@ -102,6 +120,18 @@ public class EntryManager implements Serializable {
 	 */
 	public boolean authenticate(String binddn, String bindpw) {
 		return connectionManager.authenticate(binddn, bindpw, protocol);
+	}
+
+	/**
+	 * Get DN used on authenticate method (isn't current connection
+	 * authentication)
+	 * 
+	 * @return A DN used on authenticate method
+	 * @throws LDAPException
+	 * @throws URISyntaxException
+	 */
+	public String getAuthenticateDn() {
+		return connectionManager.getAuthenticateDn();
 	}
 
 	/**
