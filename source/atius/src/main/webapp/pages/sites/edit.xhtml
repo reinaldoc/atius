@@ -12,7 +12,8 @@
 					<h:outputText value="Domínio:" />
 					<h:panelGroup>
 						<h:inputText id="atius-sites-edit-servername-id" value="#{websiteDomainEditMB.bean.serverName}" autocomplete="off"
-							onkeypress="return event.keyCode!=13" style="width: #{websiteDomainEditMB.updateMode ? '375px' : '337px' };" readonly="#{websiteDomainEditMB.updateMode ? 'true' : 'false' }" />
+							onkeypress="return event.keyCode!=13" style="width: #{websiteDomainEditMB.updateMode ? '375px' : '337px' };"
+							readonly="#{websiteDomainEditMB.updateMode ? 'true' : 'false' }" />
 						<p:commandButton image="ui-icon-gear" title="Verificar" action="#{websiteDomainEditMB.domainAvailable}"
 							update="atius-sites-edit-dlg-save-id:messages" style="margin-left: 10px; margin-right: 0px; vertical-align: bottom;"
 							process="@this, atius-sites-edit-servername-id" oncomplete="showNotification('atius-sites-edit-dlg-save-id');"
@@ -22,8 +23,7 @@
 					<h:outputText value="Categoria:" />
 					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteCategory}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
-						<f:selectItems value="#{websiteDomainListMB.websiteCategories}" var="category" itemLabel="#{category.name}"
-							itemValue="#{category.name}" />
+						<f:selectItems value="#{websiteDomainListMB.websiteCategories}" var="category" itemLabel="#{category.name}" itemValue="#{category.name}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Tipo:" />
@@ -46,9 +46,8 @@
 
 				<h:panelGroup id="atius-sites-edit-dlg-buttons-id">
 					<faa:dialogButtons id="atius-sites-edit-dlg-save-id" dialogId="atius-sites-edit-dlg-id" dialogWidgetVar="atius_sites_edit_dlg"
-						styleClass="dialog-commandbutton" updateMode="#{websiteDomainEditMB.updateMode}" actionUpdater="#{websiteDomainEditMB.update}"
-						actionInserter="#{websiteDomainEditMB.insert}" actionCloser="#{websiteDomainListMB.clearValidation}"
-						updateOnClose="atius-sites-list-datatable-id" />
+						updateMode="#{websiteDomainEditMB.updateMode}" actionUpdater="#{websiteDomainEditMB.update}" actionInserter="#{websiteDomainEditMB.insert}"
+						actionCloser="#{websiteDomainListMB.clearValidation}" updateOnClose="atius-sites-list-datatable-id" />
 				</h:panelGroup>
 
 			</p:dialog>
