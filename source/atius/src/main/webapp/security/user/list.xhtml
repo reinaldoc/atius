@@ -12,9 +12,9 @@
 
 		<p:confirmDialog message="Deseja #{userEditMB.bean.enabled ? 'desativar' : 'ativar' } o usuário: #{userEditMB.bean.login} ?" header="Atenção!"
 			severity="alert" id="faa-user-status-dlg-id" widgetVar="faa_user_status_dlg">
-			<p:commandButton value="Sim D" oncomplete="faa_user_status_dlg.hide()" update="faa-user-list-datatable-id, faa-growl-id"
+			<p:commandButton value="Sim" oncomplete="faa_user_status_dlg.hide()" update="faa-user-list-datatable-id, faa-growl-id"
 				action="#{userEditMB.disable}" actionListener="#{userListMB.clearResultList}" style="margin-right: 20px;" rendered="#{userEditMB.bean.enabled}" />
-			<p:commandButton value="Sim A" oncomplete="faa_user_status_dlg.hide()" update="faa-user-list-datatable-id, faa-growl-id"
+			<p:commandButton value="Sim" oncomplete="faa_user_status_dlg.hide()" update="faa-user-list-datatable-id, faa-growl-id"
 				action="#{userEditMB.enable}" actionListener="#{userListMB.clearResultList}" style="margin-right: 20px;" rendered="#{!userEditMB.bean.enabled}" />
 			<p:commandButton value="Não" onclick="faa_user_status_dlg.hide()" type="button" style="margin-left: 20px;" />
 		</p:confirmDialog>
