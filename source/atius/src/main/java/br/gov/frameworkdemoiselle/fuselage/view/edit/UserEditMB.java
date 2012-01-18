@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import br.gov.frameworkdemoiselle.fuselage.business.UserBC;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfile;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser;
@@ -26,20 +28,27 @@ public class UserEditMB extends AbstractEditPageBean<SecurityUser, Long> {
 	@Override
 	public String insert() {
 		try {
-			if (Strings.isBlank(getBean().getPassword()) || !getBean().getPassword().equals(getBean().getPasswordrepeat())) {
+			if (Strings.isNotBlank(getBean().getPassword()) && getBean().getPassword().length() < 8) {
 				Faces.validationFailed();
-				Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.password.notmatch"));
+				Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.password.notstrong"));
 				return null;
 			}
-
 			if (!bc.userAvailable(getBean().getLogin())) {
 				Faces.validationFailed();
 				Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.available.unavailable", getBean().getLogin()));
 				return null;
 			}
+			if (Strings.isNotBlank(getBean().getPassword()) && getBean().getPassword().equals(getBean().getPasswordrepeat())) {
+				getBean().setPassword(DigestUtils.sha512Hex(getBean().getPassword()));
+			} else {
+				Faces.validationFailed();
+				Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.password.notmatch"));
+				return null;
+			}
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.available.failed", SeverityType.ERROR));
+			return null;
 		}
 
 		getBean().setAvailable(1);
@@ -57,6 +66,27 @@ public class UserEditMB extends AbstractEditPageBean<SecurityUser, Long> {
 
 	@Override
 	public String update() {
+		try {
+			if (Strings.isBlank(getBean().getPassword()) && Strings.isBlank(getBean().getPasswordrepeat())) {
+				SecurityUser securityUser = bc.load(getBean().getId());
+				getBean().setPassword(securityUser.getPassword());
+			} else if (Strings.isNotBlank(getBean().getPassword()) && getBean().getPassword().length() < 8) {
+				Faces.validationFailed();
+				Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.password.notstrong"));
+				return null;
+			} else if (Strings.isNotBlank(getBean().getPassword()) && getBean().getPassword().equals(getBean().getPasswordrepeat())) {
+				getBean().setPassword(DigestUtils.sha512Hex(getBean().getPassword()));
+			} else {
+				Faces.validationFailed();
+				Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.password.notmatch"));
+				return null;
+			}
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.update.failed", SeverityType.ERROR));
+			return null;
+		}
+
 		try {
 			bc.update(getBean());
 			Faces.addMessage(bc.getBundle().getI18nMessage("fuselage.user.update.success", getBean().getLogin()));
