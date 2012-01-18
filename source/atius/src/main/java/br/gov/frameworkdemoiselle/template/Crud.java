@@ -44,8 +44,10 @@ public interface Crud<T, I> extends Serializable {
 	void delete(I id);
 
 	List<T> findAll();
-	
+
 	List<T> findByExample(T example);
+
+	List<T> findByModel(T example);
 
 	void insert(T bean);
 

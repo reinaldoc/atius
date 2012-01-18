@@ -75,6 +75,10 @@ public class DelegateCrud<T, I, C extends Crud<T, I>> implements Crud<T, I> {
 		return getDelegate().findByExample(example);
 	}
 
+	public List<T> findByModel(T example) {
+		return getDelegate().findByModel(example);
+	}
+
 	@Override
 	public List<T> findAll() {
 		return getDelegate().findAll();

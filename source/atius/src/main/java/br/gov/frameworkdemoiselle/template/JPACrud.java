@@ -58,6 +58,8 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import br.gov.frameworkdemoiselle.DemoiselleException;
 import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.configuration.Configuration;
@@ -263,7 +265,7 @@ public class JPACrud<T, I> implements Crud<T, I> {
 		}
 
 		List<T> resultList = query.getResultList();
-		System.out.println("[JPACrud.findAll() List<T>.size(): " + resultList.size());
+		System.out.println(getBeanClass().getSimpleName() + ".findAll() List<T>.size(): " + resultList.size());
 		return resultList;
 	}
 
@@ -287,7 +289,8 @@ public class JPACrud<T, I> implements Crud<T, I> {
 	}
 
 	/**
-	 * Retrieves a list of entities based on a single example instance of it.
+	 * Retrieves a list of entities based on a single example instance with AND
+	 * logic between attributes of it. Attention for default fields values.
 	 * <p>
 	 * See below a sample of its usage:
 	 * 
@@ -302,7 +305,29 @@ public class JPACrud<T, I> implements Crud<T, I> {
 	 * @return a list of entities
 	 */
 	public List<T> findByExample(final T example) {
-		final CriteriaQuery<T> criteria = createCriteriaByExample(example);
+		final CriteriaQuery<T> criteria = createCriteriaByExample(example, true);
+		return getEntityManager().createQuery(criteria).getResultList();
+	}
+
+	/**
+	 * Retrieves a list of entities based on a single example instance with OR
+	 * logic between attributes of it. Attention for default fields values.
+	 * <p>
+	 * See below a sample of its usage:
+	 * 
+	 * <pre>
+	 * Employee example = new Employee();
+	 * example.setLogin(&quot;john&quot;);
+	 * example.setName(&quot;john&quot;);
+	 * return (List&lt;Employee&gt;) findByExample(example);
+	 * </pre>
+	 * 
+	 * @param example
+	 *            an entity example
+	 * @return a list of entities
+	 */
+	public List<T> findByModel(final T example) {
+		final CriteriaQuery<T> criteria = createCriteriaByExample(example, false);
 		return getEntityManager().createQuery(criteria).getResultList();
 	}
 
@@ -314,14 +339,14 @@ public class JPACrud<T, I> implements Crud<T, I> {
 	 *            an example of the given entity
 	 * @return an instance of {@code CriteriaQuery}
 	 */
-	private CriteriaQuery<T> createCriteriaByExample(final T example) {
+	private CriteriaQuery<T> createCriteriaByExample(final T example, boolean logic) {
 
 		final CriteriaBuilder builder = getCriteriaBuilder();
 		final CriteriaQuery<T> query = builder.createQuery(getBeanClass());
 		final Root<T> entity = query.from(getBeanClass());
 
 		final List<Predicate> predicates = new ArrayList<Predicate>();
-		final Field[] fields = example.getClass().getDeclaredFields();
+		final Field[] fields = getSuperClassesFields(example, false);
 
 		for (Field field : fields) {
 
@@ -344,10 +369,43 @@ public class JPACrud<T, I> implements Crud<T, I> {
 				continue;
 			}
 
-			final Predicate pred = builder.equal(entity.get(field.getName()), value);
+			Predicate pred;
+			if (logic)
+				pred = builder.equal(entity.get(field.getName()), value);
+			else {
+				if (value instanceof String) {
+					Expression<String> expField = entity.get(field.getName());
+					pred = builder.like(builder.lower(expField), "%" + ((String) value).toLowerCase() + "%");
+				} else
+					pred = builder.equal(entity.get(field.getName()), value);
+			}
 			predicates.add(pred);
 		}
-		return query.where(predicates.toArray(new Predicate[0])).select(entity);
+		if (logic)
+			return query.where(builder.and(predicates.toArray(new Predicate[0]))).select(entity);
+		else
+			return query.where(builder.or(predicates.toArray(new Predicate[0]))).select(entity);
+	}
+
+	/**
+	 * Build a array of super classes fields
+	 * 
+	 * @param entry
+	 * @param onlySuperClasses
+	 * @return Array of Super Classes Fields
+	 */
+	private static Field[] getSuperClassesFields(Object entry, boolean onlySuperClasses) {
+		Field[] fieldArray = null;
+		if (entry != null) {
+			if (!onlySuperClasses)
+				fieldArray = (Field[]) ArrayUtils.addAll(fieldArray, entry.getClass().getDeclaredFields());
+			Class<? extends Object> superClazz = entry.getClass().getSuperclass();
+			while (superClazz != null && !"java.lang.Object".equals(superClazz.getName())) {
+				fieldArray = (Field[]) ArrayUtils.addAll(fieldArray, superClazz.getDeclaredFields());
+				superClazz = superClazz.getSuperclass();
+			}
+		}
+		return fieldArray;
 	}
 
 }

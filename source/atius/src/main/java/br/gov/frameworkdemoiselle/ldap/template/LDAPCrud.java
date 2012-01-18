@@ -106,4 +106,8 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 		return null;
 	}
 
+	public List<T> findByModel(T example) {
+		return null;
+	}
+
 }
