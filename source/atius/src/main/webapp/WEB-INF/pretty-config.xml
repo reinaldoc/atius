@@ -5,17 +5,12 @@
 
 	<url-mapping id="index">
 		<pattern value="/" />
-		<view-id value="/security/login.jsf" />
+		<view-id value="/index.jsf" />
 	</url-mapping>
 
 	<url-mapping id="login">
 		<pattern value="/login" />
 		<view-id value="/security/login.jsf" />
-	</url-mapping>
-
-	<url-mapping id="atius">
-		<pattern value="/atius" />
-		<view-id value="/index.jsf" />
 	</url-mapping>
 
 	<url-mapping id="report">
