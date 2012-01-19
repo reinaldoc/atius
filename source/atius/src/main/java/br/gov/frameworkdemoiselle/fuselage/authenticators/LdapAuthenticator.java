@@ -33,8 +33,6 @@ public class LdapAuthenticator extends AbstractAuthenticatorModule<LdapAuthentic
 		results = new AuthenticatorResults();
 		results.setAuthenticatorModuleName(getModuleName());
 		results.setLoggedIn(login(username, password));
-		System.out.println("ldap ==> " + results);
-		System.out.println("ldap ==> " + results.isLoggedIn());
 		if (ldapAuthConfig.isVerbose()) {
 			if (results.isLoggedIn())
 				getLogger().info(getBundle().getString("fuselage.authenticators.login.success", username, getModuleName()));
