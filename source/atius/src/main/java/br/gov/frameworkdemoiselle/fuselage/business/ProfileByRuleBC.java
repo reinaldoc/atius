@@ -4,12 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfile;
 import br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfileByRule;
 import br.gov.frameworkdemoiselle.fuselage.persistence.ProfileByRule;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
-import br.gov.frameworkdemoiselle.transaction.Transactional;
 
 public class ProfileByRuleBC extends DelegateCrud<SecurityProfileByRule, Long, ProfileByRule> {
 
@@ -17,14 +15,6 @@ public class ProfileByRuleBC extends DelegateCrud<SecurityProfileByRule, Long, P
 
 	@Inject
 	private ProfileBC profileBC;
-
-	@Transactional
-	@Startup
-	public void startup() {
-		if (findAll().isEmpty()) {
-			// insert(new SecurityProfileDefault());
-		}
-	}
 
 	public List<SecurityProfile> getProfiles() {
 		return profileBC.findAll();
