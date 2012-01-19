@@ -33,7 +33,7 @@ public class SecurityResource implements Serializable {
 
 	@Column(unique = true)
 	@NotBlank(message = "Especifique melhor o valor do recurso")
-	@Size(min = 3, max = 255, message = "Especifique melhor o valor do recurso")
+	@Size(min = 1, max = 255, message = "Especifique melhor o valor do recurso")
 	private String value;
 
 	@Column
@@ -49,13 +49,14 @@ public class SecurityResource implements Serializable {
 
 	}
 
-	public SecurityResource(String resourceName) {
-		this.name = resourceName;
+	public SecurityResource(String name) {
+		this.name = name;
 	}
 
-	public SecurityResource(String resourceName, String resourceValue) {
-		this.name = resourceName;
-		this.value = resourceValue;
+	public SecurityResource(String name, String value, String desc) {
+		this.name = name;
+		this.value = value;
+		this.description = desc;
 	}
 
 	public Long getId() {
