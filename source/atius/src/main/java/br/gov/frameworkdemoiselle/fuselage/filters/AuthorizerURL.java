@@ -60,7 +60,7 @@ public class AuthorizerURL implements Filter {
 			}
 		}
 
-		if (securityContext.getPublicResources("public_url").contains(url)) {
+		if (securityContext.getPublicResources("public_url").contains(url) || url.equals(config.getLoginPage())) {
 			info("permitted by public resource", url);
 			chain.doFilter(request, response);
 			return;
@@ -68,7 +68,7 @@ public class AuthorizerURL implements Filter {
 
 		if (!securityContext.isLoggedIn()) {
 			info("denied by not logged in, redirect to login page", url);
-			redirect(response, config.getLoginPage());
+			redirect(response, getContext() + config.getLoginPage());
 			chain.doFilter(request, response);
 			return;
 		}
@@ -77,7 +77,7 @@ public class AuthorizerURL implements Filter {
 			info("permitted by resource", url);
 		} else {
 			info("denied by resource, redirect to welcome page", url);
-			redirect(response, config.getLoginPage());
+			redirect(response, getContext() + config.getLoginPage());
 		}
 		chain.doFilter(request, response);
 	}
