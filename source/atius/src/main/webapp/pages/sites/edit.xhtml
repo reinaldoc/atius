@@ -23,7 +23,7 @@
 					<h:outputText value="Categoria:" />
 					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteCategory}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
-						<f:selectItems value="#{websiteDomainListMB.websiteCategories}" var="category" itemLabel="#{category.name}" itemValue="#{category.name}" />
+						<f:selectItems value="#{websiteDomainListMB.websiteCategories}" var="category" itemLabel="#{category.cn}" itemValue="#{category.cn}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Tipo:" />

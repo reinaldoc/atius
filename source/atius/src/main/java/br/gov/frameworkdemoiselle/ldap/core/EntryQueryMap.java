@@ -1,5 +1,6 @@
 package br.gov.frameworkdemoiselle.ldap.core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,7 +17,6 @@ import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.configuration.EntryManagerConfig;
-import br.gov.frameworkdemoiselle.ldap.internal.AbstractEntryQuery;
 import br.gov.frameworkdemoiselle.ldap.internal.ConnectionManager;
 
 import com.novell.ldap.LDAPAttribute;
@@ -30,17 +30,19 @@ import com.novell.ldap.controls.LDAPSortControl;
 import com.novell.ldap.controls.LDAPSortKey;
 
 @RequestScoped
-public class EntryQueryMap extends AbstractEntryQuery {
+public class EntryQueryMap implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Logger logger = LoggerProducer.create(EntryQuery.class);
+	private Logger logger = LoggerProducer.create(EntryQueryMap.class);
 
 	@Inject
 	private EntryManagerConfig entryManagerConfig;
 
 	@Inject
 	private ConnectionManager conn;
+
+	private String searchFilter;
 
 	private String[] resultAttributes;
 
@@ -53,21 +55,23 @@ public class EntryQueryMap extends AbstractEntryQuery {
 	private boolean dnAsAttribute;
 
 	private boolean enforceSingleResult;
+	
+	private boolean verbose = false;
 
 	@PostConstruct
 	public void init() {
 		setSearchFilter("(objectClass=*)");
 		scope = LDAPConnection.SCOPE_SUB;
-		ldapConstraints = new LDAPSearchConstraints();
-		ldapConstraints.setReferralFollowing(entryManagerConfig.isReferrals());
-		ldapConstraints.setMaxResults(entryManagerConfig.getSizelimit());
+		setLdapConstraints(new LDAPSearchConstraints());
+		getLdapConstraints().setReferralFollowing(entryManagerConfig.isReferrals());
+		getLdapConstraints().setMaxResults(entryManagerConfig.getSizelimit());
 		basedn = entryManagerConfig.getBasedn();
 		dnAsAttribute = true;
 		enforceSingleResult = true;
 	}
 
 	public void setMaxResults(int maxResult) {
-		this.ldapConstraints.setMaxResults(maxResult);
+		getLdapConstraints().setMaxResults(maxResult);
 	}
 
 	public void setBaseDn(String basedn) {
@@ -76,6 +80,14 @@ public class EntryQueryMap extends AbstractEntryQuery {
 
 	public void setScope(int scope) {
 		this.scope = scope;
+	}
+
+	public String getSearchFilter() {
+		return searchFilter;
+	}
+
+	public void setSearchFilter(String searchFilter) {
+		this.searchFilter = searchFilter;
 	}
 
 	public void setDnAsAttibute(boolean dnAsAttibute) {
@@ -94,7 +106,7 @@ public class EntryQueryMap extends AbstractEntryQuery {
 			i++;
 		}
 		LDAPSortControl sortControl = new LDAPSortControl(key, false);
-		ldapConstraints.setControls(sortControl);
+		getLdapConstraints().setControls(sortControl);
 	}
 
 	public void setAttrSortingAsc(String... sorting) {
@@ -102,7 +114,7 @@ public class EntryQueryMap extends AbstractEntryQuery {
 		for (int i = 0; i < sorting.length; i++)
 			key[i] = new LDAPSortKey(sorting[i]);
 		LDAPSortControl sortControl = new LDAPSortControl(key, false);
-		ldapConstraints.setControls(sortControl);
+		getLdapConstraints().setControls(sortControl);
 	}
 
 	public void setAttrSortingDesc(String... sorting) {
@@ -110,7 +122,7 @@ public class EntryQueryMap extends AbstractEntryQuery {
 		for (int i = 0; i < sorting.length; i++)
 			key[i] = new LDAPSortKey(sorting[i], true);
 		LDAPSortControl sortControl = new LDAPSortControl(key, false);
-		ldapConstraints.setControls(sortControl);
+		getLdapConstraints().setControls(sortControl);
 	}
 
 	public void setResultAttributes(String... resultAttributes) {
@@ -130,7 +142,7 @@ public class EntryQueryMap extends AbstractEntryQuery {
 	private List<LDAPEntry> find() {
 		List<LDAPEntry> resultList = new ArrayList<LDAPEntry>();
 		try {
-			LDAPSearchResults searchResults = getConnection().search(basedn, scope, getSearchFilter(), resultAttributes, false, ldapConstraints);
+			LDAPSearchResults searchResults = getConnection().search(basedn, scope, getSearchFilter(), resultAttributes, false, getLdapConstraints());
 			while (searchResults != null && searchResults.hasMore()) {
 				try {
 					LDAPEntry entry = searchResults.next();
@@ -211,10 +223,10 @@ public class EntryQueryMap extends AbstractEntryQuery {
 	public Map<String, String[]> getSingleResult() {
 		Map<String, String[]> resultMap = new HashMap<String, String[]>();
 
-		int maxResults = this.ldapConstraints.getMaxResults();
-		this.ldapConstraints.setMaxResults(2);
+		int maxResults = getLdapConstraints().getMaxResults();
+		getLdapConstraints().setMaxResults(2);
 		Map<String, Map<String, String[]>> searchResult = getResult(true);
-		this.ldapConstraints.setMaxResults(maxResults);
+		getLdapConstraints().setMaxResults(maxResults);
 
 		if (!searchResult.values().isEmpty())
 			resultMap = searchResult.values().iterator().next();
@@ -333,4 +345,19 @@ public class EntryQueryMap extends AbstractEntryQuery {
 		return searchFilter;
 	}
 
+	public LDAPSearchConstraints getLdapConstraints() {
+		return ldapConstraints;
+	}
+
+	public void setLdapConstraints(LDAPSearchConstraints ldapConstraints) {
+		this.ldapConstraints = ldapConstraints;
+	}
+
+	public boolean isVerbose() {
+		return verbose;
+	}
+
+	public void setVerbose(boolean verbose) {
+		this.verbose = verbose;
+	}
 }

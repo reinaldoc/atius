@@ -23,22 +23,24 @@ public class EntryManager implements Serializable {
 	private ConnectionManager connectionManager;
 
 	@Inject
-	private EntryQuery query;
-
-	@Inject
-	private EntryQueryMap queryMap;
-
-	@Inject
 	private EntryCore core;
 
 	@Inject
 	private EntryCoreMap coreMap;
+
+	@Inject
+	private EntryQuery query;
+
+	@Inject
+	private EntryQueryMap queryMap;
 
 	private int protocol = 3;
 
 	@PostConstruct
 	public void init() {
 		setVerbose(true);
+		core.setCoreMap(coreMap);
+		query.setQueryMap(queryMap);
 	}
 
 	/**
@@ -315,6 +317,7 @@ public class EntryManager implements Serializable {
 	 * @return the new entry query instance
 	 */
 	public EntryQuery createQuery(String searchFilter) {
+		query.setQueryMap(queryMap);
 		query.setSearchFilter(searchFilter);
 		return query;
 	}
@@ -348,9 +351,7 @@ public class EntryManager implements Serializable {
 	 */
 	public void setVerbose(boolean verbose) {
 		connectionManager.setVerbose(verbose);
-		core.setVerbose(verbose);
 		coreMap.setVerbose(verbose);
-		query.setVerbose(verbose);
 		queryMap.setVerbose(verbose);
 	}
 

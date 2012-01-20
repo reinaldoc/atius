@@ -55,22 +55,17 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 	public void insert(WebsiteDomain websiteDomain) {
 		getEntryManager().setVerbose(true);
 		getEntryManager().persist(websiteDomain);
-		//getEntryManager().persist(websiteDomain2entry(websiteDomain), websiteDomain.getDn());
+		// getEntryManager().persist(websiteDomain2entry(websiteDomain),
+		// websiteDomain.getDn());
 	}
 
 	public void delete(String serverName) {
-		String dn = getEntryManager().findReference(
-				String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName));
+		String dn = getEntryManager().findReference(String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName));
 		getEntryManager().remove(dn);
 	}
 
 	public List<WebsiteDomain> findBySearchFilter(String searchFilter) {
-		List<WebsiteDomain> websiteDomains = new ArrayList<WebsiteDomain>();
-		Collection<Map<String, String[]>> entries = getEntryManager().createQuery(searchFilter).getResultCollection();
-		for (Map<String, String[]> entry : entries) {
-			websiteDomains.add(entry2websiteDomain(entry));
-		}
-		return websiteDomains;
+		return getEntryManager().createQuery(searchFilter).getResultList();
 	}
 
 	public List<WebsiteDomain> findAll() {
@@ -80,8 +75,7 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 	public List<WebsiteDomain> find(String search) {
 		if (Strings.isBlank(search))
 			return findAll();
-		return findBySearchFilter(String.format("(&(objectClass=websiteDomain)(|(cn=*%1$s*)(serverName=*%1$s*)))",
-				search));
+		return findBySearchFilter(String.format("(&(objectClass=websiteDomain)(|(cn=*%1$s*)(serverName=*%1$s*)))", search));
 	}
 
 	public List<WebsiteDomain> findByCategory(String category) {
@@ -95,17 +89,15 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 			return find(search);
 		if (Strings.isBlank(search))
 			return findByCategory(category);
-		return findBySearchFilter(String.format(
-				"(&(objectClass=websiteDomain)(websiteCategory=%1$s)(|(cn=*%2$s*)(serverName=*%2$s*)))", category,
+		return findBySearchFilter(String.format("(&(objectClass=websiteDomain)(websiteCategory=%1$s)(|(cn=*%2$s*)(serverName=*%2$s*)))", category,
 				search));
 	}
 
 	public WebsiteDomain load(String serverName) {
 		WebsiteDomain websiteDomain = new WebsiteDomain();
 		if (!Strings.isBlank(serverName)) {
-			Map<String, String[]> entry = getEntryManager().createQuery(
-					String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName)).getSingleResult();
-			websiteDomain = entry2websiteDomain(entry);
+			return (WebsiteDomain) getEntryManager().createQuery(String.format("(&(objectClass=websiteDomain)(serverName=%s))", serverName))
+					.getSingleResult();
 		}
 		return websiteDomain;
 	}

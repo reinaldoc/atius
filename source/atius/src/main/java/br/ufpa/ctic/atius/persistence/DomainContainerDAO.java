@@ -30,9 +30,8 @@ public class DomainContainerDAO extends LDAPCrud<DomainContainer, String> {
 	public DomainContainer load(String domainContainerName) {
 		DomainContainer domainContainer = new DomainContainer();
 		if (!Strings.isBlank(domainContainerName)) {
-			Map<String, String[]> entry = getEntryManager().createQuery("(&(objectClass=domainContainer)(cn=" + domainContainerName + "))")
+			return (DomainContainer) getEntryManager().createQuery("(&(objectClass=domainContainer)(cn=" + domainContainerName + "))")
 					.getSingleResult();
-			domainContainer = entry2domainContainer(entry);
 		}
 		return domainContainer;
 	}

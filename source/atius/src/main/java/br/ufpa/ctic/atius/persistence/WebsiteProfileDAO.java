@@ -1,7 +1,5 @@
 package br.ufpa.ctic.atius.persistence;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +25,9 @@ public class WebsiteProfileDAO extends LDAPCrud<WebsiteProfile, String> {
 		return websiteProfile;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<WebsiteProfile> findBySearchFilter(String searchFilter) {
-		List<WebsiteProfile> websiteProfiles = new ArrayList<WebsiteProfile>();
-		Collection<Map<String, String[]>> entries = getEntryManager().createQuery(searchFilter).getResultCollection();
-		for (Map<String, String[]> entry : entries) {
-			websiteProfiles.add(entry2websiteProfile(entry));
-		}
-		return websiteProfiles;
+		return getEntryManager().createQuery(searchFilter).getResultList();
 	}
 
 	public List<WebsiteProfile> findAll() {
@@ -43,9 +37,8 @@ public class WebsiteProfileDAO extends LDAPCrud<WebsiteProfile, String> {
 	public WebsiteProfile load(String profileName) {
 		WebsiteProfile websiteProfile = new WebsiteProfile();
 		if (!Strings.isBlank(profileName)) {
-			Map<String, String[]> entry = getEntryManager().createQuery(
-					String.format("(&(objectClass=websiteProfile)(cn=%s))", profileName)).getSingleResult();
-			websiteProfile = entry2websiteProfile(entry);
+			return (WebsiteProfile) getEntryManager().createQuery(String.format("(&(objectClass=websiteProfile)(cn=%s))", profileName))
+					.getSingleResult();
 		}
 		return websiteProfile;
 	}

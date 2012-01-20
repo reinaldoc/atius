@@ -2,29 +2,33 @@ package br.gov.frameworkdemoiselle.ldap.internal;
 
 import java.io.Serializable;
 
-import javax.inject.Inject;
+import org.slf4j.Logger;
+
+import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
+import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 
 public class EntryCore implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject
+	private Logger logger = LoggerProducer.create(EntryCore.class);
+
 	private EntryCoreMap coreMap;
 
 	public void persist(Object entry) {
-		coreMap.persist(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+		getCoreMap().persist(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public void merge(Object entry) {
-		coreMap.merge(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+		getCoreMap().merge(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public void update(Object entry) {
-		coreMap.update(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+		getCoreMap().update(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public void remove(Object entry) {
-		coreMap.remove(ClazzUtils.getDistinguishedName(entry));
+		getCoreMap().remove(ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public <T> T find(Class<T> entryClass, Object searchFilter) {
@@ -52,15 +56,19 @@ public class EntryCore implements Serializable {
 	}
 
 	public String findReference(Object searchFilter) {
-		return coreMap.findReference((String) searchFilter);
+		return getCoreMap().findReference((String) searchFilter);
 	}
 
-	public boolean isVerbose() {
-		return coreMap.isVerbose();
+	private EntryCoreMap getCoreMap() {
+		if (coreMap == null) {
+			logger.error("EntryCoreMap is null (implementation error)");
+			throw new EntryException();
+		}
+		return coreMap;
 	}
 
-	public void setVerbose(boolean verbose) {
-		coreMap.setVerbose(verbose);
+	public void setCoreMap(EntryCoreMap coreMap) {
+		this.coreMap = coreMap;
 	}
 
 }

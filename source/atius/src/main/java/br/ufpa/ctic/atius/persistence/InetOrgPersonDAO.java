@@ -1,7 +1,5 @@
 package br.ufpa.ctic.atius.persistence;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -27,24 +25,18 @@ public class InetOrgPersonDAO extends LDAPCrud<InetOrgPerson, String> {
 		return inetOrgPerson;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<InetOrgPerson> findPerson(String search) {
 		search = Strings.null2empty(search);
-		List<InetOrgPerson> inetOrgPersons = new ArrayList<InetOrgPerson>();
 		EntryQuery query = getEntryManager().createQuery("(&(objectClass=inetOrgPerson)(|(cn=*" + search + "*)(mail=*" + search + "*)))");
 		query.setMaxResults(10);
-		Collection<Map<String, String[]>> entries = query.getResultCollection();
-		for (Map<String, String[]> entry : entries) {
-			inetOrgPersons.add(entry2inetOrgPerson(entry));
-		}
-		return inetOrgPersons;
+		return query.getResultList();
 	}
 
 	public InetOrgPerson load(String mail) {
 		InetOrgPerson inetOrgPerson = new InetOrgPerson();
 		if (!Strings.isBlank(mail)) {
-			Map<String, String[]> entry = getEntryManager().createQuery("(&(objectClass=inetOrgPerson)(mail=" + mail + "))")
-					.getSingleResult();
-			inetOrgPerson = entry2inetOrgPerson(entry);
+			inetOrgPerson = (InetOrgPerson) getEntryManager().createQuery("(&(objectClass=inetOrgPerson)(mail=" + mail + "))").getSingleResult();
 		}
 		return inetOrgPerson;
 	}

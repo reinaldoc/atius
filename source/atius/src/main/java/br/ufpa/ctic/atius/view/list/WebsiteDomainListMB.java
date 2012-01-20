@@ -34,7 +34,7 @@ public class WebsiteDomainListMB extends AbstractListPageBean<WebsiteDomain, Str
 
 	private String getFirstWebsiteCategory() {
 		if (getWebsiteCategories().size() > 0)
-			return getWebsiteCategories().get(0).getName();
+			return getWebsiteCategories().get(0).getCn();
 		else
 			return "";
 	}

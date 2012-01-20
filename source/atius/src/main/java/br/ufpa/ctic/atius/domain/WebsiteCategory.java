@@ -4,7 +4,7 @@ import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
 public class WebsiteCategory extends Entry {
 
-	private String name;
+	private String cn;
 
 	private String order;
 
@@ -12,12 +12,12 @@ public class WebsiteCategory extends Entry {
 		return new String[] { "websiteCategory" };
 	}
 
-	public String getName() {
-		return name;
+	public String getCn() {
+		return cn;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCn(String name) {
+		this.cn = name;
 	}
 
 	public String getOrder() {

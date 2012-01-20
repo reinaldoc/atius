@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import br.gov.frameworkdemoiselle.ldap.annotation.DistinguishedName;
 import br.gov.frameworkdemoiselle.ldap.annotation.EntryKey;
 import br.gov.frameworkdemoiselle.ldap.annotation.LDAPEntry;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
+import br.gov.frameworkdemoiselle.util.Beans;
 
 public class ClazzUtils {
 
@@ -28,7 +31,7 @@ public class ClazzUtils {
 	 * @return Distinguished Name
 	 */
 	public static String getDistinguishedName(Object entry) {
-		requireAnnotation(entry, LDAPEntry.class);
+		requireAnnotation(entry.getClass(), LDAPEntry.class);
 		return (String) getRequiredAnnotatedValue(entry, DistinguishedName.class);
 	}
 
@@ -39,10 +42,10 @@ public class ClazzUtils {
 	 * @return Entry Map
 	 */
 	public static Map<String, String[]> getStringsMap(Object entry) {
-		requireAnnotation(entry, LDAPEntry.class);
+		requireAnnotation(entry.getClass(), LDAPEntry.class);
 		Map<String, String[]> map = new HashMap<String, String[]>();
 
-		Field[] fields = getSuperClassesFields(entry, false);
+		Field[] fields = getSuperClassesFields(entry.getClass());
 		for (Field field : fields) {
 			if (field.isAnnotationPresent(DistinguishedName.class) || field.isAnnotationPresent(Ignore.class))
 				continue;
@@ -53,12 +56,98 @@ public class ClazzUtils {
 				continue;
 			if (value instanceof String[])
 				map.put(field.getName(), (String[]) value);
-			else if (verifyAnnotation(value, LDAPEntry.class))
+			else if (verifyAnnotation(field.getType(), LDAPEntry.class))
 				map.put(field.getName(), new String[] { (String) getRequiredAnnotatedValue(value, EntryKey.class) });
 			else
 				map.put(field.getName(), new String[] { value.toString() });
 		}
 		return map;
+	}
+
+	/**
+	 * Convert a Map<dn, Map<attr, value[]>> to @LDAPEntry annotated object
+	 * 
+	 * @param entry
+	 * @return Entry Map
+	 */
+	public static List<?> getEntryObjectList(Map<String, Map<String, String[]>> entryMap, Class<?> clazz) {
+		requireAnnotation(clazz, LDAPEntry.class);
+		List<Object> resultList = new ArrayList<Object>();
+		for (Map.Entry<String, Map<String, String[]>> mapEntry : entryMap.entrySet()) {
+			resultList.add(getEntryObject(mapEntry.getKey(), mapEntry.getValue(), Beans.getReference(clazz)));
+		}
+		return resultList;
+	}
+
+	public static Object getEntryObject(String dn, Map<String, String[]> map, Object entry) {
+
+		Field[] fields = getSuperClassesFields(entry.getClass());
+		for (Field field : fields) {
+			logger.warn("Setting field " + entry.getClass().getSimpleName() + "." + field.getName() + " ==> " + field.getType().getSimpleName());
+			if (field.isAnnotationPresent(Ignore.class))
+				continue;
+			if (field.isAnnotationPresent(DistinguishedName.class)) {
+				setFieldValue(field, entry, dn);
+				continue;
+			}
+			if (verifyAnnotation(field.getType(), LDAPEntry.class))
+				setFieldValue(field, entry, getMappedEntryObject(field.getType(), map.get(field.getName())));
+			else if (field.getType().isAssignableFrom(String.class))
+				setFieldValue(field, entry, map.get(field.getName())[0]);
+			else if (field.getType().isAssignableFrom(Integer.class))
+				setFieldValue(field, entry, new Integer(map.get(field.getName())[0]));
+			else if (field.getType().isArray())
+				setFieldValue(field, entry, map.get(field.getName()));
+			else
+				logger.warn("Not handled field " + entry.getClass().getSimpleName() + "." + field.getName() + " ==> "
+						+ field.getType().getSimpleName());
+
+		}
+
+		return entry;
+	}
+
+	public static Object getMappedEntryObject(Class<?> clazz, Object[] value) {
+		return Beans.getReference(clazz);
+	}
+
+	/**
+	 * Feeling a Class for a String Representation of Search Filters (RFC 4515)
+	 * and throw EntryException when can't find a @LDAPEntry object
+	 * 
+	 * @param searchFilter
+	 * @return Class
+	 */
+	public static Class<?> getRequiredClassForSearchFilter(String searchFilter, List<String> packageNames) {
+		Class<?> clazz = getClassForSearchFilter(searchFilter, packageNames);
+		if (clazz == null) {
+			logger.error("Can't find a @LDAPEntry object for search filter " + searchFilter);
+			throw new EntryException();
+		}
+		return clazz;
+	}
+
+	/**
+	 * Feeling a Class or return null for a String Representation of Search
+	 * Filters (RFC 4515)
+	 * 
+	 * @param searchFilter
+	 * @return Class
+	 */
+	public static Class<?> getClassForSearchFilter(String searchFilter, List<String> packageNames) {
+		if (searchFilter == null || packageNames == null || packageNames.size() == 0)
+			return null;
+		String patternStr = "objectClass=(.*?)(\\)|$)";
+		Matcher matcher = Pattern.compile(patternStr).matcher(searchFilter);
+		boolean matchFound = matcher.find();
+		if (matchFound && matcher.groupCount() > 1)
+			for (String packageName : packageNames)
+				try {
+					return Class.forName(packageName + "." + Character.toUpperCase(matcher.group(1).charAt(0)) + matcher.group(1).substring(1));
+				} catch (Exception e) {
+					return null;
+				}
+		return null;
 	}
 
 	/**
@@ -68,16 +157,12 @@ public class ClazzUtils {
 	 * @param onlySuperClasses
 	 * @return List of Super Classes
 	 */
-	public static List<Class<? extends Object>> getSuperClasses(Object entry, boolean onlySuperClasses) {
+	public static List<Class<? extends Object>> getSuperClasses(Class<?> entryClass) {
 		List<Class<? extends Object>> list = new ArrayList<Class<? extends Object>>();
-		if (entry != null) {
-			if (!onlySuperClasses)
-				list.add(entry.getClass());
-			Class<? extends Object> superClazz = entry.getClass().getSuperclass();
-			while (superClazz != null) {
-				list.add(superClazz);
-				superClazz = superClazz.getSuperclass();
-			}
+		Class<? extends Object> superClazz = entryClass.getSuperclass();
+		while (superClazz != null) {
+			list.add(superClazz);
+			superClazz = superClazz.getSuperclass();
 		}
 		return list;
 	}
@@ -89,16 +174,13 @@ public class ClazzUtils {
 	 * @param onlySuperClasses
 	 * @return Array of Super Classes Fields
 	 */
-	public static Field[] getSuperClassesFields(Object entry, boolean onlySuperClasses) {
+	public static Field[] getSuperClassesFields(Class<?> entryClass) {
 		Field[] fieldArray = null;
-		if (entry != null) {
-			if (!onlySuperClasses)
-				fieldArray = (Field[]) ArrayUtils.addAll(fieldArray, entry.getClass().getDeclaredFields());
-			Class<? extends Object> superClazz = entry.getClass().getSuperclass();
-			while (superClazz != null && !"java.lang.Object".equals(superClazz.getName())) {
-				fieldArray = (Field[]) ArrayUtils.addAll(fieldArray, superClazz.getDeclaredFields());
-				superClazz = superClazz.getSuperclass();
-			}
+		fieldArray = (Field[]) ArrayUtils.addAll(fieldArray, entryClass.getDeclaredFields());
+		Class<?> superClazz = entryClass.getSuperclass();
+		while (superClazz != null && !"java.lang.Object".equals(superClazz.getName())) {
+			fieldArray = (Field[]) ArrayUtils.addAll(fieldArray, superClazz.getDeclaredFields());
+			superClazz = superClazz.getSuperclass();
 		}
 		return fieldArray;
 	}
@@ -126,7 +208,7 @@ public class ClazzUtils {
 	 * @return Distinguished Name
 	 */
 	private static Object getAnnotatedValue(Object entry, Class<? extends Annotation> clazz) {
-		Field[] fields = getSuperClassesFields(entry, false);
+		Field[] fields = getSuperClassesFields(entry.getClass());
 		for (Field field : fields)
 			if (field.isAnnotationPresent(clazz))
 				return getFieldValue(field, entry);
@@ -150,18 +232,29 @@ public class ClazzUtils {
 		return value;
 	}
 
+	public static void setFieldValue(Field field, Object entry, Object value) {
+		field.setAccessible(true);
+		try {
+			System.out.println("Field: " + field.getName() + " Value: " + value);
+			field.set(entry, value);
+		} catch (Exception e) {
+			System.out.println("Exeception seting field");
+			e.printStackTrace();
+		}
+		field.setAccessible(false);
+	}
+
 	/**
 	 * Verify if annotation is present
 	 * 
 	 * @param entry
 	 * @param clazz
 	 */
-	public static boolean verifyAnnotation(Object entry, Class<? extends Annotation> clazz) {
+	public static boolean verifyAnnotation(Class<?> entryClass, Class<? extends Annotation> clazz) {
 		boolean annotationPresent = false;
-		if (entry != null)
-			for (Class<? extends Object> claz : getSuperClasses(entry, false))
-				if (claz.isAnnotationPresent(clazz))
-					annotationPresent = true;
+		for (Class<? extends Object> claz : getSuperClasses(entryClass))
+			if (claz.isAnnotationPresent(clazz))
+				annotationPresent = true;
 		return annotationPresent;
 	}
 
@@ -172,12 +265,9 @@ public class ClazzUtils {
 	 * @param entry
 	 * @param clazz
 	 */
-	public static void requireAnnotation(Object entry, Class<? extends Annotation> clazz) {
-		if (!verifyAnnotation(entry, clazz)) {
-			String entryClazzName = null;
-			if (entry != null)
-				entryClazzName = entry.getClass().getSimpleName();
-			logger.error("Entry " + entryClazzName + " doesn't have @" + clazz.getName());
+	public static void requireAnnotation(Class<?> entryClass, Class<? extends Annotation> clazz) {
+		if (!verifyAnnotation(entryClass, clazz)) {
+			logger.error("Entry " + entryClass.getSimpleName() + " doesn't have @" + clazz.getName());
 			throw new EntryException();
 		}
 

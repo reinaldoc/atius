@@ -1,6 +1,7 @@
 package br.gov.frameworkdemoiselle.ldap.configuration;
 
 import java.io.Serializable;
+import java.util.List;
 
 import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.configuration.Configuration;
@@ -36,6 +37,9 @@ public class EntryManagerConfig implements Serializable {
 
 	@Name("search.referrals")
 	private boolean referrals = false;
+
+	@Name("ldapentry.packages")
+	private List<String> ldapentry_packages;
 
 	@Name("logger")
 	private boolean logger = true;
@@ -141,6 +145,15 @@ public class EntryManagerConfig implements Serializable {
 	 */
 	public boolean isLogger() {
 		return logger;
+	}
+
+	/**
+	 * Get EntryManager.ldapentry.packages property;
+	 * 
+	 * @return
+	 */
+	public List<String> getLdapentryPackages() {
+		return ldapentry_packages;
 	}
 
 }
