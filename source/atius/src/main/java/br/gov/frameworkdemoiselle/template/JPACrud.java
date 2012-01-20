@@ -162,7 +162,7 @@ public class JPACrud<T, I> implements Crud<T, I> {
 	}
 
 	@Override
-	public T load(final Object id) {
+	public T load(final I id) {
 		return getEntityManager().find(getBeanClass(), id);
 	}
 
@@ -326,7 +326,7 @@ public class JPACrud<T, I> implements Crud<T, I> {
 	 *            an entity example
 	 * @return a list of entities
 	 */
-	public List<T> findByModel(final T example) {
+	public List<T> findByDisjunctionExample(final T example) {
 		final CriteriaQuery<T> criteria = createCriteriaByExample(example, false);
 		return getEntityManager().createQuery(criteria).getResultList();
 	}
