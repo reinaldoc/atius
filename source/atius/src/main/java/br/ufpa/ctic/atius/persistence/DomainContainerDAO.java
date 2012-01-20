@@ -13,7 +13,7 @@ public class DomainContainerDAO extends LDAPCrud<DomainContainer, String> {
 	private static final long serialVersionUID = 1L;
 
 	private DomainContainer entry2domainContainer(Map<String, String[]> entry) {
-		DomainContainer domainContainer = new DomainContainer(false);
+		DomainContainer domainContainer = new DomainContainer(true);
 		if (entry.size() == 0)
 			return domainContainer;
 		domainContainer.setDn(entry.get("dn")[0]);

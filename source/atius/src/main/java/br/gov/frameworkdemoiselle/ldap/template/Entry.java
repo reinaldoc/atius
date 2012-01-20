@@ -17,8 +17,8 @@ public abstract class Entry {
 		setObjectClass(objectClass());
 	}
 
-	public Entry(boolean setObjectClass) {
-		if (setObjectClass)
+	public Entry(boolean forMerge) {
+		if (!forMerge)
 			setObjectClass(objectClass());
 	}
 

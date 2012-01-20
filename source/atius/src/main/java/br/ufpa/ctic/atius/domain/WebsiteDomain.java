@@ -61,14 +61,6 @@ public class WebsiteDomain extends Entry {
 
 	private String loginShell = "/bin/false";
 
-	public WebsiteDomain() {
-		super();
-	}
-
-	public WebsiteDomain(boolean setObjectClass) {
-		super(setObjectClass);
-	}
-
 	protected String[] objectClass() {
 		return new String[] { "websiteDomain", "posixAccount", "shadowAccount" };
 	}

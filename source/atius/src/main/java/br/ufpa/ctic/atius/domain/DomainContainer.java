@@ -12,8 +12,8 @@ public class DomainContainer extends Entry {
 		super();
 	}
 
-	public DomainContainer(boolean setObjectClass) {
-		super(setObjectClass);
+	public DomainContainer(boolean forMerge) {
+		super(forMerge);
 	}
 
 	protected String[] objectClass() {
