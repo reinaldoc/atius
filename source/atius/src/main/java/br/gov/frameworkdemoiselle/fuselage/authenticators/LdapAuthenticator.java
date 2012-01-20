@@ -69,7 +69,8 @@ public class LdapAuthenticator extends AbstractAuthenticatorModule<LdapAuthentic
 
 	private void updateSecurityUser(SecurityUser securityUser) {
 		Map<String, String> attMap;
-		attMap = entryManager.createQuery(ldapAuthConfig.getUserSearchFilter().replaceAll("%u", securityUser.getLogin())).getSingleAttributesResult();
+		attMap = entryManager.createQueryMap(ldapAuthConfig.getUserSearchFilter().replaceAll("%u", securityUser.getLogin()))
+				.getSingleAttributesResult();
 
 		securityUser.setName(attMap.get(ldapAuthConfig.getCnAttr()));
 		securityUser.setOrgunit(attMap.get(ldapAuthConfig.getOuAttr()));

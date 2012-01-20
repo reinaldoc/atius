@@ -26,6 +26,9 @@ public class EntryManager implements Serializable {
 	private EntryQuery query;
 
 	@Inject
+	private EntryQueryMap queryMap;
+
+	@Inject
 	private EntryCore core;
 
 	@Inject
@@ -305,15 +308,28 @@ public class EntryManager implements Serializable {
 
 	/**
 	 * Create an instance of EntryQuery for executing a String Representation of
-	 * Search Filters (RFC 4515)
+	 * Search Filters (RFC 4515) and returns Objects
 	 * 
 	 * @param ldapSearchFilter
 	 *            LDAP Search Filter String (RFC 4515)
 	 * @return the new entry query instance
 	 */
-	public EntryQuery createQuery(String ldapSearchFilter) {
-		query.setFilter(ldapSearchFilter);
+	public EntryQuery createQuery(String searchFilter) {
+		query.setSearchFilter(searchFilter);
 		return query;
+	}
+
+	/**
+	 * Create an instance of EntryQueryMap for executing a String Representation
+	 * of Search Filters (RFC 4515) and returns HashMaps
+	 * 
+	 * @param ldapSearchFilter
+	 *            LDAP Search Filter String (RFC 4515)
+	 * @return the new entry query instance
+	 */
+	public EntryQueryMap createQueryMap(String searchFilter) {
+		queryMap.setSearchFilter(searchFilter);
+		return queryMap;
 	}
 
 	/**
@@ -335,6 +351,7 @@ public class EntryManager implements Serializable {
 		core.setVerbose(verbose);
 		coreMap.setVerbose(verbose);
 		query.setVerbose(verbose);
+		queryMap.setVerbose(verbose);
 	}
 
 }

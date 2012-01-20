@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
-import br.gov.frameworkdemoiselle.ldap.core.EntryQuery;
+import br.gov.frameworkdemoiselle.ldap.core.EntryQueryMap;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 
 import com.novell.ldap.LDAPAttribute;
@@ -30,7 +30,7 @@ public class EntryCoreMap implements Serializable {
 	private ConnectionManager conn;
 
 	@Inject
-	private EntryQuery query;
+	private EntryQueryMap queryMap;
 
 	private boolean verbose = false;
 
@@ -94,22 +94,22 @@ public class EntryCoreMap implements Serializable {
 
 	public Map<String, String[]> find(String searchFilter) {
 		loggerArgs(null, searchFilter);
-		query.setFilter(searchFilter);
-		return query.getSingleResult();
+		queryMap.setSearchFilter(searchFilter);
+		return queryMap.getSingleResult();
 	}
 
 	public Map<String, String[]> getReference(String dn) {
 		loggerArgs(null, dn);
-		query.setBaseDn(dn);
-		query.setScope(LDAPConnection.SCOPE_BASE);
-		query.setFilter("objectClass=*");
-		return query.getSingleResult();
+		queryMap.setBaseDn(dn);
+		queryMap.setScope(LDAPConnection.SCOPE_BASE);
+		queryMap.setSearchFilter("objectClass=*");
+		return queryMap.getSingleResult();
 	}
 
 	public String findReference(String searchFilter) {
 		loggerArgs(null, searchFilter);
-		query.setFilter(searchFilter);
-		return query.getSingleDn();
+		queryMap.setSearchFilter(searchFilter);
+		return queryMap.getSingleDn();
 	}
 
 	private void loggerArgs(Object entry, Object dn) {

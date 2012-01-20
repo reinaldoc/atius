@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.configuration.EntryManagerConfig;
-import br.gov.frameworkdemoiselle.ldap.core.EntryQuery;
+import br.gov.frameworkdemoiselle.ldap.core.EntryQueryMap;
 
 import com.novell.ldap.LDAPConnection;
 import com.novell.ldap.LDAPConstraints;
@@ -31,7 +31,7 @@ public class ConnectionManager implements Serializable {
 	private EntryManagerConfig entryManagerConfig;
 
 	@Inject
-	private EntryQuery query;
+	private EntryQueryMap queryMap;
 
 	private LDAPConnection lc;
 
@@ -230,8 +230,8 @@ public class ConnectionManager implements Serializable {
 	public boolean authenticate(String binddn, String bindpw, int protocol) {
 		authenticateDnResults = null;
 		if (binddn != null && !binddn.contains("=")) {
-			query.setFilter(authenticateFilter.replaceAll("%u", binddn));
-			binddn = query.getSingleDn();
+			queryMap.setSearchFilter(authenticateFilter.replaceAll("%u", binddn));
+			binddn = queryMap.getSingleDn();
 		}
 
 		if (binddn != null) {
