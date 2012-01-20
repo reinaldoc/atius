@@ -205,11 +205,9 @@ public class ConnectionManager implements Serializable {
 	}
 
 	/**
-	 * Get DN used on bind operation
+	 * Get DN used on bind operation or null
 	 * 
-	 * @return A DN used on bind operation
-	 * @throws LDAPException
-	 * @throws URISyntaxException
+	 * @return A DN used on bind operation or null
 	 */
 	public String getBindDn() {
 		try {
@@ -230,6 +228,7 @@ public class ConnectionManager implements Serializable {
 	 * @return
 	 */
 	public boolean authenticate(String binddn, String bindpw, int protocol) {
+		authenticateDnResults = null;
 		if (binddn != null && !binddn.contains("=")) {
 			query.setFilter(authenticateFilter.replaceAll("%u", binddn));
 			binddn = query.getSingleDn();
@@ -239,18 +238,17 @@ public class ConnectionManager implements Serializable {
 			ConnectionManager cm = new ConnectionManager();
 			cm.connect(connURI.getServerURI(), connURI.isStarttls());
 			boolean auth = cm.bind(binddn, bindpw, protocol);
-			authenticateDnResults = cm.getBindDn();
+			if (auth)
+				authenticateDnResults = cm.getBindDn();
 			return auth;
 		}
 		return false;
 	}
 
 	/**
-	 * Get DN used on authenticate operation
+	 * Get DN used on authenticate operation or null
 	 * 
-	 * @return A DN used on authenticate operation
-	 * @throws LDAPException
-	 * @throws URISyntaxException
+	 * @return A DN used on authenticate operation or null
 	 */
 	public String getAuthenticateDn() {
 		return authenticateDnResults;
