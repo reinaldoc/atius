@@ -2,12 +2,14 @@ package br.ufpa.ctic.atius.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.gov.frameworkdemoiselle.ldap.annotation.EntryKey;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
 public class InetOrgPerson extends Entry {
 
 	private String cn;
 
+	@EntryKey
 	@NotEmpty(message = "Identifique o contato")
 	private String mail;
 
@@ -34,10 +36,6 @@ public class InetOrgPerson extends Entry {
 	public String getCnMail() {
 		if (cn != null && !cn.isEmpty())
 			return cn + " (" + mail + ")";
-		return mail;
-	}
-
-	public String toString() {
 		return mail;
 	}
 
