@@ -1,7 +1,6 @@
 package br.gov.frameworkdemoiselle.ldap.core;
 
 import java.io.Serializable;
-import java.net.URISyntaxException;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -96,11 +95,9 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * Get DN used on bind operation
+	 * Get DN used on bind operation or null
 	 * 
-	 * @return A DN used on bind method
-	 * @throws LDAPException
-	 * @throws URISyntaxException
+	 * @return A DN used on bind method or null
 	 */
 	public String getBindDn() {
 		return connectionManager.getBindDn();
@@ -123,12 +120,10 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * Get DN used on authenticate method (isn't current connection
+	 * Get DN used on authenticate method or null (isn't current connection
 	 * authentication)
 	 * 
-	 * @return A DN used on authenticate method
-	 * @throws LDAPException
-	 * @throws URISyntaxException
+	 * @return The last DN used on authenticate method or null
 	 */
 	public String getAuthenticateDn() {
 		return connectionManager.getAuthenticateDn();
