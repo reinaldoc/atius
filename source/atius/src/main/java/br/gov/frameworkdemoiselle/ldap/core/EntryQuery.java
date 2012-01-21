@@ -4,20 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-
-import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.configuration.EntryManagerConfig;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.ldap.internal.ClazzUtils;
 
+@RequestScoped
 public class EntryQuery implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private Logger logger = LoggerProducer.create(EntryQuery.class);
 
 	@Inject
 	private EntryManagerConfig entryManagerConfig;
@@ -54,10 +51,8 @@ public class EntryQuery implements Serializable {
 	}
 
 	private EntryQueryMap getQueryMap() {
-		if (queryMap == null) {
-			logger.error("EntryQueryMap is null (implementation error)");
-			throw new EntryException();
-		}
+		if (queryMap == null)
+			throw new EntryException("EntryQueryMap is null (implementation error)");
 		return queryMap;
 	}
 

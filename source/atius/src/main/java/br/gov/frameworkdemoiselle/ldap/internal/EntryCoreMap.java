@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import com.novell.ldap.LDAPEntry;
 import com.novell.ldap.LDAPException;
 import com.novell.ldap.LDAPModification;
 
+@RequestScoped
 public class EntryCoreMap implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -49,8 +51,7 @@ public class EntryCoreMap implements Serializable {
 			LDAPEntry newEntry = new LDAPEntry(dn, attributeSet);
 			getConnection().add(newEntry);
 		} catch (LDAPException e) {
-			logger.error("Error persisting entry " + dn);
-			throw new EntryException();
+			throw new EntryException("Error persisting entry " + dn);
 		}
 	}
 
@@ -67,8 +68,7 @@ public class EntryCoreMap implements Serializable {
 			LDAPModification[] modsList = modList.toArray(new LDAPModification[0]);
 			getConnection().modify(dn, modsList);
 		} catch (LDAPException e) {
-			logger.error("Error merging entry " + dn);
-			throw new EntryException();
+			throw new EntryException("Error merging entry " + dn);
 		}
 	}
 
@@ -77,8 +77,7 @@ public class EntryCoreMap implements Serializable {
 		try {
 			throw new LDAPException();
 		} catch (LDAPException e) {
-			logger.error("Error updating entry " + dn);
-			throw new EntryException();
+			throw new EntryException("Error updating entry " + dn);
 		}
 	}
 
@@ -87,8 +86,7 @@ public class EntryCoreMap implements Serializable {
 		try {
 			getConnection().delete(dn);
 		} catch (LDAPException e) {
-			logger.error("Error deleting entry " + dn);
-			throw new EntryException();
+			throw new EntryException("Error deleting entry " + dn);
 		}
 	}
 

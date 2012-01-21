@@ -1,10 +1,12 @@
 package br.ufpa.ctic.atius.domain;
 
+import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
 public class WebsiteCategory extends Entry {
 
-	private String cn;
+	@Name("cn")
+	private String name;
 
 	private String order;
 
@@ -12,12 +14,12 @@ public class WebsiteCategory extends Entry {
 		return new String[] { "websiteCategory" };
 	}
 
-	public String getCn() {
-		return cn;
+	public String getName() {
+		return name;
 	}
 
-	public void setCn(String name) {
-		this.cn = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getOrder() {

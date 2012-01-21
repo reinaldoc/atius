@@ -2,16 +2,11 @@ package br.gov.frameworkdemoiselle.ldap.internal;
 
 import java.io.Serializable;
 
-import org.slf4j.Logger;
-
-import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 
 public class EntryCore implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private Logger logger = LoggerProducer.create(EntryCore.class);
 
 	private EntryCoreMap coreMap;
 
@@ -60,10 +55,8 @@ public class EntryCore implements Serializable {
 	}
 
 	private EntryCoreMap getCoreMap() {
-		if (coreMap == null) {
-			logger.error("EntryCoreMap is null (implementation error)");
-			throw new EntryException();
-		}
+		if (coreMap == null)
+			throw new EntryException("EntryCoreMap is null (implementation error)");
 		return coreMap;
 	}
 

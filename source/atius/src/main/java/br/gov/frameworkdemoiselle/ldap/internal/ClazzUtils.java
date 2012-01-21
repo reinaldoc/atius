@@ -3,6 +3,7 @@ package br.gov.frameworkdemoiselle.ldap.internal;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +14,15 @@ import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.annotation.Ignore;
+import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.annotation.DistinguishedName;
 import br.gov.frameworkdemoiselle.ldap.annotation.EntryKey;
 import br.gov.frameworkdemoiselle.ldap.annotation.LDAPEntry;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.util.Beans;
+import br.gov.frameworkdemoiselle.util.Reflections;
+import br.gov.frameworkdemoiselle.util.Strings;
 
 public class ClazzUtils {
 
@@ -51,12 +55,12 @@ public class ClazzUtils {
 				continue;
 			if (map.containsKey(field.getName()))
 				continue;
-			Object value = getFieldValue(field, entry);
+			Object value = Reflections.getFieldValue(field, entry);
 			if (value == null)
 				continue;
 			if (value instanceof String[])
 				map.put(field.getName(), (String[]) value);
-			else if (verifyAnnotation(field.getType(), LDAPEntry.class))
+			else if (isAnnotationPresent(field.getType(), LDAPEntry.class))
 				map.put(field.getName(), new String[] { (String) getRequiredAnnotatedValue(value, EntryKey.class) });
 			else
 				map.put(field.getName(), new String[] { value.toString() });
@@ -73,42 +77,25 @@ public class ClazzUtils {
 	public static List<?> getEntryObjectList(Map<String, Map<String, String[]>> entryMap, Class<?> clazz) {
 		requireAnnotation(clazz, LDAPEntry.class);
 		List<Object> resultList = new ArrayList<Object>();
-		for (Map.Entry<String, Map<String, String[]>> mapEntry : entryMap.entrySet()) {
+		for (Map.Entry<String, Map<String, String[]>> mapEntry : entryMap.entrySet())
 			resultList.add(getEntryObject(mapEntry.getKey(), mapEntry.getValue(), Beans.getReference(clazz)));
-		}
 		return resultList;
 	}
 
 	public static Object getEntryObject(String dn, Map<String, String[]> map, Object entry) {
-
 		Field[] fields = getSuperClassesFields(entry.getClass());
 		for (Field field : fields) {
-			logger.warn("Setting field " + entry.getClass().getSimpleName() + "." + field.getName() + " ==> " + field.getType().getSimpleName());
 			if (field.isAnnotationPresent(Ignore.class))
 				continue;
-			if (field.isAnnotationPresent(DistinguishedName.class)) {
-				setFieldValue(field, entry, dn);
-				continue;
+			if (field.isAnnotationPresent(DistinguishedName.class))
+				setFieldValue(field, entry, new String[] { dn });
+			else {
+				String fieldName = getFieldName(field);
+				if (map.containsKey(fieldName))
+					setFieldValue(field, entry, map.get(fieldName));
 			}
-			if (verifyAnnotation(field.getType(), LDAPEntry.class))
-				setFieldValue(field, entry, getMappedEntryObject(field.getType(), map.get(field.getName())));
-			else if (field.getType().isAssignableFrom(String.class))
-				setFieldValue(field, entry, map.get(field.getName())[0]);
-			else if (field.getType().isAssignableFrom(Integer.class))
-				setFieldValue(field, entry, new Integer(map.get(field.getName())[0]));
-			else if (field.getType().isArray())
-				setFieldValue(field, entry, map.get(field.getName()));
-			else
-				logger.warn("Not handled field " + entry.getClass().getSimpleName() + "." + field.getName() + " ==> "
-						+ field.getType().getSimpleName());
-
 		}
-
 		return entry;
-	}
-
-	public static Object getMappedEntryObject(Class<?> clazz, Object[] value) {
-		return Beans.getReference(clazz);
 	}
 
 	/**
@@ -120,10 +107,8 @@ public class ClazzUtils {
 	 */
 	public static Class<?> getRequiredClassForSearchFilter(String searchFilter, List<String> packageNames) {
 		Class<?> clazz = getClassForSearchFilter(searchFilter, packageNames);
-		if (clazz == null) {
-			logger.error("Can't find a @LDAPEntry object for search filter " + searchFilter);
-			throw new EntryException();
-		}
+		if (clazz == null)
+			throw new EntryException("Can't find a @LDAPEntry object for search filter " + searchFilter);
 		return clazz;
 	}
 
@@ -197,51 +182,110 @@ public class ClazzUtils {
 		if (value != null && !value.toString().trim().isEmpty()) {
 			return value;
 		}
-		logger.error("Class " + entry.getClass().getSimpleName() + " doesn't have a valid value for @" + clazz.getSimpleName());
-		throw new EntryException();
+		throw new EntryException("Class " + entry.getClass().getSimpleName() + " doesn't have a valid value for @" + clazz.getSimpleName());
+	}
+
+	public static Field getFieldAnnotatedAs(Object entry, Class<? extends Annotation> clazz) {
+		Field[] fields = getSuperClassesFields(entry.getClass());
+		for (Field field : fields)
+			if (field.isAnnotationPresent(clazz))
+				return field;
+		return null;
 	}
 
 	/**
 	 * Get annotated value
 	 * 
 	 * @param entry
-	 * @return Distinguished Name
 	 */
 	private static Object getAnnotatedValue(Object entry, Class<? extends Annotation> clazz) {
-		Field[] fields = getSuperClassesFields(entry.getClass());
-		for (Field field : fields)
-			if (field.isAnnotationPresent(clazz))
-				return getFieldValue(field, entry);
+		Field field = getFieldAnnotatedAs(entry, clazz);
+		if (field != null)
+			return Reflections.getFieldValue(field, entry);
 		return null;
 	}
 
 	/**
-	 * Get field value
+	 * Value may be 'String', 'String[]' or Object Annotated with @LDAPEntry
 	 * 
 	 * @param field
-	 * @param parentObject
-	 * @return
+	 * @param entry
+	 * @param value
 	 */
-	public static Object getFieldValue(Field field, Object parentObject) {
-		Object value = null;
-		field.setAccessible(true);
-		try {
-			value = field.get(parentObject);
-		} catch (Exception e) {
-		}
-		return value;
+	public static void setFieldValue(Field field, Object entry, String[] value) {
+		Reflections.setFieldValue(field, entry, getValueAsFieldType(field, value));
 	}
 
-	public static void setFieldValue(Field field, Object entry, Object value) {
-		field.setAccessible(true);
-		try {
-			System.out.println("Field: " + field.getName() + " Value: " + value);
-			field.set(entry, value);
-		} catch (Exception e) {
-			System.out.println("Exeception seting field");
-			e.printStackTrace();
-		}
-		field.setAccessible(false);
+	public static Object getValueAsFieldType(Field field, String[] value) {
+		if (value == null || value.length == 0)
+			return null;
+
+		if (field.getType().isAssignableFrom(String.class))
+			return value[0];
+
+		if (field.getType().isPrimitive())
+			return String.valueOf(value[0]);
+
+		if (field.getType().isArray())
+			if (field.getType().getComponentType().isAssignableFrom(String.class))
+				return value;
+
+		if (isAnnotationPresent(field.getType(), LDAPEntry.class))
+			return getMappedEntryObject(field.getType(), value);
+
+		if (field.getType().isAssignableFrom(ArrayList.class))
+			if (String.class.isAssignableFrom(Reflections.getGenericTypeArgument(field.getType(), 0)))
+				return new ArrayList<String>(Arrays.asList(value));
+
+		if (field.getType().isAssignableFrom(Integer.class))
+			return new Integer(value[0]);
+
+		if (field.getType().isAssignableFrom(Long.class))
+			return new Long(value[0]);
+
+		if (field.getType().isAssignableFrom(Double.class))
+			return new Double(value[0]);
+
+		if (field.getType().isAssignableFrom(Float.class))
+			return new Float(value[0]);
+
+		logger.error("Handling not implemented for field " + field.getName() + " with type " + field.getType().getClass().getSimpleName());
+
+		return null;
+
+	}
+
+	public static Object getMappedEntryObject(Class<?> clazz, String[] value) {
+		Object entry = Beans.getReference(clazz);
+		setAnnotatedFieldValueAs(entry, EntryKey.class, value);
+		return entry;
+	}
+
+	/**
+	 * Set annotated value
+	 * 
+	 * @param entry
+	 */
+	public static void setAnnotatedFieldValueAs(Object entry, Class<? extends Annotation> clazz, String[] value) {
+		Field field = getFieldAnnotatedAs(entry, clazz);
+		setFieldValue(field, entry, value);
+	}
+
+	/**
+	 * If @Name present returns field.getAnnotation(Name.class).value(),
+	 * otherwise field.getName();
+	 * 
+	 * @param field
+	 * @return @Name annotation value or object attribute name;
+	 */
+	public static String getFieldName(Field field) {
+		if (field.isAnnotationPresent(Name.class)) {
+			String name = field.getAnnotation(Name.class).value();
+			if (Strings.isBlank(name))
+				throw new EntryException("Annotation @Name must have a value");
+			return name;
+		} else
+			return field.getName();
 	}
 
 	/**
@@ -250,12 +294,11 @@ public class ClazzUtils {
 	 * @param entry
 	 * @param clazz
 	 */
-	public static boolean verifyAnnotation(Class<?> entryClass, Class<? extends Annotation> clazz) {
-		boolean annotationPresent = false;
-		for (Class<? extends Object> claz : getSuperClasses(entryClass))
+	public static boolean isAnnotationPresent(Class<?> entryClass, Class<? extends Annotation> clazz) {
+		for (Class<?> claz : getSuperClasses(entryClass))
 			if (claz.isAnnotationPresent(clazz))
-				annotationPresent = true;
-		return annotationPresent;
+				return true;
+		return false;
 	}
 
 	/**
@@ -266,11 +309,8 @@ public class ClazzUtils {
 	 * @param clazz
 	 */
 	public static void requireAnnotation(Class<?> entryClass, Class<? extends Annotation> clazz) {
-		if (!verifyAnnotation(entryClass, clazz)) {
-			logger.error("Entry " + entryClass.getSimpleName() + " doesn't have @" + clazz.getName());
-			throw new EntryException();
-		}
-
+		if (!isAnnotationPresent(entryClass, clazz))
+			throw new EntryException("Entry " + entryClass.getSimpleName() + " doesn't have @" + clazz.getName());
 	}
 
 }

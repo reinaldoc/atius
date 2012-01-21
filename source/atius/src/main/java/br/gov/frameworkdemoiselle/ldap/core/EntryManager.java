@@ -11,6 +11,7 @@ import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.ldap.internal.ConnectionManager;
 import br.gov.frameworkdemoiselle.ldap.internal.EntryCore;
 import br.gov.frameworkdemoiselle.ldap.internal.EntryCoreMap;
+import br.gov.frameworkdemoiselle.util.Beans;
 
 import com.novell.ldap.LDAPException;
 
@@ -28,10 +29,8 @@ public class EntryManager implements Serializable {
 	@Inject
 	private EntryCoreMap coreMap;
 
-	@Inject
 	private EntryQuery query;
 
-	@Inject
 	private EntryQueryMap queryMap;
 
 	private int protocol = 3;
@@ -40,7 +39,6 @@ public class EntryManager implements Serializable {
 	public void init() {
 		setVerbose(true);
 		core.setCoreMap(coreMap);
-		query.setQueryMap(queryMap);
 	}
 
 	/**
@@ -317,8 +315,8 @@ public class EntryManager implements Serializable {
 	 * @return the new entry query instance
 	 */
 	public EntryQuery createQuery(String searchFilter) {
-		query.setQueryMap(queryMap);
-		query.setSearchFilter(searchFilter);
+		query = Beans.getReference(EntryQuery.class);
+		query.setQueryMap(getEntryQueryMap(searchFilter));
 		return query;
 	}
 
@@ -331,8 +329,7 @@ public class EntryManager implements Serializable {
 	 * @return the new entry query instance
 	 */
 	public EntryQueryMap createQueryMap(String searchFilter) {
-		queryMap.setSearchFilter(searchFilter);
-		return queryMap;
+		return getEntryQueryMap(searchFilter);
 	}
 
 	/**
@@ -341,7 +338,7 @@ public class EntryManager implements Serializable {
 	 * @return true if enabled
 	 */
 	public boolean isVerbose() {
-		return coreMap.isVerbose();
+		return connectionManager.isVerbose();
 	}
 
 	/**
@@ -352,7 +349,13 @@ public class EntryManager implements Serializable {
 	public void setVerbose(boolean verbose) {
 		connectionManager.setVerbose(verbose);
 		coreMap.setVerbose(verbose);
-		queryMap.setVerbose(verbose);
+	}
+
+	public EntryQueryMap getEntryQueryMap(String searchFilter) {
+		queryMap = Beans.getReference(EntryQueryMap.class);
+		queryMap.setVerbose(isVerbose());
+		queryMap.setSearchFilter(searchFilter);
+		return queryMap;
 	}
 
 }
