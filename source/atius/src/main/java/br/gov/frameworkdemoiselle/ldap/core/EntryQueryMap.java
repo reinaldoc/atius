@@ -55,12 +55,11 @@ public class EntryQueryMap implements Serializable {
 	private boolean dnAsAttribute;
 
 	private boolean enforceSingleResult;
-	
-	private boolean verbose = false;
+
+	private boolean verbose;
 
 	@PostConstruct
 	public void init() {
-		setSearchFilter("(objectClass=*)");
 		scope = LDAPConnection.SCOPE_SUB;
 		setLdapConstraints(new LDAPSearchConstraints());
 		getLdapConstraints().setReferralFollowing(entryManagerConfig.isReferrals());
@@ -68,6 +67,7 @@ public class EntryQueryMap implements Serializable {
 		basedn = entryManagerConfig.getBasedn();
 		dnAsAttribute = true;
 		enforceSingleResult = true;
+		verbose = entryManagerConfig.isLogger();
 	}
 
 	public void setMaxResults(int maxResult) {
@@ -80,10 +80,6 @@ public class EntryQueryMap implements Serializable {
 
 	public void setScope(int scope) {
 		this.scope = scope;
-	}
-
-	public String getSearchFilter() {
-		return searchFilter;
 	}
 
 	public void setSearchFilter(String searchFilter) {
@@ -142,7 +138,7 @@ public class EntryQueryMap implements Serializable {
 	private List<LDAPEntry> find() {
 		List<LDAPEntry> resultList = new ArrayList<LDAPEntry>();
 		try {
-			LDAPSearchResults searchResults = getConnection().search(basedn, scope, getSearchFilter(), resultAttributes, false, getLdapConstraints());
+			LDAPSearchResults searchResults = getConnection().search(basedn, scope, searchFilter, resultAttributes, false, getLdapConstraints());
 			while (searchResults != null && searchResults.hasMore()) {
 				try {
 					LDAPEntry entry = searchResults.next();
@@ -151,13 +147,13 @@ public class EntryQueryMap implements Serializable {
 					// Ignore referrals;
 				} catch (LDAPException e) {
 					if (e.getResultCode() == LDAPException.SIZE_LIMIT_EXCEEDED)
-						logger.warn("Size limit exceeded for query " + getSearchFilter());
+						logger.warn("Size limit exceeded for query " + searchFilter);
 					else
 						throw e;
 				}
 			}
 		} catch (LDAPException e) {
-			logger.warn("Server returned error on query " + getSearchFilter());
+			logger.warn("Server returned error on query " + searchFilter);
 		}
 		return resultList;
 	}
@@ -353,11 +349,4 @@ public class EntryQueryMap implements Serializable {
 		this.ldapConstraints = ldapConstraints;
 	}
 
-	public boolean isVerbose() {
-		return verbose;
-	}
-
-	public void setVerbose(boolean verbose) {
-		this.verbose = verbose;
-	}
 }

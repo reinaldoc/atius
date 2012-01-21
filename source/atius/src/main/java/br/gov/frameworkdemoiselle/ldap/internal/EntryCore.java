@@ -2,33 +2,29 @@ package br.gov.frameworkdemoiselle.ldap.internal;
 
 import java.io.Serializable;
 
-import org.slf4j.Logger;
-
-import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
-import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
+import javax.inject.Inject;
 
 public class EntryCore implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Logger logger = LoggerProducer.create(EntryCore.class);
-
+	@Inject
 	private EntryCoreMap coreMap;
 
 	public void persist(Object entry) {
-		getCoreMap().persist(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+		coreMap.persist(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public void merge(Object entry) {
-		getCoreMap().merge(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+		coreMap.merge(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public void update(Object entry) {
-		getCoreMap().update(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+		coreMap.update(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public void remove(Object entry) {
-		getCoreMap().remove(ClazzUtils.getDistinguishedName(entry));
+		coreMap.remove(ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public <T> T find(Class<T> entryClass, Object searchFilter) {
@@ -56,19 +52,7 @@ public class EntryCore implements Serializable {
 	}
 
 	public String findReference(Object searchFilter) {
-		return getCoreMap().findReference((String) searchFilter);
-	}
-
-	private EntryCoreMap getCoreMap() {
-		if (coreMap == null) {
-			logger.error("EntryCoreMap is null (implementation error)");
-			throw new EntryException();
-		}
-		return coreMap;
-	}
-
-	public void setCoreMap(EntryCoreMap coreMap) {
-		this.coreMap = coreMap;
+		return coreMap.findReference((String) searchFilter);
 	}
 
 }

@@ -5,7 +5,7 @@
 		<h:panelGroup id="atius-sites-menu-id">
 			<p:dataGrid value="#{websiteDomainListMB.websiteCategories}" var="category" columns="1">
 				<p:column>
-					<p:commandLink value="#{category.cn}" immediate="true" update="atius-body-id"
+					<p:commandLink value="#{category.name}" immediate="true" update="atius-body-id"
 						action="#{websiteDomainListMB.setSearchDomain(websiteDomainListMB.searchDomain)}"
 						actionListener="#{menuContext.select('MenuSites', category.name)}"
 						styleClass="#{menuContext.menu['MenuSites'][category.name]['Style']}" />

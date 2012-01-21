@@ -1,7 +1,5 @@
 package br.ufpa.ctic.atius.persistence;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +51,6 @@ public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {
 	}
 
 	public void insert(WebsiteDomain websiteDomain) {
-		getEntryManager().setVerbose(true);
 		getEntryManager().persist(websiteDomain);
 		// getEntryManager().persist(websiteDomain2entry(websiteDomain),
 		// websiteDomain.getDn());

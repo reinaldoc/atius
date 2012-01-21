@@ -3,7 +3,6 @@ package br.gov.frameworkdemoiselle.ldap.core;
 import java.io.Serializable;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -35,13 +34,6 @@ public class EntryManager implements Serializable {
 	private EntryQueryMap queryMap;
 
 	private int protocol = 3;
-
-	@PostConstruct
-	public void init() {
-		setVerbose(true);
-		core.setCoreMap(coreMap);
-		query.setQueryMap(queryMap);
-	}
 
 	/**
 	 * Set LDAP Protocol for LDAP BIND operation when not using resource
@@ -317,7 +309,6 @@ public class EntryManager implements Serializable {
 	 * @return the new entry query instance
 	 */
 	public EntryQuery createQuery(String searchFilter) {
-		query.setQueryMap(queryMap);
 		query.setSearchFilter(searchFilter);
 		return query;
 	}
@@ -331,28 +322,9 @@ public class EntryManager implements Serializable {
 	 * @return the new entry query instance
 	 */
 	public EntryQueryMap createQueryMap(String searchFilter) {
+		queryMap.init();
 		queryMap.setSearchFilter(searchFilter);
 		return queryMap;
-	}
-
-	/**
-	 * Get verbose status.
-	 * 
-	 * @return true if enabled
-	 */
-	public boolean isVerbose() {
-		return coreMap.isVerbose();
-	}
-
-	/**
-	 * Enable or disabled verbose. If enabled entry processing is logged.
-	 * 
-	 * @param verbose
-	 */
-	public void setVerbose(boolean verbose) {
-		connectionManager.setVerbose(verbose);
-		coreMap.setVerbose(verbose);
-		queryMap.setVerbose(verbose);
 	}
 
 }

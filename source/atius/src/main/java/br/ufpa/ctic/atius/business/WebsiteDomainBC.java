@@ -98,7 +98,7 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	public boolean domainAvailable(String serverName) {
 		if (serverName != null && serverName.length() > 8) {
 			WebsiteDomain websiteDomain = getDelegate().load(serverName);
-			if (websiteDomain.getServerName() == null)
+			if (websiteDomain == null || websiteDomain.getServerName() == null)
 				return true;
 		}
 		return false;

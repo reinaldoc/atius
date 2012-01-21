@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
+import br.gov.frameworkdemoiselle.ldap.configuration.EntryManagerConfig;
 import br.gov.frameworkdemoiselle.ldap.core.EntryQueryMap;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 
@@ -27,12 +29,20 @@ public class EntryCoreMap implements Serializable {
 	private Logger logger = LoggerProducer.create(EntryCoreMap.class);
 
 	@Inject
+	private EntryManagerConfig entryManagerConfig;
+
+	@Inject
 	private ConnectionManager conn;
 
 	@Inject
 	private EntryQueryMap queryMap;
 
-	private boolean verbose = false;
+	private boolean verbose;
+
+	@PostConstruct
+	public void init() {
+		verbose = entryManagerConfig.isLogger();
+	}
 
 	private LDAPConnection getConnection() {
 		return this.conn.initialized();
@@ -49,8 +59,7 @@ public class EntryCoreMap implements Serializable {
 			LDAPEntry newEntry = new LDAPEntry(dn, attributeSet);
 			getConnection().add(newEntry);
 		} catch (LDAPException e) {
-			logger.error("Error persisting entry " + dn);
-			throw new EntryException();
+			throw new EntryException("Error persisting entry " + dn);
 		}
 	}
 
@@ -67,8 +76,7 @@ public class EntryCoreMap implements Serializable {
 			LDAPModification[] modsList = modList.toArray(new LDAPModification[0]);
 			getConnection().modify(dn, modsList);
 		} catch (LDAPException e) {
-			logger.error("Error merging entry " + dn);
-			throw new EntryException();
+			throw new EntryException("Error merging entry " + dn);
 		}
 	}
 
@@ -77,8 +85,7 @@ public class EntryCoreMap implements Serializable {
 		try {
 			throw new LDAPException();
 		} catch (LDAPException e) {
-			logger.error("Error updating entry " + dn);
-			throw new EntryException();
+			throw new EntryException("Error updating entry " + dn);
 		}
 	}
 
@@ -87,19 +94,20 @@ public class EntryCoreMap implements Serializable {
 		try {
 			getConnection().delete(dn);
 		} catch (LDAPException e) {
-			logger.error("Error deleting entry " + dn);
-			throw new EntryException();
+			throw new EntryException("Error deleting entry " + dn);
 		}
 	}
 
 	public Map<String, String[]> find(String searchFilter) {
 		loggerArgs(null, searchFilter);
+		queryMap.init();
 		queryMap.setSearchFilter(searchFilter);
 		return queryMap.getSingleResult();
 	}
 
 	public Map<String, String[]> getReference(String dn) {
 		loggerArgs(null, dn);
+		queryMap.init();
 		queryMap.setBaseDn(dn);
 		queryMap.setScope(LDAPConnection.SCOPE_BASE);
 		queryMap.setSearchFilter("objectClass=*");
@@ -108,6 +116,7 @@ public class EntryCoreMap implements Serializable {
 
 	public String findReference(String searchFilter) {
 		loggerArgs(null, searchFilter);
+		queryMap.init();
 		queryMap.setSearchFilter(searchFilter);
 		return queryMap.getSingleDn();
 	}
@@ -128,14 +137,6 @@ public class EntryCoreMap implements Serializable {
 			} else
 				logger.info(attr + ": " + value);
 		}
-	}
-
-	public boolean isVerbose() {
-		return verbose;
-	}
-
-	public void setVerbose(boolean verbose) {
-		this.verbose = verbose;
 	}
 
 }

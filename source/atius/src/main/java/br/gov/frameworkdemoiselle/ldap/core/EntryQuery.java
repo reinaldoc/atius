@@ -4,64 +4,60 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-
-import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.configuration.EntryManagerConfig;
-import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.ldap.internal.ClazzUtils;
 
+@RequestScoped
 public class EntryQuery implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Logger logger = LoggerProducer.create(EntryQuery.class);
-
 	@Inject
 	private EntryManagerConfig entryManagerConfig;
 
+	@Inject
 	private EntryQueryMap queryMap;
+
+	private String searchFilter;
+
+	private int maxResults;
+
+	@PostConstruct
+	public void init() {
+		queryMap.init();
+		queryMap.setSearchFilter(searchFilter);
+		queryMap.setMaxResults(maxResults);
+	}
 
 	@SuppressWarnings("rawtypes")
 	public List getResultList() {
-		getQueryMap().setDnAsAttibute(false);
-		return ClazzUtils.getEntryObjectList(getQueryMap().getResult(),
-				ClazzUtils.getRequiredClassForSearchFilter(getSearchFilter(), entryManagerConfig.getLdapentryPackages()));
+		init();
+		queryMap.setDnAsAttibute(false);
+		return ClazzUtils.getEntryObjectList(queryMap.getResult(),
+				ClazzUtils.getRequiredClassForSearchFilter(searchFilter, entryManagerConfig.getLdapentryPackages()));
 	}
 
 	public Object getSingleResult() {
-		getQueryMap().setDnAsAttibute(false);
-		getQueryMap().setMaxResults(2);
-		Map<String, Map<String, String[]>> map = getQueryMap().getResult();
+		init();
+		queryMap.setDnAsAttibute(false);
+		queryMap.setMaxResults(2);
+		Map<String, Map<String, String[]>> map = queryMap.getResult();
 		if (map.size() == 1)
 			return ClazzUtils.getEntryObjectList(map,
-					ClazzUtils.getRequiredClassForSearchFilter(getSearchFilter(), entryManagerConfig.getLdapentryPackages())).get(0);
+					ClazzUtils.getRequiredClassForSearchFilter(searchFilter, entryManagerConfig.getLdapentryPackages())).get(0);
 		return null;
 	}
 
 	public void setMaxResults(int maxResult) {
-		getQueryMap().getLdapConstraints().setMaxResults(maxResult);
-	}
-
-	public String getSearchFilter() {
-		return getQueryMap().getSearchFilter();
+		this.maxResults = maxResult;
 	}
 
 	public void setSearchFilter(String searchFilter) {
-		getQueryMap().setSearchFilter(searchFilter);
+		this.searchFilter = searchFilter;
 	}
 
-	private EntryQueryMap getQueryMap() {
-		if (queryMap == null) {
-			logger.error("EntryQueryMap is null (implementation error)");
-			throw new EntryException();
-		}
-		return queryMap;
-	}
-
-	public void setQueryMap(EntryQueryMap queryMap) {
-		this.queryMap = queryMap;
-	}
 }
