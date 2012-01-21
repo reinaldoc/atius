@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ import com.novell.ldap.LDAPEntry;
 import com.novell.ldap.LDAPException;
 import com.novell.ldap.LDAPModification;
 
+@RequestScoped
 public class EntryCoreMap implements Serializable {
 
 	private static final long serialVersionUID = 1L;
