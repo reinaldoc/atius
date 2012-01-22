@@ -271,8 +271,8 @@ public class EntryManager implements Serializable {
 	 *            String Representation of Search Filters (RFC 4515)
 	 * @return a entry object
 	 */
-	public <T> T find(Class<T> entryClass, Object searchFilter) {
-		return core.find(entryClass, searchFilter);
+	public <T> T find(Class<T> entryClass, Object id) {
+		return core.find(entryClass, id);
 	}
 
 	/**
