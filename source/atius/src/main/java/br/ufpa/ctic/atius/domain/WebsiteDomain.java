@@ -39,13 +39,13 @@ public class WebsiteDomain extends Entry {
 
 	private Integer inodeHardLimit;
 
-	private Integer blockCount = new Integer(0);
+	private Integer blockCount;
 
-	private Integer inodeCount = new Integer(0);
+	private Integer inodeCount;
 
 	private String graceTimeCountdown;
 
-	private String availability = "enabled";
+	private String availability;
 
 	private String documentRoot;
 
@@ -57,17 +57,30 @@ public class WebsiteDomain extends Entry {
 
 	private String uidNumber;
 
-	private String gidNumber = "100";
+	private String gidNumber;
 
 	private String homeDirectory;
 
-	private String loginShell = "/bin/false";
+	private String loginShell;
 
 	protected String[] objectClass() {
 		return new String[] { "websiteDomain", "posixAccount", "shadowAccount" };
 	}
 
-	public void setValuesByServerName() {
+	public WebsiteDomain() {
+		super();
+	}
+
+	public WebsiteDomain(boolean skipObjectClass) {
+		super(skipObjectClass);
+	}
+
+	public void prepare() {
+		loginShell = "/bin/false";
+		gidNumber = "100";
+		availability = "enabled";
+		inodeCount = new Integer(0);
+		blockCount = new Integer(0);
 		setDocumentRoot();
 		setServerAlias();
 		setUid();
