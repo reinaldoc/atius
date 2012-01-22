@@ -54,45 +54,31 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	}
 
 	public void insert(WebsiteDomain websiteDomain) {
-		try {
-			WebsiteProfile websiteProfile = websiteProfileBC.load(websiteDomain.getWebsiteProfile());
-			if (Strings.isBlank(websiteProfile.getWebserverName())) {
-				Faces.addMessage(new DefaultMessage("Não foi possível identificar o webserver do tipo " + websiteDomain.getWebsiteProfile()));
-				Faces.validationFailed();
-				return;
-			}
-			DomainContainer domainContainer = domainContainerBC.load(websiteProfile.getWebserverName());
-			if (domainContainer.getNextUidNumber() == null) {
-				Faces.addMessage(new DefaultMessage("O webserver indicado não foi encontrado"));
-				Faces.validationFailed();
-				return;
-			}
-			if (domainContainerBC.setNextUidNumber(domainContainer.getDn(), domainContainer.getNextUidNumber().intValue() + 1))
-				websiteDomain.setUidNumber(String.valueOf(domainContainer.getNextUidNumber().intValue()));
-			else {
-				Faces.addMessage(new DefaultMessage("O uidNumber sugerido não esta disponível"));
-				Faces.validationFailed();
-				return;
-			}
-			websiteDomain.setDn("serverName=" + websiteDomain.getServerName() + "," + domainContainer.getDn());
-			getDelegate().insert(websiteDomain);
-		} catch (Exception e) {
-			e.printStackTrace();
+		WebsiteProfile websiteProfile = websiteProfileBC.load(websiteDomain.getWebsiteProfile());
+		if (Strings.isBlank(websiteProfile.getWebserverName())) {
+			Faces.addMessage(new DefaultMessage("Não foi possível identificar o webserver do tipo " + websiteDomain.getWebsiteProfile()));
+			Faces.validationFailed();
+			return;
 		}
-	}
-
-	public void delete(String serverName) {
-		getDelegate().delete(serverName);
+		DomainContainer domainContainer = domainContainerBC.getNextFreeUidNumber(websiteProfile.getWebserverName());
+		if (domainContainer == null) {
+			Faces.addMessage(new DefaultMessage("O uidNumber sugerido não esta disponível"));
+			Faces.validationFailed();
+			return;
+		}
+		websiteDomain.setUidNumber(String.valueOf(domainContainer.getNextUidNumber()));
+		websiteDomain.setDn("serverName=" + websiteDomain.getServerName() + "," + domainContainer.getDn());
+		getDelegate().insert(websiteDomain);
 	}
 
 	public void disable(WebsiteDomain websiteDomain) {
 		websiteDomain.setAvailability("disabled");
-		getDelegate().update(websiteDomain);
+		update(websiteDomain);
 	}
 
 	public void enable(WebsiteDomain websiteDomain) {
 		websiteDomain.setAvailability("enabled");
-		getDelegate().update(websiteDomain);
+		update(websiteDomain);
 	}
 
 	public boolean domainAvailable(String serverName) {
@@ -109,18 +95,29 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	}
 
 	public List<WebsiteDomain> find(String search) {
-		return getDelegate().find(search);
+		WebsiteDomain websiteDomain = new WebsiteDomain(true);
+		websiteDomain.setCn(search);
+		websiteDomain.setServerName(search);
+		InetOrgPerson inetOrgPerson = new InetOrgPerson();
+		inetOrgPerson.setMail(search);
+		websiteDomain.setAdminId(inetOrgPerson);
+		websiteDomain.setOwnerId(inetOrgPerson);
+		return findByExample(websiteDomain, false, 0);
 	}
 
 	public List<WebsiteDomain> findByCategory(String category) {
 		if ("Todos".equals(category))
 			return getDelegate().findAll();
-		return getDelegate().findByCategory(category);
+		WebsiteDomain websiteDomain = new WebsiteDomain(true);
+		websiteDomain.setWebsiteCategory(category);
+		return findByExample(websiteDomain, true, 0);
 	}
 
 	public List<WebsiteDomain> findByCategory(String category, String search) {
-		if ("Todos".equals(category))
-			return getDelegate().find(search);
+		if (Strings.isBlank(search))
+			return findByCategory(category);
+		if (Strings.isBlank(category) || "Todos".equals(category))
+			return find(search);
 		return getDelegate().findByCategory(category, search);
 	}
 }
