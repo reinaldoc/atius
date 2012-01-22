@@ -146,9 +146,10 @@ public class EntryQueryMap implements Serializable {
 				} catch (LDAPReferralException e) {
 					// Ignore referrals;
 				} catch (LDAPException e) {
-					if (e.getResultCode() == LDAPException.SIZE_LIMIT_EXCEEDED)
-						logger.warn("Size limit exceeded for query " + searchFilter);
-					else
+					if (e.getResultCode() == LDAPException.SIZE_LIMIT_EXCEEDED) {
+						if (verbose)
+							logger.warn("Size limit exceeded for query " + searchFilter);
+					} else
 						throw e;
 				}
 			}
