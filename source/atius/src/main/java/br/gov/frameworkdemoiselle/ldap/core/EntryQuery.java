@@ -52,6 +52,30 @@ public class EntryQuery implements Serializable {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T> List<T> findByExample(T entry, boolean isConjunction, int maxResult) {
+		Map<String, String[]> map = ClazzUtils.getStringsMap(entry);
+		String filter = "";
+		for (Map.Entry<String, String[]> mapEntry : map.entrySet())
+			for (String value : mapEntry.getValue())
+				if (isConjunction)
+					filter = filter + "(" + mapEntry.getKey() + "=" + value + ")";
+				else
+					filter = filter + "(" + mapEntry.getKey() + "=*" + value + "*)";
+		if (filter.isEmpty())
+			return null;
+		if (isConjunction)
+			setSearchFilter("(&(objectClass=" + entry.getClass().getSimpleName() + ")(&" + filter + "))");
+		else
+			setSearchFilter("(&(objectClass=" + entry.getClass().getSimpleName() + ")(|" + filter + "))");
+		setMaxResults(maxResult);
+		return getResultList();
+	}
+
+	public <T> List<T> findByExample(T entry, boolean isConjunction) {
+		return findByExample(entry, isConjunction, entryManagerConfig.getFindByExampleMaxresult());
+	}
+
 	public void setMaxResults(int maxResult) {
 		this.maxResults = maxResult;
 	}

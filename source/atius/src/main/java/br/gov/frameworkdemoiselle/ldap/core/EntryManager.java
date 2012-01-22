@@ -1,6 +1,7 @@
 package br.gov.frameworkdemoiselle.ldap.core;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
@@ -264,7 +265,6 @@ public class EntryManager implements Serializable {
 	/**
 	 * Find a Entry by String Representation of Search Filters (RFC 4515)
 	 * 
-	 * @Method not implemented yet
 	 * @param entryClass
 	 *            a entry class
 	 * @param searchFilter
@@ -276,28 +276,49 @@ public class EntryManager implements Serializable {
 	}
 
 	/**
-	 * Find a Entry by String Representation of Distinguished Names (RFC 1485)
+	 * Find a Entry with only DistinguishedName value by @id annotated value
 	 * 
-	 * @Method not implemented yet
 	 * @param entryClass
 	 *            a entry class
 	 * @param dn
 	 *            String Representation of Distinguished Name (RFC 1485)
 	 * @return a entry object
 	 */
-	public <T> T getReference(Class<T> entryClass, Object dn) {
-		return core.getReference(entryClass, dn);
+	public <T> T getReference(Class<T> entryClass, Object id) {
+		return core.getReference(entryClass, id);
 	}
 
 	/**
-	 * Find a DN by String Representation of Search Filters (RFC 4515)
+	 * Create a query based on not null attributes values of a entry.
 	 * 
-	 * @param searchFilter
-	 *            String Representation of Search Filters (RFC 4515)
-	 * @return dn String Representation of Distinguished Name (RFC 1485)
+	 * @param entry
+	 * @param isDisjunction
+	 * @return
 	 */
-	public String findReference(Object searchFilter) {
-		return core.findReference(searchFilter);
+	public <T> List<T> findByExample(T entry, boolean isConjunction, int maxResult) {
+		return query.findByExample(entry, isConjunction, maxResult);
+	}
+
+	/**
+	 * Create a query based on not null attributes values of a entry.
+	 * 
+	 * @param entry
+	 * @param isDisjunction
+	 * @return
+	 */
+	public <T> List<T> findByExample(T entry, boolean isConjunction) {
+		return query.findByExample(entry, isConjunction);
+	}
+
+	/**
+	 * Create a query based on not null attributes values of a entry.
+	 * 
+	 * @param entry
+	 * @param isDisjunction
+	 * @return
+	 */
+	public <T> List<T> findByExample(T entry) {
+		return query.findByExample(entry, true);
 	}
 
 	/**

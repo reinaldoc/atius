@@ -41,58 +41,49 @@ public class EntryManagerConfig implements Serializable {
 	@Name("ldapentry.packages")
 	private List<String> ldapentry_packages;
 
+	@Name("findByExample.maxresult")
+	private int findByExampleMaxresult = 0;
+
 	@Name("logger")
 	private boolean logger = true;
 
 	/**
-	 * Get EntryManager.server property;
-	 * 
-	 * @return
+	 * @return EntryManager.server property;
 	 */
 	public String getServer() {
 		return server;
 	}
 
 	/**
-	 * Get EntryManager.starttls property;
-	 * 
-	 * @return
+	 * @return EntryManager.starttls property;
 	 */
 	public boolean isStarttls() {
 		return starttls;
 	}
 
 	/**
-	 * Get EntryManager.protocol property;
-	 * 
-	 * @return
+	 * @return EntryManager.protocol property;
 	 */
 	public int getProtocol() {
 		return protocol;
 	}
 
 	/**
-	 * Get EntryManager.binddn property;
-	 * 
-	 * @return
+	 * @return EntryManager.binddn property;
 	 */
 	public String getBinddn() {
 		return binddn;
 	}
 
 	/**
-	 * Get EntryManager.bindpw property;
-	 * 
-	 * @return
+	 * @return EntryManager.bindpw property;
 	 */
 	public String getBindpw() {
 		return bindpw;
 	}
 
 	/**
-	 * Get EntryManager.bindpw property in byte[];
-	 * 
-	 * @return
+	 * @return EntryManager.bindpw property in byte[];
 	 */
 	public byte[] getBindpwInBytes() {
 		try {
@@ -103,9 +94,7 @@ public class EntryManagerConfig implements Serializable {
 	}
 
 	/**
-	 * Get EntryManager.authenticate.filter property;
-	 * 
-	 * @return
+	 * @return EntryManager.authenticate.filter property;
 	 */
 	public String getAuthenticateFilter() {
 		return authenticate_filter;
@@ -121,39 +110,38 @@ public class EntryManagerConfig implements Serializable {
 	}
 
 	/**
-	 * Get EntryManager.search.sizelimit property;
-	 * 
-	 * @return
+	 * @return EntryManager.search.sizelimit property;
 	 */
 	public Integer getSizelimit() {
 		return sizelimit;
 	}
 
 	/**
-	 * Get EntryManager.search.referrals property;
-	 * 
-	 * @return
+	 * @return EntryManager.search.referrals property;
 	 */
 	public boolean isReferrals() {
 		return referrals;
 	}
 
 	/**
-	 * Get EntryManager.logger property;
-	 * 
-	 * @return
-	 */
-	public boolean isLogger() {
-		return logger;
-	}
-
-	/**
-	 * Get EntryManager.ldapentry.packages property;
-	 * 
-	 * @return
+	 * @return EntryManager.ldapentry.packages property;
 	 */
 	public List<String> getLdapentryPackages() {
 		return ldapentry_packages;
+	}
+
+	/**
+	 * @return EntryManager.findByExample.maxresult property
+	 */
+	public int getFindByExampleMaxresult() {
+		return findByExampleMaxresult;
+	}
+
+	/**
+	 * @return EntryManager.logger property;
+	 */
+	public boolean isLogger() {
+		return logger;
 	}
 
 }
