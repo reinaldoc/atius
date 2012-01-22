@@ -201,8 +201,8 @@ public class ClazzUtils {
 	public static Field getRequiredFieldAnnotatedAs(Class<?> claz, Class<? extends Annotation> clazz) {
 		Field field = getFieldAnnotatedAs(claz, clazz);
 		if (field == null)
-			throw new EntryException("Field with @" + clazz.getSimpleName() + " not found");
-		return null;
+			throw new EntryException("Field with @" + clazz.getSimpleName() + " not found on class " + claz.getSimpleName());
+		return field;
 	}
 
 	public static Field getFieldAnnotatedAs(Class<?> claz, Class<? extends Annotation> clazz) {
@@ -231,8 +231,20 @@ public class ClazzUtils {
 		if (field.getType().isAssignableFrom(String.class))
 			return value[0];
 
-		if (field.getType().isPrimitive())
-			return String.valueOf(value[0]);
+		if (field.getType().isPrimitive()) {
+			if (field.getType().isAssignableFrom(int.class))
+				return Integer.valueOf(value[0]);
+			if (field.getType().isAssignableFrom(long.class))
+				return Long.valueOf(value[0]);
+			if (field.getType().isAssignableFrom(double.class))
+				return Double.valueOf(value[0]);
+			if (field.getType().isAssignableFrom(float.class))
+				return Float.valueOf(value[0]);
+			if (field.getType().isAssignableFrom(short.class))
+				return Short.valueOf(value[0]);
+			if (field.getType().isAssignableFrom(byte.class))
+				return Byte.valueOf(value[0]);
+		}
 
 		if (field.getType().isArray())
 			if (field.getType().getComponentType().isAssignableFrom(String.class))
@@ -246,16 +258,17 @@ public class ClazzUtils {
 				return new ArrayList<String>(Arrays.asList(value));
 
 		if (field.getType().isAssignableFrom(Integer.class))
-			return new Integer(value[0]);
-
+			return Integer.valueOf(value[0]);
 		if (field.getType().isAssignableFrom(Long.class))
-			return new Long(value[0]);
-
+			return Long.valueOf(value[0]);
 		if (field.getType().isAssignableFrom(Double.class))
-			return new Double(value[0]);
-
+			return Double.valueOf(value[0]);
 		if (field.getType().isAssignableFrom(Float.class))
-			return new Float(value[0]);
+			return Float.valueOf(value[0]);
+		if (field.getType().isAssignableFrom(Short.class))
+			return Short.valueOf(value[0]);
+		if (field.getType().isAssignableFrom(Byte.class))
+			return Byte.valueOf(value[0]);
 
 		logger.error("Handling not implemented for field " + field.getName() + " with type " + field.getType().getClass().getSimpleName());
 
