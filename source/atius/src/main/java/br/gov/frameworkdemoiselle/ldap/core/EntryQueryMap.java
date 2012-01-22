@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.configuration.EntryManagerConfig;
+import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.ldap.internal.ConnectionManager;
 
 import com.novell.ldap.LDAPAttribute;
@@ -65,9 +66,9 @@ public class EntryQueryMap implements Serializable {
 		getLdapConstraints().setReferralFollowing(entryManagerConfig.isReferrals());
 		getLdapConstraints().setMaxResults(entryManagerConfig.getSizelimit());
 		basedn = entryManagerConfig.getBasedn();
-		dnAsAttribute = true;
-		enforceSingleResult = true;
-		verbose = entryManagerConfig.isLogger();
+		dnAsAttribute = entryManagerConfig.isDnAsAttribute();
+		enforceSingleResult = entryManagerConfig.isEnforceSingleResult();
+		verbose = entryManagerConfig.isVerbose();
 	}
 
 	public void setMaxResults(int maxResult) {
@@ -137,25 +138,32 @@ public class EntryQueryMap implements Serializable {
 	 */
 	private List<LDAPEntry> find() {
 		List<LDAPEntry> resultList = new ArrayList<LDAPEntry>();
+
+		LDAPSearchResults searchResults = null;
 		try {
-			LDAPSearchResults searchResults = getConnection().search(basedn, scope, searchFilter, resultAttributes, false, getLdapConstraints());
-			while (searchResults != null && searchResults.hasMore()) {
-				try {
-					LDAPEntry entry = searchResults.next();
-					resultList.add(entry);
-				} catch (LDAPReferralException e) {
-					// Ignore referrals;
-				} catch (LDAPException e) {
-					if (e.getResultCode() == LDAPException.SIZE_LIMIT_EXCEEDED) {
-						if (verbose)
-							logger.warn("Size limit exceeded for query " + searchFilter);
-					} else
-						throw e;
+			searchResults = getConnection().search(basedn, scope, searchFilter, resultAttributes, false, getLdapConstraints());
+		} catch (LDAPException e) {
+			throw new EntryException("Server returned error on query " + searchFilter, e);
+		}
+
+		while (searchResults != null && searchResults.hasMore()) {
+			try {
+				LDAPEntry entry = searchResults.next();
+				resultList.add(entry);
+			} catch (LDAPReferralException e) {
+				// Ignore referrals;
+			} catch (LDAPException e) {
+				if (e.getResultCode() == LDAPException.SIZE_LIMIT_EXCEEDED && verbose)
+					logger.warn("Size limit reached for query " + searchFilter);
+				else {
+					e.printStackTrace();
+					logger.warn("Server returned error on query " + searchFilter);
 				}
 			}
-		} catch (LDAPException e) {
-			logger.warn("Server returned error on query " + searchFilter);
 		}
+
+		if (resultList.size() == 0)
+			return null;
 		return resultList;
 	}
 
@@ -174,6 +182,14 @@ public class EntryQueryMap implements Serializable {
 		return findResult;
 	}
 
+	private List<LDAPEntry> find(int maxResult) {
+		int lastMaxResults = getLdapConstraints().getMaxResults();
+		getLdapConstraints().setMaxResults(maxResult);
+		List<LDAPEntry> searchResult = find();
+		getLdapConstraints().setMaxResults(lastMaxResults);
+		return searchResult;
+	}
+
 	/**
 	 * 
 	 * @return
@@ -182,9 +198,13 @@ public class EntryQueryMap implements Serializable {
 		List<LDAPEntry> searchResult = new ArrayList<LDAPEntry>();
 		Map<String, Map<String, String[]>> resultMap = new HashMap<String, Map<String, String[]>>();
 
-		searchResult = find();
-		if (singleResult && enforceSingleResult && searchResult.size() > 1)
-			return resultMap;
+		if (singleResult)
+			searchResult = find(2);
+		else
+			searchResult = find();
+
+		if (searchResult == null || searchResult.size() == 0 || (singleResult && enforceSingleResult && searchResult.size() > 1))
+			return null;
 
 		Iterator<LDAPEntry> itrEntry = searchResult.iterator();
 		while (itrEntry.hasNext()) {
@@ -192,42 +212,36 @@ public class EntryQueryMap implements Serializable {
 			Map<String, String[]> entryMap = new HashMap<String, String[]>();
 			@SuppressWarnings("unchecked")
 			Iterator<LDAPAttribute> itrAttr = entry.getAttributeSet().iterator();
+
 			while (itrAttr.hasNext()) {
 				LDAPAttribute attr = itrAttr.next();
 				entryMap.put(attr.getName(), attr.getStringValueArray());
 			}
+
 			if (dnAsAttribute)
 				entryMap.put("dn", new String[] { entry.getDN() });
+
 			resultMap.put(entry.getDN(), entryMap);
 			if (singleResult)
 				break;
 		}
-		return resultMap;
-	}
 
-	public Collection<Map<String, String[]>> getResultCollection() {
-		return getResult().values();
+		return resultMap;
 	}
 
 	public Map<String, Map<String, String[]>> getResult() {
 		return getResult(false);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	public Collection<Map<String, String[]>> getResultCollection() {
+		return getResult().values();
+	}
+
 	public Map<String, String[]> getSingleResult() {
-		Map<String, String[]> resultMap = new HashMap<String, String[]>();
-
-		int maxResults = getLdapConstraints().getMaxResults();
-		getLdapConstraints().setMaxResults(2);
 		Map<String, Map<String, String[]>> searchResult = getResult(true);
-		getLdapConstraints().setMaxResults(maxResults);
-
-		if (!searchResult.values().isEmpty())
-			resultMap = searchResult.values().iterator().next();
-		return resultMap;
+		if (searchResult != null && !searchResult.values().isEmpty())
+			return searchResult.values().iterator().next();
+		return null;
 	}
 
 	/**

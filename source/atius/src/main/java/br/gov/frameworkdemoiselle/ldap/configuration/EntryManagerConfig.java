@@ -44,8 +44,14 @@ public class EntryManagerConfig implements Serializable {
 	@Name("findByExample.maxresult")
 	private int findByExampleMaxresult = 0;
 
-	@Name("logger")
-	private boolean logger = true;
+	@Name("query.enforceSingleResult")
+	private boolean enforceSingleResult = true;
+
+	@Name("query.dnAsAttribute")
+	private boolean dnAsAttribute = true;
+
+	@Name("verbose")
+	private boolean verbose = true;
 
 	/**
 	 * @return EntryManager.server property;
@@ -138,10 +144,24 @@ public class EntryManagerConfig implements Serializable {
 	}
 
 	/**
+	 * @return EntryManager.query.enforceSingleResult property;
+	 */
+	public boolean isEnforceSingleResult() {
+		return enforceSingleResult;
+	}
+
+	/**
+	 * @return EntryManager.query.dnAsAttribute property;
+	 */
+	public boolean isDnAsAttribute() {
+		return dnAsAttribute;
+	}
+
+	/**
 	 * @return EntryManager.logger property;
 	 */
-	public boolean isLogger() {
-		return logger;
+	public boolean isVerbose() {
+		return verbose;
 	}
 
 }
