@@ -1,6 +1,7 @@
 /*
  * Demoiselle Framework
  * Copyright (C) 2010 SERPRO
+ * Copyright (c) 2012 - Reinaldo de Carvalho <reinaldoc@gmail.com>
  * ----------------------------------------------------------------------------
  * This file is part of Demoiselle Framework.
  * 
