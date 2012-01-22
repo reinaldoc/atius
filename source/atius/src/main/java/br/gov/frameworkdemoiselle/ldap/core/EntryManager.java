@@ -131,12 +131,15 @@ public class EntryManager implements Serializable {
 	 * Persist a LDAP Entry. Use LDAP Add Operation
 	 * 
 	 * @param entry
-	 *            a MAP with key as attributes and values as attribute values
+	 *            a MAP with key as attributes and values as attribute values.
+	 *            The valid types for Object value is String, String[] or
+	 *            byte[], a wrong type throw EntryException
+	 * 
 	 * @param dn
 	 *            String Representation of Distinguished Name (RFC 1485)
 	 * @throws EntryException
 	 */
-	public void persist(Map<String, String[]> entry, String dn) {
+	public void persist(Map<String, Object> entry, String dn) {
 		coreMap.persist(entry, dn);
 	}
 
@@ -147,27 +150,35 @@ public class EntryManager implements Serializable {
 	 * 
 	 * @param entry
 	 *            a MAP with key as attributes and values as attribute values
+	 *            The valid types for Object value is String, String[] or
+	 *            byte[], a wrong type throw EntryException
 	 * @param dn
 	 *            String Representation of Distinguished Name (RFC 1485)
 	 * @throws EntryException
 	 */
-	public void merge(Map<String, String[]> entry, String dn) {
+	public void merge(Map<String, Object> entry, String dn) {
 		coreMap.merge(entry, dn);
 	}
 
 	/**
-	 * Update LDAP Entry to declared attributes only. Undeclared attributes will
-	 * be removed. Declared attributes will be replaced. You must declare all
-	 * required attributes. Use LDAP Modify Operation
+	 * Merge LDAP Entry to declared attributes only. Undeclared attributes will
+	 * be removed from DSA. Declared attributes will be replaced. You must
+	 * declare all required attributes. Use LDAP Modify Operation.
 	 * 
+	 * @param oldEntry
+	 *            a MAP with key as attributes and values as attribute values
+	 *            The valid types for Object value is String, String[] or
+	 *            byte[], a wrong type throw EntryException
 	 * @param entry
 	 *            a MAP with key as attributes and values as attribute values
+	 *            The valid types for Object value is String, String[] or
+	 *            byte[], a wrong type throw EntryException
 	 * @param dn
 	 *            String Representation of Distinguished Name (RFC 1485)
 	 * @throws EntryException
 	 */
-	public void update(Map<String, String[]> entry, String dn) {
-		coreMap.update(entry, dn);
+	public void merge(Map<String, Object> oldEntry, Map<String, Object> entry, String dn) {
+		coreMap.merge(oldEntry, entry, dn);
 	}
 
 	/**
@@ -247,8 +258,8 @@ public class EntryManager implements Serializable {
 	 * @LDAPEntry annotated object
 	 * @throws EntryException
 	 */
-	public void update(Object entry) {
-		core.update(entry);
+	public void update(Object oldEntry, Object entry) {
+		core.merge(oldEntry, entry);
 	}
 
 	/**

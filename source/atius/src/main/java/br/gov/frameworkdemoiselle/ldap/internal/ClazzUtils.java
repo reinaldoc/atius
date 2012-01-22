@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,14 +41,15 @@ public class ClazzUtils {
 	}
 
 	/**
-	 * Convert @LDAPEntry annotated object to Map<String, String[]>
+	 * Convert @LDAPEntry annotated object to Map<String, Object>. The valid
+	 * types for Object value is String, String[] or byte[]
 	 * 
 	 * @param entry
 	 * @return Entry Map
 	 */
-	public static Map<String, String[]> getStringsMap(Object entry) {
+	public static Map<String, Object> getObjectMap(Object entry) {
 		requireAnnotation(entry.getClass(), LDAPEntry.class);
-		Map<String, String[]> map = new HashMap<String, String[]>();
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		Field[] fields = getSuperClassesFields(entry.getClass());
 		for (Field field : fields) {
@@ -58,14 +60,37 @@ public class ClazzUtils {
 			Object value = Reflections.getFieldValue(field, entry);
 			if (value == null)
 				continue;
-			if (value instanceof String[])
-				map.put(field.getName(), (String[]) value);
-			else if (isAnnotationPresent(field.getType(), LDAPEntry.class))
-				map.put(field.getName(), new String[] { (String) getRequiredAnnotatedValue(value, Id.class) });
-			else
-				map.put(field.getName(), new String[] { value.toString() });
+			map.put(field.getName(), getObjectAsSupportedType(value));
 		}
 		return map;
+	}
+
+	public static Object getObjectAsSupportedType(Object obj) {
+		if (obj instanceof String || obj instanceof String[] || obj instanceof byte[])
+			return obj;
+		else if (isAnnotationPresent(obj.getClass(), LDAPEntry.class))
+			return getRequiredAnnotatedValue(obj, Id.class).toString();
+		else if (obj.getClass().isArray())
+			return convertToStringArrayFromArray(obj);
+		else if (isCollection(obj.getClass()))
+			return convertToStringArrayFromCollection(obj);
+		else
+			return obj.toString();
+	}
+
+	public static boolean isCollection(Class<?> clazz) {
+		for (Class<?> claz : clazz.getInterfaces())
+			if (claz == Collection.class)
+				return true;
+		return false;
+	}
+
+	public static String[] convertToStringArrayFromArray(Object array) {
+		return new String[] { "Future implementation" };
+	}
+
+	public static String[] convertToStringArrayFromCollection(Object array) {
+		return new String[] { "Future implementation" };
 	}
 
 	/**
@@ -270,8 +295,7 @@ public class ClazzUtils {
 		if (field.getType().isAssignableFrom(Byte.class))
 			return Byte.valueOf(value[0]);
 
-		logger.error("Handling not implemented for field " + field.getName() + " with type " + field.getType().getClass().getSimpleName());
-
+		logger.error("Handling not implemented for field " + field.getName() + " with type " + field.getType().getSimpleName());
 		return null;
 
 	}

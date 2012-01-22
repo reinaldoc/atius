@@ -18,15 +18,15 @@ public class EntryCore implements Serializable {
 	private EntryCoreMap coreMap;
 
 	public void persist(Object entry) {
-		coreMap.persist(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+		coreMap.persist(ClazzUtils.getObjectMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public void merge(Object entry) {
-		coreMap.merge(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+		coreMap.merge(ClazzUtils.getObjectMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
-	public void update(Object entry) {
-		coreMap.update(ClazzUtils.getStringsMap(entry), ClazzUtils.getDistinguishedName(entry));
+	public void merge(Object oldEntry, Object entry) {
+		coreMap.merge(ClazzUtils.getObjectMap(oldEntry), ClazzUtils.getObjectMap(entry), ClazzUtils.getDistinguishedName(entry));
 	}
 
 	public void remove(Object entry) {
@@ -36,8 +36,11 @@ public class EntryCore implements Serializable {
 	public <T> T find(Class<T> entryClass, Object id) {
 		try {
 			Map<String, String[]> map = coreMap.find(getReferenceFilter(entryClass, id));
+			if (map == null)
+				return null;
 			return ClazzUtils.getEntryObject(map.get("dn")[0], map, entryClass);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new EntryException("Error finding entry for Class " + entryClass + " and id " + id);
 		}
 	}
@@ -49,6 +52,7 @@ public class EntryCore implements Serializable {
 					new String[] { coreMap.findReference(getReferenceFilter(entryClass, id)) });
 			return entry;
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new EntryException("Error getting reference for Class " + entryClass + " and id " + id);
 		}
 	}

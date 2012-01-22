@@ -15,6 +15,7 @@ import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.configuration.EntryManagerConfig;
 import br.gov.frameworkdemoiselle.ldap.core.EntryQueryMap;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
+import br.gov.frameworkdemoiselle.util.Strings;
 
 import com.novell.ldap.LDAPAttribute;
 import com.novell.ldap.LDAPAttributeSet;
@@ -43,56 +44,118 @@ public class EntryCoreMap implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		verbose = entryManagerConfig.isLogger();
+		verbose = entryManagerConfig.isVerbose();
 	}
 
 	private LDAPConnection getConnection() {
 		return this.conn.initialized();
 	}
 
-	public void persist(Map<String, String[]> entry, String dn) {
+	public void persist(Map<String, Object> entry, String dn) {
 		loggerArgs(entry, dn);
 		try {
 			LDAPAttributeSet attributeSet = new LDAPAttributeSet();
-			for (Map.Entry<String, String[]> attrMap : entry.entrySet()) {
+
+			for (Map.Entry<String, Object> attrMap : entry.entrySet()) {
 				loggerEntry(attrMap.getKey(), attrMap.getValue());
-				attributeSet.add(new LDAPAttribute(attrMap.getKey(), attrMap.getValue()));
+
+				if (attrMap.getValue() instanceof String)
+					attributeSet.add(new LDAPAttribute(attrMap.getKey(), (String) attrMap.getValue()));
+
+				else if (attrMap.getValue() instanceof String[])
+					attributeSet.add(new LDAPAttribute(attrMap.getKey(), (String[]) attrMap.getValue()));
+
+				else if (attrMap.getValue() instanceof byte[])
+					attributeSet.add(new LDAPAttribute(attrMap.getKey(), (byte[]) attrMap.getValue()));
+
+				else
+					throw new EntryException("Error persisting entry " + dn
+							+ ". Attribute value should be String.class, String[].class or byte[].class");
+
 			}
+
 			LDAPEntry newEntry = new LDAPEntry(dn, attributeSet);
 			getConnection().add(newEntry);
+
 		} catch (LDAPException e) {
-			throw new EntryException("Error persisting entry " + dn);
+			throw new EntryException("Error persisting entry " + dn, e);
 		}
 	}
 
-	public void merge(Map<String, String[]> entry, String dn) {
+	public void merge(Map<String, Object> entry, String dn) {
 		loggerArgs(entry, dn);
 		try {
 			List<LDAPModification> modList = new ArrayList<LDAPModification>();
-			for (Map.Entry<String, String[]> attrMap : entry.entrySet()) {
+			for (Map.Entry<String, Object> attrMap : entry.entrySet()) {
 				loggerEntry(attrMap.getKey(), attrMap.getValue());
-				LDAPAttribute attribute = new LDAPAttribute(attrMap.getKey(), attrMap.getValue());
+
+				LDAPAttribute attribute;
+				if (attrMap.getValue() instanceof String)
+					attribute = new LDAPAttribute(attrMap.getKey(), (String) attrMap.getValue());
+
+				else if (attrMap.getValue() instanceof String[])
+					attribute = new LDAPAttribute(attrMap.getKey(), (String[]) attrMap.getValue());
+
+				else if (attrMap.getValue() instanceof byte[])
+					attribute = new LDAPAttribute(attrMap.getKey(), (byte[]) attrMap.getValue());
+
+				else
+					throw new EntryException("Error merging entry " + dn + ". Attribute value should be String.class, String[].class or byte[].class");
+
 				modList.add(new LDAPModification(LDAPModification.REPLACE, attribute));
 			}
 
 			LDAPModification[] modsList = modList.toArray(new LDAPModification[0]);
 			getConnection().modify(dn, modsList);
+
 		} catch (LDAPException e) {
-			throw new EntryException("Error merging entry " + dn);
+			throw new EntryException("Error merging entry " + dn + " - " + entry, e);
 		}
 	}
 
-	public void update(Map<String, String[]> entry, String dn) {
-		loggerArgs(entry, dn);
+	public void merge(Map<String, Object> oldEntry, Map<String, Object> newEntry, String dn) {
+		loggerArgs(newEntry, dn);
 		try {
-			throw new LDAPException();
+			List<LDAPModification> modList = new ArrayList<LDAPModification>();
+			for (String attr : oldEntry.keySet()) {
+				LDAPAttribute attribute;
+
+				if (newEntry.containsKey(attr)) {
+					loggerEntry(attr, newEntry.get(attr));
+
+					if (newEntry.get(attr) instanceof String)
+						attribute = new LDAPAttribute(attr, (String) newEntry.get(attr));
+
+					else if (newEntry.get(attr) instanceof String[])
+						attribute = new LDAPAttribute(attr, (String[]) newEntry.get(attr));
+
+					else if (newEntry.get(attr) instanceof byte[])
+						attribute = new LDAPAttribute(attr, (byte[]) newEntry.get(attr));
+
+					else
+						throw new EntryException("Error merging entry " + dn
+								+ ". Attribute value should be String.class, String[].class or byte[].class");
+
+					modList.add(new LDAPModification(LDAPModification.REPLACE, attribute));
+
+				} else {
+					loggerEntry(attr, null);
+
+					attribute = new LDAPAttribute(attr);
+					modList.add(new LDAPModification(LDAPModification.DELETE, attribute));
+				}
+			}
+
+			LDAPModification[] modsList = modList.toArray(new LDAPModification[0]);
+			getConnection().modify(dn, modsList);
+
 		} catch (LDAPException e) {
-			throw new EntryException("Error updating entry " + dn);
+			throw new EntryException("Error merging entry " + dn + " - " + newEntry);
 		}
 	}
 
 	public void remove(String dn) {
-		loggerArgs(null, dn);
+		loggerArgs(dn);
 		try {
 			getConnection().delete(dn);
 		} catch (LDAPException e) {
@@ -101,14 +164,14 @@ public class EntryCoreMap implements Serializable {
 	}
 
 	public Map<String, String[]> find(String searchFilter) {
-		loggerArgs(null, searchFilter);
+		loggerArgs(searchFilter);
 		queryMap.init();
 		queryMap.setSearchFilter(searchFilter);
 		return queryMap.getSingleResult();
 	}
 
 	public Map<String, String[]> getReference(String dn) {
-		loggerArgs(null, dn);
+		loggerArgs(dn);
 		queryMap.init();
 		queryMap.setBaseDn(dn);
 		queryMap.setScope(LDAPConnection.SCOPE_BASE);
@@ -117,16 +180,15 @@ public class EntryCoreMap implements Serializable {
 	}
 
 	public String findReference(String searchFilter) {
-		loggerArgs(null, searchFilter);
+		loggerArgs(searchFilter);
 		queryMap.init();
 		queryMap.setSearchFilter(searchFilter);
 		return queryMap.getSingleDn();
 	}
 
-	private void loggerArgs(Object entry, Object dn) {
+	private void loggerArgs(Object... arg) {
 		if (verbose) {
-			logger.info(Thread.currentThread().getStackTrace()[2].getMethodName() + "(" + entry + "," + dn + ")");
-			logger.info("dn: " + dn);
+			logger.info("@" + Thread.currentThread().getStackTrace()[2].getMethodName() + "(" + Strings.join(arg, ", ") + ")");
 		}
 	}
 

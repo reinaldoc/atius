@@ -52,22 +52,33 @@ public class EntryQuery implements Serializable {
 		return null;
 	}
 
+	public String getPartialFilter(String attr, String value, boolean isConjunction) {
+		if (isConjunction)
+			return "(" + attr + "=" + value + ")";
+		else
+			return "(" + attr + "=*" + value + "*)";
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T> List<T> findByExample(T entry, boolean isConjunction, int maxResult) {
-		Map<String, String[]> map = ClazzUtils.getStringsMap(entry);
+		Map<String, Object> map = ClazzUtils.getObjectMap(entry);
+
 		String filter = "";
-		for (Map.Entry<String, String[]> mapEntry : map.entrySet())
-			for (String value : mapEntry.getValue())
-				if (isConjunction)
-					filter = filter + "(" + mapEntry.getKey() + "=" + value + ")";
-				else
-					filter = filter + "(" + mapEntry.getKey() + "=*" + value + "*)";
+		for (Map.Entry<String, Object> mapEntry : map.entrySet())
+			if (mapEntry.getValue() instanceof String)
+				filter = filter + getPartialFilter(mapEntry.getKey(), (String) mapEntry.getValue(), isConjunction);
+			else if (mapEntry.getValue() instanceof String[])
+				for (String value : (String[]) mapEntry.getValue())
+					filter = filter + getPartialFilter(mapEntry.getKey(), value, isConjunction);
+
 		if (filter.isEmpty())
 			return null;
+
 		if (isConjunction)
 			setSearchFilter("(&(objectClass=" + entry.getClass().getSimpleName() + ")(&" + filter + "))");
 		else
 			setSearchFilter("(&(objectClass=" + entry.getClass().getSimpleName() + ")(|" + filter + "))");
+
 		setMaxResults(maxResult);
 		return getResultList();
 	}
