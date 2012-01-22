@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.ldap.annotation.DistinguishedName;
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
+import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.util.Beans;
 
 public class EntryCore implements Serializable {
@@ -37,23 +38,27 @@ public class EntryCore implements Serializable {
 			Map<String, String[]> map = coreMap.find(getReferenceFilter(entryClass, id));
 			return ClazzUtils.getEntryObject(map.get("dn")[0], map, entryClass);
 		} catch (Exception e) {
-			return null;
+			throw new EntryException("Error finding entry for Class " + entryClass + " and id " + id);
 		}
 	}
 
 	public <T> T getReference(Class<T> entryClass, Object id) {
-		T entry = Beans.getReference(entryClass);
-		ClazzUtils.setAnnotatedFieldValueAs(entry, DistinguishedName.class,
-				new String[] { coreMap.findReference(getReferenceFilter(entryClass, id)) });
-		return entry;
+		try {
+			T entry = Beans.getReference(entryClass);
+			ClazzUtils.setAnnotatedFieldValueAs(entry, DistinguishedName.class,
+					new String[] { coreMap.findReference(getReferenceFilter(entryClass, id)) });
+			return entry;
+		} catch (Exception e) {
+			throw new EntryException("Error getting reference for Class " + entryClass + " and id " + id);
+		}
 	}
 
 	public String findReference(Object searchFilter) {
 		return coreMap.findReference((String) searchFilter);
 	}
 
-	public static String getReferenceFilter(Class<?> entryClass, Object id) {
-		String fieldName = ClazzUtils.getFieldName(ClazzUtils.getRequiredFieldAnnotatedAs(entryClass.getClass(), Id.class));
+	private static String getReferenceFilter(Class<?> entryClass, Object id) {
+		String fieldName = ClazzUtils.getFieldName(ClazzUtils.getRequiredFieldAnnotatedAs(entryClass, Id.class));
 		return "(&(objectClass=" + entryClass.getSimpleName() + ")(" + fieldName + "=" + id + "))";
 	}
 
