@@ -163,14 +163,14 @@ public class EntryCoreMap implements Serializable {
 		}
 	}
 
-	public Map<String, String[]> find(String searchFilter) {
+	public Map<String, Object> find(String searchFilter) {
 		loggerArgs(searchFilter);
 		queryMap.init();
 		queryMap.setSearchFilter(searchFilter);
 		return queryMap.getSingleResult();
 	}
 
-	public Map<String, String[]> getReference(String dn) {
+	public Map<String, Object> getReference(String dn) {
 		loggerArgs(dn);
 		queryMap.init();
 		queryMap.setBaseDn(dn);

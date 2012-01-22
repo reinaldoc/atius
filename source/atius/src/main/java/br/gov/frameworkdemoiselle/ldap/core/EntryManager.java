@@ -199,7 +199,7 @@ public class EntryManager implements Serializable {
 	 *            String Representation of Search Filters (RFC 4515)
 	 * @return a MAP with key as attributes and values as attribute values
 	 */
-	public Map<String, String[]> find(String searchFilter) {
+	public Map<String, Object> find(String searchFilter) {
 		return coreMap.find(searchFilter);
 	}
 
@@ -210,7 +210,7 @@ public class EntryManager implements Serializable {
 	 *            String Representation of Distinguished Name (RFC 1485)
 	 * @return a MAP with key as attributes and values as attribute values
 	 */
-	public Map<String, String[]> getReference(String dn) {
+	public Map<String, Object> getReference(String dn) {
 		return coreMap.getReference(dn);
 	}
 

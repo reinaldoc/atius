@@ -68,22 +68,22 @@ public class LdapAuthenticator extends AbstractAuthenticatorModule<LdapAuthentic
 	}
 
 	private void updateSecurityUser(SecurityUser securityUser) {
-		Map<String, String> attMap;
+		Map<String, Object> attMap;
 		attMap = entryManager.createQueryMap(ldapAuthConfig.getUserSearchFilter().replaceAll("%u", securityUser.getLogin()))
 				.getSingleAttributesResult();
 
-		securityUser.setName(attMap.get(ldapAuthConfig.getCnAttr()));
-		securityUser.setOrgunit(attMap.get(ldapAuthConfig.getOuAttr()));
-		securityUser.setDescription(attMap.get(ldapAuthConfig.getDescriptionAttr()));
+		securityUser.setName((String) attMap.get(ldapAuthConfig.getCnAttr()));
+		securityUser.setOrgunit((String) attMap.get(ldapAuthConfig.getOuAttr()));
+		securityUser.setDescription((String) attMap.get(ldapAuthConfig.getDescriptionAttr()));
 		results.setSecurityUser(securityUser);
 
 		userBC.insertOrUpdate(securityUser);
 
-		Iterator<Map.Entry<String, String>> entryIter = attMap.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> entryIter = attMap.entrySet().iterator();
 		while (entryIter.hasNext()) {
-			Map.Entry<String, String> entry = entryIter.next();
+			Map.Entry<String, Object> entry = entryIter.next();
 			if (entry.getValue() != null)
-				results.getGenericResults().put(entry.getKey().toLowerCase(), entry.getValue());
+				results.getGenericResults().put(entry.getKey().toLowerCase(), (String) entry.getValue());
 		}
 	}
 

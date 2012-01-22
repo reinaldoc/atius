@@ -35,10 +35,10 @@ public class EntryCore implements Serializable {
 
 	public <T> T find(Class<T> entryClass, Object id) {
 		try {
-			Map<String, String[]> map = coreMap.find(getReferenceFilter(entryClass, id));
+			Map<String, Object> map = coreMap.find(getReferenceFilter(entryClass, id));
 			if (map == null)
 				return null;
-			return ClazzUtils.getEntryObject(map.get("dn")[0], map, entryClass);
+			return ClazzUtils.getEntryObject(((String[])map.get("dn"))[0], map, entryClass);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new EntryException("Error finding entry for Class " + entryClass + " and id " + id);

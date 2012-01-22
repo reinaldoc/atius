@@ -45,7 +45,7 @@ public class EntryQuery implements Serializable {
 		init();
 		queryMap.setDnAsAttibute(false);
 		queryMap.setMaxResults(2);
-		Map<String, Map<String, String[]>> map = queryMap.getResult();
+		Map<String, Map<String, Object>> map = queryMap.getResult();
 		if (map.size() == 1)
 			return ClazzUtils.getEntryObjectList(map,
 					ClazzUtils.getRequiredClassForSearchFilter(searchFilter, entryManagerConfig.getLdapentryPackages())).get(0);
@@ -61,26 +61,31 @@ public class EntryQuery implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public <T> List<T> findByExample(T entry, boolean isConjunction, int maxResult) {
-		Map<String, Object> map = ClazzUtils.getObjectMap(entry);
+		try {
+			Map<String, Object> map = ClazzUtils.getObjectMap(entry);
 
-		String filter = "";
-		for (Map.Entry<String, Object> mapEntry : map.entrySet())
-			if (mapEntry.getValue() instanceof String)
-				filter = filter + getPartialFilter(mapEntry.getKey(), (String) mapEntry.getValue(), isConjunction);
-			else if (mapEntry.getValue() instanceof String[])
-				for (String value : (String[]) mapEntry.getValue())
-					filter = filter + getPartialFilter(mapEntry.getKey(), value, isConjunction);
+			String filter = "";
+			for (Map.Entry<String, Object> mapEntry : map.entrySet())
+				if (mapEntry.getValue() instanceof String)
+					filter = filter + getPartialFilter(mapEntry.getKey(), (String) mapEntry.getValue(), isConjunction);
+				else if (mapEntry.getValue() instanceof String[])
+					for (String value : (String[]) mapEntry.getValue())
+						filter = filter + getPartialFilter(mapEntry.getKey(), value, isConjunction);
 
-		if (filter.isEmpty())
-			return null;
+			if (filter.isEmpty())
+				return null;
 
-		if (isConjunction)
-			setSearchFilter("(&(objectClass=" + entry.getClass().getSimpleName() + ")(&" + filter + "))");
-		else
-			setSearchFilter("(&(objectClass=" + entry.getClass().getSimpleName() + ")(|" + filter + "))");
+			if (isConjunction)
+				setSearchFilter("(&(objectClass=" + entry.getClass().getSimpleName() + ")(&" + filter + "))");
+			else
+				setSearchFilter("(&(objectClass=" + entry.getClass().getSimpleName() + ")(|" + filter + "))");
 
-		setMaxResults(maxResult);
-		return getResultList();
+			setMaxResults(maxResult);
+			return getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public <T> List<T> findByExample(T entry, boolean isConjunction) {

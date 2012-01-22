@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -57,6 +56,8 @@ public class EntryQueryMap implements Serializable {
 
 	private boolean enforceSingleResult;
 
+	private List<String> binaryAttributes;
+
 	private boolean verbose;
 
 	@PostConstruct
@@ -68,6 +69,7 @@ public class EntryQueryMap implements Serializable {
 		basedn = entryManagerConfig.getBasedn();
 		dnAsAttribute = entryManagerConfig.isDnAsAttribute();
 		enforceSingleResult = entryManagerConfig.isEnforceSingleResult();
+		binaryAttributes = entryManagerConfig.getBinaryAttributes();
 		verbose = entryManagerConfig.isVerbose();
 	}
 
@@ -130,26 +132,53 @@ public class EntryQueryMap implements Serializable {
 		return this.conn.initialized();
 	}
 
+	private LDAPSearchResults search() {
+		try {
+			return getConnection().search(basedn, scope, searchFilter, resultAttributes, false, getLdapConstraints());
+		} catch (LDAPException e) {
+			throw new EntryException("Server returned error on query " + searchFilter, e);
+		}
+	}
+
+	/**
+	 * Object can be String[] or byte[][]
+	 * 
+	 * @param entry
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private Map<String, Object> getObjectMapForEntry(LDAPEntry entry) {
+		Map<String, Object> entryMap = new HashMap<String, Object>();
+		Iterator<LDAPAttribute> itrAttr = entry.getAttributeSet().iterator();
+
+		while (itrAttr.hasNext()) {
+			LDAPAttribute attr = itrAttr.next();
+			if (binaryAttributes.contains(attr.getName()))
+				entryMap.put(attr.getName(), attr.getByteValueArray());
+			else
+				entryMap.put(attr.getName(), attr.getStringValueArray());
+		}
+
+		if (dnAsAttribute)
+			entryMap.put("dn", new String[] { entry.getDN() });
+
+		return entryMap;
+	}
+
 	/**
 	 * 
 	 * @param searchFilter
 	 * @param resultAttributes
 	 * @return
 	 */
-	private List<LDAPEntry> find() {
-		List<LDAPEntry> resultList = new ArrayList<LDAPEntry>();
-
-		LDAPSearchResults searchResults = null;
-		try {
-			searchResults = getConnection().search(basedn, scope, searchFilter, resultAttributes, false, getLdapConstraints());
-		} catch (LDAPException e) {
-			throw new EntryException("Server returned error on query " + searchFilter, e);
-		}
+	private Map<String, Map<String, Object>> find() {
+		Map<String, Map<String, Object>> resultMap = new HashMap<String, Map<String, Object>>();
+		LDAPSearchResults searchResults = search();
 
 		while (searchResults != null && searchResults.hasMore()) {
 			try {
 				LDAPEntry entry = searchResults.next();
-				resultList.add(entry);
+				resultMap.put(entry.getDN(), getObjectMapForEntry(entry));
 			} catch (LDAPReferralException e) {
 				// Ignore referrals;
 			} catch (LDAPException e) {
@@ -162,9 +191,9 @@ public class EntryQueryMap implements Serializable {
 			}
 		}
 
-		if (resultList.size() == 0)
+		if (resultMap.size() == 0)
 			return null;
-		return resultList;
+		return resultMap;
 	}
 
 	/**
@@ -172,20 +201,20 @@ public class EntryQueryMap implements Serializable {
 	 * @param resultAttributes
 	 * @return
 	 */
-	private List<LDAPEntry> find(String[] resultAttributes) {
+	private Map<String, Map<String, Object>> find(String[] resultAttributes) {
 		String[] resultAttributesSaved = null;
 		if (this.resultAttributes != null)
 			resultAttributesSaved = this.resultAttributes.clone();
 		this.resultAttributes = resultAttributes;
-		List<LDAPEntry> findResult = find();
+		Map<String, Map<String, Object>> findResult = find();
 		this.resultAttributes = resultAttributesSaved;
 		return findResult;
 	}
 
-	private List<LDAPEntry> find(int maxResult) {
+	private Map<String, Map<String, Object>> find(int maxResult) {
 		int lastMaxResults = getLdapConstraints().getMaxResults();
 		getLdapConstraints().setMaxResults(maxResult);
-		List<LDAPEntry> searchResult = find();
+		Map<String, Map<String, Object>> searchResult = find();
 		getLdapConstraints().setMaxResults(lastMaxResults);
 		return searchResult;
 	}
@@ -194,51 +223,30 @@ public class EntryQueryMap implements Serializable {
 	 * 
 	 * @return
 	 */
-	private Map<String, Map<String, String[]>> getResult(boolean singleResult) {
-		List<LDAPEntry> searchResult = new ArrayList<LDAPEntry>();
-		Map<String, Map<String, String[]>> resultMap = new HashMap<String, Map<String, String[]>>();
+	private Map<String, Map<String, Object>> getResult(boolean singleResult) {
+		Map<String, Map<String, Object>> resultMap = new HashMap<String, Map<String, Object>>();
 
 		if (singleResult)
-			searchResult = find(2);
+			resultMap = find(2);
 		else
-			searchResult = find();
+			resultMap = find();
 
-		if (searchResult == null || searchResult.size() == 0 || (singleResult && enforceSingleResult && searchResult.size() > 1))
+		if (resultMap == null || resultMap.size() == 0 || (singleResult && enforceSingleResult && resultMap.size() > 1))
 			return null;
-
-		Iterator<LDAPEntry> itrEntry = searchResult.iterator();
-		while (itrEntry.hasNext()) {
-			LDAPEntry entry = itrEntry.next();
-			Map<String, String[]> entryMap = new HashMap<String, String[]>();
-			@SuppressWarnings("unchecked")
-			Iterator<LDAPAttribute> itrAttr = entry.getAttributeSet().iterator();
-
-			while (itrAttr.hasNext()) {
-				LDAPAttribute attr = itrAttr.next();
-				entryMap.put(attr.getName(), attr.getStringValueArray());
-			}
-
-			if (dnAsAttribute)
-				entryMap.put("dn", new String[] { entry.getDN() });
-
-			resultMap.put(entry.getDN(), entryMap);
-			if (singleResult)
-				break;
-		}
 
 		return resultMap;
 	}
 
-	public Map<String, Map<String, String[]>> getResult() {
+	public Map<String, Map<String, Object>> getResult() {
 		return getResult(false);
 	}
 
-	public Collection<Map<String, String[]>> getResultCollection() {
+	public Collection<Map<String, Object>> getResultCollection() {
 		return getResult().values();
 	}
 
-	public Map<String, String[]> getSingleResult() {
-		Map<String, Map<String, String[]>> searchResult = getResult(true);
+	public Map<String, Object> getSingleResult() {
+		Map<String, Map<String, Object>> searchResult = getResult(true);
 		if (searchResult != null && !searchResult.values().isEmpty())
 			return searchResult.values().iterator().next();
 		return null;
@@ -248,36 +256,31 @@ public class EntryQueryMap implements Serializable {
 	 * 
 	 * @return
 	 */
-	public Map<String, String> getSingleAttributesResult() {
-		Map<String, String[]> searchResult = getSingleResult();
-		Map<String, String> returnResult = new HashMap<String, String>();
-		Iterator<String> iter = searchResult.keySet().iterator();
-		while (iter.hasNext()) {
-			String attr = iter.next();
-			String[] valuesList = searchResult.get(attr);
-			if (valuesList.length > 0)
-				returnResult.put(attr, valuesList[0]);
-		}
-		return returnResult;
+	public Map<String, Object> getSingleAttributesResult() {
+		Map<String, Object> searchResult = getSingleResult();
+		for (Map.Entry<String, Object> entry : searchResult.entrySet())
+			if (entry.getValue() instanceof String[])
+				entry.setValue(((String[]) entry.getValue())[0]);
+			else if (entry.getValue() instanceof byte[][])
+				entry.setValue(((byte[][]) entry.getValue())[0]);
+		return searchResult;
 	}
 
 	/**
 	 * Set result attributes is required.
 	 * 
-	 * @return
+	 * @return should be casted for String or byte[] for binaries
 	 */
-	public String getSingleAttributeResult() {
-		String result = new String();
+	public Object getSingleAttributeResult() {
 		if (resultAttributes == null || resultAttributes.length == 0)
-			return result;
+			return null;
 
-		Map<String, String> resultMap = getSingleAttributesResult();
-		for (String attr : resultAttributes) {
-			if (resultMap.containsKey(attr)) {
+		Map<String, Object> resultMap = getSingleAttributesResult();
+		for (String attr : resultAttributes)
+			if (resultMap.containsKey(attr))
 				return resultMap.get(attr);
-			}
-		}
-		return result;
+
+		return null;
 	}
 
 	/**
@@ -302,9 +305,11 @@ public class EntryQueryMap implements Serializable {
 	 */
 	public List<String> getDnList() {
 		List<String> dnList = new ArrayList<String>();
-		ListIterator<LDAPEntry> itr = find(new String[] { "-" }).listIterator();
-		while (itr.hasNext()) {
-			dnList.add(itr.next().getDN());
+		Map<String, Map<String, Object>> result = find(new String[] { "-" });
+		if (result == null)
+			return null;
+		for (String dn : result.keySet()) {
+			dnList.add(dn);
 		}
 		return dnList;
 	}
@@ -315,22 +320,30 @@ public class EntryQueryMap implements Serializable {
 	 * 
 	 * @return a list of the Attributes values
 	 */
-	public List<String> getAttributeList() {
+	public List<Object> getAttributeList() {
 		if (resultAttributes == null || resultAttributes.length == 0)
-			return new ArrayList<String>();
+			return null;
 
-		List<String> resultList = new ArrayList<String>();
-		ListIterator<LDAPEntry> itr = find().listIterator();
-		while (itr.hasNext()) {
-			LDAPEntry entry = itr.next();
-			for (int i = 0; i != resultAttributes.length; i++) {
-				LDAPAttribute attr = entry.getAttribute(resultAttributes[i]);
-				String[] attrArray = attr.getStringValueArray();
-				for (int y = 0; y != attrArray.length; y++) {
-					resultList.add(attrArray[y]);
+		Map<String, Map<String, Object>> result = find(new String[] { "-" });
+		if (result == null)
+			return null;
+
+		List<Object> resultList = new ArrayList<Object>();
+		for (Map<String, Object> entry : result.values())
+			for (String resultAttribute : resultAttributes)
+				if (entry.containsKey(resultAttribute)) {
+					Object attrObj = entry.get(resultAttribute);
+					if (attrObj instanceof String[]) {
+						String[] attrArray = (String[]) entry.get(resultAttribute);
+						for (String attr : attrArray)
+							resultList.add(attr);
+					} else if (attrObj instanceof byte[][]) {
+						byte[][] attrArray = (byte[][]) entry.get(resultAttribute);
+						for (byte[] attr : attrArray)
+							resultList.add(attr);
+					}
 				}
-			}
-		}
+
 		return resultList;
 	}
 

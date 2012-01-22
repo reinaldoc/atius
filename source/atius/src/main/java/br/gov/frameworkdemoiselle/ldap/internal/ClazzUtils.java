@@ -99,15 +99,17 @@ public class ClazzUtils {
 	 * @param entry
 	 * @return Entry Map
 	 */
-	public static <T> List<T> getEntryObjectList(Map<String, Map<String, String[]>> entryMap, Class<T> clazz) {
+	public static <T> List<T> getEntryObjectList(Map<String, Map<String, Object>> entryMap, Class<T> clazz) {
+		if (entryMap == null)
+			return null;
 		requireAnnotation(clazz, LDAPEntry.class);
 		List<T> resultList = new ArrayList<T>();
-		for (Map.Entry<String, Map<String, String[]>> mapEntry : entryMap.entrySet())
+		for (Map.Entry<String, Map<String, Object>> mapEntry : entryMap.entrySet())
 			resultList.add(getEntryObject(mapEntry.getKey(), mapEntry.getValue(), clazz));
 		return resultList;
 	}
 
-	public static <T> T getEntryObject(String dn, Map<String, String[]> map, Class<T> clazz) {
+	public static <T> T getEntryObject(String dn, Map<String, Object> map, Class<T> clazz) {
 		T entry = Beans.getReference(clazz);
 		Field[] fields = getSuperClassesFields(entry.getClass());
 		for (Field field : fields) {
@@ -245,59 +247,88 @@ public class ClazzUtils {
 	 * @param entry
 	 * @param value
 	 */
-	public static void setFieldValue(Field field, Object entry, String[] value) {
+	public static void setFieldValue(Field field, Object entry, Object value) {
 		Reflections.setFieldValue(field, entry, getValueAsFieldType(field, value));
 	}
 
-	public static Object getValueAsFieldType(Field field, String[] value) {
-		if (value == null || value.length == 0)
-			return null;
+	public static Object getValueAsFieldType(Field field, Object values) {
+		if (values instanceof String[]) {
+			String[] valueArray = (String[]) values;
 
-		if (field.getType().isAssignableFrom(String.class))
-			return value[0];
+			if (valueArray == null || valueArray.length == 0)
+				return null;
 
-		if (field.getType().isPrimitive()) {
-			if (field.getType().isAssignableFrom(int.class))
-				return Integer.valueOf(value[0]);
-			if (field.getType().isAssignableFrom(long.class))
-				return Long.valueOf(value[0]);
-			if (field.getType().isAssignableFrom(double.class))
-				return Double.valueOf(value[0]);
-			if (field.getType().isAssignableFrom(float.class))
-				return Float.valueOf(value[0]);
-			if (field.getType().isAssignableFrom(short.class))
-				return Short.valueOf(value[0]);
-			if (field.getType().isAssignableFrom(byte.class))
-				return Byte.valueOf(value[0]);
+			if (field.getType().isAssignableFrom(String.class))
+				return valueArray[0];
+
+			if (field.getType().isArray())
+				if (field.getType().getComponentType().isAssignableFrom(String.class))
+					return valueArray;
+
+			if (field.getType().isPrimitive()) {
+
+				if (field.getType().isAssignableFrom(int.class))
+					return Integer.valueOf(valueArray[0]);
+
+				if (field.getType().isAssignableFrom(long.class))
+					return Long.valueOf(valueArray[0]);
+				
+				if (field.getType().isAssignableFrom(double.class))
+					return Double.valueOf(valueArray[0]);
+				
+				if (field.getType().isAssignableFrom(float.class))
+					return Float.valueOf(valueArray[0]);
+				
+				if (field.getType().isAssignableFrom(short.class))
+					return Short.valueOf(valueArray[0]);
+				
+				if (field.getType().isAssignableFrom(byte.class))
+					return Byte.valueOf(valueArray[0]);
+				
+			}
+
+			if (isAnnotationPresent(field.getType(), LDAPEntry.class))
+				return getMappedEntryObject(field.getType(), valueArray);
+
+			if (field.getType().isAssignableFrom(ArrayList.class))
+				if (String.class.isAssignableFrom(Reflections.getGenericTypeArgument(field.getType(), 0)))
+					return new ArrayList<String>(Arrays.asList(valueArray));
+
+			if (field.getType().isAssignableFrom(Integer.class))
+				return Integer.valueOf(valueArray[0]);
+
+			if (field.getType().isAssignableFrom(Long.class))
+				return Long.valueOf(valueArray[0]);
+			
+			if (field.getType().isAssignableFrom(Double.class))
+				return Double.valueOf(valueArray[0]);
+			
+			if (field.getType().isAssignableFrom(Float.class))
+				return Float.valueOf(valueArray[0]);
+			
+			if (field.getType().isAssignableFrom(Short.class))
+				return Short.valueOf(valueArray[0]);
+			
+			if (field.getType().isAssignableFrom(Byte.class))
+				return Byte.valueOf(valueArray[0]);
+
+			logger.error("Handling not implemented for field " + field.getName() + " with type " + field.getType().getSimpleName());
+
+		} else if (values instanceof byte[][]) {
+
+			if (field.getType().isAssignableFrom(byte[][].class))
+				return values;
+
+			if (field.getType().isAssignableFrom(byte[].class))
+				return ((byte[][]) values)[0];
+
+			logger.error("Binary data from LDAP can't be set in " + field.getName() + " with type " + field.getType().getSimpleName());
+
 		}
 
-		if (field.getType().isArray())
-			if (field.getType().getComponentType().isAssignableFrom(String.class))
-				return value;
-
-		if (isAnnotationPresent(field.getType(), LDAPEntry.class))
-			return getMappedEntryObject(field.getType(), value);
-
-		if (field.getType().isAssignableFrom(ArrayList.class))
-			if (String.class.isAssignableFrom(Reflections.getGenericTypeArgument(field.getType(), 0)))
-				return new ArrayList<String>(Arrays.asList(value));
-
-		if (field.getType().isAssignableFrom(Integer.class))
-			return Integer.valueOf(value[0]);
-		if (field.getType().isAssignableFrom(Long.class))
-			return Long.valueOf(value[0]);
-		if (field.getType().isAssignableFrom(Double.class))
-			return Double.valueOf(value[0]);
-		if (field.getType().isAssignableFrom(Float.class))
-			return Float.valueOf(value[0]);
-		if (field.getType().isAssignableFrom(Short.class))
-			return Short.valueOf(value[0]);
-		if (field.getType().isAssignableFrom(Byte.class))
-			return Byte.valueOf(value[0]);
-
-		logger.error("Handling not implemented for field " + field.getName() + " with type " + field.getType().getSimpleName());
+		logger.error("Object value should be String[] or byte[][]. The value type " + values.getClass() + " can't be set in " + field.getName()
+				+ " with type " + field.getType().getSimpleName());
 		return null;
-
 	}
 
 	public static Object getMappedEntryObject(Class<?> clazz, String[] value) {
