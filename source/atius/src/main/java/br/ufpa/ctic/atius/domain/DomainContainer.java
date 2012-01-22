@@ -8,14 +8,14 @@ public class DomainContainer extends Entry {
 	@Id
 	private String cn;
 
-	private Integer nextUidNumber;
+	private int nextUidNumber;
 
 	public DomainContainer() {
 		super();
 	}
 
-	public DomainContainer(boolean forMerge) {
-		super(forMerge);
+	public DomainContainer(boolean skipObjectClass) {
+		super(skipObjectClass);
 	}
 
 	protected String[] objectClass() {
@@ -30,11 +30,11 @@ public class DomainContainer extends Entry {
 		this.cn = cn;
 	}
 
-	public Integer getNextUidNumber() {
+	public int getNextUidNumber() {
 		return nextUidNumber;
 	}
 
-	public void setNextUidNumber(Integer nextUidNumber) {
+	public void setNextUidNumber(int nextUidNumber) {
 		this.nextUidNumber = nextUidNumber;
 	}
 
