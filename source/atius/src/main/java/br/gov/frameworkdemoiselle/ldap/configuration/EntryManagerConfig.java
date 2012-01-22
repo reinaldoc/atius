@@ -50,6 +50,9 @@ public class EntryManagerConfig implements Serializable {
 	@Name("query.dnAsAttribute")
 	private boolean dnAsAttribute = true;
 
+	@Name("query.binaryAttributes")
+	private List<String> binaryAttributes;
+
 	@Name("verbose")
 	private boolean verbose = true;
 
@@ -155,6 +158,13 @@ public class EntryManagerConfig implements Serializable {
 	 */
 	public boolean isDnAsAttribute() {
 		return dnAsAttribute;
+	}
+
+	/**
+	 * @return EntryManager.query.binaryAttributes property;
+	 */
+	public List<String> getBinaryAttributes() {
+		return binaryAttributes;
 	}
 
 	/**
