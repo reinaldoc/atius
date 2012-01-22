@@ -17,7 +17,7 @@ import br.gov.frameworkdemoiselle.annotation.Ignore;
 import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.annotation.DistinguishedName;
-import br.gov.frameworkdemoiselle.ldap.annotation.EntryKey;
+import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.annotation.LDAPEntry;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.util.Beans;
@@ -61,7 +61,7 @@ public class ClazzUtils {
 			if (value instanceof String[])
 				map.put(field.getName(), (String[]) value);
 			else if (isAnnotationPresent(field.getType(), LDAPEntry.class))
-				map.put(field.getName(), new String[] { (String) getRequiredAnnotatedValue(value, EntryKey.class) });
+				map.put(field.getName(), new String[] { (String) getRequiredAnnotatedValue(value, Id.class) });
 			else
 				map.put(field.getName(), new String[] { value.toString() });
 		}
@@ -74,15 +74,16 @@ public class ClazzUtils {
 	 * @param entry
 	 * @return Entry Map
 	 */
-	public static List<?> getEntryObjectList(Map<String, Map<String, String[]>> entryMap, Class<?> clazz) {
+	public static <T> List<T> getEntryObjectList(Map<String, Map<String, String[]>> entryMap, Class<T> clazz) {
 		requireAnnotation(clazz, LDAPEntry.class);
-		List<Object> resultList = new ArrayList<Object>();
+		List<T> resultList = new ArrayList<T>();
 		for (Map.Entry<String, Map<String, String[]>> mapEntry : entryMap.entrySet())
-			resultList.add(getEntryObject(mapEntry.getKey(), mapEntry.getValue(), Beans.getReference(clazz)));
+			resultList.add(getEntryObject(mapEntry.getKey(), mapEntry.getValue(), clazz));
 		return resultList;
 	}
 
-	public static Object getEntryObject(String dn, Map<String, String[]> map, Object entry) {
+	public static <T> T getEntryObject(String dn, Map<String, String[]> map, Class<T> clazz) {
+		T entry = Beans.getReference(clazz);
 		Field[] fields = getSuperClassesFields(entry.getClass());
 		for (Field field : fields) {
 			if (field.isAnnotationPresent(Ignore.class))
@@ -185,23 +186,30 @@ public class ClazzUtils {
 		throw new EntryException("Class " + entry.getClass().getSimpleName() + " doesn't have a valid value for @" + clazz.getSimpleName());
 	}
 
-	public static Field getFieldAnnotatedAs(Object entry, Class<? extends Annotation> clazz) {
-		Field[] fields = getSuperClassesFields(entry.getClass());
-		for (Field field : fields)
-			if (field.isAnnotationPresent(clazz))
-				return field;
-		return null;
-	}
-
 	/**
 	 * Get annotated value
 	 * 
 	 * @param entry
 	 */
 	private static Object getAnnotatedValue(Object entry, Class<? extends Annotation> clazz) {
-		Field field = getFieldAnnotatedAs(entry, clazz);
+		Field field = getFieldAnnotatedAs(entry.getClass(), clazz);
 		if (field != null)
 			return Reflections.getFieldValue(field, entry);
+		return null;
+	}
+
+	public static Field getRequiredFieldAnnotatedAs(Class<?> claz, Class<? extends Annotation> clazz) {
+		Field field = getFieldAnnotatedAs(claz, clazz);
+		if (field == null)
+			throw new EntryException("Field with @" + clazz.getSimpleName() + " not found");
+		return null;
+	}
+
+	public static Field getFieldAnnotatedAs(Class<?> claz, Class<? extends Annotation> clazz) {
+		Field[] fields = getSuperClassesFields(claz);
+		for (Field field : fields)
+			if (field.isAnnotationPresent(clazz))
+				return field;
 		return null;
 	}
 
@@ -257,7 +265,7 @@ public class ClazzUtils {
 
 	public static Object getMappedEntryObject(Class<?> clazz, String[] value) {
 		Object entry = Beans.getReference(clazz);
-		setAnnotatedFieldValueAs(entry, EntryKey.class, value);
+		setAnnotatedFieldValueAs(entry, Id.class, value);
 		return entry;
 	}
 
@@ -267,7 +275,7 @@ public class ClazzUtils {
 	 * @param entry
 	 */
 	public static void setAnnotatedFieldValueAs(Object entry, Class<? extends Annotation> clazz, String[] value) {
-		Field field = getFieldAnnotatedAs(entry, clazz);
+		Field field = getFieldAnnotatedAs(entry.getClass(), clazz);
 		setFieldValue(field, entry, value);
 	}
 
