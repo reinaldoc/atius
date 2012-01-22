@@ -13,11 +13,10 @@ public class InetOrgPersonBC extends DelegateCrud<InetOrgPerson, String, InetOrg
 	private static final long serialVersionUID = 1L;
 
 	public List<InetOrgPerson> findPerson(String search) {
-		return getDelegate().findPerson(search);
-	}
-
-	public InetOrgPerson loadByEmail(String mail) {
-		return getDelegate().load(mail);
+		InetOrgPerson inetOrgPerson = new InetOrgPerson(true);
+		inetOrgPerson.setCn(search);
+		inetOrgPerson.setMail(search);
+		return getDelegate().findByExample(inetOrgPerson, false, 10);
 	}
 
 }

@@ -45,9 +45,7 @@ public interface Crud<T, I> extends Serializable {
 
 	List<T> findAll();
 
-	List<T> findByExample(T example);
-
-	List<T> findByDisjunctionExample(T example);
+	List<T> findByExample(T example, boolean isConjunction, int maxResult);
 
 	void insert(T bean);
 

@@ -304,31 +304,12 @@ public class JPACrud<T, I> implements Crud<T, I> {
 	 *            an entity example
 	 * @return a list of entities
 	 */
-	public List<T> findByExample(final T example) {
-		final CriteriaQuery<T> criteria = createCriteriaByExample(example, true);
-		return getEntityManager().createQuery(criteria).getResultList();
-	}
-
-	/**
-	 * Retrieves a list of entities based on a single example instance with OR
-	 * logic between attributes of it. Attention for default fields values.
-	 * <p>
-	 * See below a sample of its usage:
-	 * 
-	 * <pre>
-	 * Employee example = new Employee();
-	 * example.setLogin(&quot;john&quot;);
-	 * example.setName(&quot;john&quot;);
-	 * return (List&lt;Employee&gt;) findByExample(example);
-	 * </pre>
-	 * 
-	 * @param example
-	 *            an entity example
-	 * @return a list of entities
-	 */
-	public List<T> findByDisjunctionExample(final T example) {
-		final CriteriaQuery<T> criteria = createCriteriaByExample(example, false);
-		return getEntityManager().createQuery(criteria).getResultList();
+	public List<T> findByExample(final T example, boolean isConjunction, int maxResult) {
+		final CriteriaQuery<T> criteria = createCriteriaByExample(example, isConjunction);
+		TypedQuery<T> query = getEntityManager().createQuery(criteria);
+		if (maxResult > 0)
+			query.setMaxResults(maxResult);
+		return query.getResultList();
 	}
 
 	/**
