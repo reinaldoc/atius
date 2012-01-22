@@ -21,8 +21,8 @@ public class InetOrgPerson extends Entry {
 		super();
 	}
 
-	public InetOrgPerson(boolean forMerge) {
-		super(forMerge);
+	public InetOrgPerson(boolean skipObjectClass) {
+		super(skipObjectClass);
 	}
 
 	public String getCn() {
