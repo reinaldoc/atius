@@ -142,7 +142,7 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 				Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.available.success", getBean().getServerName()));
 			else {
 				Faces.validationFailed();
-				Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.available.unavailable"));
+				Faces.addMessage(bc.getBundle().getI18nMessage("atius.sites.websites.available.unavailable", getBean().getServerName()));
 			}
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
