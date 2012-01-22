@@ -17,7 +17,7 @@ public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, Web
 	private static final long serialVersionUID = 1L;
 
 	public List<WebsiteCategory> getOrderedWebsiteCategories() {
-		List<WebsiteCategory> list = getDelegate().findAll();
+		List<WebsiteCategory> list = findAll();
 
 		Map<Long, WebsiteCategory> orderIdx = new HashMap<Long, WebsiteCategory>();
 		List<Long> orderIdxList = new ArrayList<Long>();
@@ -32,7 +32,6 @@ public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, Web
 			orderedList.add(orderIdx.get(idx));
 		}
 		return orderedList;
-
 	}
 
 }
