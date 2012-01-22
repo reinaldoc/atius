@@ -98,7 +98,7 @@ public class LDAPCrud<T, I> implements Crud<T, I> {
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		return getEntryManager().createQuery("objectClass=" + beanClass.getSimpleName()).getResultList();
+		return getEntryManager().createQuery("objectClass=" + getBeanClass().getSimpleName()).getResultList();
 	}
 
 	public List<T> findByExample(T example, boolean isConjunction, int maxResult) {
