@@ -54,7 +54,7 @@ public class ConnectionManager implements Serializable {
 	@SuppressWarnings("unused")
 	@PostConstruct
 	private void init() throws URISyntaxException {
-		if (entryManagerConfig.isLogger())
+		if (entryManagerConfig.isVerbose())
 			verbose = true;
 		connURI = new ConnectionURI(entryManagerConfig.getServer(), entryManagerConfig.isStarttls());
 		binddn = entryManagerConfig.getBinddn();
