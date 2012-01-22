@@ -1,10 +1,12 @@
 package br.ufpa.ctic.atius.domain;
 
 import br.gov.frameworkdemoiselle.annotation.Name;
+import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
 public class WebsiteProfile extends Entry {
 
+	@Id
 	@Name("cn")
 	private String name;
 

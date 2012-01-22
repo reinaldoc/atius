@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
 public class WebsiteDomain extends Entry {
@@ -13,6 +14,7 @@ public class WebsiteDomain extends Entry {
 	@Size(min = 10, max = 128, message = "Identifique melhor a entidade responsável.")
 	private String cn;
 
+	@Id
 	@Size(min = 10, max = 128, message = "Especifique o domínio.")
 	@Pattern(regexp = "^(?!www\\.).*$", message = "Não use www no domínio.")
 	private String serverName;

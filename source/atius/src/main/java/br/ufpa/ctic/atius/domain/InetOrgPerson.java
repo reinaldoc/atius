@@ -2,19 +2,27 @@ package br.ufpa.ctic.atius.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.gov.frameworkdemoiselle.ldap.annotation.EntryKey;
+import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
 public class InetOrgPerson extends Entry {
 
 	private String cn;
 
-	@EntryKey
+	@Id
 	@NotEmpty(message = "Identifique o contato")
 	private String mail;
 
 	protected String[] objectClass() {
 		return new String[] { "inetOrgPerson" };
+	}
+
+	public InetOrgPerson() {
+		super();
+	}
+
+	public InetOrgPerson(boolean forMerge) {
+		super(forMerge);
 	}
 
 	public String getCn() {
