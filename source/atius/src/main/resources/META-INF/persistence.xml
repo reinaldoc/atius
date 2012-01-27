@@ -8,6 +8,7 @@
 	<persistence-unit name="atius-ds" transaction-type="RESOURCE_LOCAL">
 		<non-jta-data-source>java:/AtiusDS</non-jta-data-source>
 
+		<class>br.ufpa.ctic.atius.db.domain.WebsiteFiles</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfile</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfileByRule</class>
