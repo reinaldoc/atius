@@ -196,7 +196,7 @@ input[type=text].filter {
 	width: 100%;
 }
 
-.dialog-body .ui-paginator-top {
+.dialog-body .ui-datatable .ui-paginator-top {
 	border: 0px;
 }
 
@@ -285,8 +285,11 @@ ul.dialog-messages li {
 	background: none !important;
 }
 
-.dialog-datatable-role .ui-datatable-data-empty tr,.dialog-datatable-profile .ui-datatable-data-empty tr,.dialog-datatable-user .ui-datatable-data-empty tr,.dialog-datatable-profileByRule .ui-datatable-data-empty tr
-	{
+.dialog-datatable-smallest table tbody.ui-datatable-data-empty tr {
+	height: 90px;
+}
+
+.dialog-datatable-small table tbody.ui-datatable-data-empty tr {
 	height: 175px;
 }
 

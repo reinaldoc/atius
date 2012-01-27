@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid id="atius-sites-upload-panel-id" cellpadding="0" cellspacing="0">
+
+		<p:dialog id="atius-sites-upload-dlg-id" header="ATIUS - Termos Digitalizados de Website" widgetVar="atius_sites_upload_dlg" modal="true"
+			width="500" resizable="false" closable="false">
+
+			<h:panelGrid columns="1" styleClass="dialog-body">
+
+				<h:form prependId="false">
+					<p:dataTable id="atius-sites-upload-datatable-id" widgetVar="atius_sites_upload_dt_wv" emptyMessage="Não há termos"
+						value="#{websiteFilesListMB.resultList}" var="atius_sites_upload_dt_row" rows="5" paginator="true" paginatorAlwaysVisible="true"
+						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-smallest">
+
+						<p:column headerText="Responsável">
+							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+								<h:outputText value="#{atius_sites_upload_dt_row.name}" />
+							</h:panelGroup>
+						</p:column>
+
+						<p:column headerText="Data">
+							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+								<h:outputText value="#{atius_sites_upload_dt_row.name}" />
+							</h:panelGroup>
+						</p:column>
+
+						<p:column>
+							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+								<h:outputText value="#{atius_sites_upload_dt_row.name}" />
+							</h:panelGroup>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+
+				<h:form prependId="false" enctype="multipart/form-data">
+					<p:fileUpload fileUploadListener="#{websiteFilesListMB.upload}" mode="advanced" update="atius-sites-upload-datatable-id" sizeLimit="1000000"
+						allowTypes="/(\.|\/)(pdf)$/" label="Enviar novo termo" fileLimit="2" showButtons="false" />
+				</h:form>
+
+			</h:panelGrid>
+
+			<h:panelGroup id="atius-sites-upload-dlg-buttons-id">
+				<h:form prependId="false">
+					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this" onclick="atius_sites_upload_dlg.hide()" />
+				</h:form>
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:panelGrid>
+
+
+</ui:composition>
