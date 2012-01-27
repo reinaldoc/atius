@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.domain;
+package br.ufpa.ctic.atius.websites.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

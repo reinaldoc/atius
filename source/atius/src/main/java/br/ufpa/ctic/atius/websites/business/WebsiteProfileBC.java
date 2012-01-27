@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.business;
+package br.ufpa.ctic.atius.websites.business;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -8,8 +8,8 @@ import java.util.Locale;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
-import br.ufpa.ctic.atius.domain.WebsiteProfile;
-import br.ufpa.ctic.atius.persistence.WebsiteProfileDAO;
+import br.ufpa.ctic.atius.websites.domain.WebsiteProfile;
+import br.ufpa.ctic.atius.websites.persistence.WebsiteProfileDAO;
 
 @BusinessController
 public class WebsiteProfileBC extends DelegateCrud<WebsiteProfile, String, WebsiteProfileDAO> {

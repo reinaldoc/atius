@@ -1,11 +1,11 @@
-package br.ufpa.ctic.atius.business;
+package br.ufpa.ctic.atius.websites.business;
 
 import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.util.Faces;
-import br.ufpa.ctic.atius.domain.DomainContainer;
-import br.ufpa.ctic.atius.persistence.DomainContainerDAO;
+import br.ufpa.ctic.atius.websites.domain.DomainContainer;
+import br.ufpa.ctic.atius.websites.persistence.DomainContainerDAO;
 
 @BusinessController
 public class DomainContainerBC extends DelegateCrud<DomainContainer, String, DomainContainerDAO> {

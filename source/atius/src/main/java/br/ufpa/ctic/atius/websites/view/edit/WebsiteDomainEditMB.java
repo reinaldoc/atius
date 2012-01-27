@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.view.edit;
+package br.ufpa.ctic.atius.websites.view.edit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,9 +17,9 @@ import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.FileRenderer;
 import br.gov.frameworkdemoiselle.util.Parameter;
 import br.gov.frameworkdemoiselle.util.Strings;
-import br.ufpa.ctic.atius.business.WebsiteDomainBC;
-import br.ufpa.ctic.atius.domain.InetOrgPerson;
-import br.ufpa.ctic.atius.domain.WebsiteDomain;
+import br.ufpa.ctic.atius.websites.business.WebsiteDomainBC;
+import br.ufpa.ctic.atius.websites.domain.InetOrgPerson;
+import br.ufpa.ctic.atius.websites.domain.WebsiteDomain;
 
 @ViewController
 public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, String> {

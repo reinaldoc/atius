@@ -1,10 +1,10 @@
-package br.ufpa.ctic.atius.persistence;
+package br.ufpa.ctic.atius.websites.persistence;
 
 import java.util.List;
 
 import br.gov.frameworkdemoiselle.ldap.template.LDAPCrud;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.ufpa.ctic.atius.domain.WebsiteDomain;
+import br.ufpa.ctic.atius.websites.domain.WebsiteDomain;
 
 @PersistenceController
 public class WebsiteDomainDAO extends LDAPCrud<WebsiteDomain, String> {

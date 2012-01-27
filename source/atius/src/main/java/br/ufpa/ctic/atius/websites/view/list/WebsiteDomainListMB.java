@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.view.list;
+package br.ufpa.ctic.atius.websites.view.list;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractListPageBean;
 import br.gov.frameworkdemoiselle.util.Faces;
-import br.ufpa.ctic.atius.business.WebsiteDomainBC;
-import br.ufpa.ctic.atius.domain.WebsiteCategory;
-import br.ufpa.ctic.atius.domain.WebsiteDomain;
+import br.ufpa.ctic.atius.websites.business.WebsiteDomainBC;
+import br.ufpa.ctic.atius.websites.domain.WebsiteCategory;
+import br.ufpa.ctic.atius.websites.domain.WebsiteDomain;
 
 @ViewController
 public class WebsiteDomainListMB extends AbstractListPageBean<WebsiteDomain, String> {

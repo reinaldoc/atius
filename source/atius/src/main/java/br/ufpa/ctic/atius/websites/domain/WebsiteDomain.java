@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.domain;
+package br.ufpa.ctic.atius.websites.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

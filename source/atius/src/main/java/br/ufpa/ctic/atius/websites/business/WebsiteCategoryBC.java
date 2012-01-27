@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.business;
+package br.ufpa.ctic.atius.websites.business;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,8 +8,8 @@ import java.util.Map;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
-import br.ufpa.ctic.atius.domain.WebsiteCategory;
-import br.ufpa.ctic.atius.persistence.WebsiteCategoryDAO;
+import br.ufpa.ctic.atius.websites.domain.WebsiteCategory;
+import br.ufpa.ctic.atius.websites.persistence.WebsiteCategoryDAO;
 
 @BusinessController
 public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, WebsiteCategoryDAO> {

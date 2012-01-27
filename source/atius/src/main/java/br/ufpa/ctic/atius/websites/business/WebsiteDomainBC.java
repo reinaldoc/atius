@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.business;
+package br.ufpa.ctic.atius.websites.business;
 
 import java.util.List;
 
@@ -10,12 +10,12 @@ import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.util.Faces;
 import br.gov.frameworkdemoiselle.util.MenuContext;
 import br.gov.frameworkdemoiselle.util.Strings;
-import br.ufpa.ctic.atius.domain.DomainContainer;
-import br.ufpa.ctic.atius.domain.InetOrgPerson;
-import br.ufpa.ctic.atius.domain.WebsiteCategory;
-import br.ufpa.ctic.atius.domain.WebsiteDomain;
-import br.ufpa.ctic.atius.domain.WebsiteProfile;
-import br.ufpa.ctic.atius.persistence.WebsiteDomainDAO;
+import br.ufpa.ctic.atius.websites.domain.DomainContainer;
+import br.ufpa.ctic.atius.websites.domain.InetOrgPerson;
+import br.ufpa.ctic.atius.websites.domain.WebsiteCategory;
+import br.ufpa.ctic.atius.websites.domain.WebsiteDomain;
+import br.ufpa.ctic.atius.websites.domain.WebsiteProfile;
+import br.ufpa.ctic.atius.websites.persistence.WebsiteDomainDAO;
 
 @BusinessController
 public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, WebsiteDomainDAO> {

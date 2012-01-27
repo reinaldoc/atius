@@ -1,11 +1,11 @@
-package br.ufpa.ctic.atius.persistence;
+package br.ufpa.ctic.atius.websites.persistence;
 
 import br.gov.frameworkdemoiselle.ldap.template.LDAPCrud;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.ufpa.ctic.atius.domain.DomainContainer;
+import br.ufpa.ctic.atius.websites.domain.WebsiteProfile;
 
 @PersistenceController
-public class DomainContainerDAO extends LDAPCrud<DomainContainer, String> {
+public class WebsiteProfileDAO extends LDAPCrud<WebsiteProfile, String> {
 
 	private static final long serialVersionUID = 1L;
 

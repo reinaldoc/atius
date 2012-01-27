@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.domain;
+package br.ufpa.ctic.atius.websites.domain;
 
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;

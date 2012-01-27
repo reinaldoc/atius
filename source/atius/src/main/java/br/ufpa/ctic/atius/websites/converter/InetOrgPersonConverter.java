@@ -1,11 +1,11 @@
-package br.ufpa.ctic.atius.converter;
+package br.ufpa.ctic.atius.websites.converter;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.ufpa.ctic.atius.domain.InetOrgPerson;
+import br.ufpa.ctic.atius.websites.domain.InetOrgPerson;
 
 @FacesConverter("inetOrgPerson")
 public class InetOrgPersonConverter implements Converter {
