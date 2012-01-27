@@ -17,7 +17,7 @@
 		
 			<p:dataTable id="faa-role-list-datatable-id" widgetVar="faa_role_dt_wv" emptyMessage="Não há registros"
 				value="#{roleListMB.lazyDataModel}" var="faa_role_dt_row" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
-				paginatorAlwaysVisible="false" lazy="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 				
 				<p:column styleClass="faa-label faa-label-role">
 					<h:outputText value="Role" />
@@ -43,9 +43,9 @@
 				
 				<p:column style="float: right; text-align: right; padding: 0px">
 					<h:panelGroup layout="block" style="width: 100px; overflow: hidden; white-space: pre">
-						<p:commandButton image="ui-icon-search" immediate="true" update="faa-role-edit-dlg-body-id, faa-role-edit-dlg-buttons-id"
+						<p:commandButton icon="ui-icon-search" immediate="true" update="faa-role-edit-dlg-body-id, faa-role-edit-dlg-buttons-id"
 							action="#{roleEditMB.editById(faa_role_dt_row.id)}" oncomplete="faa_role_edit_dlg.show()" title="Editar Informações" />
-						<p:commandButton image="ui-icon-trash" immediate="true" update="faa-role-delete-dlg-id"
+						<p:commandButton icon="ui-icon-trash" immediate="true" update="faa-role-delete-dlg-id"
 							action="#{roleEditMB.editById(faa_role_dt_row.id)}" oncomplete="faa_role_delete_dlg.show()" title="Excluir Recurso" />
 					</h:panelGroup>
 				</p:column>

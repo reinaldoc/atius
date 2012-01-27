@@ -14,7 +14,7 @@
 						<h:inputText id="atius-sites-edit-servername-id" value="#{websiteDomainEditMB.bean.serverName}" autocomplete="off"
 							onkeypress="return event.keyCode!=13" style="width: #{websiteDomainEditMB.updateMode ? '375px' : '337px' };"
 							readonly="#{websiteDomainEditMB.updateMode ? 'true' : 'false' }" />
-						<p:commandButton image="ui-icon-gear" title="Verificar" action="#{websiteDomainEditMB.domainAvailable}"
+						<p:commandButton icon="ui-icon-gear" title="Verificar" action="#{websiteDomainEditMB.domainAvailable}"
 							update="atius-sites-edit-dlg-save-id:messages" style="margin-left: 10px; margin-right: 0px; vertical-align: bottom;"
 							process="@this, atius-sites-edit-servername-id" oncomplete="showNotification('atius-sites-edit-dlg-save-id');"
 							rendered="#{!websiteDomainEditMB.updateMode}" />

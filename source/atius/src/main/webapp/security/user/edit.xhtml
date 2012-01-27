@@ -19,7 +19,7 @@
 						<h:panelGroup>
 							<h:inputText id="faa-user-edit-login-id" value="#{userEditMB.bean.login}" autocomplete="off" onkeypress="return event.keyCode!=13"
 								style="width: #{userEditMB.updateMode ? '375px' : '337px' };" readonly="#{userEditMB.updateMode ? 'true' : 'false' }" />
-							<p:commandButton image="ui-icon-gear" title="Verificar" action="#{userEditMB.userAvailable}" update="faa-user-edit-dlg-save-id:messages"
+							<p:commandButton icon="ui-icon-gear" title="Verificar" action="#{userEditMB.userAvailable}" update="faa-user-edit-dlg-save-id:messages"
 								style="margin-left: 10px; margin-right: 0px; vertical-align: bottom;" process="@this, faa-user-edit-login-id"
 								oncomplete="showNotification('faa-user-edit-dlg-save-id');" rendered="#{!userEditMB.updateMode}" />
 						</h:panelGroup>
@@ -33,11 +33,11 @@
 						<h:outputText value="Password:" />
 						<h:panelGroup layout="block" style="display: inline-block; width: 100%;">
 							<h:inputSecret value="#{userEditMB.bean.password}" style="width: 120px;" autocomplete="off" onkeypress="return event.keyCode!=13" />
-							<p:commandButton id="faa-user-edit-info-passwordrepeat" image="ui-icon-arrowthickstop-1-e" onclick="return false;"
+							<p:commandButton id="faa-user-edit-info-passwordrepeat" icon="ui-icon-arrowthickstop-1-e" onclick="return false;"
 								style="margin-left: 7px; margin-right: 7px; vertical-align: bottom;" />
 							<p:tooltip for="faa-user-edit-info-passwordrepeat" value="Repita a senha para confirmação!" />
 							<h:inputSecret value="#{userEditMB.bean.passwordrepeat}" style="width: 120px;" autocomplete="off" onkeypress="return event.keyCode!=13" />
-							<p:commandButton image="ui-icon-transferthick-e-w" style="float: right; vertical-align: bottom;" immediate="true"
+							<p:commandButton icon="ui-icon-transferthick-e-w" style="float: right; vertical-align: bottom;" immediate="true"
 								update="faa-user-edit-profile-panel-id" oncomplete="faa_user_edit_profile_dlg.show()" title="Selecionar perfis" />
 						</h:panelGroup>
 
@@ -47,7 +47,7 @@
 
 						<p:dataTable id="faa-user-edit-datatable-profile-id" widgetVar="faa_user_dt_profile_wv" emptyMessage="Não há perfis associados"
 							value="#{userEditMB.bean.profiles}" var="faa_user_dt_profile_row" rows="9" paginator="true" paginatorAlwaysVisible="true"
-							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-user">
+							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-small">
 
 							<p:column headerText="Perfis:" sortBy="#{faa_user_dt_profile_row.name}">
 
@@ -86,7 +86,7 @@
 
 					<p:dataTable id="faa-user-edit-datatable-profile-select-id" widgetVar="faa_user_dt_profile_select_wv" emptyMessage="Não há perfis"
 						value="#{userEditMB.profileList}" var="faa_user_dt_profile_select_row" rows="5" paginator="true" paginatorAlwaysVisible="true"
-						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-user"
+						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-small"
 						selection="#{userEditMB.profileArray}" rowKey="#{faa_user_dt_profile_select_row.id}">
 
 						<p:column selectionMode="multiple" style="text-align: center" />

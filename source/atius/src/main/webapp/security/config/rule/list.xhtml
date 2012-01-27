@@ -31,14 +31,14 @@
 		<h:panelGroup id="faa-profileByRule-list-id">
 
 			<h:panelGroup layout="block" style="display: block; margin-bottom: 10px">
-				<p:commandButton image="ui-icon-plus" value="Nova Regra" immediate="true"
+				<p:commandButton icon="ui-icon-plus" value="Nova Regra" immediate="true"
 					update="faa-profileByRule-edit-dlg-body-id, faa-profileByRule-edit-dlg-buttons-id" action="#{profileByRuleEditMB.editBean()}"
 					oncomplete="faa_profileByRule_edit_dlg.show()" />
 			</h:panelGroup>
 
 			<p:dataTable id="faa-profileByRule-list-datatable-id" widgetVar="faa_profileByRule_dt_wv" emptyMessage="Não há regras"
 				value="#{profileByRuleListMB.lazyDataModel}" var="faa_profileByRule_dt_row" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
-				paginatorAlwaysVisible="false" lazy="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 
 				<p:column styleClass="faa-label faa-label-profileByRule">
 					<h:outputText value="Rule" />
@@ -79,15 +79,15 @@
 
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 
-						<p:commandButton image="ui-icon-search" immediate="true" update="faa-profileByRule-edit-dlg-body-id, faa-profileByRule-edit-dlg-buttons-id"
+						<p:commandButton icon="ui-icon-search" immediate="true" update="faa-profileByRule-edit-dlg-body-id, faa-profileByRule-edit-dlg-buttons-id"
 							action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" oncomplete="faa_profileByRule_edit_dlg.show()" title="Editar Regra" />
 
-						<p:commandButton image="#{!faa_profileByRule_dt_row.enabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }" immediate="true"
+						<p:commandButton icon="#{!faa_profileByRule_dt_row.enabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }" immediate="true"
 							update="faa-config-profileByRule-tabView-id:faa-profileByRule-status-dlg-id"
 							action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" oncomplete="faa_profileByRule_status_dlg.show()"
 							title="#{!faa_profileByRule_dt_row.enabled ? 'Ativar' : 'Desativar' } Regra" />
 
-						<p:commandButton image="ui-icon-trash" immediate="true" update="faa-config-profileByRule-tabView-id:faa-profileByRule-delete-dlg-id"
+						<p:commandButton icon="ui-icon-trash" immediate="true" update="faa-config-profileByRule-tabView-id:faa-profileByRule-delete-dlg-id"
 							action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" oncomplete="faa_profileByRule_delete_dlg.show()" title="Excluir Regra" />
 
 					</h:panelGroup>

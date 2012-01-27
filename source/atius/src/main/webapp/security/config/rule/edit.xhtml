@@ -37,7 +37,7 @@
 							</p:selectOneMenu>
 
 							<h:inputText value="#{profileByRuleEditMB.bean.value}" autocomplete="off" onkeypress="return event.keyCode!=13" style="width: 150px" />
-							<p:commandButton image="ui-icon-transferthick-e-w" style="float: right; vertical-align: bottom;" immediate="true"
+							<p:commandButton icon="ui-icon-transferthick-e-w" style="float: right; vertical-align: bottom;" immediate="true"
 								update="faa-profileByRule-edit-profile-panel-id" oncomplete="faa_profileByRule_edit_profile_dlg.show()" title="Selecionar perfis" />
 
 						</h:panelGroup>
@@ -90,7 +90,7 @@
 					<p:dataTable id="faa-profileByRule-edit-datatable-profile-select-id" widgetVar="faa_profileByRule_dt_profile_select_wv"
 						emptyMessage="Não há perfis" value="#{profileByRuleEditMB.profileList}" var="faa_profileByRule_dt_profile_select_row" rows="5" paginator="true"
 						paginatorAlwaysVisible="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top"
-						styleClass="dialog-datatable dialog-datatable-profileByRule" selection="#{profileByRuleEditMB.profileArray}"
+						styleClass="dialog-datatable dialog-datatable-small" selection="#{profileByRuleEditMB.profileArray}"
 						rowKey="#{faa_profileByRule_dt_profile_select_row.id}">
 
 						<p:column selectionMode="multiple" style="text-align: center" />

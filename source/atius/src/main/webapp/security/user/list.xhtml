@@ -22,7 +22,7 @@
 
 		<h:panelGroup id="faa-user-list-id">
 			<p:dataTable id="faa-user-list-datatable-id" widgetVar="faa_user_dt_wv" emptyMessage="Não há registros" value="#{userListMB.lazyDataModel}"
-				var="faa_user_dt_row" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true" paginatorAlwaysVisible="false" lazy="true"
+				var="faa_user_dt_row" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true" paginatorAlwaysVisible="false"
 				pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 				<p:column styleClass="faa-label faa-label-user">
 					<h:outputText value="User" />
@@ -44,12 +44,12 @@
 				</p:column>
 				<p:column style="text-align: right; padding: 0px">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<p:commandButton image="ui-icon-search" immediate="true" update="faa-user-edit-dlg-body-id, faa-user-edit-dlg-buttons-id"
+						<p:commandButton icon="ui-icon-search" immediate="true" update="faa-user-edit-dlg-body-id, faa-user-edit-dlg-buttons-id"
 							action="#{userEditMB.editById(faa_user_dt_row.id)}" oncomplete="faa_user_edit_dlg.show()" title="Editar Informações" />
-						<p:commandButton image="#{!faa_user_dt_row.enabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }" immediate="true" update="faa-user-status-dlg-id"
+						<p:commandButton icon="#{!faa_user_dt_row.enabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }" immediate="true" update="faa-user-status-dlg-id"
 							action="#{userEditMB.editById(faa_user_dt_row.id)}" oncomplete="faa_user_status_dlg.show()"
 							title="#{!faa_user_dt_row.enabled ? 'Ativar' : 'Desativar' } Usuário" />
-						<p:commandButton image="ui-icon-trash" immediate="true" update="faa-user-delete-dlg-id" action="#{userEditMB.editById(faa_user_dt_row.id)}"
+						<p:commandButton icon="ui-icon-trash" immediate="true" update="faa-user-delete-dlg-id" action="#{userEditMB.editById(faa_user_dt_row.id)}"
 							oncomplete="faa_user_delete_dlg.show()" title="Excluir Usuário" />
 					</h:panelGroup>
 				</p:column>

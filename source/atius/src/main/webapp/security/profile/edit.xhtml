@@ -36,7 +36,7 @@
 								<f:selectItem itemLabel="-" itemValue="" />
 								<f:selectItems value="#{profileEditMB.resourcePriorities}" />
 							</p:selectOneMenu>
-							<p:commandButton image="ui-icon-transferthick-e-w" style="float: right;" immediate="true" update="faa-profile-edit-role-panel-id"
+							<p:commandButton icon="ui-icon-transferthick-e-w" style="float: right;" immediate="true" update="faa-profile-edit-role-panel-id"
 								oncomplete="faa_profile_edit_role_dlg.show()" title="Selecionar papéis" />
 						</h:panelGroup>
 
@@ -46,7 +46,7 @@
 
 						<p:dataTable id="faa-profile-edit-datatable-role-id" widgetVar="faa_profile_dt_role_wv" emptyMessage="Não há papéis associados"
 							value="#{profileEditMB.bean.roles}" var="faa_profile_dt_role_row" rows="9" paginator="true" paginatorAlwaysVisible="true"
-							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-profile">
+							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-small">
 
 							<p:column headerText="Papéis:" sortBy="#{faa_profile_dt_role_row.name}">
 
@@ -89,7 +89,7 @@
 
 					<p:dataTable id="faa-profile-edit-datatable-role-select-id" widgetVar="faa_profile_dt_role_select_wv" emptyMessage="Não há papéis"
 						value="#{profileEditMB.roleList}" var="faa_profile_dt_role_select_row" rows="5" paginator="true" paginatorAlwaysVisible="true"
-						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-profile"
+						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-small"
 						selection="#{profileEditMB.roleArray}" rowKey="#{faa_profile_dt_role_select_row.id}">
 
 						<p:column selectionMode="multiple" style="text-align: center" />
