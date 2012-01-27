@@ -7,11 +7,11 @@
 
 	<groupId>br.ufpa.ctic</groupId>
 	<artifactId>atius</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>war</packaging>
 
-	<name></name>
-	<description></description>
+	<name>ATIUS</name>
+	<description>Software de Gestão de Serviços de TI Universitário</description>
 	<url></url>
 
 	<parent>
@@ -40,8 +40,13 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>3.0.M4</version><!--$NO-MVN-MAN-VER$ -->
+			<version>3.0.1</version><!--$NO-MVN-MAN-VER$ -->
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ocpsoft</groupId>
+			<artifactId>prettyfaces-jsf2</artifactId>
+			<version>3.3.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
@@ -49,20 +54,32 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.ocpsoft</groupId>
-			<artifactId>prettyfaces-jsf2</artifactId>
-			<version>3.3.0</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+        <!-- File Upload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- LDAP Implementation -->
 		<dependency>
 			<groupId>com.novell.ldap</groupId>
 			<artifactId>jldap</artifactId>
 			<version>4.3</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<resources>
