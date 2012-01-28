@@ -3,32 +3,58 @@
 
 	<h:panelGrid id="atius-sites-upload-panel-id" cellpadding="0" cellspacing="0">
 
+		<h:form prependId="false">
+
+			<p:confirmDialog message="Deseja excluir o termo: #{websiteFilesListMB.websiteFiles.serverName} de #{websiteFilesListMB.websiteFiles.date}?" header="Atenção!" severity="alert"
+				id="atius-sites-upload-delete-dlg-id" widgetVar="atius_sites_upload_delete_dlg">
+
+				<p:commandButton value="Sim" oncomplete="atius_sites_upload_delete_dlg.hide()" update="atius-sites-upload-datatable-id, atius-growl-id"
+					action="#{websiteFilesListMB.delete}" actionListener="#{websiteFilesListMB.clearResultList}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_sites_upload_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
+		</h:form>
+
 		<p:dialog id="atius-sites-upload-dlg-id" header="ATIUS - Termos Digitalizados de Website" widgetVar="atius_sites_upload_dlg" modal="true"
-			width="500" resizable="false" closable="false">
+			width="750" resizable="false" closable="false">
 
 			<h:panelGrid columns="1" styleClass="dialog-body">
 
 				<h:form prependId="false">
+
+
 					<p:dataTable id="atius-sites-upload-datatable-id" widgetVar="atius_sites_upload_dt_wv" emptyMessage="Não há termos"
 						value="#{websiteFilesListMB.resultList}" var="atius_sites_upload_dt_row" rows="5" paginator="true" paginatorAlwaysVisible="true"
 						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-smallest">
 
-						<p:column headerText="Responsável">
+						<p:column headerText="Website">
 							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-								<h:outputText value="#{atius_sites_upload_dt_row.name}" />
+								<h:outputText value="#{atius_sites_upload_dt_row.serverName}" />
 							</h:panelGroup>
 						</p:column>
 
-						<p:column headerText="Data">
+						<p:column headerText="Responsável" sortBy="#{atius_sites_upload_dt_row.owner}">
 							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-								<h:outputText value="#{atius_sites_upload_dt_row.name}" />
+								<h:outputText value="#{atius_sites_upload_dt_row.owner}" />
+							</h:panelGroup>
+						</p:column>
+
+						<p:column headerText="Data" sortBy="#{atius_sites_upload_dt_row.date}">
+							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+								<h:outputText value="#{atius_sites_upload_dt_row.date}" />
 							</h:panelGroup>
 						</p:column>
 
 						<p:column>
-							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-								<h:outputText value="#{atius_sites_upload_dt_row.name}" />
-							</h:panelGroup>
+							<p:commandButton icon="ui-icon-print" ajax="false">
+								<p:fileDownload value="#{atius_sites_upload_dt_row.fileStream}" />
+							</p:commandButton>
+
+							<p:commandButton icon="ui-icon-trash" title="Excluir Termo" oncomplete="atius_sites_upload_delete_dlg.show()"
+								action="#{websiteFilesListMB.selectWebsiteFile(atius_sites_upload_dt_row)}" update="atius-sites-upload-delete-dlg-id" />
+
 						</p:column>
 
 					</p:dataTable>
