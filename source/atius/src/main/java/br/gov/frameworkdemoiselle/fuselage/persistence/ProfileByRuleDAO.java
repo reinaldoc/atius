@@ -6,7 +6,7 @@ import br.gov.frameworkdemoiselle.template.JPACrud;
 
 
 @PersistenceController
-public class ProfileByRule extends JPACrud<SecurityProfileByRule, Long> {
+public class ProfileByRuleDAO extends JPACrud<SecurityProfileByRule, Long> {
 	private static final long serialVersionUID = 1L;
 	
 }
