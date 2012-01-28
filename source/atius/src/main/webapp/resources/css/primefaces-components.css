@@ -21,8 +21,9 @@
 }
 
 /* Buttons */
-button.ui-button, button.ui-button-text-only {
-	background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #74FFCC !important;
+button.ui-button,button.ui-button-text-only {
+	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5),
+		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #74FFCC !important;
 	border: 0px solid #DEE5F2 !important;
 	border-radius: 6px;
 	font-weight: bold !important;
@@ -30,14 +31,16 @@ button.ui-button, button.ui-button-text-only {
 }
 
 button.ui-button:hover {
-	background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)) repeat scroll 0 0 #2EC890 !important;
+	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.3),
+		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #2EC890 !important;
 	border: 0px;
 	border-radius: 6px;
 	font-weight: bold;
 }
 
-button.ui-button-icon-only, button.ui-button-icon-only.ui-state-default {
-	background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #74FFCC;
+button.ui-button-icon-only,button.ui-button-icon-only.ui-state-default {
+	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5),
+		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #74FFCC;
 	height: 24px;
 	width: 24px;
 	margin-right: 12px;
@@ -228,13 +231,12 @@ div.ui-tabs ul.ui-tabs-nav li.ui-state-hover {
 }
 
 /* File Upload */
-.fileupload-content .ui-progressbar {
-	width: 100px;	
+.fileupload-content div.ui-progressbar {
+	width: 150px;
 }
 
-.fileupload-content td.name {
-	overflow: hidden;
-	white-space:nowrap;
+.fileupload-content td {
+	vertical-align: middle;
 }
 
 .fileupload-buttonbar {
@@ -243,10 +245,12 @@ div.ui-tabs ul.ui-tabs-nav li.ui-state-hover {
 }
 
 .fileupload-buttonbar label.ui-button {
-	background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #74FFCC !important;
+	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5),
+		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #74FFCC !important;
 	float: right;
 }
 
 .fileupload-buttonbar label.ui-button:hover {
-background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)) repeat scroll 0 0 #2EC890 !important;
+	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.3),
+		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #2EC890 !important;
 }
