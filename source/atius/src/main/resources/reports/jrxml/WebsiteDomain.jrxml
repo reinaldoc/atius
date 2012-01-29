@@ -2,30 +2,73 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WebsiteDomain" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="134"/>
 	<subDataset name="LDAP Dataset">
-		<queryString language="SQL">
-			<![CDATA[select * from websiteDomain]]>
+		<queryString>
+			<![CDATA[select * from websiteDomain, posixAccount]]>
 		</queryString>
-		<field name="cn" class="java.lang.Object"/>
-		<field name="serverName" class="java.lang.Object"/>
-		<field name="documentRoot" class="java.lang.Object"/>
-		<field name="availability" class="java.lang.Object"/>
-		<field name="adminId" class="java.lang.Object"/>
-		<field name="ownerId" class="java.lang.Object"/>
+		<field name="userPassword_s" class="java.lang.Object"/>
+		<field name="objectClass" class="java.lang.Object"/>
+		<field name="inodeHardLimit" class="java.lang.Object"/>
+		<field name="ownerId_s" class="java.lang.Object"/>
+		<field name="objectClass_s" class="java.lang.Object"/>
+		<field name="subschemaSubentry" class="java.lang.Object"/>
 		<field name="serverAlias" class="java.lang.Object"/>
-		<field name="suPhpEngine" class="java.lang.Object"/>
+		<field name="databaseSchemaDn_s" class="java.lang.Object"/>
+		<field name="websiteProfile" class="java.lang.Object"/>
 		<field name="blockCount" class="java.lang.Object"/>
 		<field name="inodeCount" class="java.lang.Object"/>
-		<field name="graceTimeCountdown" class="java.lang.Object"/>
-		<field name="websiteProfile" class="java.lang.Object"/>
+		<field name="description_s" class="java.lang.Object"/>
+		<field name="uid" class="java.lang.Object"/>
+		<field name="availability" class="java.lang.Object"/>
+		<field name="serverAlias_s" class="java.lang.Object"/>
+		<field name="serverName" class="java.lang.Object"/>
+		<field name="websiteProfile_s" class="java.lang.Object"/>
+		<field name="blockSoftLimit_s" class="java.lang.Object"/>
+		<field name="graceTimeCountdown_s" class="java.lang.Object"/>
+		<field name="inodeSoftLimit_s" class="java.lang.Object"/>
+		<field name="inodeHardLimit_s" class="java.lang.Object"/>
+		<field name="structuralObjectClass_s" class="java.lang.Object"/>
+		<field name="subschemaSubentry_s" class="java.lang.Object"/>
+		<field name="userPassword" class="java.lang.Object"/>
+		<field name="serverName_s" class="java.lang.Object"/>
+		<field name="NDS_Tree" class="java.lang.Object"/>
 		<field name="websiteCategory" class="java.lang.Object"/>
-		<field name="databaseSchemaDn" class="java.lang.Object"/>
-		<field name="blockSoftLimit" class="java.lang.Object"/>
-		<field name="blockHardLimit" class="java.lang.Object"/>
-		<field name="inodeSoftLimit" class="java.lang.Object"/>
-		<field name="inodeHardLimit" class="java.lang.Object"/>
+		<field name="availability_s" class="java.lang.Object"/>
 		<field name="createTimestamp" class="java.lang.Object"/>
+		<field name="blockHardLimit" class="java.lang.Object"/>
+		<field name="blockHardLimit_s" class="java.lang.Object"/>
+		<field name="homeDirectory" class="java.lang.Object"/>
+		<field name="gecos" class="java.lang.Object"/>
+		<field name="loginShell" class="java.lang.Object"/>
+		<field name="ownerId" class="java.lang.Object"/>
+		<field name="adminId" class="java.lang.Object"/>
+		<field name="websiteCategory_s" class="java.lang.Object"/>
+		<field name="cn_s" class="java.lang.Object"/>
+		<field name="documentRoot_s" class="java.lang.Object"/>
+		<field name="modifyTimestamp" class="java.lang.Object"/>
+		<field name="inodeCount_s" class="java.lang.Object"/>
+		<field name="NDS_FullName" class="java.lang.Object"/>
+		<field name="cn" class="java.lang.Object"/>
+		<field name="suPhpEngine_s" class="java.lang.Object"/>
+		<field name="structuralObjectClass" class="java.lang.Object"/>
+		<field name="NDS_Name" class="java.lang.Object"/>
+		<field name="loginShell_s" class="java.lang.Object"/>
+		<field name="uidNumber" class="java.lang.Object"/>
+		<field name="gecos_s" class="java.lang.Object"/>
+		<field name="databaseSchemaDn" class="java.lang.Object"/>
+		<field name="uid_s" class="java.lang.Object"/>
+		<field name="homeDirectory_s" class="java.lang.Object"/>
+		<field name="NDS_Context" class="java.lang.Object"/>
+		<field name="blockSoftLimit" class="java.lang.Object"/>
+		<field name="inodeSoftLimit" class="java.lang.Object"/>
+		<field name="documentRoot" class="java.lang.Object"/>
+		<field name="suPhpEngine" class="java.lang.Object"/>
+		<field name="adminId_s" class="java.lang.Object"/>
+		<field name="description" class="java.lang.Object"/>
+		<field name="gidNumber" class="java.lang.Object"/>
+		<field name="blockCount_s" class="java.lang.Object"/>
+		<field name="graceTimeCountdown" class="java.lang.Object"/>
 		<group name="websiteCategory">
 			<groupExpression><![CDATA[$F{websiteCategory}]]></groupExpression>
 		</group>
@@ -33,6 +76,8 @@
 			<groupExpression><![CDATA[$F{websiteProfile}]]></groupExpression>
 		</group>
 	</subDataset>
+	<parameter name="LOGO_LEFT" class="java.lang.String"/>
+	<parameter name="LOGO_RIGHT" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select * from websiteDomain]]>
 	</queryString>
@@ -40,8 +85,8 @@
 	<field name="serverName" class="java.lang.Object"/>
 	<field name="documentRoot" class="java.lang.Object"/>
 	<field name="availability" class="java.lang.Object"/>
-	<field name="adminId" class="java.lang.Object"/>
-	<field name="ownerId" class="java.lang.Object"/>
+	<field name="adminId" class="br.ufpa.ctic.atius.websites.domain.InetOrgPerson"/>
+	<field name="ownerId" class="br.ufpa.ctic.atius.websites.domain.InetOrgPerson"/>
 	<field name="serverAlias" class="java.lang.Object"/>
 	<field name="suPhpEngine" class="java.lang.Object"/>
 	<field name="blockCount" class="java.lang.Object"/>
@@ -54,120 +99,414 @@
 	<field name="inodeSoftLimit" class="java.lang.Object"/>
 	<field name="inodeHardLimit" class="java.lang.Object"/>
 	<field name="objectClass" class="java.lang.Object"/>
+	<field name="uid" class="java.lang.Object"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="40" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<staticText>
-				<reportElement x="81" y="0" width="360" height="18"/>
+				<reportElement x="70" y="11" width="378" height="21"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Universidade Federal do Pará]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="81" y="18" width="360" height="20"/>
+				<reportElement x="70" y="32" width="378" height="20"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Centro de Tecnologia da Informação e Comunicação - CTIC]]></text>
 			</staticText>
+			<image hAlign="Center">
+				<reportElement x="15" y="0" width="55" height="52"/>
+				<imageExpression class="java.io.File"><![CDATA[new File($P{LOGO_LEFT})]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="448" y="11" width="88" height="41"/>
+				<imageExpression class="java.io.File"><![CDATA[new File($P{LOGO_RIGHT})]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="59" width="555" height="1"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
+		<band height="599" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="14" width="205" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dados do Website]]></text>
+			</staticText>
 			<frame>
-				<reportElement mode="Transparent" x="0" y="0" width="555" height="35"/>
-				<box>
+				<reportElement x="0" y="34" width="555" height="80"/>
+				<box bottomPadding="0">
 					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0" lineStyle="Double"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-			</frame>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="11" splitType="Stretch">
-			<frame>
-				<reportElement x="0" y="0" width="555" height="11"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-			</frame>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="80" splitType="Stretch">
-			<frame>
-				<reportElement x="0" y="0" width="555" height="80"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
 				</box>
 				<staticText>
-					<reportElement x="0" y="20" width="158" height="20"/>
-					<textElement verticalAlignment="Middle"/>
+					<reportElement x="0" y="20" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
 					<text><![CDATA[Domínio:]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="158" y="0" width="217" height="20"/>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{cn}]]></textFieldExpression>
-				</textField>
 				<staticText>
-					<reportElement x="0" y="0" width="158" height="20"/>
-					<textElement verticalAlignment="Middle"/>
+					<reportElement x="0" y="0" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
 					<text><![CDATA[Entidade:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="158" y="20" width="217" height="20"/>
-					<textElement verticalAlignment="Middle"/>
+					<reportElement x="135" y="20" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{serverName}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="0" y="40" width="158" height="20"/>
-					<textElement verticalAlignment="Middle"/>
+					<reportElement x="0" y="40" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
 					<text><![CDATA[Categoria:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="158" y="40" width="217" height="20"/>
-					<textElement verticalAlignment="Middle"/>
+					<reportElement x="135" y="40" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{websiteCategory}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="0" y="60" width="158" height="20"/>
-					<textElement verticalAlignment="Middle"/>
+					<reportElement x="0" y="60" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
 					<text><![CDATA[Tipo:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="158" y="60" width="217" height="20"/>
-					<textElement verticalAlignment="Middle"/>
+					<reportElement x="135" y="60" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{websiteProfile}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement x="135" y="0" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{cn}]]></textFieldExpression>
+				</textField>
 			</frame>
+			<staticText>
+				<reportElement x="15" y="388" width="205" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contato Administrativo]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="408" width="555" height="40"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="19" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Email:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Nome:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="19" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{ownerId}.getMail()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="135" y="0" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{ownerId}.getCn()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="15" y="461" width="205" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contato Técnico]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="481" width="555" height="40"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="20" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Email:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Nome:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="19" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{adminId}.getMail()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="135" y="0" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{adminId}.getCn()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="15" y="125" width="205" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dados de Publicação]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="145" width="555" height="231"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FTP:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="0" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["ftp."+$F{serverName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="20" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Usuário:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="20" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{uid}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="40" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Senha:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="40" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["---"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="66" width="555" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="0" y="74" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Banco de dados:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="74" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["db."+$F{serverName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="114" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Usuário:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="94" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["db_"+$F{uid}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="134" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Senha:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="134" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["---"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="167" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CMS:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="167" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["www."+$F{serverName}+"/wp-admin"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="187" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Usuário:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="187" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{uid}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="207" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Senha:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="207" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["---"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="94" width="135" height="20"/>
+					<box leftPadding="6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Schema:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="135" y="114" width="420" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{uid}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="160" width="555" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</frame>
+			<line>
+				<reportElement x="115" y="573" width="308" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="70" y="574" width="397" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{ownerId}.getCn()]]></textFieldExpression>
+			</textField>
 		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="5" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="4" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="21" splitType="Stretch"/>
+		<band height="4" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="20" splitType="Stretch">
-			<staticText>
-				<reportElement x="144" y="0" width="191" height="20"/>
-				<textElement/>
-				<text><![CDATA[_________________________________________]]></text>
-			</staticText>
-		</band>
+		<band height="4" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
 		<band splitType="Stretch"/>
