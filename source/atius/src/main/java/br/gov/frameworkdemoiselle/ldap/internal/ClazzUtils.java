@@ -39,7 +39,6 @@ import br.gov.frameworkdemoiselle.ldap.core.EntryManager;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
 import br.gov.frameworkdemoiselle.util.Beans;
 import br.gov.frameworkdemoiselle.util.Reflections;
-import br.gov.frameworkdemoiselle.util.Strings;
 
 public class ClazzUtils {
 
@@ -404,7 +403,7 @@ public class ClazzUtils {
 	public static String getFieldName(Field field) {
 		if (field.isAnnotationPresent(Name.class)) {
 			String name = field.getAnnotation(Name.class).value();
-			if (Strings.isBlank(name))
+			if (name == null || name.trim().isEmpty())
 				throw new EntryException("Annotation @Name must have a value");
 			return name;
 		} else

@@ -24,13 +24,13 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.ldap.configuration.EntryManagerConfig;
 import br.gov.frameworkdemoiselle.ldap.core.EntryQueryMap;
 import br.gov.frameworkdemoiselle.ldap.exception.EntryException;
-import br.gov.frameworkdemoiselle.util.Strings;
 
 import com.novell.ldap.LDAPAttribute;
 import com.novell.ldap.LDAPAttributeSet;
@@ -203,7 +203,7 @@ public class EntryCoreMap implements Serializable {
 
 	private void loggerArgs(Object... arg) {
 		if (verbose) {
-			logger.info("@" + Thread.currentThread().getStackTrace()[2].getMethodName() + "(" + Strings.join(arg, ", ") + ")");
+			logger.info("@" + Thread.currentThread().getStackTrace()[2].getMethodName() + "(" + StringUtils.join(arg, ", ") + ")");
 		}
 	}
 
