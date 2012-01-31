@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
+
+	<h:form prependId="false">
+		<h:panelGrid id="atius-dhcp-edit-panel-id">
+			<p:dialog id="atius-dhcp-edit-dlg-id" header="ATIUS - Cadastro de Webdhcp" widgetVar="atius_dhcp_edit_dlg" modal="true" width="480"
+				resizable="false" closable="false">
+				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-edit-dlg-body-id">
+					<h:outputText value="Entidade:" />
+					<h:inputText value="#{websiteDomainEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+
+					<h:outputText value="Domínio:" />
+					<h:panelGroup>
+						<h:inputText id="atius-dhcp-edit-servername-id" value="#{websiteDomainEditMB.bean.serverName}" autocomplete="off"
+							onkeypress="return event.keyCode!=13" style="width: #{websiteDomainEditMB.updateMode ? '375px' : '337px' };"
+							readonly="#{websiteDomainEditMB.updateMode ? 'true' : 'false' }" />
+						<p:commandButton icon="ui-icon-gear" title="Verificar" action="#{websiteDomainEditMB.domainAvailable}"
+							update="atius-dhcp-edit-dlg-save-id:messages" style="margin-left: 10px; margin-right: 0px; vertical-align: bottom;"
+							process="@this, atius-dhcp-edit-servername-id" oncomplete="showNotification('atius-dhcp-edit-dlg-save-id');"
+							rendered="#{!websiteDomainEditMB.updateMode}" />
+					</h:panelGroup>
+
+					<h:outputText value="Categoria:" />
+					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteCategory}" effect="fade" styleClass="dialog-selectonemenu">
+						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
+						<f:selectItems value="#{websiteDomainListMB.websiteCategories}" var="category" itemLabel="#{category.name}" itemValue="#{category.name}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Tipo:" />
+					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteProfile}" effect="fade" styleClass="dialog-selectonemenu">
+						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
+						<f:selectItems value="#{websiteDomainListMB.websiteProfiles}" var="profile" itemLabel="#{profile}" itemValue="#{profile}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Contato Administrativo:" />
+					<p:autoComplete value="#{websiteDomainEditMB.bean.ownerId}" completeMethod="#{websiteDomainEditMB.findPerson}" forceSelection="true"
+						maxResults="10" minQueryLength="1" var="person" itemLabel="#{person.cnMail}" itemValue="#{person}" converter="inetOrgPerson"
+						onkeypress="return event.keyCode!=13" />
+
+					<h:outputText value="Contato Técnico:" />
+					<p:autoComplete value="#{websiteDomainEditMB.bean.adminId}" completeMethod="#{websiteDomainEditMB.findPerson}" forceSelection="true"
+						maxResults="10" minQueryLength="1" var="person" itemLabel="#{person.cnMail}" itemValue="#{person}" converter="inetOrgPerson"
+						onkeypress="return event.keyCode!=13" />
+
+				</h:panelGrid>
+
+				<h:panelGroup id="atius-dhcp-edit-dlg-buttons-id">
+					<faa:dialogButtons id="atius-dhcp-edit-dlg-save-id" dialogId="atius-dhcp-edit-dlg-id" dialogWidgetVar="atius_dhcp_edit_dlg"
+						updateMode="#{websiteDomainEditMB.updateMode}" actionUpdater="#{websiteDomainEditMB.update}" actionInserter="#{websiteDomainEditMB.insert}"
+						actionCloser="#{websiteDomainListMB.clearValidation}" updateOnClose="atius-dhcp-list-datatable-id" />
+				</h:panelGroup>
+
+			</p:dialog>
+		</h:panelGrid>
+	</h:form>
+</ui:composition>

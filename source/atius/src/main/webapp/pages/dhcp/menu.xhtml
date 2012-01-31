@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form prependId="false">
+		<h:panelGroup id="atius-dhcp-menu-id">
+			<p:dataGrid value="#{websiteDomainListMB.websiteCategories}" var="category" columns="1">
+				<p:column>
+					<p:commandLink value="#{category.name}" immediate="true" update="atius-body-id"
+						action="#{websiteDomainListMB.setSearchDomain(websiteDomainListMB.searchDomain)}"
+						actionListener="#{menuContext.select('MenuDhcp', category.name)}"
+						styleClass="#{menuContext.menu['MenuDhcp'][category.name]['Style']}" />
+				</p:column>
+			</p:dataGrid>
+
+			<p:commandLink value="Todos" immediate="true" update="atius-body-id" action="#{websiteDomainListMB.clearResultList}"
+				actionListener="#{menuContext.select('MenuDhcp', 'Todos')}" styleClass="#{menuContext.menu['MenuDhcp']['Todos']['Style']}" />
+
+			<p:spacer height="10px" />
+
+			<p:commandLink value="Configuração" immediate="true" update="atius-body-id"
+				actionListener="#{menuContext.select('MenuDhcp', 'Configuração')}"
+				styleClass="#{menuContext.menu['MenuDhcp']['Configuração']['Style']}" />
+		</h:panelGroup>
+	</h:form>
+</ui:composition>
