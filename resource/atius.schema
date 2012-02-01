@@ -20,7 +20,10 @@
 # ATIUS Core Schema ObjectClass Structure
 #   atiusContainer
 #     |---mailContainer
-#     |     \---notImplemented
+#     |     \--- (core.schema && inetOrgPerson.schema objectClasses)
+#     |
+#     |---dhcpContainer
+#     |     \--- (dhcp.schema objectClasses)
 #     |
 #     \---websiteContainer
 #           |---profileContainer
@@ -63,13 +66,20 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1000	NAME 'atiusContainer'
 	MUST ( cn ) )
 
 #
+# dhcpContainer objectclass
+#
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1020	NAME 'dhcpContainer'
+	DESC 'DHCP Container'
+	SUP top STRUCTURAL
+	MUST ( cn ) )
+
+#
 # websiteContainer objectclass
 #
 objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1100	NAME 'websiteContainer'
 	DESC 'Website Container'
 	SUP top STRUCTURAL
 	MUST ( cn ) )
-
 
 #
 # profileContainer objectclass
