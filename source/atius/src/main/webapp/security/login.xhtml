@@ -12,11 +12,12 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 140px;
+	padding: 10px;
 }
 
 .loginInput {
 	width: 300px;
-	border: 2px solid #AFAFAF;
+	border: 1px solid #AFAFAF;
 	font-size: 15px;
 	font-weight: bold;
 	padding: 3px;
@@ -36,8 +37,12 @@
 	font-weight: bold;
 }
 
-.loginRowCenter {
+.loginRowCenter td {
 	text-align: center;
+}
+
+.loginRowPadding td {
+	padding-top: 10px;
 }
 
 .loginLogo {
@@ -118,7 +123,7 @@ function getEngine() {
 
 <h:body styleClass="loginBody" onload="setLoginFocus('faa-input-username', 'faa-input-password');">
 	<h:form prependId="false" onsubmit="if (!requireIE8()) return false;">
-		<h:panelGrid columns="1" styleClass="loginTable" rowClasses="loginRowCenter,,,,,,loginRowCenter,loginRowCenter">
+		<h:panelGrid columns="1" styleClass="loginTable" rowClasses="loginRowCenter,loginRowPadding,,loginRowPadding,,,">
 			<h:graphicImage library="images" name="logo.png" styleClass="loginLogo" alt="ATIUS" />
 			<h:outputText styleClass="loginText" value="Usuário:" />
 			<h:inputText styleClass="loginInput" value="#{credential.username}" id="faa-input-username" autocomplete="off" />
@@ -127,7 +132,6 @@ function getEngine() {
 				<h:inputSecret styleClass="loginInput" value="#{credential.password}" id="faa-input-password" />
 				<h:commandButton styleClass="loginButton" value="Entrar" action="#{authMB.login}" />
 			</h:panelGroup>
-			<br />
 			<br />
 		</h:panelGrid>
 	</h:form>
