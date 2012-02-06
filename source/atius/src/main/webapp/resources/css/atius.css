@@ -296,7 +296,7 @@ ul.dialog-messages li {
 /*
 	CSS for Fuselage
 */
-tbody tr td .faa-label {
+tbody tr td.faa-label .ui-dt-c {
 	text-align: center;
 	font-size: 10px;
 	font-family: Tahoma;
@@ -307,28 +307,28 @@ tbody tr td .faa-label {
 	padding: 4px 20px !important;
 }
 
-tbody tr td .faa-label-user {
+tbody tr td.faa-label-user .ui-dt-c {
 	background-color: #ae7c4f;
 	border-color: #ae7c4f;
 }
 
-tbody tr td .faa-label-profile {
+tbody tr td.faa-label-profile .ui-dt-c {
 	background-color: #5A6986;
 	border-color: #5A6986;
 }
 
-tbody tr td .faa-label-role {
+tbody tr td.faa-label-role .ui-dt-c {
 	background-color: #6FA8DC;
 	border-color: #6FA8DC;
 }
 
-tbody tr td .faa-label-resource {
+tbody tr td.faa-label-resource .ui-dt-c {
 	background-color: #dc9f68;
 	border-color: #dc9f68;
 	width: 50px;
 }
 
-tbody tr td .faa-label-profileByRule {
+tbody tr td.faa-label-profileByRule .ui-dt-c {
 	background-color: #aaaaaa;
 	border-color: #aaaaaa;
 }
