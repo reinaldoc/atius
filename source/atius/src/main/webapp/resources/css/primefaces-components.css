@@ -59,6 +59,12 @@ button.ui-button-icon-only,button.ui-button-icon-only.ui-state-default {
 	text-align: left;
 }
 
+.ui-datatable th.ui-state-hover {
+	background: none;
+	background-color: #E0E0E0 !important;
+}
+
+
 .ui-datatable th.ui-paginator {
 	text-align: center;
 }
