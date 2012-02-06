@@ -9,15 +9,19 @@
 	<div id="atius-body-right-id">
 		<!-- Begin @BodyRight  -->
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'User')}">
+			<ui:include src="user/edit.xhtml" />
 			<ui:include src="user/list.xhtml" />
 		</h:panelGroup>
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Profile')}">
+			<ui:include src="profile/edit.xhtml" />
 			<ui:include src="profile/list.xhtml" />
 		</h:panelGroup>
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Role')}">
+			<ui:include src="role/edit.xhtml" />
 			<ui:include src="role/list.xhtml" />
 		</h:panelGroup>
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Resource')}">
+			<ui:include src="resource/edit.xhtml" />
 			<ui:include src="resource/list.xhtml" />
 		</h:panelGroup>
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Configuração')}">
