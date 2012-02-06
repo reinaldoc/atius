@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.primefaces.event.FileUploadEvent;
 
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
-import br.gov.frameworkdemoiselle.template.AbstractListPageBean;
+import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
 import br.ufpa.ctic.atius.websites.business.WebsiteFilesBC;
 import br.ufpa.ctic.atius.websites.domain.WebsiteDomain;
 import br.ufpa.ctic.atius.websites.domain.WebsiteFiles;
@@ -24,6 +24,10 @@ public class WebsiteFilesListMB extends AbstractListPageBean<WebsiteFiles, Long>
 
 	private WebsiteFiles bean;
 
+	public String getSortAttribute() {
+		return "serverName";
+	}
+	
 	@Override
 	protected List<WebsiteFiles> handleResultList() {
 		if (websiteDomain == null)

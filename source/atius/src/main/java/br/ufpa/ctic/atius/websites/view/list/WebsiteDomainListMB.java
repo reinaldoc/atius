@@ -6,8 +6,8 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
-import br.gov.frameworkdemoiselle.template.AbstractListPageBean;
-import br.gov.frameworkdemoiselle.util.Faces;
+import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
+import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.ufpa.ctic.atius.websites.business.WebsiteDomainBC;
 import br.ufpa.ctic.atius.websites.domain.WebsiteCategory;
 import br.ufpa.ctic.atius.websites.domain.WebsiteDomain;
@@ -31,7 +31,11 @@ public class WebsiteDomainListMB extends AbstractListPageBean<WebsiteDomain, Str
 	private void init() {
 		bc.selectMenu(getFirstWebsiteCategory());
 	}
-
+	
+	public String getSortAttribute() {
+		return "serverName";
+	}
+	
 	private String getFirstWebsiteCategory() {
 		if (getWebsiteCategories().size() > 0)
 			return getWebsiteCategories().get(0).getName();

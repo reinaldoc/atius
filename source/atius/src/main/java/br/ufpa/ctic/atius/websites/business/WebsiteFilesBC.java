@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import org.primefaces.model.UploadedFile;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
-import br.gov.frameworkdemoiselle.template.DelegateCrud;
+import br.gov.frameworkdemoiselle.template.contrib.DelegateCrud;
 import br.ufpa.ctic.atius.websites.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.websites.domain.WebsiteDomain;
 import br.ufpa.ctic.atius.websites.domain.WebsiteFiles;
@@ -36,9 +36,8 @@ public class WebsiteFilesBC extends DelegateCrud<WebsiteFiles, Long, WebsiteFile
 	}
 
 	public List<WebsiteFiles> findByServerName(String serverName) {
-		WebsiteFiles websiteFiles = new WebsiteFiles();
-		websiteFiles.setServerName(serverName);
-		return getDelegate().findByExample(websiteFiles, true, 0);
+		getQueryConfig().getFilter().put("serverName", serverName);
+		return findAll();
 	}
 
 }

@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.gov.frameworkdemoiselle.enumeration.contrib.Comparison;
+import br.gov.frameworkdemoiselle.enumeration.contrib.Logic;
 import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
-import br.gov.frameworkdemoiselle.template.DelegateCrud;
-import br.gov.frameworkdemoiselle.util.Faces;
-import br.gov.frameworkdemoiselle.util.MenuContext;
-import br.gov.frameworkdemoiselle.util.Strings;
+import br.gov.frameworkdemoiselle.template.contrib.DelegateCrud;
+import br.gov.frameworkdemoiselle.util.contrib.Faces;
+import br.gov.frameworkdemoiselle.util.core.MenuContext;
+import br.gov.frameworkdemoiselle.util.contrib.Strings;
 import br.ufpa.ctic.atius.websites.domain.DomainContainer;
 import br.ufpa.ctic.atius.websites.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.websites.domain.WebsiteCategory;
@@ -95,22 +97,21 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	}
 
 	public List<WebsiteDomain> find(String search) {
-		WebsiteDomain websiteDomain = new WebsiteDomain(true);
-		websiteDomain.setCn(search);
-		websiteDomain.setServerName(search);
-		InetOrgPerson inetOrgPerson = new InetOrgPerson();
-		inetOrgPerson.setMail(search);
-		websiteDomain.setAdminId(inetOrgPerson);
-		websiteDomain.setOwnerId(inetOrgPerson);
-		return findByExample(websiteDomain, false, 0);
+		getQueryConfig().getFilter().clear();
+		getQueryConfig().getFilter().put("cn", search);
+		getQueryConfig().getFilter().put("serverName", search);
+		getQueryConfig().getFilter().put("adminId", search);
+		getQueryConfig().getFilter().put("ownerId", search);
+		getQueryConfig().setFilterComparison(Comparison.CONTAINS);
+		getQueryConfig().setFilterLogic(Logic.OR);
+		return findAll();
 	}
 
 	public List<WebsiteDomain> findByCategory(String category) {
-		if ("Todos".equals(category))
-			return getDelegate().findAll();
-		WebsiteDomain websiteDomain = new WebsiteDomain(true);
-		websiteDomain.setWebsiteCategory(category);
-		return findByExample(websiteDomain, true, 0);
+		getQueryConfig().getFilter().clear();
+		if (!"Todos".equals(category))
+			getQueryConfig().getFilter().put("websiteCategory", category);
+		return findAll();
 	}
 
 	public List<WebsiteDomain> findByCategory(String category, String search) {
