@@ -1,7 +1,7 @@
 package br.ufpa.ctic.atius.websites.persistence;
 
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.template.JPACrud;
+import br.gov.frameworkdemoiselle.template.contrib.JPACrud;
 import br.ufpa.ctic.atius.websites.domain.WebsiteFiles;
 
 @PersistenceController

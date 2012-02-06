@@ -3,7 +3,7 @@ package br.ufpa.ctic.atius.websites.business;
 import br.gov.frameworkdemoiselle.message.DefaultMessage;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
-import br.gov.frameworkdemoiselle.util.Faces;
+import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.ufpa.ctic.atius.websites.domain.DomainContainer;
 import br.ufpa.ctic.atius.websites.persistence.DomainContainerDAO;
 
