@@ -6,6 +6,5 @@
 		<class>br.gov.frameworkdemoiselle.transaction.JPATransaction</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.core.Authenticator</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.core.Authorizer</class>
-		<class>br.gov.frameworkdemoiselle.fuselage.core.PublicResource</class>
 	</alternatives>
 </beans>
