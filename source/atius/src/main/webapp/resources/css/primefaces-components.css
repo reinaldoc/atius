@@ -254,3 +254,12 @@ div.ui-tabs ul.ui-tabs-nav li.ui-state-hover {
 	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.3),
 		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #2EC890 !important;
 }
+
+/* Auto Complete */
+div.ui-autocomplete-panel {
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+div.ui-autocomplete-panel ul.ui-autocomplete-list {
+	border: 1px solid #D6D6D6;
+}
