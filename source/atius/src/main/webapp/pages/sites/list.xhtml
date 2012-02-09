@@ -24,8 +24,8 @@
 
 		<h:panelGroup id="atius-sites-list-panel-id">
 			<p:dataTable id="atius-sites-list-datatable-id" widgetVar="atius_sites_list_datatable" emptyMessage="Não há registros"
-				value="#{websiteDomainListMB.resultList}" var="domain" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true" paginatorAlwaysVisible="false"
-				pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+				value="#{websiteDomainListMB.resultList}" var="domain" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 				<p:column headerText="Entidade" sortBy="#{domain.cn}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 						<h:outputText value="#{domain.cn} " />
@@ -50,15 +50,17 @@
 
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 
-						<p:commandButton icon="ui-icon-search" title="Editar Informações" oncomplete="atius_sites_edit_dlg.show()"
-							action="#{websiteDomainEditMB.editById(domain.serverName)}" update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id" immediate="true" />
+						<p:commandButton icon="ui-icon-search" title="Editar Informações" oncomplete="atius_sites_edit_dlg.show()" styleClass="margin"
+							action="#{websiteDomainEditMB.editById(domain.serverName)}" update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id"
+							immediate="true" />
 
-						<p:commandButton icon="ui-icon-document" title="Imprimir Termo" onclick="openReport('sites','#{domain.serverName}'); return false;" />
+						<p:commandButton icon="ui-icon-document" title="Imprimir Termo" onclick="openReport('sites','#{domain.serverName}'); return false;"
+							styleClass="margin" />
 
 						<p:commandButton icon="ui-icon-folder-collapsed" title="Enviar Termo Digitalizado" oncomplete="atius_sites_upload_dlg.show()"
-							action="#{websiteFilesListMB.selectWebsite(domain)}" update="atius-sites-upload-dlg-id" />
+							action="#{websiteFilesListMB.selectWebsite(domain)}" update="atius-sites-upload-dlg-id" styleClass="margin" />
 
-						<p:commandButton icon="#{!domain.availabilityEnabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }" style="icon" immediate="true"
+						<p:commandButton icon="#{!domain.availabilityEnabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }" immediate="true" styleClass="margin"
 							update="atius-sites-status-dlg-id" action="#{websiteDomainEditMB.editBean(domain)}" oncomplete="atius_sites_status_dlg.show()"
 							title="Este website está #{domain.availabilityEnabled ? 'ativado!' : 'desativado!' }. Deseja #{!domain.availabilityEnabled ? 'ativá-lo' : 'desativá-lo' }?" />
 
