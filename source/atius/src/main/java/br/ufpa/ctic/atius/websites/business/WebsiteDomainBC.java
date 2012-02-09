@@ -7,11 +7,12 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.enumeration.contrib.Comparison;
 import br.gov.frameworkdemoiselle.enumeration.contrib.Logic;
 import br.gov.frameworkdemoiselle.message.DefaultMessage;
+import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.contrib.DelegateCrud;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
-import br.gov.frameworkdemoiselle.util.core.MenuContext;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
+import br.gov.frameworkdemoiselle.util.core.MenuContext;
 import br.ufpa.ctic.atius.websites.domain.DomainContainer;
 import br.ufpa.ctic.atius.websites.domain.InetOrgPerson;
 import br.ufpa.ctic.atius.websites.domain.WebsiteCategory;
@@ -97,20 +98,20 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	}
 
 	public List<WebsiteDomain> find(String search) {
-		getQueryConfig().getFilter().clear();
-		getQueryConfig().getFilter().put("cn", search);
-		getQueryConfig().getFilter().put("serverName", search);
-		getQueryConfig().getFilter().put("adminId", search);
-		getQueryConfig().getFilter().put("ownerId", search);
-		getQueryConfig().setFilterComparison(Comparison.CONTAINS);
-		getQueryConfig().setFilterLogic(Logic.OR);
+		QueryConfig<WebsiteDomain> queryConfig = getQueryConfig();
+		queryConfig.getFilter().put("cn", search);
+		queryConfig.getFilter().put("serverName", search);
+		queryConfig.getFilter().put("adminId", search);
+		queryConfig.getFilter().put("ownerId", search);
+		queryConfig.setFilterComparison(Comparison.CONTAINS);
+		queryConfig.setFilterLogic(Logic.OR);
 		return findAll();
 	}
 
 	public List<WebsiteDomain> findByCategory(String category) {
-		getQueryConfig().getFilter().clear();
+		QueryConfig<WebsiteDomain> queryConfig = getQueryConfig();
 		if (!"Todos".equals(category))
-			getQueryConfig().getFilter().put("websiteCategory", category);
+			queryConfig.getFilter().put("websiteCategory", category);
 		return findAll();
 	}
 

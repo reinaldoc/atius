@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.gov.frameworkdemoiselle.enumeration.contrib.Comparison;
 import br.gov.frameworkdemoiselle.enumeration.contrib.Logic;
+import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.contrib.DelegateCrud;
 import br.ufpa.ctic.atius.websites.domain.InetOrgPerson;
@@ -15,11 +16,12 @@ public class InetOrgPersonBC extends DelegateCrud<InetOrgPerson, String, InetOrg
 	private static final long serialVersionUID = 1L;
 
 	public List<InetOrgPerson> findPerson(String search) {
-		getQueryConfig().getFilter().put("cn", search);
-		getQueryConfig().getFilter().put("mail", search);
-		getQueryConfig().setMaxResults(5);
-		getQueryConfig().setFilterLogic(Logic.OR);
-		getQueryConfig().setFilterComparison(Comparison.CONTAINS);
+		QueryConfig<InetOrgPerson> queryConfig = getQueryConfig();
+		queryConfig.getFilter().put("cn", search);
+		queryConfig.getFilter().put("mail", search);
+		queryConfig.setMaxResults(5);
+		queryConfig.setFilterLogic(Logic.OR);
+		queryConfig.setFilterComparison(Comparison.CONTAINS);
 		return findAll();
 	}
 
