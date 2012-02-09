@@ -106,6 +106,10 @@ input[type=text].filter {
 	margin-right: 3px;
 }
 
+button.margin {
+	margin-right: 12px;
+}
+
 /*
 	CSS for Tables
 */
@@ -174,15 +178,19 @@ input[type=text].filter {
 	color: black;
 }
 
+.dialog-body input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus
+	{
+	border: 1px solid #BBC5CD;
+	background-color: #FFFFE0;
+}
+
 .dialog-body select {
 	width: 383px;
 	background-color: white;
 }
 
-.dialog-body input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus
-	{
-	border: 1px solid #BBC5CD;
-	background-color: #FFFFE0;
+.dialog-body textarea {
+	height: 70px;
 }
 
 .dialog-body table {
@@ -266,15 +274,18 @@ ul.dialog-messages li {
 	font-weight: normal;
 }
 
-.dialog-datatable .ui-datatable-data .ui-dt-c {
-	padding: 2px !important;
+.dialog-datatable .ui-datatable-data .ui-dt-c div {
+	display: inline-block;
+	line-height: 24px;
+	overflow: hidden;
+	white-space: pre;
 }
 
 .dialog-datatable .ui-sortable-column {
 	background: none;
 }
 
-.dialog-datatable table thead tr th {
+.dialog-datatable table thead tr th.ui-state-default {
 	background: none !important;
 }
 

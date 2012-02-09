@@ -5,12 +5,12 @@
 
 		<h:panelGrid id="faa-role-edit-panel-id" cellpadding="0" cellspacing="0">
 
-			<p:dialog id="faa-role-edit-dlg-id" header="FAA - Cadastro de Papéis" widgetVar="faa_role_edit_dlg" modal="true" width="800" resizable="false"
-				closable="false">
+			<p:dialog id="faa-role-edit-dlg-id" header="FAA - Cadastro de Papéis" widgetVar="faa_role_edit_dlg" modal="true" width="820"
+				resizable="false" closable="false">
 
 				<h:panelGrid columns="2" styleClass="dialog-body dialog-body-role" id="faa-role-edit-dlg-body-id">
 
-					<h:panelGrid columns="1">
+					<h:panelGrid columns="1" style="width: 370px;">
 
 						<h:outputText value="Nome:" />
 						<h:inputText value="#{roleEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" />
@@ -24,30 +24,35 @@
 						<h:outputText value="Restritiva:" />
 						<h:panelGroup>
 
-							<h:selectBooleanCheckbox id="faa-role-edit-restriction-id" value="#{roleEditMB.bean.restriction}" onkeypress="return event.keyCode!=13" />
+							<h:selectBooleanCheckbox id="faa-role-edit-restriction-id" value="#{roleEditMB.bean.restriction}"
+								onkeypress="return event.keyCode!=13" />
 							<p:tooltip for="faa-role-edit-restriction-id" value="Apenas indica que este papél não deve ser adicionado a perfis administrativos." />
 
-							<p:commandButton icon="ui-icon-transferthick-e-w" style="float: right; margin-bottom: 2px;" immediate="true"
+							<p:commandButton icon="ui-icon-plus" style="float: right; margin-bottom: 2px; margin-right: 0px;" immediate="true"
 								update="faa-role-edit-resource-panel-id" oncomplete="faa_role_edit_resource_dlg.show()" title="Selecionar recursos" />
 
 						</h:panelGroup>
 
 					</h:panelGrid>
 
-					<h:panelGrid columns="1">
+					<h:panelGrid columns="1" id="faa-role-edit-panel-resource-id">
 
 						<p:dataTable id="faa-role-edit-datatable-resource-id" widgetVar="faa_role_dt_resource_wv" emptyMessage="Não há recursos associados"
 							value="#{roleEditMB.bean.resources}" var="faa_role_dt_resource_row" rows="7" paginator="true" paginatorAlwaysVisible="true"
 							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-small">
 
 							<p:column headerText="Recursos:" sortBy="#{faa_role_dt_resource_row.name}">
-								<h:panelGroup layout="block" style="width: 150px; overflow: hidden; white-space: pre; float: left">
+								<h:panelGroup layout="block" style="width: 130px;">
 									<h:outputText value="#{faa_role_dt_resource_row.name}" title="#{faa_role_dt_resource_row.name}" />
 								</h:panelGroup>
 
-								<h:panelGroup layout="block" style="width: 180px; overflow: hidden; white-space: pre; float: right">
+								<h:panelGroup layout="block" style="width: 200px;">
 									<h:outputText value="#{faa_role_dt_resource_row.value}" title="#{faa_role_dt_resource_row.value}" />
 								</h:panelGroup>
+
+								<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" immediate="true" title="Desvincular recurso"
+									update="faa-role-edit-panel-resource-id" action="#{roleEditMB.unselectResource(faa_role_dt_resource_row)}" />
+
 							</p:column>
 
 						</p:dataTable>
@@ -72,8 +77,8 @@
 
 		<h:panelGrid id="faa-role-edit-resource-panel-id" cellpadding="0" cellspacing="0">
 
-			<p:dialog id="faa-role-edit-resource-dlg-id" header="FAA - Seleção de Recursos" widgetVar="faa_role_edit_resource_dlg" modal="true" width="600"
-				resizable="false" closable="false">
+			<p:dialog id="faa-role-edit-resource-dlg-id" header="FAA - Seleção de Recursos" widgetVar="faa_role_edit_resource_dlg" modal="true"
+				width="600" resizable="false" closable="false">
 
 				<h:panelGrid columns="1" styleClass="dialog-body dialog-body-role">
 
@@ -101,7 +106,8 @@
 
 					<p:commandButton value="Selecionar" update="faa-role-edit-datatable-resource-id" oncomplete="faa_role_edit_resource_dlg.hide()" />
 
-					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this" onclick="faa_role_edit_resource_dlg.hide()" />
+					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this"
+						onclick="faa_role_edit_resource_dlg.hide()" />
 
 				</h:panelGroup>
 
