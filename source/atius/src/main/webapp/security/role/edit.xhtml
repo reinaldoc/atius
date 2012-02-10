@@ -29,7 +29,8 @@
 							<p:tooltip for="faa-role-edit-restriction-id" value="Apenas indica que este papél não deve ser adicionado a perfis administrativos." />
 
 							<p:commandButton icon="ui-icon-plus" style="float: right; margin-bottom: 2px; margin-right: 0px;" immediate="true"
-								update="faa-role-edit-resource-panel-id" oncomplete="faa_role_edit_resource_dlg.show()" title="Selecionar recursos" />
+								update="faa-role-edit-resource-panel-id" oncomplete="faa_role_edit_resource_dlg.show()" title="Selecionar recursos"
+								actionListener="#{roleEditMB.clearResourceList()}" />
 
 						</h:panelGroup>
 
@@ -37,8 +38,8 @@
 
 					<h:panelGrid columns="1" id="faa-role-edit-panel-resource-id">
 
-						<p:dataTable id="faa-role-edit-datatable-resource-id" widgetVar="faa_role_dt_resource_wv" emptyMessage="Não há recursos associados"
-							value="#{roleEditMB.bean.resources}" var="faa_role_dt_resource_row" rows="7" paginator="true" paginatorAlwaysVisible="true"
+						<p:dataTable id="faa-role-edit-datatable-resource-id" widgetVar="faa_role_dt_resource_wv" emptyMessage="Não há recursos selecionados"
+							value="#{roleEditMB.bean.resources}" var="faa_role_dt_resource_row" rows="6" paginator="true" paginatorAlwaysVisible="true"
 							pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-small">
 
 							<p:column headerText="Recursos:" sortBy="#{faa_role_dt_resource_row.name}">
@@ -82,10 +83,11 @@
 
 				<h:panelGrid columns="1" styleClass="dialog-body dialog-body-role">
 
-					<p:dataTable id="faa-role-edit-datatable-resource-select-id" widgetVar="faa_role_dt_resource_select_wv" emptyMessage="Não há recursos"
-						value="#{roleEditMB.resourceList}" var="faa_role_dt_resource_select_row" rows="5" paginator="true" paginatorAlwaysVisible="true"
-						pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-small"
-						selection="#{roleEditMB.resourceArray}" rowKey="#{faa_role_dt_resource_select_row.id}">
+					<p:dataTable id="faa-role-edit-datatable-resource-select-id" widgetVar="faa_role_dt_resource_select_wv"
+						emptyMessage="Não há recursos disponíveis" value="#{roleEditMB.resourceList}" var="faa_role_dt_resource_select_row" rows="10"
+						paginator="true" paginatorAlwaysVisible="true" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="top"
+						styleClass="dialog-datatable dialog-datatable-small" selection="#{roleEditMB.resourceArray}"
+						rowKey="#{faa_role_dt_resource_select_row.id}">
 
 						<p:column selectionMode="multiple" style="text-align: center" />
 
@@ -104,7 +106,8 @@
 
 				<h:panelGroup id="faa-role-edit-resource-dlg-buttons-id">
 
-					<p:commandButton value="Selecionar" update="faa-role-edit-datatable-resource-id" oncomplete="faa_role_edit_resource_dlg.hide()" />
+					<p:commandButton value="Selecionar" update="faa-role-edit-datatable-resource-id" oncomplete="faa_role_edit_resource_dlg.hide()"
+						action="#{roleEditMB.selectResources()}" />
 
 					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this"
 						onclick="faa_role_edit_resource_dlg.hide()" />
