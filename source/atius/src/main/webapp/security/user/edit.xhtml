@@ -99,11 +99,8 @@
 						<p:column selectionMode="multiple" style="text-align: center" />
 
 						<p:column headerText="Perfil:">
-							<h:panelGroup layout="block" style="width: 130px; overflow: hidden; white-space: pre; float: left">
+							<h:panelGroup layout="block" style="width: 470px; overflow: hidden; white-space: pre; float: left">
 								<h:outputText value="#{faa_user_dt_profile_select_row.name}" title="#{faa_user_dt_profile_select_row.shortDescription}" />
-							</h:panelGroup>
-							<h:panelGroup layout="block" style="width: 340px; overflow: hidden; white-space: pre; float: right">
-								<h:outputText value="#{faa_user_dt_profile_select_row.shortDescription}" title="#{faa_user_dt_profile_select_row.shortDescription}" />
 							</h:panelGroup>
 						</p:column>
 
@@ -114,7 +111,7 @@
 				<h:panelGroup id="faa-user-edit-profile-dlg-buttons-id">
 
 					<p:commandButton value="Selecionar" update="faa-user-edit-datatable-profile-id" oncomplete="faa_user_edit_profile_dlg.hide()"
-						action="#{userEditMB.selectResources()}" />
+						action="#{userEditMB.selectProfiles()}" />
 
 					<p:commandLink value="Fechar" immediate="true" styleClass="dialog-close-link" process="@this"
 						onclick="faa_user_edit_profile_dlg.hide()" />
