@@ -80,9 +80,7 @@ body {
 	border-radius: 7px 7px 7px 7px;
 }
 
-/*
-	CSS for HTML tags
-*/
+/*	HTML tags	*/
 td.top {
 	vertical-align: top;
 }
@@ -108,38 +106,7 @@ button.margin {
 	margin-right: 12px;
 }
 
-/*
-	CSS for Tables
-*/
-.atius-table {
-	width: 100%;
-	border: 1px solid inherit;
-}
-
-.atius-table th {
-	padding: 4px 10px;
-	background: #DDDDDD none repeat scroll 0 0 !important;
-	border: 0 none !important;
-	color: #2854BB !important;
-	font-weight: bold !important;
-	padding-bottom: 4px !important;
-	padding-top: 4px !important;
-	text-align: left !important;
-	-moz-background-clip: border !important;
-	-moz-background-inline-policy: continuous !important;
-	-moz-background-origin: padding !important;
-}
-
-.atius-table td {
-	padding: 2px 4px 3px;
-	border-color: -moz-use-text-color -moz-use-text-color #D6D6D6 !important;
-	border-style: none none solid !important;
-	border-width: 0 0 1px !important;
-}
-
-/*
-	CSS for Dialog
-*/
+/*	Dialog */
 .dialog-body {
 	width: 100%;
 	border-bottom: 2px solid #AFAFAF;
@@ -291,9 +258,7 @@ ul.dialog-messages li {
 	height: 175px;
 }
 
-/*
-	CSS for Fuselage
-*/
+/*	Fuselage	*/
 tbody tr td.faa-label .ui-dt-c {
 	text-align: center;
 	font-size: 10px;
