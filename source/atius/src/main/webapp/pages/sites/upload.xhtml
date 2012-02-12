@@ -8,7 +8,7 @@
 			<p:confirmDialog message="Deseja excluir o termo: #{websiteFilesListMB.websiteFiles.serverName} de #{websiteFilesListMB.websiteFiles.date}?" header="Atenção!" severity="alert"
 				id="atius-sites-upload-delete-dlg-id" widgetVar="atius_sites_upload_delete_dlg">
 
-				<p:commandButton value="Sim" oncomplete="atius_sites_upload_delete_dlg.hide()" update="atius-sites-upload-datatable-id, atius-growl-id"
+				<p:commandButton value="Sim" oncomplete="atius_sites_upload_delete_dlg.hide()" update="atius-sites-upload-datatable-id, faa-growl-id"
 					action="#{websiteFilesListMB.delete}" actionListener="#{websiteFilesListMB.clearResultList}" style="margin-right: 20px;" />
 
 				<p:commandButton value="Não" onclick="atius_sites_upload_delete_dlg.hide()" type="button" style="margin-left: 20px;" />

@@ -5,19 +5,19 @@
 		<h:panelGroup id="atius-sites-menu-id">
 			<p:dataGrid value="#{websiteDomainListMB.websiteCategories}" var="category" columns="1">
 				<p:column>
-					<p:commandLink value="#{category.name}" immediate="true" update="atius-body-id"
+					<p:commandLink value="#{category.name}" immediate="true" update="faa-body-id"
 						action="#{websiteDomainListMB.setSearchDomain(websiteDomainListMB.searchDomain)}"
 						actionListener="#{menuContext.select('MenuSites', category.name)}"
 						styleClass="#{menuContext.menu['MenuSites'][category.name]['Style']}" />
 				</p:column>
 			</p:dataGrid>
 
-			<p:commandLink value="Todos" immediate="true" update="atius-body-id" action="#{websiteDomainListMB.clearResultList}"
+			<p:commandLink value="Todos" immediate="true" update="faa-body-id" action="#{websiteDomainListMB.clearResultList}"
 				actionListener="#{menuContext.select('MenuSites', 'Todos')}" styleClass="#{menuContext.menu['MenuSites']['Todos']['Style']}" />
 
 			<p:spacer height="10px" />
 
-			<p:commandLink value="Configuração" immediate="true" update="atius-body-id"
+			<p:commandLink value="Configuração" immediate="true" update="faa-body-id"
 				actionListener="#{menuContext.select('MenuSites', 'Configuração')}"
 				styleClass="#{menuContext.menu['MenuSites']['Configuração']['Style']}" />
 		</h:panelGroup>

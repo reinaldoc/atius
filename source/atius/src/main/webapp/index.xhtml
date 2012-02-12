@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/main.xhtml">
 
-	<ui:define name="atius-header-right-ui">
+	<ui:define name="faa-header-right-ui">
+
 		<!-- @HeaderRight  -->
 		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Sites')}">
 			<ui:include src="pages/sites/header.xhtml" />
@@ -14,9 +15,11 @@
 		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Segurança')}">
 			<ui:include src="security/header.xhtml" />
 		</h:panelGroup>
+
 	</ui:define>
 
-	<ui:define name="atius-body-ui">
+	<ui:define name="faa-body-ui">
+
 		<!-- Begin @Body  -->
 		<h:panelGroup rendered="#{menuContext.isSelected('MenuTop', 'Email')}">
 			<ui:include src="pages/email/main.xhtml" />
@@ -38,6 +41,7 @@
 			<ui:include src="security/main.xhtml" />
 		</h:panelGroup>
 		<!-- End @Body  -->
+
 	</ui:define>
 
 </ui:composition>

@@ -1,8 +1,10 @@
 @CHARSET "UTF-8";
-
 /*
-	CSS for Layout
+	FAA - Fuselage Authorization and Authentication
 */
+
+
+/*	Layout	*/
 html {
 	font: small-caption;
 	font-size: 12px;
@@ -14,14 +16,14 @@ body {
 	padding: 0px;
 }
 
-#atius-top-id {
+#faa-top-id {
 	width: 100%;
 	background-color: #E8E8E8;
 	height: 25px;
 	border-bottom: solid 1px #AFAFAF;
 }
 
-#atius-top-id a {
+#faa-top-id a {
 	color: #4F4F4F;
 	text-decoration: none;
 	font-weight: bold;
@@ -31,25 +33,21 @@ body {
 	padding-right: 10px;
 }
 
-#atius-top-id a.right-menu-item {
-	float: right;
-}
-
-#atius-top-id a:hover {
+#faa-top-id a:hover {
 	background-color: #D0D0D0;
 }
 
-#atius-top-id a.selected {
+#faa-top-id a.selected {
 	background-color: #CCCCCC;
 }
 
-#atius-body-left-id {
+#faa-body-left-id {
 	float: left;
 	width: 180px;
 	padding-top: 20px;
 }
 
-#atius-body-left-id a {
+#faa-body-left-id a {
 	color: black;
 	text-decoration: none;
 	display: block;
@@ -58,23 +56,23 @@ body {
 	padding-bottom: 4px;
 }
 
-#atius-body-left-id a:hover {
+#faa-body-left-id a:hover {
 	background-color: #74ffcc;
 	font-weight: bold;
 }
 
-#atius-body-left-id a.selected {
+#faa-body-left-id a.selected {
 	background-color: #2ec890;
 	color: white;
 }
 
-#atius-body-left-id a.selected:hover {
+#faa-body-left-id a.selected:hover {
 	background-color: #2ec890;
 	color: white;
 	font-weight: normal;
 }
 
-#atius-body-right-id {
+#faa-body-right-id {
 	margin-left: 180px;
 	right: 1px;
 	border: 3px solid #2ec890;
@@ -137,10 +135,6 @@ button.margin {
 	border-color: -moz-use-text-color -moz-use-text-color #D6D6D6 !important;
 	border-style: none none solid !important;
 	border-width: 0 0 1px !important;
-}
-
-.atius-table-header {
-	margin-bottom: 5px;
 }
 
 /*
@@ -340,3 +334,4 @@ tbody tr td.faa-label-profileByRule .ui-dt-c {
 .faa-header-items td {
 	padding-right: 45px;
 }
+

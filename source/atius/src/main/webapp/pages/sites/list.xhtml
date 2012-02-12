@@ -5,7 +5,7 @@
 
 		<p:confirmDialog message="Deseja excluir o website: #{websiteDomainEditMB.bean.serverName} ?" header="Atenção!" severity="alert"
 			id="atius-sites-delete-dlg-id" widgetVar="atius_sites_delete_dlg">
-			<p:commandButton value="Sim" oncomplete="atius_sites_delete_dlg.hide()" update="atius-sites-list-datatable-id, atius-growl-id"
+			<p:commandButton value="Sim" oncomplete="atius_sites_delete_dlg.hide()" update="atius-sites-list-datatable-id, faa-growl-id"
 				action="#{websiteDomainEditMB.delete}" actionListener="#{websiteDomainListMB.clearResultList}" style="margin-right: 20px;" />
 			<p:commandButton value="Não" onclick="atius_sites_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 		</p:confirmDialog>
@@ -13,10 +13,10 @@
 		<p:confirmDialog
 			message="Deseja #{websiteDomainEditMB.bean.availabilityEnabled ? 'desativar' : 'ativar' } o website: #{websiteDomainEditMB.bean.serverName} ?"
 			header="Atenção!" severity="alert" id="atius-sites-status-dlg-id" widgetVar="atius_sites_status_dlg">
-			<p:commandButton value="Sim" oncomplete="atius_sites_status_dlg.hide()" update="atius-sites-list-datatable-id, atius-growl-id"
+			<p:commandButton value="Sim" oncomplete="atius_sites_status_dlg.hide()" update="atius-sites-list-datatable-id, faa-growl-id"
 				action="#{websiteDomainEditMB.disable}" actionListener="#{websiteDomainListMB.clearResultList}" style="margin-right: 20px;"
 				rendered="#{websiteDomainEditMB.bean.availabilityEnabled}" />
-			<p:commandButton value="Sim" oncomplete="atius_sites_status_dlg.hide()" update="atius-sites-list-datatable-id, atius-growl-id"
+			<p:commandButton value="Sim" oncomplete="atius_sites_status_dlg.hide()" update="atius-sites-list-datatable-id, faa-growl-id"
 				action="#{websiteDomainEditMB.enable}" actionListener="#{websiteDomainListMB.clearResultList}" style="margin-right: 20px;"
 				rendered="#{!websiteDomainEditMB.bean.availabilityEnabled}" />
 			<p:commandButton value="Não" onclick="atius_sites_status_dlg.hide()" type="button" style="margin-left: 20px;" />
