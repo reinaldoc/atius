@@ -98,7 +98,16 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	}
 
 	public List<WebsiteDomain> find(String search) {
+		if (Strings.isNotBlank(search) && !"Todos".equals(getSelectedMenu()))
+			return getDelegate().findByCategory(getSelectedMenu(), search);
+
 		QueryConfig<WebsiteDomain> queryConfig = getQueryConfig();
+		if (Strings.isBlank(search)) {
+			if (!"Todos".equals(getSelectedMenu()))
+				queryConfig.getFilter().put("websiteCategory", getSelectedMenu());
+			return findAll();
+		}
+
 		queryConfig.getFilter().put("cn", search);
 		queryConfig.getFilter().put("serverName", search);
 		queryConfig.getFilter().put("adminId", search);
@@ -108,18 +117,4 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 		return findAll();
 	}
 
-	public List<WebsiteDomain> findByCategory(String category) {
-		QueryConfig<WebsiteDomain> queryConfig = getQueryConfig();
-		if (!"Todos".equals(category))
-			queryConfig.getFilter().put("websiteCategory", category);
-		return findAll();
-	}
-
-	public List<WebsiteDomain> findByCategory(String category, String search) {
-		if (Strings.isBlank(search))
-			return findByCategory(category);
-		if (Strings.isBlank(category) || "Todos".equals(category))
-			return find(search);
-		return getDelegate().findByCategory(category, search);
-	}
 }

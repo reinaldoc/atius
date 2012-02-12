@@ -6,8 +6,7 @@
 			<p:dataGrid value="#{websiteDomainListMB.websiteCategories}" var="category" columns="1">
 				<p:column>
 					<p:commandLink value="#{category.name}" immediate="true" update="faa-body-id"
-						action="#{websiteDomainListMB.setSearchDomain(websiteDomainListMB.searchDomain)}"
-						actionListener="#{menuContext.select('MenuSites', category.name)}"
+						actionListener="#{menuContext.select('MenuSites', category.name)}" action="#{websiteDomainListMB.clearResultList()}"
 						styleClass="#{menuContext.menu['MenuSites'][category.name]['Style']}" />
 				</p:column>
 			</p:dataGrid>

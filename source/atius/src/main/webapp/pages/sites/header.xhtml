@@ -2,18 +2,29 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:panelGrid columns="2">
+
 		<h:form prependId="false">
+
 			<h:panelGrid columns="2" styleClass="faa-header-items">
+
 				<h:panelGroup layout="block">
-					<h:inputText id="atius-sites-search-domain" value="#{websiteDomainListMB.searchDomain}" autocomplete="off" styleClass="filter" />
-					<p:commandButton icon="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.clearResultList}"
-						update="atius-sites-list-datatable-id" process="atius-sites-search-domain, @this" />
+
+					<h:inputText id="atius-sites-search-domain" value="#{websiteDomainListMB.resultFilter}" autocomplete="off" styleClass="filter" />
+
+					<p:commandButton icon="ui-icon ui-icon-search" value="Buscar" update="atius-sites-list-datatable-id"
+						process="atius-sites-search-domain, @this" />
+
 				</h:panelGroup>
+
 				<p:commandButton icon="ui-icon-plusthick" value="Novo Site" immediate="true" action="#{websiteDomainEditMB.editBean}"
 					update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id" oncomplete="atius_sites_edit_dlg.show()" />
+
 			</h:panelGrid>
+
 		</h:form>
+
 		<ui:include src="edit.xhtml" />
+
 	</h:panelGrid>
 
 </ui:composition>

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;
 
+import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
 import br.ufpa.ctic.atius.websites.business.WebsiteFilesBC;
@@ -24,14 +25,11 @@ public class WebsiteFilesListMB extends AbstractListPageBean<WebsiteFiles, Long>
 
 	private WebsiteFiles bean;
 
-	public String getSortAttribute() {
-		return "serverName";
-	}
-	
 	@Override
-	protected List<WebsiteFiles> handleResultList() {
+	protected List<WebsiteFiles> handleResultList(QueryConfig<WebsiteFiles> queryConfig) {
 		if (websiteDomain == null)
 			return null;
+		queryConfig.setSorting("serverName");
 		return bc.findByServerName(websiteDomain.getServerName());
 	}
 
@@ -56,6 +54,5 @@ public class WebsiteFilesListMB extends AbstractListPageBean<WebsiteFiles, Long>
 	public void delete() {
 		bc.delete(bean.getId());
 	}
-
 
 }

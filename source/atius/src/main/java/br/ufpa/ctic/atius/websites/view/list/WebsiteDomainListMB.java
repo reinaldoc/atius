@@ -5,9 +5,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
-import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.ufpa.ctic.atius.websites.business.WebsiteDomainBC;
 import br.ufpa.ctic.atius.websites.domain.WebsiteCategory;
 import br.ufpa.ctic.atius.websites.domain.WebsiteDomain;
@@ -20,8 +20,6 @@ public class WebsiteDomainListMB extends AbstractListPageBean<WebsiteDomain, Str
 	@Inject
 	private WebsiteDomainBC bc;
 
-	private String searchDomain;
-
 	List<WebsiteCategory> websiteCategories;
 
 	List<String> websiteProfiles;
@@ -31,36 +29,17 @@ public class WebsiteDomainListMB extends AbstractListPageBean<WebsiteDomain, Str
 	private void init() {
 		bc.selectMenu(getFirstWebsiteCategory());
 	}
-	
-	public String getSortAttribute() {
-		return "serverName";
-	}
-	
+
 	private String getFirstWebsiteCategory() {
 		if (getWebsiteCategories().size() > 0)
 			return getWebsiteCategories().get(0).getName();
 		else
-			return "";
+			return "Todos";
 	}
 
 	@Override
-	protected List<WebsiteDomain> handleResultList() {
-		return bc.findByCategory(bc.getSelectedMenu(), searchDomain);
-	}
-
-	public String clearValidation() {
-		Faces.resetValidation();
-		clearResultList();
-		return null;
-	}
-
-	public String getSearchDomain() {
-		return searchDomain;
-	}
-
-	public void setSearchDomain(String searchDomain) {
-		this.searchDomain = searchDomain;
-		clearResultList();
+	protected List<WebsiteDomain> handleResultList(QueryConfig<WebsiteDomain> queryConfig) {
+		return bc.find(getResultFilter());
 	}
 
 	public List<WebsiteCategory> getWebsiteCategories() {

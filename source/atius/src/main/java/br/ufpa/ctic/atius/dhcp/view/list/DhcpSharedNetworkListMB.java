@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
 import br.ufpa.ctic.atius.dhcp.business.DhcpSharedNetworkBC;
@@ -19,12 +20,8 @@ public class DhcpSharedNetworkListMB extends AbstractListPageBean<DhcpSharedNetw
 	private DhcpSharedNetworkBC bc;
 
 	@Override
-	protected String getSortAttribute() {
-		return "cn";
-	}
-
-	@Override
-	protected List<DhcpSharedNetwork> handleResultList() {
+	protected List<DhcpSharedNetwork> handleResultList(QueryConfig<DhcpSharedNetwork> queryConfig) {
+		queryConfig.setSorting("cn");
 		return bc.findAll();
 	}
 
