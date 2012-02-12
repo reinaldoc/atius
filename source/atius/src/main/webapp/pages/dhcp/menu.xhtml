@@ -5,19 +5,19 @@
 		<h:panelGroup id="atius-dhcp-menu-id">
 			<p:dataGrid value="#{dhcpSharedNetworkListMB.resultList}" var="dhcpSharedNetwork" columns="1">
 				<p:column>
-					<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update="atius-body-id"
+					<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update="faa-body-id"
 						action="#{dhcpSessionInfo.selectDhcpSharedNetwork(dhcpSharedNetwork)}"
 						actionListener="#{menuContext.select('MenuDhcp', dhcpSharedNetwork.cn)}"
 						styleClass="#{menuContext.menu['MenuDhcp'][dhcpSharedNetwork.cn]['Style']}" />
 				</p:column>
 			</p:dataGrid>
 <!-- 
-			<p:commandLink value="Todos" immediate="true" update="atius-body-id" action="#{dhcpSharedNetworkListMB.clearResultList}"
+			<p:commandLink value="Todos" immediate="true" update="faa-body-id" action="#{dhcpSharedNetworkListMB.clearResultList}"
 				actionListener="#{menuContext.select('MenuDhcp', 'Todos')}" styleClass="#{menuContext.menu['MenuDhcp']['Todos']['Style']}" />
  -->
 			<p:spacer height="10px" />
 
-			<p:commandLink value="Configuração" immediate="true" update="atius-body-id"
+			<p:commandLink value="Configuração" immediate="true" update="faa-body-id"
 				actionListener="#{menuContext.select('MenuDhcp', 'Configuração')}"
 				styleClass="#{menuContext.menu['MenuDhcp']['Configuração']['Style']}" />
 		</h:panelGroup>

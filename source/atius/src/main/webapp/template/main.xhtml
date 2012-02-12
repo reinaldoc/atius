@@ -4,73 +4,114 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+
 	<h:outputStylesheet library="css" name="jquery.qtip.css" />
-	<h:outputStylesheet library="css" name="atius.css" />
+	<h:outputStylesheet library="css" name="faa.css" />
 	<h:outputStylesheet library="css" name="primefaces-components.css" />
+
 	<h:outputScript library="javascript" name="jquery.qtip.js" />
-	<h:outputScript library="javascript" name="atius.js" />
+	<h:outputScript library="javascript" name="faa.js" />
+
 	<title><ui:insert name="title">#{messages['main.app.title']}</ui:insert></title>
+
 </h:head>
 
 <h:body>
-	<p:growl id="atius-growl-id" showDetail="false" life="9000" />
+
 	<p:growl id="faa-growl-id" showDetail="false" life="9000" />
-	<div id="atius-top-id">
-		<ui:insert name="atius-top-ui">
+
+	<div id="faa-top-id">
+
+		<ui:insert name="faa-top-ui">
+
 			<!-- @TopMenu  -->
 			<ui:include src="/pages/menu.xhtml" />
+
 		</ui:insert>
+
 	</div>
-	<h:panelGroup id="atius-header-id">
-		<ui:insert name="atius-header-ui">
+
+	<h:panelGroup id="faa-header-id">
+
+		<ui:insert name="faa-header-ui">
+
 			<!-- Begin @Header  -->
-			<h:panelGrid columns="2" styleClass="atius-table-header">
+			<h:panelGrid columns="2" style="margin-bottom: 5px;">
+
 				<h:panelGroup>
-					<div id="atius-header-left-id">
-						<ui:insert name="atius-header-left-ui">
+
+					<div id="faa-header-left-id">
+
+						<ui:insert name="faa-header-left-ui">
+
 							<!-- Begin @HeaderLeft  -->
 							<h:form prependId="false">
+
 								<p:commandLink actionListener="#{menuContext.select('TopMenu', 'Sites')}" ajax="false" immediate="true" action="/index.jsf">
-									<h:graphicImage library="images" name="logo.png" width="165px" height="44px" alt="Atius"
+
+									<h:graphicImage library="images" name="logo.png" width="165px" height="44px" alt="#{messages['main.app.title']}"
 										style="border: 0px; margin-left: 0px; margin-top: 5px; margin-right: 8px;" />
+
 								</p:commandLink>
+
 							</h:form>
 							<!-- End @HeaderLeft  -->
+
 						</ui:insert>
+
 					</div>
+
 				</h:panelGroup>
+
 				<h:panelGroup>
-					<div id="atius-header-right-id">
-						<ui:insert name="atius-header-right-ui">
+
+					<div id="faa-header-right-id">
+
+						<ui:insert name="faa-header-right-ui">
 							<!-- @HeaderRight  -->
 						</ui:insert>
+
 					</div>
+
 				</h:panelGroup>
+
 			</h:panelGrid>
 			<!-- End @Header  -->
+
 		</ui:insert>
+
 	</h:panelGroup>
-	<h:panelGroup id="atius-body-id">
-		<ui:insert name="atius-body-ui">
+
+	<h:panelGroup id="faa-body-id">
+
+		<ui:insert name="faa-body-ui">
+
 			<!-- Begin @Body  -->
-			<div id="atius-body-left-id">
-				<ui:insert name="atius-body-left-ui">
+			<div id="faa-body-left-id">
+				<ui:insert name="faa-body-left-ui">
 					<!-- @BodyLeft -->
 				</ui:insert>
 			</div>
-			<div id="atius-body-right-id">
-				<ui:insert name="atius-body-right-ui">
+
+			<div id="faa-body-right-id">
+				<ui:insert name="faa-body-right-ui">
 					<!-- @BodyRight -->
 				</ui:insert>
 			</div>
 			<!-- End @Body  -->
+
 		</ui:insert>
+
 	</h:panelGroup>
-	<h:panelGroup id="atius-footer-id">
-		<ui:insert name="atius-footer-ui">
+
+	<h:panelGroup id="faa-footer-id">
+
+		<ui:insert name="faa-footer-ui">
 			<!-- @Footer  -->
 		</ui:insert>
+
 	</h:panelGroup>
 
 </h:body>
+
 </html>
