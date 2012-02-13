@@ -5,11 +5,11 @@
 		<h:form prependId="false">
 			<h:panelGrid columns="2" styleClass="faa-header-items">
 				<h:panelGroup layout="block">
-					<h:inputText id="atius-dhcp-search-domain" value="#{websiteDomainListMB.searchDomain}" autocomplete="off" styleClass="filter" />
+					<h:inputText id="atius-dhcp-search-domain" value="#{dhcpSharedNetworkListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 					<p:commandButton icon="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.clearResultList}"
 						update="atius-dhcp-list-datatable-id" process="atius-dhcp-search-domain, @this" />
 				</h:panelGroup>
-				<p:commandButton icon="ui-icon-plusthick" value="Novo Site" immediate="true" action="#{websiteDomainEditMB.editBean}"
+				<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
 					update="atius-dhcp-edit-dlg-body-id, atius-dhcp-edit-dlg-buttons-id" oncomplete="atius_dhcp_edit_dlg.show()" />
 			</h:panelGrid>
 		</h:form>
