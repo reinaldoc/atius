@@ -3,67 +3,51 @@
 
 	<h:form prependId="false">
 
-		<p:confirmDialog message="Deseja excluir o website: #{websiteDomainEditMB.bean.serverName} ?" header="Atenção!" severity="alert"
-			id="atius-dhcp-delete-dlg-id" widgetVar="atius_dhcp_delete_dlg">
+		<p:confirmDialog message="Deseja excluir a subrede: #{dhcpSubnetEditMB.bean.cn} ?" header="Atenção!" severity="alert" id="atius-dhcp-delete-dlg-id"
+			widgetVar="atius_dhcp_delete_dlg">
 			<p:commandButton value="Sim" oncomplete="atius_dhcp_delete_dlg.hide()" update="atius-dhcp-list-datatable-id, faa-growl-id"
-				action="#{websiteDomainEditMB.delete}" actionListener="#{websiteDomainListMB.clearResultList}" style="margin-right: 20px;" />
+				action="#{dhcpSubnetEditMB.delete}" actionListener="#{dhcpSubnetListMB.clearResultList}" style="margin-right: 20px;" />
 			<p:commandButton value="Não" onclick="atius_dhcp_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
-		</p:confirmDialog>
-
-		<p:confirmDialog
-			message="Deseja #{websiteDomainEditMB.bean.availabilityEnabled ? 'desativar' : 'ativar' } o website: #{websiteDomainEditMB.bean.serverName} ?"
-			header="Atenção!" severity="alert" id="atius-dhcp-status-dlg-id" widgetVar="atius_dhcp_status_dlg">
-			<p:commandButton value="Sim" oncomplete="atius_dhcp_status_dlg.hide()" update="atius-dhcp-list-datatable-id, faa-growl-id"
-				action="#{websiteDomainEditMB.disable}" actionListener="#{websiteDomainListMB.clearResultList}" style="margin-right: 20px;"
-				rendered="#{websiteDomainEditMB.bean.availabilityEnabled}" />
-			<p:commandButton value="Sim" oncomplete="atius_dhcp_status_dlg.hide()" update="atius-dhcp-list-datatable-id, faa-growl-id"
-				action="#{websiteDomainEditMB.enable}" actionListener="#{websiteDomainListMB.clearResultList}" style="margin-right: 20px;"
-				rendered="#{!websiteDomainEditMB.bean.availabilityEnabled}" />
-			<p:commandButton value="Não" onclick="atius_dhcp_status_dlg.hide()" type="button" style="margin-left: 20px;" />
 		</p:confirmDialog>
 
 		<h:panelGroup id="atius-dhcp-list-panel-id">
 			<p:dataTable id="atius-dhcp-list-datatable-id" widgetVar="atius_dhcp_list_datatable" emptyMessage="Não há registros"
-				value="#{websiteDomainListMB.resultList}" var="domain" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true" paginatorAlwaysVisible="false"
-				pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
-				<p:column headerText="Entidade" sortBy="#{domain.cn}">
+				value="#{dhcpSubnetListMB.resultList}" var="dhcpSubnet" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+
+				<p:column headerText="Nome" sortBy="#{dhcpSubnet.dhcpComments}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<h:outputText value="#{domain.cn} " />
+						<h:outputText value="#{dhcpSubnet.dhcpComments}" />
 					</h:panelGroup>
 				</p:column>
-				<p:column headerText="Domínio" sortBy="#{domain.serverName}">
+
+				<p:column headerText="Subrede" sortBy="#{dhcpSubnet.cn}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<h:outputText value="#{domain.serverName}" />
+						<h:outputText value="#{dhcpSubnet.cn}/#{dhcpSubnet.dhcpNetMask}" />
 					</h:panelGroup>
 				</p:column>
-				<p:column headerText="Categoria">
+
+				<p:column headerText="Range" sortBy="#{dhcpSubnet.dhcpRange}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<h:outputText value="#{domain.websiteCategory}" />
+						<h:outputText value="#{dhcpSubnet.dhcpRange}" />
 					</h:panelGroup>
 				</p:column>
-				<p:column headerText="Tipo">
+
+				<p:column headerText="Gateway" sortBy="#{dhcpSubnet.dhcpGateway}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<h:outputText value="#{domain.websiteProfile}" />
+						<h:outputText value="#{dhcpSubnet.dhcpGateway}" />
 					</h:panelGroup>
 				</p:column>
+
 				<p:column style="text-align: right; padding: 0px">
 
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 
-						<p:commandButton icon="ui-icon-search" title="Editar Informações" oncomplete="atius_dhcp_edit_dlg.show()"
-							action="#{websiteDomainEditMB.editById(domain.serverName)}" update="atius-dhcp-edit-dlg-body-id, atius-dhcp-edit-dlg-buttons-id" immediate="true" />
-
-						<p:commandButton icon="ui-icon-document" title="Imprimir Termo" onclick="openReport('dhcp','#{domain.serverName}'); return false;" />
-
-						<p:commandButton icon="ui-icon-folder-collapsed" title="Enviar Termo Digitalizado" oncomplete="atius_dhcp_upload_dlg.show()"
-							action="#{websiteFilesListMB.selectWebsite(domain)}" update="atius-dhcp-upload-dlg-id" />
-
-						<p:commandButton icon="#{!domain.availabilityEnabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }" style="icon" immediate="true"
-							update="atius-dhcp-status-dlg-id" action="#{websiteDomainEditMB.editBean(domain)}" oncomplete="atius_dhcp_status_dlg.show()"
-							title="Este website está #{domain.availabilityEnabled ? 'ativado!' : 'desativado!' }. Deseja #{!domain.availabilityEnabled ? 'ativá-lo' : 'desativá-lo' }?" />
+						<p:commandButton icon="ui-icon-search" title="Editar Informações" oncomplete="atius_dhcp_edit_dlg.show()" styleClass="margin"
+							action="#{dhcpSubnetEditMB.editById(dhcpSubnet.cn)}" update="atius-dhcp-edit-dlg-body-id, atius-dhcp-edit-dlg-buttons-id" immediate="true" />
 
 						<p:commandButton icon="ui-icon-trash" title="Excluir Website" oncomplete="atius_dhcp_delete_dlg.show()"
-							action="#{websiteDomainEditMB.editBean(domain)}" update="atius-dhcp-delete-dlg-id" />
+							action="#{dhcpSubnetEditMB.editBean(dhcpSubnet)}" update="atius-dhcp-delete-dlg-id" />
 
 					</h:panelGroup>
 				</p:column>

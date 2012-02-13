@@ -21,21 +21,19 @@ public class DhcpSharedNetworkListMB extends AbstractListPageBean<DhcpSharedNetw
 
 	@Override
 	protected List<DhcpSharedNetwork> handleResultList(QueryConfig<DhcpSharedNetwork> queryConfig) {
-		queryConfig.setSorting("cn");
 		return bc.findAll();
 	}
 
 	@SuppressWarnings("unused")
 	@PostConstruct
 	private void init() {
-		bc.selectMenu(getFirstSharedNetwork());
+		if (getResultList().size() > 0)
+			bc.selectDhcpSharedNetwork(getResultList().get(0));
 	}
 
-	public String getFirstSharedNetwork() {
-		if (getResultList().size() > 0)
-			return getResultList().get(0).getCn();
-		else
-			return "";
+	public void selectDhcpSharedNetwork(DhcpSharedNetwork dhcpSharedNetwork) {
+		bc.selectMenu(dhcpSharedNetwork.getCn());
+		bc.selectDhcpSharedNetwork(dhcpSharedNetwork);
 	}
 
 }

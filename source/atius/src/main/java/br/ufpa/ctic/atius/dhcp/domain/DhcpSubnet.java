@@ -12,6 +12,8 @@ public class DhcpSubnet extends Entry {
 
 	private String dhcpNetMask;
 
+	private String dhcpRange;
+
 	private String dhcpComments;
 
 	public DhcpSubnet() {
@@ -42,12 +44,32 @@ public class DhcpSubnet extends Entry {
 		this.dhcpOption = dhcpOption;
 	}
 
+	public String getDhcpGateway() {
+		if (dhcpOption != null)
+			for (String option : dhcpOption)
+				if (option.contains("routers"))
+					return option.split(" ")[1];
+		return null;
+	}
+
+	public void setDhcpGateway(String gateway) {
+
+	}
+
 	public String getDhcpNetMask() {
 		return dhcpNetMask;
 	}
 
 	public void setDhcpNetMask(String dhcpNetMask) {
 		this.dhcpNetMask = dhcpNetMask;
+	}
+
+	public String getDhcpRange() {
+		return dhcpRange;
+	}
+
+	public void setDhcpRange(String dhcpRange) {
+		this.dhcpRange = dhcpRange;
 	}
 
 	public String getDhcpComments() {
