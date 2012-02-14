@@ -53,7 +53,8 @@ public class DhcpSubnet extends Entry {
 	}
 
 	public void setDhcpGateway(String gateway) {
-
+		// if (dhcpOption == null)
+		dhcpOption = new String[] { "routers " + gateway };
 	}
 
 	public String getDhcpNetMask() {
