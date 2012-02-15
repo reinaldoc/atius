@@ -27,9 +27,9 @@
 					</h:panelGroup>
 				</p:column>
 
-				<p:column headerText="Range" sortBy="#{dhcpSubnet.dhcpRange}">
+				<p:column headerText="Range" sortBy="#{dhcpSubnet.dhcpRangeFirst}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<h:outputText value="#{dhcpSubnet.dhcpRange}" />
+						<h:outputText value="#{dhcpSubnet.dhcpRangeFirst} - #{dhcpSubnet.dhcpRangeLast}" />
 					</h:panelGroup>
 				</p:column>
 
@@ -44,7 +44,7 @@
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 
 						<p:commandButton icon="ui-icon-search" title="Editar Informações" oncomplete="atius_dhcp_edit_dlg.show()" styleClass="margin"
-							action="#{dhcpSubnetEditMB.editById(dhcpSubnet.cn)}" update="atius-dhcp-edit-dlg-body-id, atius-dhcp-edit-dlg-buttons-id" immediate="true" />
+							action="#{dhcpSubnetEditMB.editBean(dhcpSubnet)}" update="atius-dhcp-edit-dlg-body-id, atius-dhcp-edit-dlg-buttons-id" immediate="true" />
 
 						<p:commandButton icon="ui-icon-trash" title="Excluir Website" oncomplete="atius_dhcp_delete_dlg.show()"
 							action="#{dhcpSubnetEditMB.editBean(dhcpSubnet)}" update="atius-dhcp-delete-dlg-id" />

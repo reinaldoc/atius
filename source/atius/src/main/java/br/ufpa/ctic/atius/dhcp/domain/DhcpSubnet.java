@@ -1,7 +1,9 @@
 package br.ufpa.ctic.atius.dhcp.domain;
 
+import br.gov.frameworkdemoiselle.annotation.Ignore;
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
+import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
 public class DhcpSubnet extends Entry {
 
@@ -13,6 +15,12 @@ public class DhcpSubnet extends Entry {
 	private String dhcpNetMask;
 
 	private String dhcpRange;
+
+	@Ignore
+	private String dhcpRangeFirst;
+
+	@Ignore
+	private String dhcpRangeLast;
 
 	private String dhcpComments;
 
@@ -53,7 +61,7 @@ public class DhcpSubnet extends Entry {
 	}
 
 	public void setDhcpGateway(String gateway) {
-
+		dhcpOption = new String[] { "routers " + gateway };
 	}
 
 	public String getDhcpNetMask() {
@@ -64,12 +72,28 @@ public class DhcpSubnet extends Entry {
 		this.dhcpNetMask = dhcpNetMask;
 	}
 
-	public String getDhcpRange() {
-		return dhcpRange;
+	public String getDhcpRangeFirst() {
+		if (dhcpRange != null)
+			return Strings.substringBefore(dhcpRange, " ");
+		return null;
 	}
 
-	public void setDhcpRange(String dhcpRange) {
-		this.dhcpRange = dhcpRange;
+	public void setDhcpRangeFirst(String dhcpRangeFirst) {
+		this.dhcpRangeFirst = dhcpRangeFirst;
+	}
+
+	public String getDhcpRangeLast() {
+		if (dhcpRange != null)
+			return Strings.substringAfter(dhcpRange, " ");
+		return null;
+	}
+
+	public void setDhcpRangeLast(String dhcpRangeLast) {
+		this.dhcpRangeLast = dhcpRangeLast;
+	}
+
+	public void setDhcpRange() {
+		this.dhcpRange = dhcpRangeFirst + " " + dhcpRangeLast;
 	}
 
 	public String getDhcpComments() {

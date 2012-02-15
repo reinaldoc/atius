@@ -9,11 +9,11 @@
 					<p:commandButton icon="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.clearResultList}"
 						update="atius-dhcp-list-datatable-id" process="atius-dhcp-search-domain, @this" />
 				</h:panelGroup>
-				<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
+				<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
 					update="atius-dhcp-edit-dlg-body-id, atius-dhcp-edit-dlg-buttons-id" oncomplete="atius_dhcp_edit_dlg.show()" />
 			</h:panelGrid>
 		</h:form>
-		<ui:include src="edit.xhtml" />
+		<ui:include src="subnet/edit.xhtml" />
 	</h:panelGrid>
 
 </ui:composition>
