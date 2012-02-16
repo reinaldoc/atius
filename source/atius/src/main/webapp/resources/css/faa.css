@@ -258,6 +258,10 @@ ul.dialog-messages li {
 	height: 175px;
 }
 
+.dialog-datatable-small td {
+	font-weight: normal;
+}
+
 /*	Fuselage	*/
 tbody tr td.faa-label .ui-dt-c {
 	text-align: center;

@@ -3,12 +3,12 @@
 
 	<h:form prependId="false">
 
-		<h:panelGrid id="atius-dhcp-edit-panel-id">
+		<h:panelGrid id="atius-dhcp-subnet-edit-panel-id">
 
-			<p:dialog id="atius-dhcp-edit-dlg-id" header="ATIUS - Cadastro de Subrede" widgetVar="atius_dhcp_edit_dlg" modal="true" width="480"
+			<p:dialog id="atius-dhcp-subnet-edit-dlg-id" header="ATIUS - Cadastro de Subrede" widgetVar="atius_dhcp_subnet_edit_dlg" modal="true" width="480"
 				resizable="false" closable="false">
 
-				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-edit-dlg-body-id">
+				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-subnet-edit-dlg-body-id">
 
 					<h:outputText value="Nome:" />
 					<h:inputText value="#{dhcpSubnetEditMB.bean.dhcpComments}" autocomplete="off" onkeypress="return event.keyCode!=13" />
@@ -34,10 +34,10 @@
 
 				</h:panelGrid>
 
-				<h:panelGroup id="atius-dhcp-edit-dlg-buttons-id">
-					<faa:dialogButtons id="atius-dhcp-edit-dlg-save-id" dialogId="atius-dhcp-edit-dlg-id" dialogWidgetVar="atius_dhcp_edit_dlg"
+				<h:panelGroup id="atius-dhcp-subnet-edit-dlg-buttons-id">
+					<faa:dialogButtons id="atius-dhcp-subnet-edit-dlg-save-id" dialogId="atius-dhcp-subnet-edit-dlg-id" dialogWidgetVar="atius_dhcp_subnet_edit_dlg"
 						updateMode="#{dhcpSubnetEditMB.updateMode}" actionUpdater="#{dhcpSubnetEditMB.update}" actionInserter="#{dhcpSubnetEditMB.insert}"
-						actionCloser="#{dhcpSubnetListMB.clearValidation}" updateOnClose="atius-dhcp-list-datatable-id" />
+						actionCloser="#{dhcpSubnetListMB.clearValidation}" updateOnClose="atius-dhcp-subnet-list-datatable-id" />
 				</h:panelGroup>
 
 			</p:dialog>

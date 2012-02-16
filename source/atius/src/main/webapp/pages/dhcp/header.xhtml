@@ -2,18 +2,28 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:panelGrid columns="2">
+
 		<h:form prependId="false">
+
 			<h:panelGrid columns="2" styleClass="faa-header-items">
+
 				<h:panelGroup layout="block">
-					<h:inputText id="atius-dhcp-search-domain" value="#{dhcpSharedNetworkListMB.resultFilter}" autocomplete="off" styleClass="filter" />
+
+					<h:inputText id="atius-dhcp-subnet-search-domain" value="#{dhcpSharedNetworkListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 					<p:commandButton icon="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.clearResultList}"
-						update="atius-dhcp-list-datatable-id" process="atius-dhcp-search-domain, @this" />
+						update="atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search-domain, @this" />
+
 				</h:panelGroup>
+
 				<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
-					update="atius-dhcp-edit-dlg-body-id, atius-dhcp-edit-dlg-buttons-id" oncomplete="atius_dhcp_edit_dlg.show()" />
+					update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
+
 			</h:panelGrid>
+
 		</h:form>
+
 		<ui:include src="subnet/edit.xhtml" />
+
 	</h:panelGrid>
 
 </ui:composition>

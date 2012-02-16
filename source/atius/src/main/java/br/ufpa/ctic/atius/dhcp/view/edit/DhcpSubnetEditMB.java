@@ -77,4 +77,8 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 		return netmasks;
 	}
 
+	public void selectDhcpSubnet(DhcpSubnet dhcpSubnet) {
+		bc.selectDhcpSubnet(dhcpSubnet);
+	}
+
 }

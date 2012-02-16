@@ -93,7 +93,8 @@ public class DhcpSubnet extends Entry {
 	}
 
 	public void setDhcpRange() {
-		this.dhcpRange = dhcpRangeFirst + " " + dhcpRangeLast;
+		if (Strings.isNotBlank(dhcpRangeFirst) && Strings.isNotBlank(dhcpRangeLast))
+			this.dhcpRange = dhcpRangeFirst + " " + dhcpRangeLast;
 	}
 
 	public String getDhcpComments() {

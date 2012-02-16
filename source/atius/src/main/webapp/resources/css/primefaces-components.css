@@ -67,9 +67,12 @@ button.ui-button-icon-only,button.ui-button-icon-only.ui-state-default {
 	background-color: #E0E0E0 !important;
 }
 
-
 .ui-datatable th.ui-paginator {
 	text-align: center;
+}
+
+.ui-datatable td.ui-paginator {
+	background: none repeat scroll 0 0 #E8E8E8;
 }
 
 .ui-datatable-odd {
@@ -84,6 +87,7 @@ button.ui-button-icon-only,button.ui-button-icon-only.ui-state-default {
 	border: 0px !important;
 	border-bottom: 1px solid #D6D6D6 !important;
 	padding: 2px 4px 3px !important;
+	vertical-align: middle;
 }
 
 .ui-datatable-data-empty td {

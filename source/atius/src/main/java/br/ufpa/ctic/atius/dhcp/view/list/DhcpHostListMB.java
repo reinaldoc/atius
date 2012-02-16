@@ -7,22 +7,22 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
-import br.ufpa.ctic.atius.dhcp.business.DhcpSubnetBC;
-import br.ufpa.ctic.atius.dhcp.domain.DhcpSubnet;
+import br.ufpa.ctic.atius.dhcp.business.DhcpHostBC;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpHost;
 
 @ViewController
-public class DhcpSubnetListMB extends AbstractListPageBean<DhcpSubnet, String> {
+public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private DhcpSubnetBC bc;
+	private DhcpHostBC bc;
 
 	@Override
-	protected List<DhcpSubnet> handleResultList(QueryConfig<DhcpSubnet> queryConfig) {
-		if (bc.getDhcpSharedNetworkDN() == null)
+	protected List<DhcpHost> handleResultList(QueryConfig<DhcpHost> queryConfig) {
+		if (bc.getDhcpSubnetDN() == null)
 			return null;
-		getQueryConfig().setGeneric(bc.getDhcpSharedNetworkDN());
+		getQueryConfig().setGeneric(bc.getDhcpSubnetDN());
 		return bc.findAll();
 	}
 

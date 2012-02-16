@@ -2,6 +2,7 @@ package br.ufpa.ctic.atius.dhcp.domain;
 
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
+import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
 public class DhcpHost extends Entry {
 
@@ -11,6 +12,8 @@ public class DhcpHost extends Entry {
 	private String dhcpHWAddress;
 
 	private String dhcpStatements;
+
+	private String dhcpComments;
 
 	public DhcpHost() {
 		super();
@@ -33,19 +36,35 @@ public class DhcpHost extends Entry {
 	}
 
 	public String getDhcpHWAddress() {
+		if (dhcpHWAddress != null)
+			return Strings.substringAfter(dhcpHWAddress, " ");
 		return dhcpHWAddress;
 	}
 
 	public void setDhcpHWAddress(String dhcpHWAddress) {
+		if (Strings.isNotBlank(dhcpHWAddress))
+			dhcpHWAddress = "ethernet " + dhcpHWAddress;
 		this.dhcpHWAddress = dhcpHWAddress;
 	}
 
 	public String getDhcpStatements() {
+		if (dhcpStatements != null)
+			return Strings.substringAfter(dhcpStatements, " ");
 		return dhcpStatements;
 	}
 
 	public void setDhcpStatements(String dhcpStatements) {
+		if (Strings.isNotBlank(dhcpStatements))
+			dhcpStatements = "fixed-address " + dhcpStatements;
 		this.dhcpStatements = dhcpStatements;
+	}
+
+	public String getDhcpComments() {
+		return dhcpComments;
+	}
+
+	public void setDhcpComments(String dhcpComments) {
+		this.dhcpComments = dhcpComments;
 	}
 
 }
