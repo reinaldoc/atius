@@ -3,7 +3,6 @@
 	FAA - Fuselage Authorization and Authentication
 */
 
-
 /*	Layout	*/
 html {
 	font: small-caption;
@@ -95,11 +94,15 @@ fieldset {
 }
 
 input[type=text].filter {
-	width: 270px;
+	width: 270px !important;
 	font-weight: bold;
 	border: 2px solid gray;
 	height: 22px;
 	margin-right: 3px;
+}
+
+input[type=text].filter:focus {
+	background: transparent !important;
 }
 
 button.margin {
@@ -137,6 +140,15 @@ button.margin {
 	border-radius: 0px !important;
 	box-shadow: none !important;
 	color: black;
+}
+
+.dialog-body span.asInput {
+    border: 1px solid #BBC5CD;
+    display: block;
+    font-weight: normal;
+    line-height: 22px;
+    padding-left: 2px;
+    width: 378px;
 }
 
 .dialog-body input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus
@@ -303,4 +315,3 @@ tbody tr td.faa-label-profileByRule .ui-dt-c {
 .faa-header-items td {
 	padding-right: 45px;
 }
-

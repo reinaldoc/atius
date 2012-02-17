@@ -11,7 +11,8 @@
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-host-edit-dlg-body-id">
 
 					<h:outputText value="Hostname:" />
-					<h:inputText value="#{dhcpHostEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:inputText value="#{dhcpHostEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13"
+						readonly="#{dhcpHostEditMB.updateMode ? 'true' : 'false' }" />
 
 					<h:outputText value="IP:" />
 					<h:inputText value="#{dhcpHostEditMB.bean.dhcpStatements}" autocomplete="off" onkeypress="return event.keyCode!=13" />

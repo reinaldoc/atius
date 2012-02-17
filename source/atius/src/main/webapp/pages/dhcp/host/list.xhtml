@@ -12,10 +12,23 @@
 			<p:commandButton value="Não" onclick="atius_dhcp_host_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 		</p:confirmDialog>
 
-		<p:dialog id="atius-dhcp-host-list-dlg-id" header="ATIUS - Reservas DHCP" widgetVar="atius_dhcp_host_list_dlg" modal="true" width="900"
+		<p:dialog id="atius-dhcp-host-list-dlg-id" header="ATIUS - Reserva de IP" widgetVar="atius_dhcp_host_list_dlg" modal="true" width="900"
 			resizable="false" closable="false">
 
 			<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-host-list-dlg-body-id">
+
+				<h:panelGroup layout="block">
+
+					<h:inputText id="atius-dhcp-host-search" value="#{dhcpHostListMB.resultFilter}" autocomplete="off" styleClass="filter"
+						onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); return false; }" />
+
+					<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpHostListMB.clearResultList}" update="atius-dhcp-host-list-datatable-id"
+						process="atius-dhcp-host-search, @this" style="margin-right: 45px;" widgetVar="atius_dhcp_host_search" />
+
+					<p:commandButton icon="ui-icon-plusthick" value="Nova Reserva de IP" immediate="true" action="#{dhcpHostEditMB.editBean}"
+						update="atius-dhcp-host-edit-dlg-body-id, atius-dhcp-host-edit-dlg-buttons-id" oncomplete="atius_dhcp_host_edit_dlg.show()" />
+
+				</h:panelGroup>
 
 				<h:panelGroup id="atius-dhcp-host-list-panel-id">
 					<p:dataTable id="atius-dhcp-host-list-datatable-id" widgetVar="atius_dhcp_host_list_datatable" emptyMessage="Não há registros"

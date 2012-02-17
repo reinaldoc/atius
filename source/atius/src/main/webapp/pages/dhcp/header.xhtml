@@ -9,13 +9,13 @@
 
 				<h:panelGroup layout="block">
 
-					<h:inputText id="atius-dhcp-subnet-search-domain" value="#{dhcpSharedNetworkListMB.resultFilter}" autocomplete="off" styleClass="filter" />
-					<p:commandButton icon="ui-icon ui-icon-search" value="Buscar" action="#{websiteDomainListMB.clearResultList}"
-						update="atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search-domain, @this" />
+					<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
+					<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.clearResultList}"
+						update="atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search, @this" />
 
 				</h:panelGroup>
 
-				<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
+				<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
 					update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
 
 			</h:panelGrid>
