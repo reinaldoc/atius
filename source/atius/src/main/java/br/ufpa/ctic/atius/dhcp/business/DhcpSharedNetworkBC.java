@@ -28,4 +28,8 @@ public class DhcpSharedNetworkBC extends DelegateCrud<DhcpSharedNetwork, String,
 		sessionInfo.selectDhcpSharedNetwork(dhcpSharedNetwork);
 	}
 
+	public String getDhcpServiceDN() {
+		return sessionInfo.getDhcpServiceDN();
+	}
+
 }

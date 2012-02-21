@@ -6,7 +6,9 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 import br.ufpa.ctic.atius.dhcp.business.DhcpServerBC;
+import br.ufpa.ctic.atius.dhcp.business.DhcpServiceBC;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpServer;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpService;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpSharedNetwork;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpSubnet;
 
@@ -18,7 +20,12 @@ public class DhcpSessionInfo implements Serializable {
 	@Inject
 	private DhcpServerBC dhcpServerBC;
 
+	@Inject
+	private DhcpServiceBC dhcpServiceBC;
+
 	private DhcpServer dhcpServer;
+
+	private DhcpService dhcpService;
 
 	private DhcpSharedNetwork dhcpSharedNetwork;
 
@@ -27,9 +34,12 @@ public class DhcpSessionInfo implements Serializable {
 	public String getDhcpServiceDN() {
 		if (dhcpServer == null) {
 			dhcpServer = dhcpServerBC.getDefaultDhcpServer();
-			if (dhcpServer != null)
+			if (dhcpServer != null) {
+				dhcpService = dhcpServiceBC.getDhcpService(dhcpServer);
 				return dhcpServer.getDhcpServiceDN();
-		}
+			}
+		} else
+			return dhcpServer.getDhcpServiceDN();
 		return null;
 	}
 
@@ -37,8 +47,9 @@ public class DhcpSessionInfo implements Serializable {
 		return dhcpServer.getCn();
 	}
 
-	public void selectDhcpServer(String dhcpServerName) {
-		dhcpServer = dhcpServerBC.load(dhcpServerName);
+	public void selectDhcpServer(DhcpServer dhcpServer) {
+		this.dhcpServer = dhcpServer;
+		this.dhcpService = dhcpServiceBC.getDhcpService(dhcpServer);
 	}
 
 	public String getDhcpSharedNetworkDN() {
@@ -59,6 +70,10 @@ public class DhcpSessionInfo implements Serializable {
 
 	public void selectDhcpSubnet(DhcpSubnet dhcpSubnet) {
 		this.dhcpSubnet = dhcpSubnet;
+	}
+
+	public DhcpService getDhcpService() {
+		return dhcpService;
 	}
 
 }
