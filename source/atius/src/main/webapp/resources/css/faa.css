@@ -315,3 +315,12 @@ tbody tr td.faa-label-profileByRule .ui-dt-c {
 .faa-header-items td {
 	padding-right: 45px;
 }
+
+
+div.panel {
+	background-color: #54DFAC;
+	box-shadow: 4px 4px 4px #CCCCCC;
+	padding: 0.5em 1em;
+    border: 1px solid #BBC5CD;
+    display: block;
+}
