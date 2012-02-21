@@ -1,7 +1,9 @@
 package br.ufpa.ctic.atius.dhcp.domain;
 
+import br.gov.frameworkdemoiselle.annotation.Ignore;
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
+import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
 public class DhcpService extends Entry {
 
@@ -12,7 +14,20 @@ public class DhcpService extends Entry {
 
 	private String[] dhcpOption;
 
+	@Ignore
+	private String dhcpOptionDNS;
+
+	@Ignore
+	private String dhcpOptionNTP;
+
+	@Ignore
+	private String dhcpOptionDomainPrefix;
+
 	private String[] dhcpStatements;
+
+	private String dhcpStatementsLeaseTime;
+
+	private String dhcpStatementsMaxLeaseTime;
 
 	public DhcpService() {
 		super();
@@ -24,6 +39,18 @@ public class DhcpService extends Entry {
 
 	protected String[] objectClass() {
 		return new String[] { "dhcpService", "dhcpOptions" };
+	}
+
+	private void getOptions() {
+		if (dhcpOption != null)
+			for (String option : dhcpOption) {
+				if ("ntp-servers".equals(Strings.substringBefore(option, " ")))
+					dhcpOptionNTP = Strings.substringAfter(option, " ");
+				else if ("domain-name-servers".equals(Strings.substringBefore(option, " ")))
+					dhcpOptionDNS = Strings.substringAfter(option, " ");
+				else if ("domain-name".equals(Strings.substringBefore(option, " ")))
+					dhcpOptionDomainPrefix = Strings.substringAfter(option, " ");
+			}
 	}
 
 	public String getCn() {
@@ -50,12 +77,58 @@ public class DhcpService extends Entry {
 		this.dhcpOption = dhcpOption;
 	}
 
+	public String getDhcpOptionDNS() {
+		if (dhcpOptionDNS == null)
+			getOptions();
+		return dhcpOptionDNS;
+	}
+
+	public void setDhcpOptionDNS(String dhcpOptionDNS) {
+		this.dhcpOptionDNS = dhcpOptionDNS;
+	}
+
+	public String getDhcpOptionNTP() {
+		if (dhcpOptionNTP == null)
+			getOptions();
+		return dhcpOptionNTP;
+	}
+
+	public void setDhcpOptionNTP(String dhcpOptionNTP) {
+		this.dhcpOptionNTP = dhcpOptionNTP;
+	}
+
+	public String getDhcpOptionDomainPrefix() {
+		if (dhcpOptionNTP == dhcpOptionDomainPrefix)
+			getOptions();
+		return dhcpOptionDomainPrefix;
+	}
+
+	public void setDhcpOptionDomainPrefix(String dhcpOptionDomainPrefix) {
+		this.dhcpOptionDomainPrefix = dhcpOptionDomainPrefix;
+	}
+
 	public String[] getDhcpStatements() {
 		return dhcpStatements;
 	}
 
 	public void setDhcpStatements(String[] dhcpStatements) {
 		this.dhcpStatements = dhcpStatements;
+	}
+
+	public String getDhcpStatementsLeaseTime() {
+		return dhcpStatementsLeaseTime;
+	}
+
+	public void setDhcpStatementsLeaseTime(String dhcpStatementsLeaseTime) {
+		this.dhcpStatementsLeaseTime = dhcpStatementsLeaseTime;
+	}
+
+	public String getDhcpStatementsMaxLeaseTime() {
+		return dhcpStatementsMaxLeaseTime;
+	}
+
+	public void setDhcpStatementsMaxLeaseTime(String dhcpStatementsMaxLeaseTime) {
+		this.dhcpStatementsMaxLeaseTime = dhcpStatementsMaxLeaseTime;
 	}
 
 }

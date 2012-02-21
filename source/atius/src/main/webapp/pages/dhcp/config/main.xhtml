@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGroup layout="block" style="display: inline-block; vertical-align: top; margin-top: 25px; margin-left: 25px; width: 378px;">
+
+		<div class="panel">Servidores</div>
+
+		<h:form prependId="false">
+
+			<p:dataTable id="atius-dhcp-server-datatable-id" widgetVar="atius_dhcp_server_wv" emptyMessage="Não há servidores DHCP"
+				value="#{dhcpServerListMB.resultList}" var="atius_dhcp_server_row" rows="9" paginator="true" paginatorAlwaysVisible="false"
+				pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+
+				<p:column sortBy="#{atius_dhcp_server_row.cn}">
+
+					<h:panelGroup layout="block" style="width: 330px; overflow: hidden; white-space: pre; float: left">
+						<h:outputText value="#{atius_dhcp_server_row.cn}" />
+					</h:panelGroup>
+
+					<p:commandButton icon="ui-icon-check" title="Selecionar servidor" styleClass="margin"
+						action="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_server_row)}" immediate="true" update="faa-body-id" />
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+		<div class="panel" style="margin-top: 25px;">Opções</div>
+		<h:panelGrid columns="2" styleClass="faa-table">
+			<h:outputText value="NTP Server: " />
+			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionNTP}" />
+
+			<h:outputText value="DNS Server: " />
+			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDNS}" />
+
+			<h:outputText value="DNS Prefix: " />
+			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix}" />
+
+			<h:outputText value="Lease Time: " />
+			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" />
+
+			<h:outputText value="Max Lease time: " />
+			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" />
+		</h:panelGrid>
+
+
+
+	</h:panelGroup>
+
+	<h:panelGroup layout="block" style="display: inline-block; padding-top: 25px; padding-left: 25px; width: 378px;">
+
+		<div class="panel">Redes</div>
+
+		<p:dataTable id="atius-dhcp-network-datatable-id" widgetVar="atius_dhcp_network_wv" emptyMessage="Não há redes DHCP"
+			value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_network_row" rows="9" paginator="true" paginatorAlwaysVisible="false"
+			pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+
+			<p:column sortBy="#{atius_dhcp_network_row.cn}">
+
+				<h:panelGroup layout="block" style="width: 330px; overflow: hidden; white-space: pre; float: left">
+					<h:outputText value="#{atius_dhcp_network_row.cn}" />
+				</h:panelGroup>
+
+			</p:column>
+
+		</p:dataTable>
+
+
+	</h:panelGroup>
+
+</ui:composition>
