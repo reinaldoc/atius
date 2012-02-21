@@ -66,12 +66,20 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1000	NAME 'atiusContainer'
 	MUST ( cn ) )
 
 #
-# dhcpContainer objectclass
+# attribute types for dhcpContainer objectclass
+#  * dhcpPrimaryServer
 #
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1020	NAME 'dhcpContainer'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1021	NAME 'dhcpPrimaryServer'
+	DESC 'The primary dhcp server for ATIUS'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
+
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1020		NAME 'dhcpContainer'
 	DESC 'DHCP Container'
 	SUP top STRUCTURAL
-	MUST ( cn ) )
+	MUST ( cn )
+	MAY ( dhcpPrimaryServer ) )
 
 #
 # websiteContainer objectclass
