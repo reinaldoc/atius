@@ -31,25 +31,27 @@ public class DhcpSessionInfo implements Serializable {
 
 	private DhcpSubnet dhcpSubnet;
 
-	public String getDhcpServiceDN() {
+	public DhcpServer getDhcpServer() {
 		if (dhcpServer == null) {
-			dhcpServer = dhcpServerBC.getDefaultDhcpServer();
-			if (dhcpServer != null) {
-				dhcpService = dhcpServiceBC.getDhcpService(dhcpServer);
-				return dhcpServer.getDhcpServiceDN();
-			}
-		} else
-			return dhcpServer.getDhcpServiceDN();
-		return null;
-	}
-
-	public String getDhcpServerName() {
-		return dhcpServer.getCn();
+			dhcpServer = dhcpServerBC.getPrimaryDhcpServer();
+			dhcpService = dhcpServiceBC.getDhcpService(dhcpServer);
+		}
+		return dhcpServer;
 	}
 
 	public void selectDhcpServer(DhcpServer dhcpServer) {
 		this.dhcpServer = dhcpServer;
 		this.dhcpService = dhcpServiceBC.getDhcpService(dhcpServer);
+	}
+
+	public DhcpService getDhcpService() {
+		return dhcpService;
+	}
+
+	public String getDhcpServiceDN() {
+		if (dhcpService == null)
+			getDhcpServer();
+		return dhcpService.getDn();
 	}
 
 	public String getDhcpSharedNetworkDN() {
@@ -70,10 +72,6 @@ public class DhcpSessionInfo implements Serializable {
 
 	public void selectDhcpSubnet(DhcpSubnet dhcpSubnet) {
 		this.dhcpSubnet = dhcpSubnet;
-	}
-
-	public DhcpService getDhcpService() {
-		return dhcpService;
 	}
 
 }
