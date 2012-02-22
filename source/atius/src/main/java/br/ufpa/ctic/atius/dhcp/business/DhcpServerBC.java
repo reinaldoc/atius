@@ -23,18 +23,24 @@ public class DhcpServerBC extends DelegateCrud<DhcpServer, String, DhcpServerDAO
 	@Inject
 	private DhcpContainerBC dhcpContainerBC;
 
-	public DhcpServer getDefaultDhcpServer() {
+	public DhcpServer getPrimaryDhcpServer() {
+		String primaryDhcpServer = dhcpContainerBC.getPrimaryDhcpServer();
+		if (primaryDhcpServer == null)
+			return new DhcpServer();
 		getQueryConfig().setGeneric(dhcpConfig.getDhcpContainerDN());
-		return load(dhcpContainerBC.getPrimaryDhcpServer());
+		return load(primaryDhcpServer);
 	}
 
 	public String getDhcpContainerDN() {
 		return dhcpConfig.getDhcpContainerDN();
 	}
 
+	public DhcpServer getDhcpServer() {
+		return sessionInfo.getDhcpServer();
+	}
+
 	public void selectDhcpServer(DhcpServer dhcpServer) {
 		sessionInfo.selectDhcpServer(dhcpServer);
-		dhcpContainerBC.selectPrimaryDhcpServer(dhcpServer.getCn());
 	}
 
 }
