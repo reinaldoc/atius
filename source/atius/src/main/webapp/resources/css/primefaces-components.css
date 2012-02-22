@@ -45,6 +45,15 @@ button.ui-button-icon-only,button.ui-button-icon-only.ui-state-default {
 	width: 24px;
 }
 
+div.ui-radiobutton div.ui-radiobutton-box {
+	height: 13px;
+	width: 13px;
+}
+
+span.ui-icon-bullet {
+    background-position: -82px -146px;
+}
+
 /*  DataTable  */
 .ui-datatable {
 	font-family: inherit !important;
@@ -101,8 +110,9 @@ button.ui-button-icon-only,button.ui-button-icon-only.ui-state-default {
 }
 
 .ui-datatable-data .ui-state-highlight {
-	background: #74FFCC;
-	text-shadow: 1px 1px 1px #AAAAAA;
+	color: #3F586D; background : #F9F9F9;
+	text-shadow: none;
+	background: #F9F9F9;
 }
 
 .ui-datatable-data-empty tr {

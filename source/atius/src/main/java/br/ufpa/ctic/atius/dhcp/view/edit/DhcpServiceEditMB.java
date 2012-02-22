@@ -18,9 +18,8 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 	@Inject
 	private DhcpServiceBC bc;
 
-	@SuppressWarnings("unused")
 	@PostConstruct
-	private void init() {
+	public void init() {
 		setBean(bc.getDhcpService());
 	}
 

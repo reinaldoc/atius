@@ -17,8 +17,9 @@
 						<h:outputText value="#{atius_dhcp_server_row.cn}" />
 					</h:panelGroup>
 
-					<p:commandButton icon="ui-icon-check" title="Selecionar servidor" styleClass="margin"
-						action="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_server_row)}" immediate="true" update="faa-body-id" />
+					<p:commandButton icon="ui-icon-check" title="Selecionar servidor"
+						actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_server_row)}" action="#{dhcpServiceEditMB.init()}" styleClass="margin"
+						immediate="true" update="faa-body-id" />
 
 				</p:column>
 
