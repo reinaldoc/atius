@@ -1,7 +1,5 @@
 package br.ufpa.ctic.atius.dhcp.business;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
@@ -17,11 +15,6 @@ public class DhcpSharedNetworkBC extends DelegateCrud<DhcpSharedNetwork, String,
 
 	@Inject
 	private DhcpSessionInfo sessionInfo;
-
-	public List<DhcpSharedNetwork> findAll() {
-		getQueryConfig().setGeneric(sessionInfo.getDhcpServiceDN());
-		return getDelegate().findAll();
-	}
 
 	public void selectDhcpSharedNetwork(DhcpSharedNetwork dhcpSharedNetwork) {
 		selectMenu(dhcpSharedNetwork.getCn());
