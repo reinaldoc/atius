@@ -33,7 +33,7 @@ public class DhcpContainerBC extends DelegateCrud<DhcpContainer, String, DhcpCon
 			}
 			return null;
 		}
-		return findAll().get(0).getDhcpPrimaryServer();
+		return dhcpContainers.get(0).getDhcpPrimaryServer();
 	}
 
 	public void selectPrimaryDhcpServer(String dhcpServerName) {
