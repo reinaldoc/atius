@@ -20,6 +20,8 @@ public class DhcpServiceBC extends DelegateCrud<DhcpService, String, DhcpService
 	private DhcpSessionInfo sessionInfo;
 
 	public DhcpService getDhcpService(DhcpServer dhcpServer) {
+		if (dhcpServer == null || dhcpServer.getDhcpServiceDN() == null)
+			return new DhcpService();
 		getQueryConfig().setGeneric(dhcpServer.getDhcpServiceDN());
 		List<DhcpService> dhcpServices = findAll();
 		if (dhcpServices.size() > 0)
