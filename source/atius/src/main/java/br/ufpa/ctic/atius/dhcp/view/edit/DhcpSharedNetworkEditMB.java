@@ -20,7 +20,7 @@ public class DhcpSharedNetworkEditMB extends AbstractEditPageBean<DhcpSharedNetw
 	@Override
 	public String insert() {
 		try {
-			// getBean().setParentDN(bc.getDhcpSubnetDN());
+			getBean().setParentDN(bc.getDhcpServiceDN());
 			bc.insert(getBean());
 			Faces.addI18nMessage("atius.dhcp.network.insert.success", getBean().getCn());
 		} catch (RuntimeException e) {

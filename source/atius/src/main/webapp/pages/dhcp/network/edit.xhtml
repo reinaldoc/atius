@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
+
+	<h:form prependId="false">
+
+		<h:panelGrid id="atius-dhcp-network-edit-panel-id" cellpadding="0" cellspacing="0">
+
+			<p:dialog id="atius-dhcp-network-edit-dlg-id" header="ATIUS - Cadastro de Rede" widgetVar="atius_dhcp_network_edit_dlg" modal="true" width="480"
+				resizable="false" closable="false">
+
+				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-network-edit-dlg-body-id">
+
+					<h:outputText value="Nome da Rede:" />
+					<h:inputText value="#{dhcpSharedNetworkEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+
+				</h:panelGrid>
+
+				<h:panelGroup id="atius-dhcp-network-edit-dlg-buttons-id">
+					<faa:dialogButtons id="atius-dhcp-network-edit-dlg-save-id" dialogId="atius-dhcp-network-edit-dlg-id" dialogWidgetVar="atius_dhcp_network_edit_dlg"
+						updateMode="#{dhcpSharedNetworkEditMB.updateMode}" actionUpdater="#{dhcpSharedNetworkEditMB.update}" actionInserter="#{dhcpSharedNetworkEditMB.insert}"
+						actionCloser="#{dhcpSharedNetworkListMB.clearValidation}" updateOnClose="faa-body-id" />
+				</h:panelGroup>
+
+			</p:dialog>
+		</h:panelGrid>
+	</h:form>
+</ui:composition>
