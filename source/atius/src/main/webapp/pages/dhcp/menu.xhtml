@@ -11,9 +11,8 @@
 
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 180px;">
 
-						<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update="faa-body-id"
-							action="#{dhcpSharedNetworkListMB.selectDhcpSharedNetwork(dhcpSharedNetwork)}"
-							actionListener="#{dhcpSubnetListMB.clearResultList}"
+						<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update="faa-body-id, faa-header-right-id"
+							action="#{dhcpSharedNetworkListMB.selectDhcpSharedNetwork(dhcpSharedNetwork)}" actionListener="#{dhcpSubnetListMB.clearResultList}"
 							styleClass="#{menuContext.menu['DhcpSharedNetwork'][dhcpSharedNetwork.cn]['Style']}" />
 
 					</h:panelGroup>
@@ -22,13 +21,9 @@
 
 			</p:dataGrid>
 
-			<!-- 
-			<p:commandLink value="Todos" immediate="true" update="faa-body-id" action="#{dhcpSharedNetworkListMB.clearResultList}"
-				actionListener="#{menuContext.select('DhcpSharedNetwork', 'Todos')}" styleClass="#{menuContext.menu['DhcpSharedNetwork']['Todos']['Style']}" />
- -->
 			<p:spacer height="10px" />
 
-			<p:commandLink value="Configuração" immediate="true" update="faa-body-id"
+			<p:commandLink value="Configuração" immediate="true" update="faa-body-id, faa-header-right-id"
 				actionListener="#{menuContext.select('DhcpSharedNetwork', 'Configuração')}"
 				styleClass="#{menuContext.menu['DhcpSharedNetwork']['Configuração']['Style']}" />
 
