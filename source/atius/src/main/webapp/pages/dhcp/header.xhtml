@@ -1,29 +1,22 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<h:panelGrid columns="2">
+	<h:form prependId="false">
 
-		<h:form prependId="false">
+		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
 
-			<h:panelGrid columns="2" styleClass="faa-header-items">
+			<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 
-				<h:panelGroup layout="block">
+			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.clearResultList}" update="atius-dhcp-subnet-list-datatable-id"
+				process="atius-dhcp-subnet-search, @this" style="margin-right: 45px"/>
 
-					<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
-					<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.clearResultList}"
-						update="atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search, @this" />
+			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
+				update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
 
-				</h:panelGroup>
+		</h:panelGroup>
 
-				<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
-					update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
+	</h:form>
 
-			</h:panelGrid>
-
-		</h:form>
-
-		<ui:include src="subnet/edit.xhtml" />
-
-	</h:panelGrid>
+	<ui:include src="subnet/edit.xhtml" />
 
 </ui:composition>

@@ -1,15 +1,15 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<div id="faa-body-left-id">
+	<h:panelGroup id="faa-body-left-id" layout="block" style="display: block;">
 
 		<!-- Begin @BodyLeft  -->
 		<ui:include src="menu.xhtml" />
 		<!-- End @BodyLeft  -->
 
-	</div>
-
-	<div id="faa-body-right-id">
+	</h:panelGroup>
+	
+	<h:panelGroup id="faa-body-right-id" layout="block" style="display: block;">
 
 		<!-- Begin @BodyRight  -->
 		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
@@ -22,6 +22,6 @@
 		</h:panelGroup>
 		<!-- Begin @BodyRight  -->
 
-	</div>
+	</h:panelGroup>
 
 </ui:composition>
