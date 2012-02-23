@@ -8,15 +8,28 @@
 			<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 
 			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.clearResultList}" update="atius-dhcp-subnet-list-datatable-id"
-				process="atius-dhcp-subnet-search, @this" style="margin-right: 45px"/>
+				process="atius-dhcp-subnet-search, @this" style="margin-right: 45px" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
 				update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
 
 		</h:panelGroup>
 
+		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+
+			<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
+				update="atius-dhcp-network-edit-dlg-body-id, atius-dhcp-network-edit-dlg-buttons-id" oncomplete="atius_dhcp_network_edit_dlg.show()" />
+
+		</h:panelGroup>
+
 	</h:form>
 
-	<ui:include src="subnet/edit.xhtml" />
+	<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+		<ui:include src="subnet/edit.xhtml" />
+	</h:panelGroup>
+
+	<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+		<ui:include src="network/edit.xhtml" />
+	</h:panelGroup>
 
 </ui:composition>
