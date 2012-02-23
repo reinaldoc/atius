@@ -143,12 +143,12 @@ button.margin {
 }
 
 .dialog-body span.asInput {
-    border: 1px solid #BBC5CD;
-    display: block;
-    font-weight: normal;
-    line-height: 22px;
-    padding-left: 2px;
-    width: 378px;
+	border: 1px solid #BBC5CD;
+	display: block;
+	font-weight: normal;
+	line-height: 22px;
+	padding-left: 2px;
+	width: 378px;
 }
 
 .dialog-body input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus
@@ -316,11 +316,40 @@ tbody tr td.faa-label-profileByRule .ui-dt-c {
 	padding-right: 45px;
 }
 
-
 div.panel {
 	background-color: #54DFAC;
 	box-shadow: 4px 4px 4px #CCCCCC;
 	padding: 0.5em 1em;
-    border: 1px solid #BBC5CD;
-    display: block;
+	border: 1px solid #BBC5CD;
+	display: block;
+}
+
+div.asTable {
+	margin-top: 10px;
+	color: #3F586D;
+}
+
+div.asRow {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #D6D6D6;
+	padding-left: 3px;
+	border-bottom-width: 1px;
+}
+
+div.asRowOdd {
+	background-color: #F3F3F3;
+}
+
+div.asRowEven {
+	background-color: #F9F9F9;
+}
+
+div.asColumn {
+	line-height: 28px;
+}
+
+div.asColumnLeft {
+	float: left;
+	width: 120px;
 }

@@ -1,39 +1,31 @@
 package br.ufpa.ctic.atius.dhcp.view.edit;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
-import br.ufpa.ctic.atius.dhcp.business.DhcpServiceBC;
-import br.ufpa.ctic.atius.dhcp.domain.DhcpService;
+import br.ufpa.ctic.atius.dhcp.business.DhcpSharedNetworkBC;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpSharedNetwork;
 
 @ViewController
-public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String> {
+public class DhcpSharedNetworkEditMB extends AbstractEditPageBean<DhcpSharedNetwork, String> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private DhcpServiceBC bc;
-
-	@PostConstruct
-	public void init() {
-		setBean(bc.getDhcpService());
-		getBean().setOptions();
-		getBean().setStatements();
-	}
+	private DhcpSharedNetworkBC bc;
 
 	@Override
 	public String insert() {
 		try {
 			// getBean().setParentDN(bc.getDhcpSubnetDN());
 			bc.insert(getBean());
-			Faces.addI18nMessage("atius.dhcp.service.insert.success", getBean().getCn());
+			Faces.addI18nMessage("atius.dhcp.network.insert.success", getBean().getCn());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.dhcp.service.insert.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.dhcp.network.insert.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
@@ -42,10 +34,10 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 	public String update() {
 		try {
 			bc.update(getBean());
-			Faces.addI18nMessage("atius.dhcp.service.update.success", getBean().getCn());
+			Faces.addI18nMessage("atius.dhcp.network.update.success", getBean().getCn());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.dhcp.service.update.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.dhcp.network.update.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
@@ -54,23 +46,23 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 	public String delete() {
 		try {
 			bc.delete(getBean().getCn());
-			Faces.addI18nMessage("atius.dhcp.service.delete.success", getBean().getCn());
+			Faces.addI18nMessage("atius.dhcp.network.delete.success", getBean().getCn());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.dhcp.service.delete.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.dhcp.network.delete.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
 
 	@Override
-	protected DhcpService load(String id) {
+	protected DhcpSharedNetwork load(String id) {
 		try {
 			return bc.load(id);
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.dhcp.service.load.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.dhcp.network.load.failed", SeverityType.ERROR);
 		}
-		return new DhcpService();
+		return new DhcpSharedNetwork();
 	}
 
 }

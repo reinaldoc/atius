@@ -28,45 +28,86 @@
 		</h:form>
 
 		<div class="panel" style="margin-top: 25px;">Opções</div>
-		<h:panelGrid columns="2" styleClass="faa-table">
-			<h:outputText value="NTP Server: " />
-			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionNTP}" />
 
-			<h:outputText value="DNS Server: " />
-			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDNS}" />
+		<div class="asTable">
 
-			<h:outputText value="DNS Prefix: " />
-			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix}" />
+			<div class="asRow asRowEven">
+				<div class="asColumn asColumnLeft">NTP Server:</div>
+				<div class="asColumn">
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionNTP}" />
+				</div>
+			</div>
 
-			<h:outputText value="Lease Time: " />
-			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" />
+			<div class="asRow asRowOdd">
+				<div class="asColumn asColumnLeft">DNS Server:</div>
+				<div class="asColumn">
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDNS}" />
+				</div>
+			</div>
 
-			<h:outputText value="Max Lease time: " />
-			<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" />
-		</h:panelGrid>
+			<div class="asRow asRowEven">
+				<div class="asColumn asColumnLeft">DNS Prefix:</div>
+				<div class="asColumn">
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix}" />
+				</div>
+			</div>
 
+			<div class="asRow asRowOdd">
+				<div class="asColumn asColumnLeft">Lease Time:</div>
+				<div class="asColumn">
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" />
+				</div>
+			</div>
 
+			<div class="asRow asRowEven">
+				<div class="asColumn asColumnLeft">Max Lease time:</div>
+				<div class="asColumn">
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" />
+				</div>
+			</div>
+
+		</div>
 
 	</h:panelGroup>
 
-	<h:panelGroup layout="block" style="display: inline-block; padding-top: 25px; padding-left: 25px; width: 378px;">
+	<h:panelGroup layout="block" id="atius-dhcp-config-network-panel-id"
+		style="display: inline-block; padding-top: 25px; padding-left: 25px; width: 378px;">
 
 		<div class="panel">Redes</div>
 
-		<p:dataTable id="atius-dhcp-network-datatable-id" widgetVar="atius_dhcp_network_wv" emptyMessage="Não há redes DHCP"
-			value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_network_row" rows="9" paginator="true" paginatorAlwaysVisible="false"
-			pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+		<h:form prependId="false">
 
-			<p:column sortBy="#{atius_dhcp_network_row.cn}">
+			<p:confirmDialog message="Deseja excluir a rede: #{dhcpSharedNetworkEditMB.bean.cn} ?" header="Atenção!" severity="alert"
+				id="atius-dhcp-config-network-delete-dlg-id" widgetVar="atius_dhcp_config_network_delete_dlg">
 
-				<h:panelGroup layout="block" style="width: 330px; overflow: hidden; white-space: pre; float: left">
-					<h:outputText value="#{atius_dhcp_network_row.cn}" />
-				</h:panelGroup>
+				<p:commandButton value="Sim" oncomplete="atius_dhcp_config_network_delete_dlg.hide()"
+					update="atius-dhcp-config-network-datatable-id, faa-growl-id" action="#{dhcpSharedNetworkEditMB.delete}"
+					actionListener="#{dhcpSharedNetworkListMB.clearResultList}" style="margin-right: 20px;" />
 
-			</p:column>
+				<p:commandButton value="Não" onclick="atius_dhcp_config_network_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 
-		</p:dataTable>
+			</p:confirmDialog>
 
+			<p:dataTable id="atius-dhcp-config-network-datatable-id" widgetVar="atius_dhcp_config_network_wv" emptyMessage="Não há redes DHCP"
+				value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="9" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom"
+				styleClass="dialog-datatable dialog-datatable-small">
+
+				<p:column sortBy="#{atius_dhcp_config_network_row.cn}">
+
+					<h:panelGroup layout="block" style="width: 330px; overflow: hidden; white-space: pre; float: left">
+						<h:outputText value="#{atius_dhcp_config_network_row.cn}" />
+					</h:panelGroup>
+
+					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" immediate="true" title="Remover Rede"
+						update="atius-dhcp-config-network-delete-dlg-id" action="#{dhcpSharedNetworkEditMB.editBean(atius_dhcp_config_network_row)}"
+						oncomplete="atius_dhcp_config_network_delete_dlg.show()" />
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
 
 	</h:panelGroup>
 

@@ -25,8 +25,10 @@ public class DhcpService extends Entry {
 
 	private String[] dhcpStatements;
 
+	@Ignore
 	private String dhcpStatementsLeaseTime;
 
+	@Ignore
 	private String dhcpStatementsMaxLeaseTime;
 
 	public DhcpService() {
@@ -41,7 +43,7 @@ public class DhcpService extends Entry {
 		return new String[] { "dhcpService", "dhcpOptions" };
 	}
 
-	private void getOptions() {
+	public void setOptions() {
 		if (dhcpOption != null)
 			for (String option : dhcpOption) {
 				if ("ntp-servers".equals(Strings.substringBefore(option, " ")))
@@ -50,6 +52,16 @@ public class DhcpService extends Entry {
 					dhcpOptionDNS = Strings.substringAfter(option, " ");
 				else if ("domain-name".equals(Strings.substringBefore(option, " ")))
 					dhcpOptionDomainPrefix = Strings.substringAfter(option, " ");
+			}
+	}
+
+	public void setStatements() {
+		if (dhcpStatements != null)
+			for (String statement : dhcpStatements) {
+				if ("default-lease-time".equals(Strings.substringBefore(statement, " ")))
+					dhcpStatementsLeaseTime = Strings.substringAfter(statement, " ");
+				else if ("max-lease-time".equals(Strings.substringBefore(statement, " ")))
+					dhcpStatementsMaxLeaseTime = Strings.substringAfter(statement, " ");
 			}
 	}
 
@@ -78,8 +90,10 @@ public class DhcpService extends Entry {
 	}
 
 	public String getDhcpOptionDNS() {
-		if (dhcpOptionDNS == null)
-			getOptions();
+		if (dhcpOptionDNS == null) {
+			dhcpOptionDNS = "0.0.0.0";
+			setOptions();
+		}
 		return dhcpOptionDNS;
 	}
 
@@ -88,8 +102,10 @@ public class DhcpService extends Entry {
 	}
 
 	public String getDhcpOptionNTP() {
-		if (dhcpOptionNTP == null)
-			getOptions();
+		if (dhcpOptionNTP == null) {
+			dhcpOptionNTP = "0.0.0.0";
+			setOptions();
+		}
 		return dhcpOptionNTP;
 	}
 
@@ -98,8 +114,10 @@ public class DhcpService extends Entry {
 	}
 
 	public String getDhcpOptionDomainPrefix() {
-		if (dhcpOptionNTP == dhcpOptionDomainPrefix)
-			getOptions();
+		if (dhcpOptionDomainPrefix == null) {
+			dhcpOptionDomainPrefix = "\"\"";
+			setOptions();
+		}
 		return dhcpOptionDomainPrefix;
 	}
 
@@ -116,6 +134,10 @@ public class DhcpService extends Entry {
 	}
 
 	public String getDhcpStatementsLeaseTime() {
+		if (dhcpStatementsLeaseTime == null) {
+			dhcpStatementsLeaseTime = "0";
+			setStatements();
+		}
 		return dhcpStatementsLeaseTime;
 	}
 
@@ -124,6 +146,10 @@ public class DhcpService extends Entry {
 	}
 
 	public String getDhcpStatementsMaxLeaseTime() {
+		if (dhcpStatementsMaxLeaseTime == null) {
+			dhcpStatementsMaxLeaseTime = "0";
+			setStatements();
+		}
 		return dhcpStatementsMaxLeaseTime;
 	}
 
