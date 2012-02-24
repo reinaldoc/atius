@@ -26,10 +26,16 @@ public class DhcpService extends Entry {
 	private String[] dhcpStatements;
 
 	@Ignore
+	private Boolean dhcpStatementsAuthoritative;
+
+	@Ignore
 	private String dhcpStatementsLeaseTime;
 
 	@Ignore
 	private String dhcpStatementsMaxLeaseTime;
+
+	@Ignore
+	private String dhcpServerName;
 
 	public DhcpService() {
 		super();
@@ -43,7 +49,7 @@ public class DhcpService extends Entry {
 		return new String[] { "dhcpService", "dhcpOptions" };
 	}
 
-	public void setOptions() {
+	public void getOptions() {
 		if (dhcpOption != null)
 			for (String option : dhcpOption) {
 				if ("ntp-servers".equals(Strings.substringBefore(option, " ")))
@@ -51,18 +57,29 @@ public class DhcpService extends Entry {
 				else if ("domain-name-servers".equals(Strings.substringBefore(option, " ")))
 					dhcpOptionDNS = Strings.substringAfter(option, " ");
 				else if ("domain-name".equals(Strings.substringBefore(option, " ")))
-					dhcpOptionDomainPrefix = Strings.substringAfter(option, " ");
+					dhcpOptionDomainPrefix = Strings.substringBetween(option, "\"");
 			}
 	}
 
-	public void setStatements() {
+	public void getStatements() {
 		if (dhcpStatements != null)
-			for (String statement : dhcpStatements) {
+			for (String statement : dhcpStatements)
 				if ("default-lease-time".equals(Strings.substringBefore(statement, " ")))
 					dhcpStatementsLeaseTime = Strings.substringAfter(statement, " ");
 				else if ("max-lease-time".equals(Strings.substringBefore(statement, " ")))
 					dhcpStatementsMaxLeaseTime = Strings.substringAfter(statement, " ");
-			}
+				else if ("authoritative".equals(statement))
+					dhcpStatementsAuthoritative = true;
+	}
+
+	public void setStatements() {
+		String authoritative;
+		if (dhcpStatementsAuthoritative == true)
+			authoritative = "authoritative";
+		else
+			authoritative = "not authoritative";
+		dhcpStatements = new String[] { authoritative, "ddns-update-style none", "default-lease-time " + dhcpStatementsLeaseTime,
+				"max-lease-time " + dhcpStatementsMaxLeaseTime };
 	}
 
 	public String getCn() {
@@ -92,7 +109,7 @@ public class DhcpService extends Entry {
 	public String getDhcpOptionDNS() {
 		if (dhcpOptionDNS == null) {
 			dhcpOptionDNS = "0.0.0.0";
-			setOptions();
+			getOptions();
 		}
 		return dhcpOptionDNS;
 	}
@@ -104,7 +121,7 @@ public class DhcpService extends Entry {
 	public String getDhcpOptionNTP() {
 		if (dhcpOptionNTP == null) {
 			dhcpOptionNTP = "0.0.0.0";
-			setOptions();
+			getOptions();
 		}
 		return dhcpOptionNTP;
 	}
@@ -115,8 +132,8 @@ public class DhcpService extends Entry {
 
 	public String getDhcpOptionDomainPrefix() {
 		if (dhcpOptionDomainPrefix == null) {
-			dhcpOptionDomainPrefix = "\"\"";
-			setOptions();
+			dhcpOptionDomainPrefix = "-";
+			getOptions();
 		}
 		return dhcpOptionDomainPrefix;
 	}
@@ -133,10 +150,22 @@ public class DhcpService extends Entry {
 		this.dhcpStatements = dhcpStatements;
 	}
 
+	public boolean isDhcpStatementsAuthoritative() {
+		if (dhcpStatementsAuthoritative == null) {
+			dhcpStatementsAuthoritative = false;
+			getStatements();
+		}
+		return dhcpStatementsAuthoritative;
+	}
+
+	public void setDhcpStatementsAuthoritative(boolean dhcpStatementsAuthoritative) {
+		this.dhcpStatementsAuthoritative = dhcpStatementsAuthoritative;
+	}
+
 	public String getDhcpStatementsLeaseTime() {
 		if (dhcpStatementsLeaseTime == null) {
 			dhcpStatementsLeaseTime = "0";
-			setStatements();
+			getStatements();
 		}
 		return dhcpStatementsLeaseTime;
 	}
@@ -148,13 +177,21 @@ public class DhcpService extends Entry {
 	public String getDhcpStatementsMaxLeaseTime() {
 		if (dhcpStatementsMaxLeaseTime == null) {
 			dhcpStatementsMaxLeaseTime = "0";
-			setStatements();
+			getStatements();
 		}
 		return dhcpStatementsMaxLeaseTime;
 	}
 
 	public void setDhcpStatementsMaxLeaseTime(String dhcpStatementsMaxLeaseTime) {
 		this.dhcpStatementsMaxLeaseTime = dhcpStatementsMaxLeaseTime;
+	}
+
+	public String getDhcpServerName() {
+		return dhcpServerName;
+	}
+
+	public void setDhcpServerName(String dhcpServerName) {
+		this.dhcpServerName = dhcpServerName;
 	}
 
 }

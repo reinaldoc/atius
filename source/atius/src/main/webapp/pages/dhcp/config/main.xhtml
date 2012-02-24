@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<h:panelGroup layout="block" style="display: inline-block; vertical-align: top; margin-top: 25px; margin-left: 25px; width: 378px;">
+	<h:panelGroup id="atius-dhcp-config-panel-id" layout="block"
+		style="display: inline-block; vertical-align: top; margin-top: 25px; margin-left: 25px; width: 378px;">
 
 		<div class="panel">Servidores</div>
 
@@ -17,9 +18,8 @@
 						<h:outputText value="#{atius_dhcp_server_row.cn}" />
 					</h:panelGroup>
 
-					<p:commandButton icon="ui-icon-check" title="Selecionar servidor"
-						actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_server_row)}" action="#{dhcpServiceEditMB.init()}" styleClass="margin"
-						immediate="true" update="faa-body-id" />
+					<p:commandButton icon="ui-icon-check" title="Selecionar servidor" actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_server_row)}"
+						action="#{dhcpSharedNetworkListMB.clearResultList}" styleClass="margin" immediate="true" update="faa-body-id" />
 
 				</p:column>
 
@@ -27,9 +27,36 @@
 
 		</h:form>
 
-		<div class="panel" style="margin-top: 25px;">Opções</div>
+		<div class="panel" style="margin-top: 25px;">
+			<h:panelGroup layout="block" style="display: inline-block">Opções</h:panelGroup>
+			<h:form prependId="false">
+				<p:commandButton icon="ui-icon-pencil" title="Editar opções" immediate="true"
+					update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
+			</h:form>
+		</div>
 
 		<div class="asTable">
+
+			<div class="asRow asRowOdd">
+				<div class="asColumn asColumnLeft">Autoritativo:</div>
+				<div class="asColumn">
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsAuthoritative ? 'sim' : 'não' }" />
+				</div>
+			</div>
+
+			<div class="asRow asRowEven">
+				<div class="asColumn asColumnLeft">Tempo de sessão (seg):</div>
+				<div class="asColumn">
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" />
+				</div>
+			</div>
+
+			<div class="asRow asRowOdd">
+				<div class="asColumn asColumnLeft">Tempo máx. de sessão:</div>
+				<div class="asColumn">
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" />
+				</div>
+			</div>
 
 			<div class="asRow asRowEven">
 				<div class="asColumn asColumnLeft">NTP Server:</div>
@@ -49,20 +76,6 @@
 				<div class="asColumn asColumnLeft">DNS Prefix:</div>
 				<div class="asColumn">
 					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix}" />
-				</div>
-			</div>
-
-			<div class="asRow asRowOdd">
-				<div class="asColumn asColumnLeft">Lease Time:</div>
-				<div class="asColumn">
-					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" />
-				</div>
-			</div>
-
-			<div class="asRow asRowEven">
-				<div class="asColumn asColumnLeft">Max Lease time:</div>
-				<div class="asColumn">
-					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" />
 				</div>
 			</div>
 
@@ -89,9 +102,8 @@
 			</p:confirmDialog>
 
 			<p:dataTable id="atius-dhcp-config-network-datatable-id" widgetVar="atius_dhcp_config_network_wv" emptyMessage="Não há redes DHCP"
-				value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="9" paginator="true"
-				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom"
-				styleClass="dialog-datatable dialog-datatable-small">
+				value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="9" paginator="true" paginatorAlwaysVisible="false"
+				pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
 
 				<p:column sortBy="#{atius_dhcp_config_network_row.cn}">
 

@@ -20,17 +20,22 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 
 	@PostConstruct
 	public void init() {
-		setBean(bc.getDhcpService());
-		getBean().setOptions();
-		getBean().setStatements();
+		editBean(bc.getDhcpService());
+		getBean().setDhcpServerName(bc.getDhcpServer().getCn());
+		getBean().getOptions();
+		getBean().getStatements();
 	}
 
 	@Override
 	public String insert() {
 		try {
-			// getBean().setParentDN(bc.getDhcpSubnetDN());
+			String dhcpServerDN = bc.insertDhcpServer(getBean().getDhcpServerName());
+			getBean().setParentDN(dhcpServerDN);
+			getBean().setCn("dhcpService");
+			getBean().setStatements();
 			bc.insert(getBean());
 			Faces.addI18nMessage("atius.dhcp.service.insert.success", getBean().getCn());
+			init();
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.service.insert.failed", SeverityType.ERROR);
@@ -41,8 +46,10 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 	@Override
 	public String update() {
 		try {
+			getBean().setStatements();
 			bc.update(getBean());
 			Faces.addI18nMessage("atius.dhcp.service.update.success", getBean().getCn());
+			init();
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.service.update.failed", SeverityType.ERROR);

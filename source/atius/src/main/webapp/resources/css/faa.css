@@ -147,7 +147,7 @@ button.margin {
 	display: block;
 	font-weight: normal;
 	line-height: 22px;
-	padding-left: 2px;
+	padding-left: 4px;
 	width: 378px;
 }
 
@@ -324,6 +324,12 @@ div.panel {
 	display: block;
 }
 
+div.panel form {
+	display: inline-block;
+	float: right;
+	margin-top: -5px;
+}
+
 div.asTable {
 	margin-top: 10px;
 	color: #3F586D;
@@ -351,5 +357,5 @@ div.asColumn {
 
 div.asColumnLeft {
 	float: left;
-	width: 120px;
+	width: 170px;
 }

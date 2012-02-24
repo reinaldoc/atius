@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
+import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.ufpa.ctic.atius.dhcp.business.DhcpServerBC;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpServer;
+import br.ufpa.ctic.atius.dhcp.view.edit.DhcpServiceEditMB;
 
 @ViewController
 public class DhcpServerListMB extends AbstractListPageBean<DhcpServer, String> {
@@ -26,6 +28,7 @@ public class DhcpServerListMB extends AbstractListPageBean<DhcpServer, String> {
 
 	public void selectDhcpServer(DhcpServer dhcpServer) {
 		bc.selectDhcpServer(dhcpServer);
+		Faces.getManagedProperty("#{dhcpServiceEditMB}", DhcpServiceEditMB.class).init();
 	}
 
 }

@@ -17,6 +17,9 @@
 
 		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
 
+			<p:commandButton icon="ui-icon-plusthick" value="Novo Servidor" immediate="true" action="#{dhcpServiceEditMB.editBean}" style="margin-right: 45px"
+				update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
+
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
 				update="atius-dhcp-network-edit-dlg-body-id, atius-dhcp-network-edit-dlg-buttons-id" oncomplete="atius_dhcp_network_edit_dlg.show()" />
 
@@ -30,6 +33,7 @@
 
 	<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
 		<ui:include src="network/edit.xhtml" />
+		<ui:include src="service/edit.xhtml" />
 	</h:panelGroup>
 
 </ui:composition>

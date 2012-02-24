@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
+
+	<h:form prependId="false">
+
+		<h:panelGrid id="atius-dhcp-service-edit-panel-id" cellpadding="0" cellspacing="0">
+
+			<p:dialog id="atius-dhcp-service-edit-dlg-id" header="ATIUS - Serviço DHCP" widgetVar="atius_dhcp_service_edit_dlg" modal="true" width="480"
+				resizable="false" closable="false">
+
+				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-service-edit-dlg-body-id">
+
+					<h:outputText value="Servidor:" />
+					<h:inputText value="#{dhcpServiceEditMB.bean.dhcpServerName}" autocomplete="off" onkeypress="return event.keyCode!=13"
+						readonly="#{dhcpServiceEditMB.updateMode ? 'true' : 'false' }" />
+
+					<h:panelGroup>
+						<h:outputText value="Autoritativo:" />
+						<p:selectBooleanCheckbox value="#{dhcpServiceEditMB.bean.dhcpStatementsAuthoritative}" onkeypress="return event.keyCode!=13" />
+					</h:panelGroup>
+
+					<h:outputText value="Tempo de sessão (segundos):" />
+					<h:inputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+
+					<h:outputText value="Tempo máximo de sessão (segundos):" />
+					<h:inputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+
+				</h:panelGrid>
+
+				<h:panelGroup id="atius-dhcp-service-edit-dlg-buttons-id">
+					<faa:dialogButtons id="atius-dhcp-service-edit-dlg-save-id" dialogId="atius-dhcp-service-edit-dlg-id"
+						dialogWidgetVar="atius_dhcp_service_edit_dlg" updateMode="#{dhcpServiceEditMB.updateMode}" actionUpdater="#{dhcpServiceEditMB.update}"
+						actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServerListMB.clearResultList}" updateOnClose="atius-dhcp-config-panel-id" />
+				</h:panelGroup>
+
+			</p:dialog>
+		</h:panelGrid>
+	</h:form>
+</ui:composition>

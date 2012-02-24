@@ -51,7 +51,7 @@ div.ui-radiobutton div.ui-radiobutton-box {
 }
 
 span.ui-icon-bullet {
-    background-position: -82px -146px;
+	background-position: -82px -146px;
 }
 
 /*  DataTable  */
@@ -110,7 +110,8 @@ span.ui-icon-bullet {
 }
 
 .ui-datatable-data .ui-state-highlight {
-	color: #3F586D; background : #F9F9F9;
+	color: #3F586D;
+	background: #F9F9F9;
 	text-shadow: none;
 	background: #F9F9F9;
 }
@@ -285,4 +286,14 @@ div.ui-autocomplete-panel {
 
 div.ui-autocomplete-panel ul.ui-autocomplete-list {
 	border: 1px solid #D6D6D6;
+}
+
+/* Select Bool Checkbox */
+div.ui-chkbox {
+	margin: 5px 5px 5px 10px;
+	vertical-align: middle;
+}
+
+div.ui-chkbox div.ui-chkbox-box {
+	background: transparent;
 }

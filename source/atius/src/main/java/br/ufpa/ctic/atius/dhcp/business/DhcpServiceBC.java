@@ -19,6 +19,9 @@ public class DhcpServiceBC extends DelegateCrud<DhcpService, String, DhcpService
 	@Inject
 	private DhcpSessionInfo sessionInfo;
 
+	@Inject
+	private DhcpServerBC dhcpServerBC;
+
 	public DhcpService getDhcpService(DhcpServer dhcpServer) {
 		if (dhcpServer == null || dhcpServer.getDhcpServiceDN() == null)
 			return new DhcpService();
@@ -26,11 +29,24 @@ public class DhcpServiceBC extends DelegateCrud<DhcpService, String, DhcpService
 		List<DhcpService> dhcpServices = findAll();
 		if (dhcpServices.size() > 0)
 			return dhcpServices.get(0);
-		return null;
+		return new DhcpService();
 	}
 
 	public DhcpService getDhcpService() {
 		return sessionInfo.getDhcpService();
+	}
+
+	public DhcpServer getDhcpServer() {
+		return sessionInfo.getDhcpServer();
+	}
+
+	public String insertDhcpServer(String serverName) {
+		DhcpServer dhcpServer = new DhcpServer();
+		dhcpServer.setParentDN(dhcpServerBC.getDhcpContainerDN());
+		dhcpServer.setCn(serverName);
+		dhcpServer.setDhcpServiceDN("cn=dhcpService,cn=" + serverName + "," + dhcpServerBC.getDhcpContainerDN());
+		dhcpServerBC.insert(dhcpServer);
+		return "cn=" + serverName + "," + dhcpServerBC.getDhcpContainerDN();
 	}
 
 }
