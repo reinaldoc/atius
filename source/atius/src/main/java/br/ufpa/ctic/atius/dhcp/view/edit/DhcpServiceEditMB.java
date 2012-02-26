@@ -9,6 +9,7 @@ import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.ufpa.ctic.atius.dhcp.business.DhcpServiceBC;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpService;
+import br.ufpa.ctic.atius.dhcp.view.list.DhcpServerListMB;
 
 @ViewController
 public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String> {
@@ -35,7 +36,7 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 			getBean().setStatements();
 			bc.insert(getBean());
 			Faces.addI18nMessage("atius.dhcp.service.insert.success", getBean().getCn());
-			init();
+			Faces.getManagedProperty("#{dhcpServerListMB}", DhcpServerListMB.class).clearResultList();
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.service.insert.failed", SeverityType.ERROR);

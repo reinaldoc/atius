@@ -5,8 +5,8 @@
 
 		<h:panelGrid id="atius-dhcp-service-edit-panel-id" cellpadding="0" cellspacing="0">
 
-			<p:dialog id="atius-dhcp-service-edit-dlg-id" header="ATIUS - Serviço DHCP" widgetVar="atius_dhcp_service_edit_dlg" modal="true" width="480"
-				resizable="false" closable="false">
+			<p:dialog id="atius-dhcp-service-edit-dlg-id" header="ATIUS - Serviço DHCP" widgetVar="atius_dhcp_service_edit_dlg" modal="true"
+				width="480" resizable="false" closable="false">
 
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-service-edit-dlg-body-id">
 
@@ -30,7 +30,7 @@
 				<h:panelGroup id="atius-dhcp-service-edit-dlg-buttons-id">
 					<faa:dialogButtons id="atius-dhcp-service-edit-dlg-save-id" dialogId="atius-dhcp-service-edit-dlg-id"
 						dialogWidgetVar="atius_dhcp_service_edit_dlg" updateMode="#{dhcpServiceEditMB.updateMode}" actionUpdater="#{dhcpServiceEditMB.update}"
-						actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServerListMB.clearResultList}" updateOnClose="atius-dhcp-config-panel-id" />
+						actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServiceEditMB.init}" updateOnClose="atius-dhcp-config-panel-id" />
 				</h:panelGroup>
 
 			</p:dialog>
