@@ -43,4 +43,8 @@ public class DhcpServerBC extends DelegateCrud<DhcpServer, String, DhcpServerDAO
 		sessionInfo.selectDhcpServer(dhcpServer);
 	}
 
+	public void deleteDhcpService(String dhcpServiceDN) {
+		getDelegate().remove(dhcpServiceDN);
+	}
+
 }

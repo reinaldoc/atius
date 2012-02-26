@@ -45,6 +45,7 @@ public class DhcpServerEditMB extends AbstractEditPageBean<DhcpServer, String> {
 	@Override
 	public String delete() {
 		try {
+			bc.deleteDhcpService(getBean().getDhcpServiceDN());
 			bc.delete(getBean().getCn());
 			Faces.addI18nMessage("atius.dhcp.server.delete.success", getBean().getCn());
 		} catch (RuntimeException e) {
