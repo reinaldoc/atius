@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.ufpa.ctic.atius.dhcp.business.DhcpServerBC;
 import br.ufpa.ctic.atius.dhcp.business.DhcpServiceBC;
@@ -12,6 +13,7 @@ import br.ufpa.ctic.atius.dhcp.domain.DhcpService;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpSharedNetwork;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpSubnet;
 
+@Named
 @SessionScoped
 public class DhcpSessionInfo implements Serializable {
 
@@ -52,6 +54,10 @@ public class DhcpSessionInfo implements Serializable {
 		if (dhcpService == null)
 			getDhcpServer();
 		return dhcpService.getDn();
+	}
+
+	public DhcpSharedNetwork getDhcpSharedNetwork() {
+		return dhcpSharedNetwork;
 	}
 
 	public String getDhcpSharedNetworkDN() {

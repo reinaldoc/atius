@@ -10,6 +10,9 @@
 
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-network-edit-dlg-body-id">
 
+					<h:outputText value="Servidor:" />
+					<h:outputText value="#{dhcpSessionInfo.dhcpServer.cn}" styleClass="asInput" />
+
 					<h:outputText value="Nome da Rede:" />
 					<h:inputText value="#{dhcpSharedNetworkEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 

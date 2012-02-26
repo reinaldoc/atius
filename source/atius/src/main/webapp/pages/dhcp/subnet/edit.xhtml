@@ -11,7 +11,7 @@
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-subnet-edit-dlg-body-id">
 
 					<h:outputText value="Rede:" />
-					<h:outputText value="#{menuContext.getSelected('DhcpSharedNetwork')}" styleClass="asInput" />
+					<h:outputText value="#{dhcpSessionInfo.dhcpSharedNetwork.cn}" styleClass="asInput" />
 
 					<h:outputText value="Nome da subrede:" />
 					<h:inputText value="#{dhcpSubnetEditMB.bean.dhcpComments}" autocomplete="off" onkeypress="return event.keyCode!=13" />
