@@ -108,7 +108,7 @@ public class DhcpService extends Entry {
 
 	public String getDhcpOptionDNS() {
 		if (dhcpOptionDNS == null) {
-			dhcpOptionDNS = "0.0.0.0";
+			dhcpOptionDNS = "-";
 			getOptions();
 		}
 		return dhcpOptionDNS;
@@ -120,7 +120,7 @@ public class DhcpService extends Entry {
 
 	public String getDhcpOptionNTP() {
 		if (dhcpOptionNTP == null) {
-			dhcpOptionNTP = "0.0.0.0";
+			dhcpOptionNTP = "-";
 			getOptions();
 		}
 		return dhcpOptionNTP;
@@ -164,7 +164,7 @@ public class DhcpService extends Entry {
 
 	public String getDhcpStatementsLeaseTime() {
 		if (dhcpStatementsLeaseTime == null) {
-			dhcpStatementsLeaseTime = "0";
+			dhcpStatementsLeaseTime = "-";
 			getStatements();
 		}
 		return dhcpStatementsLeaseTime;
@@ -176,7 +176,7 @@ public class DhcpService extends Entry {
 
 	public String getDhcpStatementsMaxLeaseTime() {
 		if (dhcpStatementsMaxLeaseTime == null) {
-			dhcpStatementsMaxLeaseTime = "0";
+			dhcpStatementsMaxLeaseTime = "-";
 			getStatements();
 		}
 		return dhcpStatementsMaxLeaseTime;
