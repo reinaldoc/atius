@@ -2,12 +2,12 @@ package br.ufpa.ctic.atius.dhcp.view.list;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
+import br.gov.frameworkdemoiselle.util.Strings;
 import br.ufpa.ctic.atius.dhcp.business.DhcpSharedNetworkBC;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpSharedNetwork;
 
@@ -27,13 +27,12 @@ public class DhcpSharedNetworkListMB extends AbstractListPageBean<DhcpSharedNetw
 		return bc.findAll();
 	}
 
-	@SuppressWarnings("unused")
-	@PostConstruct
-	private void init() {
-		if (getResultList() != null && getResultList().size() > 0)
-			bc.selectDhcpSharedNetwork(getResultList().get(0));
-		else
-			bc.selectMenu("Configuração");
+	public void init() {
+		if (Strings.isEmpty(bc.getSelectedMenu()))
+			if (getResultList() != null && getResultList().size() > 0)
+				bc.selectDhcpSharedNetwork(getResultList().get(0));
+			else
+				bc.selectMenu("Configuração");
 	}
 
 	public void selectDhcpSharedNetwork(DhcpSharedNetwork dhcpSharedNetwork) {

@@ -16,6 +16,7 @@
 			<h:outputText value="|" styleClass="separator" />
 
 			<p:commandLink value="DHCP" actionListener="#{menuContext.select('MenuTop', 'DHCP')}"
+			action="#{dhcpSharedNetworkListMB.init}"
 				styleClass="#{menuContext.menu['MenuTop']['DHCP']['Style']}" ajax="false" immediate="true" />
 
 			<!-- MENU LADO DIREITO -->
