@@ -12,7 +12,7 @@
 				id="atius-dhcp-config-server-delete-dlg-id" widgetVar="atius_dhcp_config_server_delete_dlg">
 
 				<p:commandButton value="Sim" oncomplete="atius_dhcp_config_server_delete_dlg.hide()"
-					update="atius-dhcp-config-server-datatable-id, atius-dhcp-config-options-panel-id, faa-growl-id"
+					update="atius-dhcp-config-server-datatable-id, atius-dhcp-config-options-panel-id, faa-header-right-id, faa-growl-id"
 					actionListener="#{dhcpServerEditMB.delete}" action="#{dhcpServiceEditMB.init}" style="margin-right: 20px;" />
 
 				<p:commandButton value="Não" onclick="atius_dhcp_config_server_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
@@ -31,7 +31,7 @@
 
 					<p:commandButton icon="ui-icon-check" style="float: right;" title="Selecionar servidor"
 						actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_config_server_row)}"
-						action="#{dhcpSharedNetworkListMB.clearResultList}" immediate="true" update="faa-body-id" />
+						action="#{dhcpSharedNetworkListMB.clearResultList}" immediate="true" update="faa-body-id, faa-header-right-id" />
 
 					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" styleClass="margin" immediate="true"
 						title="Remover Servidor" update="atius-dhcp-config-server-delete-dlg-id"
@@ -48,7 +48,7 @@
 			<div class="panel" style="margin-top: 25px;">
 				<h:panelGroup layout="block" style="display: inline-block">Opções (#{dhcpSessionInfo.dhcpServer.cn})</h:panelGroup>
 				<h:form prependId="false">
-					<p:commandButton icon="ui-icon-pencil" title="Editar opções" immediate="true"
+					<p:commandButton icon="ui-icon-pencil" title="Editar opções" immediate="true" disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
 						update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
 				</h:form>
 			</div>
