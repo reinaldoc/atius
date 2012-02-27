@@ -12,8 +12,8 @@
 				id="atius-dhcp-config-server-delete-dlg-id" widgetVar="atius_dhcp_config_server_delete_dlg">
 
 				<p:commandButton value="Sim" oncomplete="atius_dhcp_config_server_delete_dlg.hide()"
-					update="atius-dhcp-config-server-datatable-id, faa-growl-id" actionListener="#{dhcpServerEditMB.delete}"
-					action="#{dhcpServerListMB.clearResultList}" style="margin-right: 20px;" />
+					update="atius-dhcp-config-server-datatable-id, atius-dhcp-config-options-panel-id, faa-growl-id"
+					actionListener="#{dhcpServerEditMB.delete}" action="#{dhcpServiceEditMB.init}" style="margin-right: 20px;" />
 
 				<p:commandButton value="Não" onclick="atius_dhcp_config_server_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 
@@ -43,59 +43,62 @@
 
 		</h:form>
 
-		<div class="panel" style="margin-top: 25px;">
-			<h:panelGroup layout="block" style="display: inline-block">Opções</h:panelGroup>
-			<h:form prependId="false">
-				<p:commandButton icon="ui-icon-pencil" title="Editar opções" immediate="true"
-					update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
-			</h:form>
-		</div>
+		<h:panelGroup id="atius-dhcp-config-options-panel-id">
 
-		<div class="asTable">
-
-			<div class="asRow asRowOdd">
-				<div class="asColumn asColumnLeft">Autoritativo:</div>
-				<div class="asColumn">
-					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsAuthoritative ? 'sim' : 'não' }" />
-				</div>
+			<div class="panel" style="margin-top: 25px;">
+				<h:panelGroup layout="block" style="display: inline-block">Opções (#{dhcpSessionInfo.dhcpServer.cn})</h:panelGroup>
+				<h:form prependId="false">
+					<p:commandButton icon="ui-icon-pencil" title="Editar opções" immediate="true"
+						update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
+				</h:form>
 			</div>
 
-			<div class="asRow asRowEven">
-				<div class="asColumn asColumnLeft">Tempo de sessão (seg):</div>
-				<div class="asColumn">
-					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" />
-				</div>
-			</div>
+			<div class="asTable">
 
-			<div class="asRow asRowOdd">
-				<div class="asColumn asColumnLeft">Tempo máx. de sessão:</div>
-				<div class="asColumn">
-					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" />
+				<div class="asRow asRowOdd">
+					<div class="asColumn asColumnLeft">Autoritativo:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsAuthoritative ? 'sim' : 'não' }" />
+					</div>
 				</div>
-			</div>
 
-			<div class="asRow asRowEven">
-				<div class="asColumn asColumnLeft">NTP Server:</div>
-				<div class="asColumn">
-					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionNTP}" />
+				<div class="asRow asRowEven">
+					<div class="asColumn asColumnLeft">Tempo de sessão (seg):</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" />
+					</div>
 				</div>
-			</div>
 
-			<div class="asRow asRowOdd">
-				<div class="asColumn asColumnLeft">DNS Server:</div>
-				<div class="asColumn">
-					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDNS}" />
+				<div class="asRow asRowOdd">
+					<div class="asColumn asColumnLeft">Tempo máx. de sessão:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" />
+					</div>
 				</div>
-			</div>
 
-			<div class="asRow asRowEven">
-				<div class="asColumn asColumnLeft">DNS Prefix:</div>
-				<div class="asColumn">
-					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix}" />
+				<div class="asRow asRowEven">
+					<div class="asColumn asColumnLeft">NTP Server:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionNTP}" />
+					</div>
 				</div>
-			</div>
 
-		</div>
+				<div class="asRow asRowOdd">
+					<div class="asColumn asColumnLeft">DNS Server:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDNS}" />
+					</div>
+				</div>
+
+				<div class="asRow asRowEven">
+					<div class="asColumn asColumnLeft">DNS Prefix:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix}" />
+					</div>
+				</div>
+
+			</div>
+		</h:panelGroup>
 
 	</h:panelGroup>
 

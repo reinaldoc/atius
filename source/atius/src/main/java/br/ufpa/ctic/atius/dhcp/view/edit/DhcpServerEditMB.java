@@ -8,6 +8,7 @@ import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.ufpa.ctic.atius.dhcp.business.DhcpServerBC;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpServer;
+import br.ufpa.ctic.atius.dhcp.view.list.DhcpServerListMB;
 
 @ViewController
 public class DhcpServerEditMB extends AbstractEditPageBean<DhcpServer, String> {
@@ -48,6 +49,9 @@ public class DhcpServerEditMB extends AbstractEditPageBean<DhcpServer, String> {
 			bc.deleteDhcpService(getBean().getDhcpServiceDN());
 			bc.delete(getBean().getCn());
 			Faces.addI18nMessage("atius.dhcp.server.delete.success", getBean().getCn());
+			if (getBean().equals(bc.getDhcpServer()))
+				bc.selectDhcpServer(new DhcpServer());
+			Faces.getManagedProperty("#{dhcpServerListMB}", DhcpServerListMB.class).clearResultList();
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.server.delete.failed", SeverityType.ERROR);
