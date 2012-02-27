@@ -12,7 +12,7 @@
 				id="atius-dhcp-config-server-delete-dlg-id" widgetVar="atius_dhcp_config_server_delete_dlg">
 
 				<p:commandButton value="Sim" oncomplete="atius_dhcp_config_server_delete_dlg.hide()"
-					update="atius-dhcp-config-server-datatable-id, atius-dhcp-config-options-panel-id, faa-header-right-id, faa-growl-id"
+					update="atius-dhcp-config-server-datatable-id, atius-dhcp-config-options-panel-id, faa-header-right-id, faa-body-left-id, faa-growl-id"
 					actionListener="#{dhcpServerEditMB.delete}" action="#{dhcpServiceEditMB.init}" style="margin-right: 20px;" />
 
 				<p:commandButton value="Não" onclick="atius_dhcp_config_server_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
@@ -48,7 +48,8 @@
 			<div class="panel" style="margin-top: 25px;">
 				<h:panelGroup layout="block" style="display: inline-block">Opções (#{dhcpSessionInfo.dhcpServer.cn})</h:panelGroup>
 				<h:form prependId="false">
-					<p:commandButton icon="ui-icon-pencil" title="Editar opções" immediate="true" disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
+					<p:commandButton icon="ui-icon-pencil" title="Editar opções" immediate="true"
+						disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
 						update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
 				</h:form>
 			</div>
@@ -113,7 +114,7 @@
 				id="atius-dhcp-config-network-delete-dlg-id" widgetVar="atius_dhcp_config_network_delete_dlg">
 
 				<p:commandButton value="Sim" oncomplete="atius_dhcp_config_network_delete_dlg.hide()"
-					update="atius-dhcp-config-network-datatable-id, faa-growl-id" action="#{dhcpSharedNetworkEditMB.delete}"
+					update="atius-dhcp-config-network-datatable-id, faa-body-left-id, faa-growl-id" action="#{dhcpSharedNetworkEditMB.delete}"
 					actionListener="#{dhcpSharedNetworkListMB.clearResultList}" style="margin-right: 20px;" />
 
 				<p:commandButton value="Não" onclick="atius_dhcp_config_network_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
