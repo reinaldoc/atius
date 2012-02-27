@@ -31,6 +31,10 @@ public class DhcpServerBC extends DelegateCrud<DhcpServer, String, DhcpServerDAO
 		return load(primaryDhcpServer);
 	}
 
+	public void selectPrimaryDhcpServer(String dhcpServerName) {
+		dhcpContainerBC.selectPrimaryDhcpServer(dhcpServerName);
+	}
+	
 	public String getDhcpContainerDN() {
 		return dhcpConfig.getDhcpContainerDN();
 	}

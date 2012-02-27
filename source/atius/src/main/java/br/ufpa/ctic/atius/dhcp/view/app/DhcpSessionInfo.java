@@ -44,6 +44,8 @@ public class DhcpSessionInfo implements Serializable {
 	public void selectDhcpServer(DhcpServer dhcpServer) {
 		this.dhcpServer = dhcpServer;
 		this.dhcpService = dhcpServiceBC.getDhcpService(dhcpServer);
+		this.dhcpSharedNetwork = null;
+		this.dhcpSubnet = null;
 	}
 
 	public DhcpService getDhcpService() {
@@ -68,6 +70,10 @@ public class DhcpSessionInfo implements Serializable {
 
 	public void selectDhcpSharedNetwork(DhcpSharedNetwork dhcpSharedNetwork) {
 		this.dhcpSharedNetwork = dhcpSharedNetwork;
+	}
+
+	public DhcpSubnet getDhcpSubnet() {
+		return dhcpSubnet;
 	}
 
 	public String getDhcpSubnetDN() {
