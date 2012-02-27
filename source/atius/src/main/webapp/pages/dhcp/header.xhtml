@@ -7,18 +7,20 @@
 
 			<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 
-			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.clearResultList}" update="atius-dhcp-subnet-list-datatable-id"
-				process="atius-dhcp-subnet-search, @this" style="margin-right: 45px" />
+			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.clearResultList}"
+				update="atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search, @this" style="margin-right: 45px" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
-				update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
+				update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()"
+				disabled="#{dhcpSessionInfo.dhcpSharedNetwork.cn == null ? 'true' : 'false' }" />
 
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
 
-			<p:commandButton icon="ui-icon-plusthick" value="Novo Servidor" immediate="true" action="#{dhcpServiceEditMB.editBean}" style="margin-right: 45px"
-				update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
+			<p:commandButton icon="ui-icon-plusthick" value="Novo Servidor" immediate="true" action="#{dhcpServiceEditMB.editBean}"
+				style="margin-right: 45px" update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id"
+				oncomplete="atius_dhcp_service_edit_dlg.show()" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
 				update="atius-dhcp-network-edit-dlg-body-id, atius-dhcp-network-edit-dlg-buttons-id" oncomplete="atius_dhcp_network_edit_dlg.show()"
