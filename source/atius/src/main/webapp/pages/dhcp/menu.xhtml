@@ -5,6 +5,15 @@
 
 		<h:panelGroup id="atius-dhcp-menu-id">
 
+			<div class="panel panel-menu">
+
+				<h:panelGroup layout="block" style="display: inline-block">#{dhcpSessionInfo.dhcpServer.cn == null ? ' --- ' : dhcpSessionInfo.dhcpServer.cn }</h:panelGroup>
+
+				<p:commandButton icon="ui-icon-gear" title="Selecionar servidor" immediate="true" style="float: right"
+					update="atius-dhcp-server-list-dlg-body-id" oncomplete="atius_dhcp_server_list_dlg.show()" />
+
+			</div>
+
 			<p:dataGrid value="#{dhcpSharedNetworkListMB.resultList}" var="dhcpSharedNetwork" columns="1">
 
 				<p:column>
