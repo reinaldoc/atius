@@ -37,12 +37,11 @@ public class DhcpContainerBC extends DelegateCrud<DhcpContainer, String, DhcpCon
 	}
 
 	public void selectPrimaryDhcpServer(String dhcpServerName) {
-		getQueryConfig().setGeneric(dhcpConfig.getDhcpContainerDN());
-		List<DhcpContainer> dhcpContainers = findAll();
-		if (dhcpContainers.size() != 0) {
-			dhcpContainers.get(0).setDhcpPrimaryServer(dhcpServerName);
-			update(dhcpContainers.get(0));
+		DhcpContainer dhcpContainer = getDelegate().getReference(dhcpConfig.getDhcpContainerDN());
+		if (dhcpContainer != null && dhcpContainer.getDn() != null) {
+			dhcpContainer.setDhcpPrimaryServer(dhcpServerName);
+			update(dhcpContainer);
 		}
 	}
-	
+
 }
