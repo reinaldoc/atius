@@ -5,6 +5,9 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.contrib.DelegateCrud;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpHost;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpServer;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpSharedNetwork;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpSubnet;
 import br.ufpa.ctic.atius.dhcp.persistence.DhcpHostDAO;
 import br.ufpa.ctic.atius.dhcp.view.app.DhcpSessionInfo;
 
@@ -16,8 +19,16 @@ public class DhcpHostBC extends DelegateCrud<DhcpHost, String, DhcpHostDAO> {
 	@Inject
 	private DhcpSessionInfo sessionInfo;
 
-	public String getDhcpSubnetDN() {
-		return sessionInfo.getDhcpSubnetDN();
+	public DhcpServer getDhcpServer() {
+		return sessionInfo.getDhcpServer();
+	}
+
+	public DhcpSharedNetwork getDhcpSharedNetwork() {
+		return sessionInfo.getDhcpSharedNetwork();
+	}
+
+	public DhcpSubnet getDhcpSubnet() {
+		return sessionInfo.getDhcpSubnet();
 	}
 
 }

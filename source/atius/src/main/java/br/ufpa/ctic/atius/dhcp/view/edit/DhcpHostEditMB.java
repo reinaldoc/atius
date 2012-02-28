@@ -20,7 +20,7 @@ public class DhcpHostEditMB extends AbstractEditPageBean<DhcpHost, String> {
 	@Override
 	public String insert() {
 		try {
-			getBean().setParentDN(bc.getDhcpSubnetDN());
+			getBean().setParentDN(bc.getDhcpSubnet().getDn());
 			bc.insert(getBean());
 			Faces.addI18nMessage("atius.dhcp.host.insert.success", getBean().getCn());
 		} catch (RuntimeException e) {

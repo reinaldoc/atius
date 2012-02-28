@@ -10,6 +10,10 @@
 
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-host-edit-dlg-body-id">
 
+					<h:outputText value="Subrede:" rendered="#{!dhcpHostEditMB.updateMode}" />
+					<h:outputText value="#{dhcpSessionInfo.dhcpSubnet.cn}/#{dhcpSessionInfo.dhcpSubnet.dhcpNetMask} - #{dhcpSessionInfo.dhcpSubnet.dhcpComments}"
+						styleClass="asInput" rendered="#{!dhcpHostEditMB.updateMode}" />
+
 					<h:outputText value="Hostname:" />
 					<h:inputText value="#{dhcpHostEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13"
 						readonly="#{dhcpHostEditMB.updateMode ? 'true' : 'false' }" />

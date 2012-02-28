@@ -19,13 +19,18 @@
 
 				<h:panelGroup layout="block">
 
+					<div class="filter">
+						<p:commandButton icon="ui-icon-gear" action="#{dhcpHostListMB.selectSearchNode()}" update="atius-dhcp-host-list-datatable-id, faa-growl-id"
+							oncomplete="getElementById('atius-dhcp-host-search').focus(); atius_dhcp_host_list_dlg.initPosition();" process="@this" styleClass="filter" />
+					</div>
+
 					<h:inputText id="atius-dhcp-host-search" value="#{dhcpHostListMB.resultFilter}" autocomplete="off" styleClass="filter"
-						onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); return false; }" />
+						style="border-left: none !important;" onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); return false; }" />
 
 					<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpHostListMB.clearResultList}" update="atius-dhcp-host-list-datatable-id"
 						process="atius-dhcp-host-search, @this" style="margin-right: 45px;" widgetVar="atius_dhcp_host_search" />
 
-					<p:commandButton icon="ui-icon-plusthick" value="Nova Reserva de IP" immediate="true" action="#{dhcpHostEditMB.editBean}"
+					<p:commandButton icon="ui-icon-plusthick" value="Nova Reserva de IP" immediate="true" action="#{dhcpHostEditMB.editBean}" style="float: right"
 						update="atius-dhcp-host-edit-dlg-body-id, atius-dhcp-host-edit-dlg-buttons-id" oncomplete="atius_dhcp_host_edit_dlg.show()" />
 
 				</h:panelGroup>

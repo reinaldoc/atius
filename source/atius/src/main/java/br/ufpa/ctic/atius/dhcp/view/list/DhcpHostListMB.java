@@ -9,6 +9,7 @@ import br.gov.frameworkdemoiselle.enumeration.contrib.Comparison;
 import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
+import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
 import br.ufpa.ctic.atius.dhcp.business.DhcpHostBC;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpHost;
@@ -21,12 +22,18 @@ public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 	@Inject
 	private DhcpHostBC bc;
 
+	private Integer searchNode = 0;
+	
+	public void init() {
+		searchNode = 0;
+		clearResultFilter();
+	}
+
 	@Override
 	protected List<DhcpHost> handleResultList(QueryConfig<DhcpHost> queryConfig) {
-		if (bc.getDhcpSubnetDN() == null)
+		if (getSearchNode() == null)
 			return null;
-
-		queryConfig.setGeneric(bc.getDhcpSubnetDN());
+		queryConfig.setGeneric(getSearchNode());
 
 		List<DhcpHost> dhcpHosts = new ArrayList<DhcpHost>();
 		if (Strings.isNotBlank(getResultFilter())) {
@@ -43,6 +50,29 @@ public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 		}
 		dhcpHosts.addAll(bc.findAll());
 		return dhcpHosts;
+	}
+
+	private String getSearchNode() {
+		if (searchNode.intValue() == 0)
+			return bc.getDhcpSubnet().getDn();
+		else if (searchNode.intValue() == 1)
+			return bc.getDhcpSharedNetwork().getDn();
+		else
+			return bc.getDhcpServer().getDn();
+	}
+
+	public void selectSearchNode() {
+		clearResultList();
+		if (searchNode.intValue() == 0) {
+			searchNode = 1;
+			Faces.addI18nMessage("atius.dhcp.search.network", bc.getDhcpSharedNetwork().getCn());
+		} else if (searchNode.intValue() == 1) {
+			searchNode = 2;
+			Faces.addI18nMessage("atius.dhcp.search.server", bc.getDhcpServer().getCn());
+		} else {
+			searchNode = 0;
+			Faces.addI18nMessage("atius.dhcp.search.subnet", bc.getDhcpSubnet().getCn() + "/" + bc.getDhcpSubnet().getDhcpNetMask());
+		}
 	}
 
 }

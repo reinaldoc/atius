@@ -49,23 +49,15 @@ public class DhcpSessionInfo implements Serializable {
 	}
 
 	public DhcpService getDhcpService() {
+		if (dhcpService == null)
+			getDhcpServer();
 		return dhcpService;
 	}
 
-	public String getDhcpServiceDN() {
-		if (dhcpService == null)
-			getDhcpServer();
-		return dhcpService.getDn();
-	}
-
 	public DhcpSharedNetwork getDhcpSharedNetwork() {
+		if (dhcpSharedNetwork == null)
+			return new DhcpSharedNetwork();
 		return dhcpSharedNetwork;
-	}
-
-	public String getDhcpSharedNetworkDN() {
-		if (dhcpSharedNetwork != null)
-			return dhcpSharedNetwork.getDn();
-		return null;
 	}
 
 	public void selectDhcpSharedNetwork(DhcpSharedNetwork dhcpSharedNetwork) {
@@ -73,13 +65,9 @@ public class DhcpSessionInfo implements Serializable {
 	}
 
 	public DhcpSubnet getDhcpSubnet() {
+		if (dhcpSubnet == null)
+			dhcpSubnet = new DhcpSubnet();
 		return dhcpSubnet;
-	}
-
-	public String getDhcpSubnetDN() {
-		if (dhcpSubnet != null)
-			return dhcpSubnet.getDn();
-		return null;
 	}
 
 	public void selectDhcpSubnet(DhcpSubnet dhcpSubnet) {

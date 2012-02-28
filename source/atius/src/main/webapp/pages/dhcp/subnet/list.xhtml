@@ -53,7 +53,7 @@
 
 						<p:commandButton icon="ui-icon-search" title="Visualizar reservas"
 							oncomplete="atius_dhcp_host_list_dlg.initPosition(); atius_dhcp_host_list_dlg.show()" styleClass="margin"
-							action="#{dhcpSubnetEditMB.selectDhcpSubnet(dhcpSubnet)}" actionListener="#{dhcpHostListMB.clearResultFilter()}"
+							action="#{dhcpSubnetEditMB.selectDhcpSubnet(dhcpSubnet)}" actionListener="#{dhcpHostListMB.init()}"
 							update="atius-dhcp-host-list-dlg-body-id" immediate="true" />
 
 						<p:commandButton icon="ui-icon-trash" title="Excluir Subrede" oncomplete="atius_dhcp_subnet_delete_dlg.show()"

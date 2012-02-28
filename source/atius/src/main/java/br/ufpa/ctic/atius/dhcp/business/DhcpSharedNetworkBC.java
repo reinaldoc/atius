@@ -22,7 +22,7 @@ public class DhcpSharedNetworkBC extends DelegateCrud<DhcpSharedNetwork, String,
 	}
 
 	public String getDhcpServiceDN() {
-		return sessionInfo.getDhcpServiceDN();
+		return sessionInfo.getDhcpService().getDn();
 	}
 
 }

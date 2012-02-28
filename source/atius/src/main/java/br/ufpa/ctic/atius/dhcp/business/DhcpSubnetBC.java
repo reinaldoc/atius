@@ -17,7 +17,7 @@ public class DhcpSubnetBC extends DelegateCrud<DhcpSubnet, String, DhcpSubnetDAO
 	private DhcpSessionInfo sessionInfo;
 
 	public String getDhcpSharedNetworkDN() {
-		return sessionInfo.getDhcpSharedNetworkDN();
+		return sessionInfo.getDhcpSharedNetwork().getDn();
 	}
 
 	public void selectDhcpSubnet(DhcpSubnet dhcpSubnet) {
