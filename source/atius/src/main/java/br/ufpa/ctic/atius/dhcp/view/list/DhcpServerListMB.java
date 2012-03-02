@@ -30,7 +30,8 @@ public class DhcpServerListMB extends AbstractListPageBean<DhcpServer, String> {
 		if (dhcpServer.equals(bc.getDhcpServer()))
 			bc.selectPrimaryDhcpServer(dhcpServer.getCn());
 		bc.selectDhcpServer(dhcpServer);
-		bc.getMenuContext().select("DhcpSharedNetwork", "");
+		if (!bc.getMenuContext().getSelected("DhcpSharedNetwork").equals("Configuração"))
+			bc.getMenuContext().select("DhcpSharedNetwork", "");
 		Faces.getManagedProperty("#{dhcpSharedNetworkListMB}", DhcpSharedNetworkListMB.class).clearResultList();
 		Faces.getManagedProperty("#{dhcpSharedNetworkListMB}", DhcpSharedNetworkListMB.class).init();
 		Faces.getManagedProperty("#{dhcpServiceEditMB}", DhcpServiceEditMB.class).init();
