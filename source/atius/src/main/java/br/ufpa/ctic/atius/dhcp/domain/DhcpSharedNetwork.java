@@ -1,11 +1,14 @@
 package br.ufpa.ctic.atius.dhcp.domain;
 
+import javax.validation.constraints.Size;
+
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
 
 public class DhcpSharedNetwork extends Entry {
 
 	@Id
+	@Size(min = 3, message = "Identifique melhor a rede")
 	private String cn;
 
 	private String[] dhcpOption;

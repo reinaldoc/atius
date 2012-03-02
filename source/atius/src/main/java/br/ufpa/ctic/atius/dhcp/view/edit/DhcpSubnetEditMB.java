@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.commons.net.util.SubnetUtils;
+
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
+import br.gov.frameworkdemoiselle.util.contrib.Strings;
 import br.ufpa.ctic.atius.dhcp.business.DhcpSubnetBC;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpSubnet;
 
@@ -22,15 +25,53 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 
 	@Override
 	public String insert() {
+		SubnetUtils subnet;
+		try {
+			subnet = new SubnetUtils(getBean().getCn() + "/" + getBean().getDhcpNetMask());
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addI18nMessage("atius.dhcp.validation.networkaddress.failed", SeverityType.ERROR);
+			return null;
+		}
+
+		try {
+			if (!subnet.getInfo().isInRange(getBean().getDhcpGateway()))
+				throw new IllegalArgumentException("Gateway is not in subnet");
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
+			Faces.addI18nMessage("atius.dhcp.validation.gateway.failed", SeverityType.ERROR);
+			return null;
+		}
+
+		getBean().setDhcpRange();
+		if (Strings.isNotBlank(getBean().getDhcpRangeFirst()) || Strings.isNotBlank(getBean().getDhcpRangeLast())) {
+			try {
+				if (!subnet.getInfo().isInRange(getBean().getDhcpRangeFirst()))
+					throw new IllegalArgumentException("Start range is not in subnet");
+			} catch (RuntimeException e) {
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/" + getBean().getDhcpNetMask());
+				return null;
+			}
+			try {
+				if (!subnet.getInfo().isInRange(getBean().getDhcpRangeLast()))
+					throw new IllegalArgumentException("End range is not in subnet");
+			} catch (RuntimeException e) {
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/" + getBean().getDhcpNetMask());
+				return null;
+			}
+		}
+
 		try {
 			getBean().setParentDN(bc.getDhcpSharedNetworkDN());
-			getBean().setDhcpRange();
 			bc.insert(getBean());
 			Faces.addI18nMessage("atius.dhcp.subnet.insert.success", getBean().getCn());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.subnet.insert.failed", SeverityType.ERROR);
 		}
+
 		return null;
 	}
 

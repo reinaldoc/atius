@@ -1,5 +1,8 @@
 package br.ufpa.ctic.atius.dhcp.domain;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import br.gov.frameworkdemoiselle.annotation.Ignore;
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
@@ -8,6 +11,7 @@ import br.gov.frameworkdemoiselle.util.contrib.Strings;
 public class DhcpSubnet extends Entry {
 
 	@Id
+	@Pattern(regexp = "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})", message = "Especifique um endereço válido para a subrede")
 	private String cn;
 
 	private String[] dhcpOption;
@@ -22,6 +26,7 @@ public class DhcpSubnet extends Entry {
 	@Ignore
 	private String dhcpRangeLast;
 
+	@Size(min = 3, message = "Identifique melhor o nome da subrede")
 	private String dhcpComments;
 
 	public DhcpSubnet() {
@@ -61,7 +66,10 @@ public class DhcpSubnet extends Entry {
 	}
 
 	public void setDhcpGateway(String gateway) {
-		dhcpOption = new String[] { "routers " + gateway };
+		if (Strings.isNotBlank(gateway))
+			dhcpOption = new String[] { "routers " + gateway };
+		else
+			dhcpOption = null;
 	}
 
 	public String getDhcpNetMask() {
@@ -94,7 +102,9 @@ public class DhcpSubnet extends Entry {
 
 	public void setDhcpRange() {
 		if (Strings.isNotBlank(dhcpRangeFirst) && Strings.isNotBlank(dhcpRangeLast))
-			this.dhcpRange = dhcpRangeFirst + " " + dhcpRangeLast;
+			dhcpRange = dhcpRangeFirst + " " + dhcpRangeLast;
+		else
+			dhcpRange = null;
 	}
 
 	public String getDhcpComments() {
