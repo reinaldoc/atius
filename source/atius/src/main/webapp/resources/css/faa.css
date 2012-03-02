@@ -108,17 +108,29 @@ input[type=text].filter:focus {
 div.filter {
 	height: 28px;
 	border: 1px solid #BBC5CD;
-	border-right: none;
 	display: inline-block;
+	margin-right: 3px;
 }
 
-table button.filter {
+div.filter input[type="text"] {
+	width: 270px !important;
+	font-weight: bold;
+	height: 22px;
+	border: none !important;
+	outline: none;
+}
+
+div.filter input[type="text"]:focus {
+	background: transparent;
+}
+
+div.filter button {
 	background: none !important;
 	border: none;
 	box-shadow: none !important;
 }
 
-table button.filter:hover {
+div.filter button:hover {
 	background: none !important;
 	border: none;
 	box-shadow: none;
