@@ -15,13 +15,19 @@ public class DhcpService extends Entry {
 	private String[] dhcpOption;
 
 	@Ignore
+	private String dhcpOptionDomainPrefix;
+
+	@Ignore
 	private String dhcpOptionDNS;
 
 	@Ignore
 	private String dhcpOptionNTP;
 
 	@Ignore
-	private String dhcpOptionDomainPrefix;
+	private String dhcpOptionSMB;
+
+	@Ignore
+	private String dhcpOptionSMBtype;
 
 	private String[] dhcpStatements;
 
@@ -58,6 +64,10 @@ public class DhcpService extends Entry {
 					dhcpOptionDNS = Strings.substringAfter(option, " ");
 				else if ("domain-name".equals(Strings.substringBefore(option, " ")))
 					dhcpOptionDomainPrefix = Strings.substringBetween(option, "\"");
+				else if ("netbios-name-servers".equals(Strings.substringBefore(option, " ")))
+					dhcpOptionSMB = Strings.substringAfter(option, " ");
+				else if ("netbios-node-type".equals(Strings.substringBefore(option, " ")))
+					dhcpOptionSMBtype = Strings.substringAfter(option, " ");
 			}
 	}
 
@@ -192,6 +202,30 @@ public class DhcpService extends Entry {
 
 	public void setDhcpServerName(String dhcpServerName) {
 		this.dhcpServerName = dhcpServerName;
+	}
+
+	public String getDhcpOptionSMB() {
+		if (dhcpOptionSMB == null) {
+			dhcpOptionSMB = "-";
+			getOptions();
+		}
+		return dhcpOptionSMB;
+	}
+
+	public void setDhcpOptionSMB(String dhcpOptionSMB) {
+		this.dhcpOptionSMB = dhcpOptionSMB;
+	}
+
+	public String getDhcpOptionSMBtype() {
+		if (dhcpOptionSMBtype == null) {
+			dhcpOptionSMBtype = "-";
+			getOptions();
+		}
+		return dhcpOptionSMBtype;
+	}
+
+	public void setDhcpOptionSMBtype(String dhcpOptionSMBtype) {
+		this.dhcpOptionSMBtype = dhcpOptionSMBtype;
 	}
 
 }
