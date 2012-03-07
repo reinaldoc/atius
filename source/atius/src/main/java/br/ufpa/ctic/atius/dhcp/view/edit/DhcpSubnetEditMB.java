@@ -25,13 +25,43 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 
 	@Override
 	public String insert() {
+		if (validate()) {
+			try {
+				getBean().setParentDN(bc.getDhcpSharedNetworkDN());
+				getBean().setDhcpOptions();
+				bc.insert(getBean());
+				Faces.addI18nMessage("atius.dhcp.subnet.insert.success", getBean().getCn());
+			} catch (RuntimeException e) {
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.subnet.insert.failed", SeverityType.ERROR);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public String update() {
+		if (validate()) {
+			try {
+				getBean().setDhcpOptions();
+				bc.update(getBean());
+				Faces.addI18nMessage("atius.dhcp.subnet.update.success", getBean().getCn());
+			} catch (RuntimeException e) {
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.subnet.update.failed", SeverityType.ERROR);
+			}
+		}
+		return null;
+	}
+
+	private boolean validate() {
 		SubnetUtils subnet;
 		try {
 			subnet = new SubnetUtils(getBean().getCn() + "/" + getBean().getDhcpNetMask());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.validation.networkaddress.failed", SeverityType.ERROR);
-			return null;
+			return false;
 		}
 
 		try {
@@ -40,7 +70,7 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.validation.gateway.failed", SeverityType.ERROR);
-			return null;
+			return false;
 		}
 
 		getBean().setDhcpRange();
@@ -51,7 +81,7 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 			} catch (RuntimeException e) {
 				Faces.validationFailed();
 				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/" + getBean().getDhcpNetMask());
-				return null;
+				return false;
 			}
 			try {
 				if (!subnet.getInfo().isInRange(getBean().getDhcpRangeLast()))
@@ -59,40 +89,17 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 			} catch (RuntimeException e) {
 				Faces.validationFailed();
 				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/" + getBean().getDhcpNetMask());
-				return null;
+				return false;
 			}
 		}
-
-		try {
-			getBean().setParentDN(bc.getDhcpSharedNetworkDN());
-			bc.insert(getBean());
-			Faces.addI18nMessage("atius.dhcp.subnet.insert.success", getBean().getCn());
-		} catch (RuntimeException e) {
-			Faces.validationFailed();
-			Faces.addI18nMessage("atius.dhcp.subnet.insert.failed", SeverityType.ERROR);
-		}
-
-		return null;
-	}
-
-	@Override
-	public String update() {
-		try {
-			getBean().setDhcpRange();
-			bc.update(getBean());
-			Faces.addI18nMessage("atius.dhcp.subnet.update.success", getBean().getCn());
-		} catch (RuntimeException e) {
-			Faces.validationFailed();
-			Faces.addI18nMessage("atius.dhcp.subnet.update.failed", SeverityType.ERROR);
-		}
-		return null;
+		return true;
 	}
 
 	@Override
 	public String delete() {
 		try {
 			bc.delete(getBean().getCn());
-			Faces.addI18nMessage("atius.dhcp.subnet.delete.success", getBean().getCn());
+			Faces.addI18nMessage("atius.dhcp.subnet.delete.success", getBean().getInfo());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.subnet.delete.failed", SeverityType.ERROR);
