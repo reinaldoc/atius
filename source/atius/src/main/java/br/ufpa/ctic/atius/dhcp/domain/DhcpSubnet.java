@@ -5,16 +5,13 @@ import javax.validation.constraints.Size;
 
 import br.gov.frameworkdemoiselle.annotation.Ignore;
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
-import br.gov.frameworkdemoiselle.ldap.template.Entry;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
-public class DhcpSubnet extends Entry {
+public class DhcpSubnet extends DhcpOption {
 
 	@Id
 	@Pattern(regexp = "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})", message = "Especifique um endereço válido para a subrede")
 	private String cn;
-
-	private String[] dhcpOption;
 
 	private String dhcpNetMask;
 
@@ -47,29 +44,6 @@ public class DhcpSubnet extends Entry {
 
 	public void setCn(String cn) {
 		this.cn = cn;
-	}
-
-	public String[] getDhcpOption() {
-		return dhcpOption;
-	}
-
-	public void setDhcpOption(String[] dhcpOption) {
-		this.dhcpOption = dhcpOption;
-	}
-
-	public String getDhcpGateway() {
-		if (dhcpOption != null)
-			for (String option : dhcpOption)
-				if (option.contains("routers"))
-					return option.split(" ")[1];
-		return null;
-	}
-
-	public void setDhcpGateway(String gateway) {
-		if (Strings.isNotBlank(gateway))
-			dhcpOption = new String[] { "routers " + gateway };
-		else
-			dhcpOption = null;
 	}
 
 	public String getDhcpNetMask() {
@@ -113,6 +87,10 @@ public class DhcpSubnet extends Entry {
 
 	public void setDhcpComments(String dhcpComments) {
 		this.dhcpComments = dhcpComments;
+	}
+
+	public String getInfo() {
+		return cn + "/" + dhcpNetMask + " (" + dhcpComments + ")";
 	}
 
 }

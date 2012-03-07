@@ -3,7 +3,7 @@
 
 	<h:form prependId="false">
 
-		<p:confirmDialog message="Deseja excluir a subrede: #{dhcpSubnetEditMB.bean.cn} ?" header="Atenção!" severity="alert"
+		<p:confirmDialog message="Deseja excluir a subrede: #{dhcpSubnetEditMB.bean.info}  ?" header="Atenção!" severity="alert"
 			id="atius-dhcp-subnet-delete-dlg-id" widgetVar="atius_dhcp_subnet_delete_dlg">
 
 			<p:commandButton value="Sim" oncomplete="atius_dhcp_subnet_delete_dlg.hide()" update="atius-dhcp-subnet-list-datatable-id, faa-growl-id"

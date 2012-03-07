@@ -23,7 +23,7 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 	public void init() {
 		editBean(bc.getDhcpService());
 		getBean().setDhcpServerName(bc.getDhcpServer().getCn());
-		getBean().getOptions();
+		getBean().getDhcpOptions();
 		getBean().getStatements();
 	}
 
