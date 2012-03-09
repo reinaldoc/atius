@@ -10,30 +10,30 @@
 
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-option-edit-dlg-body-id">
 
-					<h:outputText value="Rede:" />
-					<h:outputText value="#{menuContext.getSelected('DhcpSharedNetwork')}" styleClass="asInput" />
-
-					<h:outputText value="NTP Server:" />
-					<h:inputText value="#{dhcpoptionEditMB.bean.dhcpOptionNTP}" autocomplete="off" onkeypress="return event.keyCode!=13" />
-
-					<h:outputText value="DNS Server:" />
-					<h:inputText value="#{dhcpoptionEditMB.bean.dhcpOptionDNS}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Servidor:" />
+					<h:outputText value="#{dhcpSessionInfo.dhcpServer.cn}" styleClass="asInput" />
 
 					<h:outputText value="DNS Prefix:" />
-					<h:inputText value="#{dhcpoptionEditMB.bean.dhcpOptionDomainPrefix}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionDomainPrefix}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="Lease Time:" />
-					<h:inputText value="#{dhcpoptionEditMB.bean.dhcpStatementsLeaseTime}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="DNS Server:" />
+					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionDNS}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="Max Lease Time:" />
-					<h:inputText value="#{dhcpoptionEditMB.bean.dhcpStatementsMaxLeaseTime}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="NTP Server:" />
+					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionNTP}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+
+					<h:outputText value="Netbios Server:" />
+					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionSMB}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+
+					<h:outputText value="Netbios Server Type:" />
+					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionSMBtype}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
 				</h:panelGrid>
 
 				<h:panelGroup id="atius-dhcp-option-edit-dlg-buttons-id">
-					<faa:dialogButtons id="atius-dhcp-option-edit-dlg-save-id" dialogId="atius-dhcp-option-edit-dlg-id" dialogWidgetVar="atius_dhcp_option_edit_dlg"
-						updateMode="#{dhcpoptionEditMB.updateMode}" actionUpdater="#{dhcpoptionEditMB.update}" actionInserter="#{dhcpoptionEditMB.insert}"
-						actionCloser="#{dhcpoptionListMB.clearValidation}" updateOnClose="atius-dhcp-option-list-datatable-id" />
+					<faa:dialogButtons id="atius-dhcp-option-edit-dlg-save-id" dialogId="atius-dhcp-option-edit-dlg-id"
+						dialogWidgetVar="atius_dhcp_option_edit_dlg" updateMode="#{dhcpOptionEditMB.updateMode}" actionUpdater="#{dhcpOptionEditMB.update}"
+						actionInserter="#{dhcpOptionEditMB.insert}" actionCloser="#{dhcpOptionEditMB.editBean()}" update="@all" />
 				</h:panelGroup>
 
 			</p:dialog>

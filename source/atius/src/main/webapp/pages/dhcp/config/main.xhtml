@@ -31,12 +31,12 @@
 					</h:panelGroup>
 
 					<p:commandButton icon="ui-icon-check" style="float: right;" title="Selecionar servidor"
-						actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_config_server_row)}" action="#{dhcpSharedNetworkListMB.clearResultList}"
-						immediate="true" update="faa-body-id, faa-header-right-id" />
+						actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_config_server_row)}"
+						action="#{dhcpSharedNetworkListMB.clearResultList}" immediate="true" update="faa-body-id, faa-header-right-id" />
 
-					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" styleClass="margin" immediate="true" title="Remover Servidor"
-						update="atius-dhcp-config-server-delete-dlg-id" action="#{dhcpServerEditMB.editBean(atius_dhcp_config_server_row)}"
-						oncomplete="atius_dhcp_config_server_delete_dlg.show()" />
+					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" styleClass="margin" immediate="true"
+						title="Remover Servidor" update="atius-dhcp-config-server-delete-dlg-id"
+						action="#{dhcpServerEditMB.editBean(atius_dhcp_config_server_row)}" oncomplete="atius_dhcp_config_server_delete_dlg.show()" />
 
 				</p:column>
 
@@ -85,7 +85,8 @@
 				<h:form prependId="false">
 					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true" styleClass="transparent"
 						disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
-						update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
+						action="#{dhcpOptionEditMB.editBean(dhcpSessionInfo.dhcpService)}"
+						update="atius-dhcp-option-edit-dlg-body-id, atius-dhcp-option-edit-dlg-buttons-id" oncomplete="atius_dhcp_option_edit_dlg.show()" />
 				</h:form>
 			</div>
 
@@ -151,8 +152,9 @@
 			</p:confirmDialog>
 
 			<p:dataTable id="atius-dhcp-config-network-datatable-id" widgetVar="atius_dhcp_config_network_wv" emptyMessage="Não há redes DHCP"
-				value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="13" paginator="true" paginatorAlwaysVisible="false"
-				pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+				value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="13" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom"
+				styleClass="dialog-datatable dialog-datatable-small">
 
 				<p:column sortBy="#{atius_dhcp_config_network_row.cn}">
 
