@@ -64,28 +64,21 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 			return false;
 		}
 
-		try {
-			if (!subnet.getInfo().isInRange(getBean().getDhcpGateway()))
-				throw new IllegalArgumentException("Gateway is not in subnet");
-		} catch (RuntimeException e) {
-			Faces.validationFailed();
-			Faces.addI18nMessage("atius.dhcp.validation.gateway.failed", SeverityType.ERROR);
-			return false;
-		}
+		if (Strings.isNotEmpty(getBean().getDhcpGateway()))
+			try {
+				if (!subnet.getInfo().isInRange(getBean().getDhcpGateway()))
+					throw new IllegalArgumentException("Gateway is not in subnet");
+			} catch (RuntimeException e) {
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.validation.gateway.failed", SeverityType.ERROR);
+				return false;
+			}
 
 		getBean().setDhcpRange();
 		if (Strings.isNotBlank(getBean().getDhcpRangeFirst()) || Strings.isNotBlank(getBean().getDhcpRangeLast())) {
 			try {
-				if (!subnet.getInfo().isInRange(getBean().getDhcpRangeFirst()))
-					throw new IllegalArgumentException("Start range is not in subnet");
-			} catch (RuntimeException e) {
-				Faces.validationFailed();
-				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/" + getBean().getDhcpNetMask());
-				return false;
-			}
-			try {
-				if (!subnet.getInfo().isInRange(getBean().getDhcpRangeLast()))
-					throw new IllegalArgumentException("End range is not in subnet");
+				if (!subnet.getInfo().isInRange(getBean().getDhcpRangeFirst()) || !subnet.getInfo().isInRange(getBean().getDhcpRangeLast()))
+					throw new IllegalArgumentException("Range is not in subnet");
 			} catch (RuntimeException e) {
 				Faces.validationFailed();
 				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/" + getBean().getDhcpNetMask());

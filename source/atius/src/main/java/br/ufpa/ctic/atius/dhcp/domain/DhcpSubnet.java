@@ -55,9 +55,9 @@ public class DhcpSubnet extends DhcpOption {
 	}
 
 	public String getDhcpRangeFirst() {
-		if (dhcpRange != null)
-			return Strings.substringBefore(dhcpRange, " ");
-		return null;
+		if (dhcpRangeFirst == null)
+			dhcpRangeFirst = Strings.substringBefore(dhcpRange, " ");
+		return dhcpRangeFirst;
 	}
 
 	public void setDhcpRangeFirst(String dhcpRangeFirst) {
@@ -65,9 +65,9 @@ public class DhcpSubnet extends DhcpOption {
 	}
 
 	public String getDhcpRangeLast() {
-		if (dhcpRange != null)
-			return Strings.substringAfter(dhcpRange, " ");
-		return null;
+		if (dhcpRangeLast == null)
+			dhcpRangeLast = Strings.substringAfter(dhcpRange, " ");
+		return dhcpRangeLast;
 	}
 
 	public void setDhcpRangeLast(String dhcpRangeLast) {
