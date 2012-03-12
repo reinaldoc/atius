@@ -17,6 +17,8 @@ public class DhcpOptionEditMB extends AbstractEditPageBean<DhcpOption, String> {
 	@Inject
 	private DhcpOptionBC bc;
 
+	private String updateId;
+
 	@Override
 	public String insert() {
 		return null;
@@ -47,6 +49,14 @@ public class DhcpOptionEditMB extends AbstractEditPageBean<DhcpOption, String> {
 
 	public void editDhcpService() {
 		editBean(bc.getDhcpService());
+	}
+
+	public String getUpdateId() {
+		return updateId;
+	}
+
+	public void setUpdateId(String updateId) {
+		this.updateId = updateId;
 	}
 
 }

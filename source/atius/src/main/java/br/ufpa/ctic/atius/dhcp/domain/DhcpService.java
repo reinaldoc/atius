@@ -14,6 +14,9 @@ public class DhcpService extends DhcpOption {
 	private String[] dhcpStatements;
 
 	@Ignore
+	private boolean dhcpStatementsLoaded;
+
+	@Ignore
 	private Boolean dhcpStatementsAuthoritative;
 
 	@Ignore
@@ -27,10 +30,12 @@ public class DhcpService extends DhcpOption {
 
 	public DhcpService() {
 		super();
+		dhcpStatementsLoaded = false;
 	}
 
 	public DhcpService(boolean skipObjectClass) {
 		super(skipObjectClass);
+		dhcpStatementsLoaded = false;
 	}
 
 	protected String[] objectClass() {
@@ -38,7 +43,8 @@ public class DhcpService extends DhcpOption {
 	}
 
 	public void getStatements() {
-		if (dhcpStatements != null)
+		if (dhcpStatements != null && !dhcpStatementsLoaded) {
+			dhcpStatementsLoaded = true;
 			for (String statement : dhcpStatements)
 				if ("default-lease-time".equals(Strings.substringBefore(statement, " ")))
 					dhcpStatementsLeaseTime = Strings.substringAfter(statement, " ");
@@ -46,6 +52,7 @@ public class DhcpService extends DhcpOption {
 					dhcpStatementsMaxLeaseTime = Strings.substringAfter(statement, " ");
 				else if ("authoritative".equals(statement))
 					dhcpStatementsAuthoritative = true;
+		}
 	}
 
 	public void setStatements() {
@@ -95,10 +102,8 @@ public class DhcpService extends DhcpOption {
 	}
 
 	public String getDhcpStatementsLeaseTime() {
-		if (dhcpStatementsLeaseTime == null) {
-			dhcpStatementsLeaseTime = "-";
+		if (dhcpStatementsLeaseTime == null)
 			getStatements();
-		}
 		return dhcpStatementsLeaseTime;
 	}
 
@@ -107,10 +112,8 @@ public class DhcpService extends DhcpOption {
 	}
 
 	public String getDhcpStatementsMaxLeaseTime() {
-		if (dhcpStatementsMaxLeaseTime == null) {
-			dhcpStatementsMaxLeaseTime = "-";
+		if (dhcpStatementsMaxLeaseTime == null)
 			getStatements();
-		}
 		return dhcpStatementsMaxLeaseTime;
 	}
 

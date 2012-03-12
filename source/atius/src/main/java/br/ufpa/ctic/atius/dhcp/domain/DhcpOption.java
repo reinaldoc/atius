@@ -83,90 +83,78 @@ public class DhcpOption extends Entry {
 	}
 
 	public String getDhcpGateway() {
-		if (dhcpOptionGateway == null) {
-			dhcpOptionGateway = "-";
+		if (dhcpOptionGateway == null)
 			getDhcpOptions();
-		}
 		return dhcpOptionGateway;
 	}
 
 	public void setDhcpGateway(String dhcpOptionGateway) {
-		if ("-".equals(dhcpOptionGateway))
+		if (Strings.isBlank(dhcpOptionGateway))
 			this.dhcpOptionGateway = null;
 		else
 			this.dhcpOptionGateway = dhcpOptionGateway;
 	}
 
 	public String getDhcpOptionDNS() {
-		if (dhcpOptionDNS == null) {
-			dhcpOptionDNS = "-";
+		if (dhcpOptionDNS == null)
 			getDhcpOptions();
-		}
 		return dhcpOptionDNS;
 	}
 
 	public void setDhcpOptionDNS(String dhcpOptionDNS) {
-		if ("-".equals(dhcpOptionDNS))
+		if (Strings.isBlank(dhcpOptionDNS))
 			this.dhcpOptionDNS = null;
 		else
 			this.dhcpOptionDNS = dhcpOptionDNS;
 	}
 
 	public String getDhcpOptionNTP() {
-		if (dhcpOptionNTP == null) {
-			dhcpOptionNTP = "-";
+		if (dhcpOptionNTP == null)
 			getDhcpOptions();
-		}
 		return dhcpOptionNTP;
 	}
 
 	public void setDhcpOptionNTP(String dhcpOptionNTP) {
-		if ("-".equals(dhcpOptionNTP))
+		if (Strings.isBlank(dhcpOptionNTP))
 			this.dhcpOptionNTP = null;
 		else
 			this.dhcpOptionNTP = dhcpOptionNTP;
 	}
 
 	public String getDhcpOptionDomainPrefix() {
-		if (dhcpOptionDomainPrefix == null) {
-			dhcpOptionDomainPrefix = "-";
+		if (dhcpOptionDomainPrefix == null)
 			getDhcpOptions();
-		}
 		return dhcpOptionDomainPrefix;
 	}
 
 	public void setDhcpOptionDomainPrefix(String dhcpOptionDomainPrefix) {
-		if ("-".equals(dhcpOptionDomainPrefix))
+		if (Strings.isBlank(dhcpOptionDomainPrefix))
 			this.dhcpOptionDomainPrefix = null;
 		else
 			this.dhcpOptionDomainPrefix = dhcpOptionDomainPrefix;
 	}
 
 	public String getDhcpOptionSMB() {
-		if (dhcpOptionSMB == null) {
-			dhcpOptionSMB = "-";
+		if (dhcpOptionSMB == null)
 			getDhcpOptions();
-		}
 		return dhcpOptionSMB;
 	}
 
 	public void setDhcpOptionSMB(String dhcpOptionSMB) {
-		if ("-".equals(dhcpOptionSMB))
+		if (Strings.isBlank(dhcpOptionSMB))
 			this.dhcpOptionSMB = null;
 		else
 			this.dhcpOptionSMB = dhcpOptionSMB;
 	}
 
 	public String getDhcpOptionSMBtype() {
-		if (dhcpOptionSMBtype == null) {
-			dhcpOptionSMBtype = "-";
+		if (dhcpOptionSMBtype == null)
 			getDhcpOptions();
-		}
 		return dhcpOptionSMBtype;
 	}
 
 	public void setDhcpOptionSMBtype(String dhcpOptionSMBtype) {
-		if ("-".equals(dhcpOptionSMBtype))
+		if (Strings.isBlank(dhcpOptionSMBtype))
 			this.dhcpOptionSMBtype = null;
 		else
 			this.dhcpOptionSMBtype = dhcpOptionSMBtype;

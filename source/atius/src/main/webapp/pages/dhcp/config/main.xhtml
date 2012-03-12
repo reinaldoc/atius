@@ -67,14 +67,16 @@
 				<div class="asRow asRowEven">
 					<div class="asColumn asColumnLeft">Tempo de sessão (seg):</div>
 					<div class="asColumn">
-						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" />
+						<h:outputText
+							value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime != null ? dhcpServiceEditMB.bean.dhcpStatementsLeaseTime : '-' }" />
 					</div>
 				</div>
 
 				<div class="asRow asRowOdd">
 					<div class="asColumn asColumnLeft">Tempo máx. de sessão:</div>
 					<div class="asColumn">
-						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" />
+						<h:outputText
+							value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime != null ? dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime : '-' }" />
 					</div>
 				</div>
 
@@ -85,7 +87,8 @@
 				<h:form prependId="false">
 					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true" styleClass="transparent"
 						disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
-						action="#{dhcpOptionEditMB.editBean(dhcpSessionInfo.dhcpService)}"
+						action="#{dhcpOptionEditMB.setUpdateId('atius-dhcp-config-options-panel-id')}"
+						actionListener="#{dhcpOptionEditMB.editBean(dhcpSessionInfo.dhcpService)}"
 						update="atius-dhcp-option-edit-dlg-body-id, atius-dhcp-option-edit-dlg-buttons-id" oncomplete="atius_dhcp_option_edit_dlg.show()" />
 				</h:form>
 			</div>
@@ -102,28 +105,28 @@
 				<div class="asRow asRowEven">
 					<div class="asColumn asColumnLeft">DNS Server:</div>
 					<div class="asColumn">
-						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDNS}" />
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDNS != null ? dhcpServiceEditMB.bean.dhcpOptionDNS : '-' }" />
 					</div>
 				</div>
 
 				<div class="asRow asRowOdd">
 					<div class="asColumn asColumnLeft">NTP Server:</div>
 					<div class="asColumn">
-						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionNTP}" />
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionNTP != null ? dhcpServiceEditMB.bean.dhcpOptionNTP : '-' }" />
 					</div>
 				</div>
 
 				<div class="asRow asRowEven">
 					<div class="asColumn asColumnLeft">Netbios Server:</div>
 					<div class="asColumn">
-						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionSMB}" />
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionSMB != null ? dhcpServiceEditMB.bean.dhcpOptionSMB : '-' }" />
 					</div>
 				</div>
 
 				<div class="asRow asRowOdd">
 					<div class="asColumn asColumnLeft">Netbios Server Type:</div>
 					<div class="asColumn">
-						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionSMBtype}" />
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionSMBtype != null ? dhcpServiceEditMB.bean.dhcpOptionSMBtype : '-' }" />
 					</div>
 				</div>
 
