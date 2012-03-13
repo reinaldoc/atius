@@ -77,8 +77,11 @@ public class DhcpSubnet extends DhcpOption {
 	public void setDhcpRange() {
 		if (Strings.isNotBlank(dhcpRangeFirst) && Strings.isNotBlank(dhcpRangeLast))
 			dhcpRange = dhcpRangeFirst + " " + dhcpRangeLast;
-		else
+		else {
+			if (dhcpRange != null)
+				removeAttribute("dhcpRange");
 			dhcpRange = null;
+		}
 	}
 
 	public String getDhcpComments() {
