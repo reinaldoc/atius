@@ -17,7 +17,6 @@ public class DhcpSharedNetworkBC extends DelegateCrud<DhcpSharedNetwork, String,
 	private DhcpSessionInfo sessionInfo;
 
 	public void selectDhcpSharedNetwork(DhcpSharedNetwork dhcpSharedNetwork) {
-		selectMenu(dhcpSharedNetwork.getCn());
 		sessionInfo.selectDhcpSharedNetwork(dhcpSharedNetwork);
 	}
 
