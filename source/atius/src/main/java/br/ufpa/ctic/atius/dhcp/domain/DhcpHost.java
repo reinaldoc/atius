@@ -1,10 +1,9 @@
 package br.ufpa.ctic.atius.dhcp.domain;
 
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
-import br.gov.frameworkdemoiselle.ldap.template.Entry;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
-public class DhcpHost extends Entry {
+public class DhcpHost extends DhcpOption {
 
 	@Id
 	private String cn;

@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.contrib.DelegateCrud;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpOption;
-import br.ufpa.ctic.atius.dhcp.domain.DhcpService;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpServer;
 import br.ufpa.ctic.atius.dhcp.persistence.DhcpOptionDAO;
 import br.ufpa.ctic.atius.dhcp.view.app.DhcpSessionInfo;
 
@@ -17,8 +17,8 @@ public class DhcpOptionBC extends DelegateCrud<DhcpOption, String, DhcpOptionDAO
 	@Inject
 	private DhcpSessionInfo sessionInfo;
 
-	public DhcpService getDhcpService() {
-		return sessionInfo.getDhcpService();
+	public DhcpServer getDhcpServer() {
+		return sessionInfo.getDhcpServer();
 	}
 
 }

@@ -67,7 +67,7 @@ public class DhcpOption extends Entry {
 	}
 
 	public void setDhcpOptions() {
-		dhcpOption = null;
+		String[] dhcpOption = null;
 		if (Strings.isNotBlank(dhcpOptionGateway))
 			dhcpOption = (String[]) ArrayUtils.add(dhcpOption, "routers " + dhcpOptionGateway);
 		if (Strings.isNotBlank(dhcpOptionNTP))
@@ -80,6 +80,9 @@ public class DhcpOption extends Entry {
 			dhcpOption = (String[]) ArrayUtils.add(dhcpOption, "netbios-name-servers " + dhcpOptionSMB);
 		if (Strings.isNotBlank(dhcpOptionSMBtype))
 			dhcpOption = (String[]) ArrayUtils.add(dhcpOption, "netbios-node-type " + dhcpOptionSMBtype);
+		if (dhcpOption == null && this.dhcpOption != null)
+			removeAttribute("dhcpOption");
+		this.dhcpOption = dhcpOption;
 	}
 
 	public String getDhcpGateway() {

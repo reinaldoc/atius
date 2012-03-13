@@ -10,8 +10,8 @@
 
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-option-edit-dlg-body-id">
 
-					<h:outputText value="Servidor:" />
-					<h:outputText value="#{dhcpSessionInfo.dhcpServer.cn}" styleClass="asInput" />
+					<h:outputText value="#{dhcpOptionEditMB.objectType}:" />
+					<h:outputText value="#{dhcpOptionEditMB.objectName}" styleClass="asInput" />
 
 					<h:outputText value="DNS Prefix:" />
 					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionDomainPrefix}" autocomplete="off" onkeypress="return event.keyCode!=13" />

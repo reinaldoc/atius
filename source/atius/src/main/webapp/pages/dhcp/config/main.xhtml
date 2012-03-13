@@ -98,7 +98,7 @@
 				<div class="asRow asRowOdd">
 					<div class="asColumn asColumnLeft">DNS Prefix:</div>
 					<div class="asColumn">
-						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix}" />
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix != null ? dhcpServiceEditMB.bean.dhcpOptionDomainPrefix : '-' }" />
 					</div>
 				</div>
 
@@ -161,9 +161,14 @@
 
 				<p:column sortBy="#{atius_dhcp_config_network_row.cn}">
 
-					<h:panelGroup layout="block" style="width: 330px; overflow: hidden; white-space: pre; float: left">
+					<h:panelGroup layout="block" style="width: 310px; overflow: hidden; white-space: pre; float: left">
 						<h:outputText value="#{atius_dhcp_config_network_row.cn}" />
 					</h:panelGroup>
+
+					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true"
+						action="#{dhcpOptionEditMB.setUpdateId('atius-dhcp-config-network-panel-id')}"
+						actionListener="#{dhcpOptionEditMB.editBean(atius_dhcp_config_network_row)}"
+						update="atius-dhcp-option-edit-dlg-body-id, atius-dhcp-option-edit-dlg-buttons-id" oncomplete="atius_dhcp_option_edit_dlg.show()" />
 
 					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" immediate="true" title="Remover Rede"
 						update="atius-dhcp-config-network-delete-dlg-id" action="#{dhcpSharedNetworkEditMB.editBean(atius_dhcp_config_network_row)}"

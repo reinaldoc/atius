@@ -7,7 +7,11 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.ufpa.ctic.atius.dhcp.business.DhcpOptionBC;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpHost;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpOption;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpService;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpSharedNetwork;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpSubnet;
 
 @ViewController
 public class DhcpOptionEditMB extends AbstractEditPageBean<DhcpOption, String> {
@@ -47,16 +51,32 @@ public class DhcpOptionEditMB extends AbstractEditPageBean<DhcpOption, String> {
 		return new DhcpOption();
 	}
 
-	public void editDhcpService() {
-		editBean(bc.getDhcpService());
-	}
-
 	public String getUpdateId() {
 		return updateId;
 	}
 
 	public void setUpdateId(String updateId) {
 		this.updateId = updateId;
+	}
+
+	public String getObjectType() {
+		if (getBean() instanceof DhcpService)
+			return "Servidor";
+		if (getBean() instanceof DhcpSharedNetwork)
+			return "Rede";
+		if (getBean() instanceof DhcpSubnet)
+			return "Subrede";
+		return "Hostname";
+	}
+
+	public String getObjectName() {
+		if (getBean() instanceof DhcpService)
+			return bc.getDhcpServer().getCn();
+		if (getBean() instanceof DhcpSharedNetwork)
+			return ((DhcpSharedNetwork) getBean()).getCn();
+		if (getBean() instanceof DhcpSubnet)
+			return ((DhcpSubnet) getBean()).getCn();
+		return ((DhcpHost) getBean()).getCn();
 	}
 
 }
