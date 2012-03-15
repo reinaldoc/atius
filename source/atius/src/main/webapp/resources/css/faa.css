@@ -2,11 +2,32 @@
 /*
 	FAA - Fuselage Authorization and Authentication
 */
+@font-face {
+	font-family: DroidSans;
+	src: url("/atius/javax.faces.resource/DroidSans.eot.jsf?ln=css");
+}
+
+@font-face {
+	font-family: DroidSans;
+	src: url("/atius/javax.faces.resource/DroidSans-Bold.eot.jsf?ln=css");
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: DroidSans;
+	src: url("/atius/javax.faces.resource/DroidSans.ttf.jsf?ln=css");
+}
+
+@font-face {
+	font-family: DroidSans;
+	src: url("/atius/javax.faces.resource/DroidSans-Bold.ttf.jsf?ln=css");
+	font-weight: bold;
+}
 
 /*	Layout	*/
 html {
-	font: small-caption;
-	font-size: 12px;
+	font-family: DroidSans;
+	font-size: 12.5px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
@@ -25,7 +46,6 @@ body {
 #faa-top-id a {
 	color: #4F4F4F;
 	text-decoration: none;
-	font-weight: bold;
 	display: inline-block;
 	line-height: 25px;
 	padding-left: 10px;

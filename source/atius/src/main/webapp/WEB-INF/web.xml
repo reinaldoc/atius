@@ -55,5 +55,11 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+	
+	<!--  mime type -->
+	<mime-mapping>
+		<extension>ttf</extension>
+		<mime-type>application/x-font-ttf</mime-type>
+	</mime-mapping>
 
 </web-app>
