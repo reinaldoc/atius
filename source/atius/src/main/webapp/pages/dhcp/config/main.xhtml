@@ -30,8 +30,8 @@
 							style="#{atius_dhcp_config_server_row.cn.equals(dhcpSessionInfo.dhcpServer.cn) ? 'font-weight: bold' : '' }" />
 					</h:panelGroup>
 
-					<p:commandButton icon="ui-icon-check" style="float: right;" title="Selecionar servidor"
-						actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_config_server_row)}"
+					<p:commandButton icon="#{dhcpSessionInfo.dhcpServer == atius_dhcp_config_server_row ? 'ui-icon-circle-check' : 'ui-icon-radio-on'}"
+						style="float: right;" title="Selecionar servidor" actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_config_server_row)}"
 						action="#{dhcpSharedNetworkListMB.clearResultList}" immediate="true" update="faa-body-id, faa-header-right-id" />
 
 					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" styleClass="margin" immediate="true"
