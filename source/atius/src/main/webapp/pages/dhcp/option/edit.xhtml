@@ -16,17 +16,23 @@
 					<h:outputText value="DNS Prefix:" />
 					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionDomainPrefix}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="DNS Server:" />
+					<h:outputText value="Servidor DNS:" />
 					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionDNS}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="NTP Server:" />
+					<h:outputText value="Servidor NTP:" />
 					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionNTP}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="Netbios Server:" />
+					<h:outputText value="Servidor Netbios:" />
 					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionSMB}" autocomplete="off" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="Netbios Server Type:" />
-					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionSMBtype}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Consulta Netbios:" />
+					<p:selectOneMenu value="#{dhcpOptionEditMB.bean.dhcpOptionSMBtype}" effect="fade" styleClass="dialog-selectonemenu">
+						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
+						<f:selectItem itemLabel="Broadcast (no WINS)" itemValue="1" />
+						<f:selectItem itemLabel="Peer (WINS only)" itemValue="2" />
+						<f:selectItem itemLabel="Mixed (Broadcast, then WINS)" itemValue="4" />
+						<f:selectItem itemLabel="Hybrid (WINS, then broadcast)" itemValue="8" />
+					</p:selectOneMenu>
 
 				</h:panelGrid>
 
