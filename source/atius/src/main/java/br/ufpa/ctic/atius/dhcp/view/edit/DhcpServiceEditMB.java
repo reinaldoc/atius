@@ -8,6 +8,7 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.ufpa.ctic.atius.dhcp.business.DhcpServiceBC;
+import br.ufpa.ctic.atius.dhcp.domain.DhcpServer;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpService;
 import br.ufpa.ctic.atius.dhcp.view.list.DhcpServerListMB;
 
@@ -23,20 +24,21 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 	public void init() {
 		editBean(bc.getDhcpService());
 		getBean().setDhcpServerName(bc.getDhcpServer().getCn());
-		getBean().getDhcpOptions();
-		getBean().getStatements();
+		getBean().load();
 	}
 
 	@Override
 	public String insert() {
 		try {
-			String dhcpServerDN = bc.insertDhcpServer(getBean().getDhcpServerName());
-			getBean().setParentDN(dhcpServerDN);
+			DhcpServer dhcpServer = bc.insertDhcpServer(getBean().getDhcpServerName());
+			getBean().setParentDN(dhcpServer.getDn());
 			getBean().setCn("dhcpService");
-			getBean().setStatements();
+			getBean().set();
 			bc.insert(getBean());
 			Faces.addI18nMessage("atius.dhcp.service.insert.success", getBean().getCn());
-			Faces.getManagedProperty("#{dhcpServerListMB}", DhcpServerListMB.class).clearResultList();
+			DhcpServerListMB dhcpServerListMB = Faces.getManagedProperty("#{dhcpServerListMB}", DhcpServerListMB.class);
+			dhcpServerListMB.clearResultList();
+			dhcpServerListMB.selectDhcpServer(dhcpServer);
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.service.insert.failed", SeverityType.ERROR);
@@ -47,7 +49,7 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 	@Override
 	public String update() {
 		try {
-			getBean().setStatements();
+			getBean().set();
 			bc.update(getBean());
 			Faces.addI18nMessage("atius.dhcp.service.update.success", getBean().getCn());
 			init();

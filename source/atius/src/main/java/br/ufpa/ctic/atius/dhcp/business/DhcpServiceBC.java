@@ -40,13 +40,13 @@ public class DhcpServiceBC extends DelegateCrud<DhcpService, String, DhcpService
 		return sessionInfo.getDhcpServer();
 	}
 
-	public String insertDhcpServer(String serverName) {
+	public DhcpServer insertDhcpServer(String serverName) {
 		DhcpServer dhcpServer = new DhcpServer();
-		dhcpServer.setParentDN(dhcpServerBC.getDhcpContainerDN());
+		dhcpServer.setDn("cn=" + serverName + "," + dhcpServerBC.getDhcpContainerDN());
 		dhcpServer.setCn(serverName);
-		dhcpServer.setDhcpServiceDN("cn=dhcpService,cn=" + serverName + "," + dhcpServerBC.getDhcpContainerDN());
+		dhcpServer.setDhcpServiceDN("cn=dhcpService," + dhcpServer.getDn());
 		dhcpServerBC.insert(dhcpServer);
-		return "cn=" + serverName + "," + dhcpServerBC.getDhcpContainerDN();
+		return dhcpServer;
 	}
 
 }

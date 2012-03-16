@@ -31,7 +31,7 @@ public class DhcpOptionEditMB extends AbstractEditPageBean<DhcpOption, String> {
 	@Override
 	public String update() {
 		try {
-			getBean().setDhcpOptions();
+			getBean().set();
 			bc.update(getBean());
 			Faces.addI18nMessage("atius.dhcp.option.update.success");
 		} catch (RuntimeException e) {

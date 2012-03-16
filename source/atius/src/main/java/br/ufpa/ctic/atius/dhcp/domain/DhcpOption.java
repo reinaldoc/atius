@@ -8,10 +8,21 @@ import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
 public class DhcpOption extends Entry {
 
+	private String[] dhcpStatements;
+
+	@Ignore
+	private Boolean dhcpStatementsAuthoritative;
+
+	@Ignore
+	private String dhcpStatementsLeaseTime;
+
+	@Ignore
+	private String dhcpStatementsMaxLeaseTime;
+
 	private String[] dhcpOption;
 
 	@Ignore
-	private boolean dhcpOptionLoaded;
+	private boolean dhcpLoaded;
 
 	@Ignore
 	private String dhcpOptionGateway;
@@ -33,12 +44,12 @@ public class DhcpOption extends Entry {
 
 	public DhcpOption() {
 		super();
-		dhcpOptionLoaded = false;
+		dhcpLoaded = false;
 	}
 
 	public DhcpOption(boolean skipObjectClass) {
 		super(skipObjectClass);
-		dhcpOptionLoaded = false;
+		dhcpLoaded = false;
 	}
 
 	@Override
@@ -46,27 +57,50 @@ public class DhcpOption extends Entry {
 		return null;
 	}
 
-	public void getDhcpOptions() {
-		if (dhcpOption != null && !dhcpOptionLoaded) {
-			dhcpOptionLoaded = true;
-			for (String option : dhcpOption) {
-				if ("routers".equals(Strings.substringBefore(option, " ")))
-					dhcpOptionGateway = Strings.substringAfter(option, " ");
-				else if ("ntp-servers".equals(Strings.substringBefore(option, " ")))
-					dhcpOptionNTP = Strings.substringAfter(option, " ");
-				else if ("domain-name-servers".equals(Strings.substringBefore(option, " ")))
-					dhcpOptionDNS = Strings.substringAfter(option, " ");
-				else if ("domain-name".equals(Strings.substringBefore(option, " ")))
-					dhcpOptionDomainPrefix = Strings.substringBetween(option, "\"");
-				else if ("netbios-name-servers".equals(Strings.substringBefore(option, " ")))
-					dhcpOptionSMB = Strings.substringAfter(option, " ");
-				else if ("netbios-node-type".equals(Strings.substringBefore(option, " ")))
-					dhcpOptionSMBtype = Strings.substringAfter(option, " ");
-			}
+	/**
+	 * Populate dhcpOptionGateway, dhcpOptionNTP, dhcpOptionDNS,
+	 * dhcpOptionDomainPrefix, dhcpOptionSMB from dhcpOption attribute;
+	 * 
+	 * Populate dhcpStatementsAuthoritative, dhcpStatementsLeaseTime,
+	 * dhcpStatementsMaxLeaseTime from dhcpStatements attribute;
+	 */
+	public void load() {
+		if (!dhcpLoaded) {
+			dhcpLoaded = true;
+			if (dhcpOption != null)
+				for (String option : dhcpOption)
+					if ("routers".equals(Strings.substringBefore(option, " ")))
+						dhcpOptionGateway = Strings.substringAfter(option, " ");
+					else if ("ntp-servers".equals(Strings.substringBefore(option, " ")))
+						dhcpOptionNTP = Strings.substringAfter(option, " ");
+					else if ("domain-name-servers".equals(Strings.substringBefore(option, " ")))
+						dhcpOptionDNS = Strings.substringAfter(option, " ");
+					else if ("domain-name".equals(Strings.substringBefore(option, " ")))
+						dhcpOptionDomainPrefix = Strings.substringBetween(option, "\"");
+					else if ("netbios-name-servers".equals(Strings.substringBefore(option, " ")))
+						dhcpOptionSMB = Strings.substringAfter(option, " ");
+					else if ("netbios-node-type".equals(Strings.substringBefore(option, " ")))
+						dhcpOptionSMBtype = Strings.substringAfter(option, " ");
+			if (dhcpStatements != null)
+				for (String statement : dhcpStatements)
+					if ("default-lease-time".equals(Strings.substringBefore(statement, " ")))
+						dhcpStatementsLeaseTime = Strings.substringAfter(statement, " ");
+					else if ("max-lease-time".equals(Strings.substringBefore(statement, " ")))
+						dhcpStatementsMaxLeaseTime = Strings.substringAfter(statement, " ");
+					else if ("authoritative".equals(statement))
+						dhcpStatementsAuthoritative = true;
 		}
+
 	}
 
-	public void setDhcpOptions() {
+	/**
+	 * Set dhcpOption attribute from dhcpOptionGateway, dhcpOptionNTP,
+	 * dhcpOptionDNS, dhcpOptionDomainPrefix, dhcpOptionSMB;
+	 * 
+	 * Set dhcpStatements attribute from dhcpStatementsAuthoritative,
+	 * dhcpStatementsLeaseTime, dhcpStatementsMaxLeaseTime from dhcpStatements;
+	 */
+	public void set() {
 		String[] dhcpOption = null;
 		if (Strings.isNotBlank(dhcpOptionGateway))
 			dhcpOption = (String[]) ArrayUtils.add(dhcpOption, "routers " + dhcpOptionGateway);
@@ -83,11 +117,25 @@ public class DhcpOption extends Entry {
 		if (dhcpOption == null && this.dhcpOption != null)
 			removeAttribute("dhcpOption");
 		this.dhcpOption = dhcpOption;
+
+		String[] dhcpStatements = null;
+		if (dhcpStatementsAuthoritative) {
+			dhcpStatements = (String[]) ArrayUtils.add(dhcpStatements, "authoritative");
+			dhcpStatements = (String[]) ArrayUtils.add(dhcpStatements, "ddns-update-style none");
+		}
+		if (Strings.isNotBlank(dhcpStatementsLeaseTime))
+			dhcpStatements = (String[]) ArrayUtils.add(dhcpStatements, "default-lease-time " + dhcpStatementsLeaseTime);
+		if (Strings.isNotBlank(dhcpStatementsMaxLeaseTime))
+			dhcpStatements = (String[]) ArrayUtils.add(dhcpStatements, "max-lease-time " + dhcpStatementsMaxLeaseTime);
+		if (dhcpStatements == null && this.dhcpStatements != null)
+			removeAttribute("dhcpStatements");
+		this.dhcpStatements = dhcpStatements;
+
 	}
 
 	public String getDhcpGateway() {
 		if (dhcpOptionGateway == null)
-			getDhcpOptions();
+			load();
 		return dhcpOptionGateway;
 	}
 
@@ -100,7 +148,7 @@ public class DhcpOption extends Entry {
 
 	public String getDhcpOptionDNS() {
 		if (dhcpOptionDNS == null)
-			getDhcpOptions();
+			load();
 		return dhcpOptionDNS;
 	}
 
@@ -113,7 +161,7 @@ public class DhcpOption extends Entry {
 
 	public String getDhcpOptionNTP() {
 		if (dhcpOptionNTP == null)
-			getDhcpOptions();
+			load();
 		return dhcpOptionNTP;
 	}
 
@@ -126,7 +174,7 @@ public class DhcpOption extends Entry {
 
 	public String getDhcpOptionDomainPrefix() {
 		if (dhcpOptionDomainPrefix == null)
-			getDhcpOptions();
+			load();
 		return dhcpOptionDomainPrefix;
 	}
 
@@ -139,7 +187,7 @@ public class DhcpOption extends Entry {
 
 	public String getDhcpOptionSMB() {
 		if (dhcpOptionSMB == null)
-			getDhcpOptions();
+			load();
 		return dhcpOptionSMB;
 	}
 
@@ -152,7 +200,7 @@ public class DhcpOption extends Entry {
 
 	public String getDhcpOptionSMBtype() {
 		if (dhcpOptionSMBtype == null)
-			getDhcpOptions();
+			load();
 		return dhcpOptionSMBtype;
 	}
 
@@ -161,6 +209,44 @@ public class DhcpOption extends Entry {
 			this.dhcpOptionSMBtype = null;
 		else
 			this.dhcpOptionSMBtype = dhcpOptionSMBtype;
+	}
+
+	public boolean isDhcpStatementsAuthoritative() {
+		if (dhcpStatementsAuthoritative == null) {
+			dhcpStatementsAuthoritative = false;
+			load();
+		}
+		return dhcpStatementsAuthoritative;
+	}
+
+	public void setDhcpStatementsAuthoritative(boolean dhcpStatementsAuthoritative) {
+		this.dhcpStatementsAuthoritative = dhcpStatementsAuthoritative;
+	}
+
+	public String getDhcpStatementsLeaseTime() {
+		if (dhcpStatementsLeaseTime == null)
+			load();
+		return dhcpStatementsLeaseTime;
+	}
+
+	public void setDhcpStatementsLeaseTime(String dhcpStatementsLeaseTime) {
+		if (Strings.isBlank(dhcpStatementsLeaseTime))
+			this.dhcpStatementsLeaseTime = null;
+		else
+			this.dhcpStatementsLeaseTime = dhcpStatementsLeaseTime;
+	}
+
+	public String getDhcpStatementsMaxLeaseTime() {
+		if (dhcpStatementsMaxLeaseTime == null)
+			load();
+		return dhcpStatementsMaxLeaseTime;
+	}
+
+	public void setDhcpStatementsMaxLeaseTime(String dhcpStatementsMaxLeaseTime) {
+		if (Strings.isBlank(dhcpStatementsMaxLeaseTime))
+			this.dhcpStatementsMaxLeaseTime = null;
+		else
+			this.dhcpStatementsMaxLeaseTime = dhcpStatementsMaxLeaseTime;
 	}
 
 }

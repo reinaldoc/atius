@@ -28,7 +28,7 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 		if (validate()) {
 			try {
 				getBean().setParentDN(bc.getDhcpSharedNetworkDN());
-				getBean().setDhcpOptions();
+				getBean().set();
 				bc.insert(getBean());
 				Faces.addI18nMessage("atius.dhcp.subnet.insert.success", getBean().getCn());
 			} catch (RuntimeException e) {
@@ -43,7 +43,7 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 	public String update() {
 		if (validate()) {
 			try {
-				getBean().setDhcpOptions();
+				getBean().set();
 				bc.update(getBean());
 				Faces.addI18nMessage("atius.dhcp.subnet.update.success", getBean().getCn());
 			} catch (RuntimeException e) {
