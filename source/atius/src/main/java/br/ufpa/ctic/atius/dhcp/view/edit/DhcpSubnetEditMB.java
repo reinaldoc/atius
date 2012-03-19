@@ -55,7 +55,9 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 	}
 
 	private boolean validate() {
+		boolean validate = true;
 		SubnetUtils subnet;
+
 		try {
 			subnet = new SubnetUtils(getBean().getCn() + "/" + getBean().getDhcpNetMask());
 		} catch (RuntimeException e) {
@@ -71,7 +73,7 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 			} catch (RuntimeException e) {
 				Faces.validationFailed();
 				Faces.addI18nMessage("atius.dhcp.validation.gateway.failed", SeverityType.ERROR);
-				return false;
+				validate = false;
 			}
 
 		getBean().setDhcpRange();
@@ -82,10 +84,10 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 			} catch (RuntimeException e) {
 				Faces.validationFailed();
 				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/" + getBean().getDhcpNetMask());
-				return false;
+				validate = false;
 			}
 		}
-		return true;
+		return validate;
 	}
 
 	@Override
