@@ -2,10 +2,13 @@ package br.ufpa.ctic.atius.dhcp.view.edit;
 
 import javax.inject.Inject;
 
+import org.apache.commons.net.util.SubnetUtils;
+
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
+import br.gov.frameworkdemoiselle.util.contrib.Strings;
 import br.ufpa.ctic.atius.dhcp.business.DhcpOptionBC;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpHost;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpOption;
@@ -30,15 +33,51 @@ public class DhcpOptionEditMB extends AbstractEditPageBean<DhcpOption, String> {
 
 	@Override
 	public String update() {
-		try {
-			getBean().set();
-			bc.update(getBean());
-			Faces.addI18nMessage("atius.dhcp.option.update.success");
-		} catch (RuntimeException e) {
-			Faces.validationFailed();
-			Faces.addI18nMessage("atius.dhcp.option.update.failed", SeverityType.ERROR);
+		if (validate()) {
+			try {
+				getBean().set();
+				bc.update(getBean());
+				Faces.addI18nMessage("atius.dhcp.option.update.success");
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.option.update.failed", SeverityType.ERROR);
+			}
 		}
 		return null;
+	}
+
+	private boolean validate() {
+		boolean validate = true;
+
+		if (Strings.isNotBlank(getBean().getDhcpOptionDNS()))
+			try {
+				new SubnetUtils(getBean().getDhcpOptionDNS() + "/32");
+			} catch (RuntimeException e) {
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.validation.dnsserver.failed", SeverityType.ERROR);
+				validate = false;
+			}
+
+		if (Strings.isNotBlank(getBean().getDhcpOptionNTP()))
+			try {
+				new SubnetUtils(getBean().getDhcpOptionNTP() + "/32");
+			} catch (RuntimeException e) {
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.validation.ntpserver.failed", SeverityType.ERROR);
+				validate = false;
+			}
+
+		if (Strings.isNotBlank(getBean().getDhcpOptionSMB()))
+			try {
+				new SubnetUtils(getBean().getDhcpOptionSMB() + "/32");
+			} catch (RuntimeException e) {
+				Faces.validationFailed();
+				Faces.addI18nMessage("atius.dhcp.validation.smbserver.failed", SeverityType.ERROR);
+				validate = false;
+			}
+
+		return validate;
 	}
 
 	@Override

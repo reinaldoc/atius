@@ -19,12 +19,6 @@
 				value="#{dhcpSubnetListMB.resultList}" var="dhcpSubnet" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
 				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 
-				<p:column headerText="Nome" sortBy="#{dhcpSubnet.dhcpComments}">
-					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<h:outputText value="#{dhcpSubnet.dhcpComments}" />
-					</h:panelGroup>
-				</p:column>
-
 				<p:column headerText="Subrede" sortBy="#{dhcpSubnet.cn}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 						<h:outputText value="#{dhcpSubnet.cn}/#{dhcpSubnet.dhcpNetMask}" />
@@ -40,6 +34,12 @@
 				<p:column headerText="Gateway" sortBy="#{dhcpSubnet.dhcpGateway}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 						<h:outputText value="#{dhcpSubnet.dhcpGateway}" />
+					</h:panelGroup>
+				</p:column>
+
+				<p:column headerText="Comentários" sortBy="#{dhcpSubnet.dhcpComments}">
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+						<h:outputText value="#{dhcpSubnet.dhcpComments}" />
 					</h:panelGroup>
 				</p:column>
 
