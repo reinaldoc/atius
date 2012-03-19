@@ -37,20 +37,18 @@
 		<ui:insert name="faa-header-ui">
 
 			<!-- Begin @Header  -->
-			<h:panelGrid columns="2" style="margin-bottom: 5px;">
+			<h:panelGroup layout="block" style="display: block;">
 
-				<h:panelGroup id="faa-header-left-id" layout="block" style="display: block;">
+				<h:panelGroup id="faa-header-left-id" layout="block" style="display: inline-block;">
 
 					<ui:insert name="faa-header-left-ui">
 
 						<!-- Begin @HeaderLeft  -->
 						<h:form prependId="false">
 
-							<p:commandLink actionListener="#{menuContext.select('TopMenu', 'Sites')}" ajax="false" immediate="true" action="/index.jsf">
-
-								<h:graphicImage library="images" name="logo.png" width="165px" height="44px" alt="#{messages['main.app.title']}"
-									style="border: 0px; margin-left: 0px; margin-top: 5px; margin-right: 8px;" />
-
+							<p:commandLink actionListener="#{menuContext.select('TopMenu', 'Sites')}" ajax="false" immediate="true" action="/index.jsf"
+								styleClass="logo">
+								<h:outputText value="Atius" styleClass="logo" />
 							</p:commandLink>
 
 						</h:form>
@@ -60,7 +58,7 @@
 
 				</h:panelGroup>
 
-				<h:panelGroup id="faa-header-right-id" layout="block" style="display: block;">
+				<h:panelGroup id="faa-header-right-id" layout="block" style="display: inline-block;">
 
 					<ui:insert name="faa-header-right-ui">
 						<!-- @HeaderRight  -->
@@ -68,7 +66,7 @@
 
 				</h:panelGroup>
 
-			</h:panelGrid>
+			</h:panelGroup>
 			<!-- End @Header  -->
 
 		</ui:insert>

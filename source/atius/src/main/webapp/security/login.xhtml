@@ -7,6 +7,32 @@
 	<title><ui:insert name="title">Autenticação</ui:insert></title>
 
 	<style type="text/css">
+@font-face {
+	font-family: ChanceryMediumItalic;
+	src:
+		url("/atius/javax.faces.resource/urw-chancery-l-medium-italic.eot.jsf?ln=css");
+}
+
+@font-face {
+	font-family: ChanceryMediumItalic;
+	src:
+		url("/atius/javax.faces.resource/urw-chancery-l-medium-italic.ttf.jsf?ln=css");
+}
+
+span.logo {
+	color: #374140;
+	font-family: ChanceryMediumItalic;
+	font-size: 64px;
+	text-decoration: none;
+	text-shadow: 2px 2px 2px #888888;
+}
+
+.logo {
+	text-decoration: none;
+	text-align: center;
+	width: 100%;
+}
+
 .loginTable {
 	border: 6px solid #C6C8CD;
 	margin-left: auto;
@@ -124,7 +150,10 @@ function getEngine() {
 <h:body styleClass="loginBody" onload="setLoginFocus('faa-input-username', 'faa-input-password');">
 	<h:form prependId="false" onsubmit="if (!requireIE8()) return false;">
 		<h:panelGrid columns="1" styleClass="loginTable" rowClasses="loginRowCenter,loginRowPadding,,loginRowPadding,,,">
-			<h:graphicImage library="images" name="logo.png" styleClass="loginLogo" alt="ATIUS" />
+			<h:panelGroup layout="block" styleClass="logo">
+				<h:outputText value="Atius" styleClass="logo" />
+			</h:panelGroup>
+
 			<h:outputText styleClass="loginText" value="Usuário:" />
 			<h:inputText styleClass="loginInput" value="#{credential.username}" id="faa-input-username" autocomplete="off" />
 			<h:outputText styleClass="loginText" value="Senha:" />
