@@ -50,6 +50,7 @@
 
 		<!-- Barra de Sucesso -->
 		<h:panelGroup id="success-bar" style="display: none; line-height: 20px;">
+			<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-circle-check" style="float: left; margin-top: 2px;" />
 			<h:outputText value="Dados cadastrados com sucesso!" styleClass="dialog-message-success" />
 			<!-- Fechar -->
 			<p:commandLink value="Fechar" immediate="true" ajax="#{cc.attrs.closeAjax}" styleClass="dialog-close-link"

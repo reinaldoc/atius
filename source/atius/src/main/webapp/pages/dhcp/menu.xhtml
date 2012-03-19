@@ -9,7 +9,7 @@
 
 				<p:column>
 
-					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 180px;">
+					<h:panelGroup layout="block" style="white-space: pre;">
 
 						<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update="faa-body-id, faa-header-right-id"
 							action="#{dhcpSharedNetworkListMB.selectDhcpSharedNetwork(dhcpSharedNetwork)}" actionListener="#{dhcpSubnetListMB.clearResultList}"
@@ -25,7 +25,7 @@
 
 			<p:commandLink value="Configuração" immediate="true" update="faa-body-id, faa-header-right-id"
 				actionListener="#{menuContext.select('DhcpSharedNetwork', 'Configuração')}"
-				styleClass="#{menuContext.menu['DhcpSharedNetwork']['Configuração']['Style']}" />
+				styleClass="#{menuContext.menu['DhcpSharedNetwork']['Configuração']['Style']}" style="margin-bottom: 15px;" />
 
 		</h:panelGroup>
 
