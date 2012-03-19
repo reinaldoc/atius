@@ -119,7 +119,7 @@ public class DhcpOption extends Entry {
 		this.dhcpOption = dhcpOption;
 
 		String[] dhcpStatements = null;
-		if (dhcpStatementsAuthoritative) {
+		if (dhcpStatementsAuthoritative != null && dhcpStatementsAuthoritative) {
 			dhcpStatements = (String[]) ArrayUtils.add(dhcpStatements, "authoritative");
 			dhcpStatements = (String[]) ArrayUtils.add(dhcpStatements, "ddns-update-style none");
 		}
