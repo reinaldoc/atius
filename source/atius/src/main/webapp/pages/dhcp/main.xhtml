@@ -8,17 +8,22 @@
 		<!-- End @BodyLeft  -->
 
 	</h:panelGroup>
-	
+
 	<h:panelGroup id="faa-body-right-id" layout="block" style="display: block;">
 
 		<!-- Begin @BodyRight  -->
 		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+
 			<ui:include src="config/main.xhtml" />
+
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+
 			<ui:include src="subnet/list.xhtml" />
+
 			<ui:include src="host/list.xhtml" />
+
 		</h:panelGroup>
 		<!-- Begin @BodyRight  -->
 

@@ -92,6 +92,7 @@ body {
 #faa-body-left-id a {
 	color: black;
 	text-decoration: none;
+	text-shadow: 1px 1px 9px #D6D6D6;
 	display: block;
 	padding-top: 4px;
 	padding-left: 15px;
@@ -142,10 +143,11 @@ span.logo {
 
 .logo {
 	margin-left: 10px;
-	margin-right: 12px;
+	margin-right: 18px;
 	display: inline-block;
 	text-decoration: none;
 	width: 151px;
+	height: 60px;
 }
 
 fieldset {
@@ -160,7 +162,8 @@ fieldset {
 input[type=text].filter {
 	width: 270px !important;
 	font-weight: bold;
-	border: 2px solid gray;
+	border: 1px solid gray;
+	border-radius: 3px 3px 3px 3px;
 	height: 22px;
 	margin-right: 3px;
 }
@@ -409,7 +412,8 @@ tbody tr td.faa-label-profileByRule .ui-dt-c {
 
 div.panel {
 	font-family: PalladioBold;
-	font-size: 18px;
+	font-size: 14px;
+	letter-spacing: 1px;
 	background-color: #374140;
 	color: #E0E0E0;
 	box-shadow: 4px 4px 8px #888888;
@@ -434,7 +438,7 @@ div.panel button.transparent {
 
 div.panel button.ui-button:hover {
 	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5),
-		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #5CC6C6 !important;
+		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #888888 !important;
 }
 
 div.panel form {
