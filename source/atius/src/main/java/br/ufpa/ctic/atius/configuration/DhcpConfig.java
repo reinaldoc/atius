@@ -17,8 +17,4 @@ public class DhcpConfig implements Serializable {
 		return dhcpContainerDN;
 	}
 
-	public void setDhcpContainerDN(String dhcpContainerDN) {
-		this.dhcpContainerDN = dhcpContainerDN;
-	}
-
 }
