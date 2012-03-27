@@ -6,18 +6,20 @@
 		<h:form prependId="false">
 			<!-- MENU LADO ESQUERDO -->
 			<p:commandLink value="E-mail" actionListener="#{menuContext.select('MenuTop', 'Email')}"
-				styleClass="#{menuContext.menu['MenuTop']['Email']['Style']}" ajax="false" immediate="true" />
+				styleClass="#{menuContext.menu['MenuTop']['Email']['Style']}" ajax="false" immediate="true"
+				rendered="#{securityContext.hasRole('ROLE-EMAIL-MODULE')}" />
 
-			<h:outputText value="|" styleClass="separator" />
+			<h:outputText value="|" styleClass="separator" rendered="#{securityContext.hasRole('ROLE-EMAIL-MODULE')}" />
 
 			<p:commandLink value="Sites" actionListener="#{menuContext.select('MenuTop', 'Sites')}"
-				styleClass="#{menuContext.menu['MenuTop']['Sites']['Style']}" ajax="false" immediate="true" />
+				styleClass="#{menuContext.menu['MenuTop']['Sites']['Style']}" ajax="false" immediate="true"
+				rendered="#{securityContext.hasRole('ROLE-SITES-MODULE')}" />
 
-			<h:outputText value="|" styleClass="separator" />
+			<h:outputText value="|" styleClass="separator" rendered="#{securityContext.hasRole('ROLE-SITES-MODULE')}" />
 
 			<p:commandLink value="DHCP" actionListener="#{menuContext.select('MenuTop', 'DHCP')}"
-			action="#{dhcpSharedNetworkListMB.init}"
-				styleClass="#{menuContext.menu['MenuTop']['DHCP']['Style']}" ajax="false" immediate="true" />
+				styleClass="#{menuContext.menu['MenuTop']['DHCP']['Style']}" ajax="false" immediate="true"
+				rendered="#{securityContext.hasRole('ROLE-DHCP-MODULE')}" />
 
 			<!-- MENU LADO DIREITO -->
 			<p:commandLink value="Sair" style="float: right; margin-right: 20px;" ajax="false" immediate="true" action="#{authMB.logout}" />
@@ -27,10 +29,12 @@
 			<p:commandLink value="#{proxyMB.userNameProperCase}" style="float: right" actionListener="#{menuContext.select('MenuTop', 'Usuário')}"
 				styleClass="#{menuContext.menu['MenuTop']['Usuário']['Style']}" ajax="false" immediate="true" />
 
-			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;" />
+			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;"
+				rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
 
 			<p:commandLink value="Segurança" style="float: right" actionListener="#{menuContext.select('MenuTop', 'Segurança')}"
-				styleClass="#{menuContext.menu['MenuTop']['Segurança']['Style']}" ajax="false" immediate="true" />
+				styleClass="#{menuContext.menu['MenuTop']['Segurança']['Style']}" ajax="false" immediate="true"
+				rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
 
 		</h:form>
 
