@@ -9,13 +9,15 @@
 				styleClass="#{menuContext.menu['MenuTop']['Email']['Style']}" ajax="false" immediate="true"
 				rendered="#{securityContext.hasRole('ROLE-EMAIL-MODULE')}" />
 
-			<h:outputText value="|" styleClass="separator" rendered="#{securityContext.hasRole('ROLE-EMAIL-MODULE')}" />
+			<h:outputText value="|" styleClass="separator"
+				rendered="#{securityContext.hasRole('ROLE-EMAIL-MODULE') and securityContext.hasRole('ROLE-SITES-MODULE')}" />
 
 			<p:commandLink value="Sites" actionListener="#{menuContext.select('MenuTop', 'Sites')}"
 				styleClass="#{menuContext.menu['MenuTop']['Sites']['Style']}" ajax="false" immediate="true"
 				rendered="#{securityContext.hasRole('ROLE-SITES-MODULE')}" />
 
-			<h:outputText value="|" styleClass="separator" rendered="#{securityContext.hasRole('ROLE-SITES-MODULE')}" />
+			<h:outputText value="|" styleClass="separator"
+				rendered="#{securityContext.hasRole('ROLE-SITES-MODULE') and securityContext.hasRole('ROLE-DHCP-MODULE')}" />
 
 			<p:commandLink value="DHCP" actionListener="#{menuContext.select('MenuTop', 'DHCP')}"
 				styleClass="#{menuContext.menu['MenuTop']['DHCP']['Style']}" ajax="false" immediate="true"
