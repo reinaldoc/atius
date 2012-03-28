@@ -11,8 +11,7 @@
 				update="atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search, @this" style="margin-right: 45px" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
-				update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()"
-				disabled="#{dhcpSessionInfo.dhcpSharedNetwork.cn == null ? 'true' : 'false' }" />
+				update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
 
 		</h:panelGroup>
 
