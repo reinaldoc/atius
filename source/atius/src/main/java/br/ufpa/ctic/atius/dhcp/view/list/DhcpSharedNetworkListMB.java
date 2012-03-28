@@ -2,6 +2,7 @@ package br.ufpa.ctic.atius.dhcp.view.list;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
@@ -27,6 +28,7 @@ public class DhcpSharedNetworkListMB extends AbstractListPageBean<DhcpSharedNetw
 		return bc.findAll();
 	}
 
+	@PostConstruct
 	public void init() {
 		if (Strings.isEmpty(getSelectedMenu()))
 			if (getResultList() != null && getResultList().size() > 0) {
