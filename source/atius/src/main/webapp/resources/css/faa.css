@@ -122,7 +122,7 @@ body {
 	right: 1px;
 	border: 1px solid #374140;
 	overflow: hidden;
-	box-shadow: 8px 10px 12px #CCCCFF;
+	box-shadow: 8px 10px 12px #CCCCDD;
 	min-height: 400px;
 	border-radius: 10px 10px 10px 10px;
 	background: #F6F6F6;
@@ -468,7 +468,7 @@ div.asRowOdd {
 }
 
 div.asRowEven {
-	background-color: #EBEBFF;
+	background-color: #EBEBF3;
 }
 
 div.asColumn {
