@@ -38,12 +38,14 @@
 
 @font-face {
 	font-family: PalladioBold;
-	src: url("/atius/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css");
+	src:
+		url("/atius/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css");
 }
 
 @font-face {
 	font-family: PalladioBold;
-	src: url("/atius/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css");
+	src:
+		url("/atius/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css");
 }
 
 /*	Layout	*/
@@ -434,15 +436,18 @@ div.panel button.transparent {
 	box-shadow: none;
 }
 
-div.panel button.ui-button:hover {
-	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5),
-		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #888888 !important;
-}
-
 div.panel form {
 	display: inline-block;
 	float: right;
 	margin-top: -5px;
+}
+
+div.panel form button.ui-button .ui-icon {
+	background-color: #BBCCCC;
+}
+
+div.panel form button.ui-button:hover .ui-icon {
+	background-color: #5CC6C6;
 }
 
 div.asTable {
