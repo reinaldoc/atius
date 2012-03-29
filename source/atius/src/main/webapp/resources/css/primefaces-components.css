@@ -37,8 +37,7 @@ button.ui-button,button.ui-button-text-only {
 }
 
 button.ui-button:hover {
-	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.3),
-		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #5CC6C6 !important;
+	background: repeat scroll 0 0 #5CC6C6 !important;
 	border: 0px;
 	border-radius: 6px;
 	font-weight: bold;
@@ -92,11 +91,11 @@ span.ui-icon-bullet {
 }
 
 .ui-datatable-odd {
-	background: none repeat scroll 0 0 #F9F9F9;
+	background: none repeat scroll 0 0 #EBEBFF;
 }
 
 .ui-datatable-even {
-	background: none repeat scroll 0 0 #F3F3F3;
+	background: none repeat scroll 0 0 #F9F9F9;
 }
 
 .ui-datatable td {

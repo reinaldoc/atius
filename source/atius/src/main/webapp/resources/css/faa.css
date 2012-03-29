@@ -116,15 +116,14 @@ body {
 }
 
 #faa-body-right-id {
-	margin-left: 180px;
+	margin-right: 3px;
 	right: 1px;
 	border: 1px solid #374140;
 	overflow: hidden;
-	box-shadow: 16px 0 16px #888888;
+	box-shadow: 8px 10px 12px #CCCCFF;
 	min-height: 400px;
 	border-radius: 10px 10px 10px 10px;
 	background: #F6F6F6;
-	box-shadow: 16px 0 16px #888888;
 }
 
 /*	HTML tags	*/
@@ -460,11 +459,11 @@ div.asRow {
 }
 
 div.asRowOdd {
-	background-color: #F3F3F3;
+	background-color: #F9F9F9;
 }
 
 div.asRowEven {
-	background-color: #F9F9F9;
+	background-color: #EBEBFF;
 }
 
 div.asColumn {
