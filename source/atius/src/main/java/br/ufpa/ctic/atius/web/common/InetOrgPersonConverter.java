@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.web.converter;
+package br.ufpa.ctic.atius.web.common;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
