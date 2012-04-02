@@ -4,9 +4,9 @@ import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.contrib.DelegateCrud;
+import br.ufpa.ctic.atius.dhcp.common.DhcpSessionInfo;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpSharedNetwork;
 import br.ufpa.ctic.atius.dhcp.persistence.DhcpSharedNetworkDAO;
-import br.ufpa.ctic.atius.dhcp.view.app.DhcpSessionInfo;
 
 @BusinessController
 public class DhcpSharedNetworkBC extends DelegateCrud<DhcpSharedNetwork, String, DhcpSharedNetworkDAO> {

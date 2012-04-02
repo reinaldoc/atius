@@ -6,10 +6,10 @@ import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.contrib.DelegateCrud;
+import br.ufpa.ctic.atius.dhcp.common.DhcpSessionInfo;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpServer;
 import br.ufpa.ctic.atius.dhcp.domain.DhcpService;
 import br.ufpa.ctic.atius.dhcp.persistence.DhcpServiceDAO;
-import br.ufpa.ctic.atius.dhcp.view.app.DhcpSessionInfo;
 
 @BusinessController
 public class DhcpServiceBC extends DelegateCrud<DhcpService, String, DhcpServiceDAO> {

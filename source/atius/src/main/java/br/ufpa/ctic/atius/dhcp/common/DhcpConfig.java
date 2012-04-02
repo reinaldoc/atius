@@ -1,4 +1,4 @@
-package br.ufpa.ctic.atius.configuration;
+package br.ufpa.ctic.atius.dhcp.common;
 
 import java.io.Serializable;
 
