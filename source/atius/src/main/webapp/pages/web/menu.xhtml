@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form prependId="false">
+		<h:panelGroup id="atius-sites-menu-id">
+			<p:dataGrid value="#{websiteDomainListMB.websiteCategories}" var="category" columns="1">
+				<p:column>
+					<p:commandLink value="#{category.name}" immediate="true" update="faa-body-id"
+						actionListener="#{menuContext.select('WebsiteDomain', category.name)}" action="#{websiteDomainListMB.clearResultList()}"
+						styleClass="#{menuContext.menu['WebsiteDomain'][category.name]['Style']}" />
+				</p:column>
+			</p:dataGrid>
+
+			<p:commandLink value="Todos" immediate="true" update="faa-body-id" action="#{websiteDomainListMB.clearResultList}"
+				actionListener="#{menuContext.select('WebsiteDomain', 'Todos')}" styleClass="#{menuContext.menu['WebsiteDomain']['Todos']['Style']}" />
+
+			<p:spacer height="10px" />
+
+			<p:commandLink value="Configuração" immediate="true" update="faa-body-id"
+				actionListener="#{menuContext.select('WebsiteDomain', 'Configuração')}"
+				styleClass="#{menuContext.menu['WebsiteDomain']['Configuração']['Style']}" style="margin-bottom: 15px;" />
+		</h:panelGroup>
+	</h:form>
+</ui:composition>
