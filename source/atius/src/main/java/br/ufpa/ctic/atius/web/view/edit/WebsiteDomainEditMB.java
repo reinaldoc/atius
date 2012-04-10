@@ -32,7 +32,7 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	private WebsiteDomainBC bc;
 
 	@Inject
-	@Path("reports/WebsiteDomain.jasper")
+	@Path("report/WebsiteDomain.jasper")
 	private Report report;
 
 	@Inject
@@ -117,8 +117,8 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 				if (websiteDomain != null && Strings.isNotBlank(websiteDomain.getServerName())) {
 					FacesContext context = FacesContext.getCurrentInstance();
 					Map<String, Object> params = new HashMap<String, Object>();
-					params.put("LOGO_LEFT", context.getExternalContext().getRealPath("WEB-INF/classes/reports/images/ufpa_logo.jpg"));
-					params.put("LOGO_RIGHT", context.getExternalContext().getRealPath("WEB-INF/classes/reports/images/ctic_logo.gif"));
+					params.put("LOGO_LEFT", context.getExternalContext().getRealPath("WEB-INF/classes/report/images/ufpa_logo.jpg"));
+					params.put("LOGO_RIGHT", context.getExternalContext().getRealPath("WEB-INF/classes/report/images/ctic_logo.gif"));
 
 					List<WebsiteDomain> beanReport = new ArrayList<WebsiteDomain>();
 					beanReport.add(websiteDomain);
