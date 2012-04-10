@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WebsiteDomain" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="134"/>
+	<property name="ireport.y" value="0"/>
 	<subDataset name="LDAP Dataset">
 		<queryString>
 			<![CDATA[select * from websiteDomain, posixAccount]]>
@@ -85,8 +85,8 @@
 	<field name="serverName" class="java.lang.Object"/>
 	<field name="documentRoot" class="java.lang.Object"/>
 	<field name="availability" class="java.lang.Object"/>
-	<field name="adminId" class="br.ufpa.ctic.atius.websites.domain.InetOrgPerson"/>
-	<field name="ownerId" class="br.ufpa.ctic.atius.websites.domain.InetOrgPerson"/>
+	<field name="adminId" class="br.ufpa.ctic.atius.web.domain.InetOrgPerson"/>
+	<field name="ownerId" class="br.ufpa.ctic.atius.web.domain.InetOrgPerson"/>
 	<field name="serverAlias" class="java.lang.Object"/>
 	<field name="suPhpEngine" class="java.lang.Object"/>
 	<field name="blockCount" class="java.lang.Object"/>
