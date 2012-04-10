@@ -24,29 +24,29 @@
 				</p:column>
 
 				<p:column headerText="Nome" sortBy="#{faa_role_dt_row.name}">
-					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; margin-right: -120px; width: 200px;">
 						<h:outputText value="#{faa_role_dt_row.name}" title="#{faa_role_dt_row.shortDescription}" />
 					</h:panelGroup>
 				</p:column>
 
 				<p:column headerText="Descrição" sortBy="#{faa_role_dt_row.description}">
-					<h:panelGroup layout="block" style="width: 500px; overflow: hidden; white-space: pre">
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; margin-right: -120px;">
 						<h:outputText value="#{faa_role_dt_row.description}" title="#{faa_role_dt_row.description}" />
 					</h:panelGroup>
 				</p:column>
 
 				<p:column headerText="Restritiva">
-					<h:panelGroup layout="block" style="width: 50px; overflow: hidden; white-space: pre">
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; margin-right: -120px;">
 						<h:outputText value="#{faa_role_dt_row.restriction ? 'Sim' : '' }" />
 					</h:panelGroup>
 				</p:column>
 
 				<p:column style="text-align: right; padding: 0px">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
-						<p:commandButton icon="ui-icon-pencil" immediate="true" update="faa-role-edit-dlg-body-id, faa-role-edit-dlg-buttons-id"
-							styleClass="margin" action="#{roleEditMB.editById(faa_role_dt_row.id)}" oncomplete="faa_role_edit_dlg.show()"
+						<p:commandButton icon="ui-icon-search" immediate="true" update="faa-role-edit-dlg-body-id, faa-role-edit-dlg-buttons-id"
+							styleClass="forItems" action="#{roleEditMB.editById(faa_role_dt_row.id)}" oncomplete="faa_role_edit_dlg.show()"
 							title="Editar Informações" />
-						<p:commandButton icon="ui-icon-trash" immediate="true" update="faa-role-delete-dlg-id" styleClass="margin"
+						<p:commandButton icon="ui-icon-trash" immediate="true" update="faa-role-delete-dlg-id" styleClass="forItems"
 							action="#{roleEditMB.editById(faa_role_dt_row.id)}" oncomplete="faa_role_delete_dlg.show()" title="Excluir Recurso" />
 					</h:panelGroup>
 				</p:column>

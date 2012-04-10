@@ -203,8 +203,12 @@ div.filter button:hover {
 	box-shadow: none;
 }
 
-button.margin {
+button.forItems {
 	margin-right: 12px;
+}
+
+button.forHeader {
+	margin-right: 45px;
 }
 
 /*	Dialog */
@@ -215,14 +219,6 @@ button.margin {
 	margin-bottom: 10px;
 }
 
-.dialog-body-role {
-	padding: 0;
-}
-
-.dialog-body-profile,.dialog-body-user,.dialog-body-profileByRule {
-	padding: 0 0 7px;
-}
-
 .dialog-body td {
 	padding-top: 4px;
 	color: #3F586D;
@@ -231,7 +227,8 @@ button.margin {
 	text-align: left;
 }
 
-.dialog-body input[type=text],input[type=password],textarea,select {
+.dialog-body input[type=text],.dialog-body input[type=password],.dialog-body textarea,.dialog-body select
+	{
 	width: 375px;
 	border: 1px solid #BBC5CD !important;
 	padding: 3px !important;
@@ -249,7 +246,12 @@ button.margin {
 	width: 378px;
 }
 
-.dialog-body input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus
+.dialog-body-input input[type=text],.dialog-body-input input[type=password],.dialog-body-input textarea,.dialog-body-input select
+	{
+	width: 340px;
+}
+
+.dialog-body input[type=text]:focus,.dialog-body input[type=password]:focus,.dialog-body textarea:focus,.dialog-body select:focus
 	{
 	border: 1px solid #BBC5CD;
 	background-color: #FFFFE0;
@@ -272,14 +274,20 @@ button.margin {
 	border: 0px;
 }
 
-.dialog-body-role tbody tr td,.dialog-body-profile tbody tr td,.dialog-body-user tbody tr td,.dialog-body-profileByRule tbody tr td
-	{
-	width: 400px;
+.dialog-body-table .ui-widget-header {
+	background: none;
 }
 
-.dialog-body-role .ui-widget-header,.dialog-body-profile .ui-widget-header,.dialog-body-user .ui-widget-header,.dialog-body-profileByRule .ui-widget-header
-	{
-	background: none;
+.dialog-body-table {
+	padding: 0 0 7px;
+}
+
+.dialog-body-tableOnRight .ui-datatable th.ui-state-default {
+	padding-left: 0px;
+}
+
+.dialog-body-tableOnRight tbody tr td {
+	width: 400px;
 }
 
 .dialog-selectonemenu {
@@ -313,9 +321,13 @@ ul.dialog-messages li {
 }
 
 .dialog-message-success {
-	color: #272727;
+	color: black;
 	font-weight: bold;
-	margin-left: 5px;
+	padding-left: 20px;
+	margin-left: 3px;
+	background-repeat: no-repeat;
+	background-image:
+		url('/atius/javax.faces.resource/faa-success.gif.jsf?ln=images');
 }
 
 .dialog-close-link {
@@ -369,6 +381,10 @@ ul.dialog-messages li {
 }
 
 /*	Fuselage	*/
+tbody tr td.faa-label {
+	width: 80px;
+}
+
 tbody tr td.faa-label .ui-dt-c {
 	text-align: center;
 	font-size: 10px;
@@ -395,6 +411,10 @@ tbody tr td.faa-label-role .ui-dt-c {
 	border-color: #6FA8DC;
 }
 
+tbody tr td.faa-label-resource {
+	width: 100px;
+}
+
 tbody tr td.faa-label-resource .ui-dt-c {
 	background-color: #dc9f68;
 	border-color: #dc9f68;
@@ -404,10 +424,6 @@ tbody tr td.faa-label-resource .ui-dt-c {
 tbody tr td.faa-label-profileByRule .ui-dt-c {
 	background-color: #aaaaaa;
 	border-color: #aaaaaa;
-}
-
-.faa-header-items td {
-	padding-right: 45px;
 }
 
 div.panel {

@@ -24,13 +24,13 @@
 				</p:column>
 
 				<p:column headerText="Tipo" sortBy="#{faa_resource_dt_row.name}">
-					<h:panelGroup layout="block" style="width: 200px; overflow: hidden; white-space: pre">
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; margin-right: -120px;">
 						<h:outputText value="#{faa_resource_dt_row.name} " />
 					</h:panelGroup>
 				</p:column>
 
 				<p:column headerText="Valor" sortBy="#{faa_resource_dt_row.value}">
-					<h:panelGroup layout="block" style="width: 350px; overflow: hidden; white-space: pre">
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; margin-right: -120px;">
 						<h:outputText value="#{faa_resource_dt_row.value}" title="#{faa_resource_dt_row.description}" />
 					</h:panelGroup>
 				</p:column>
@@ -39,11 +39,11 @@
 
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 
-						<p:commandButton icon="ui-icon-pencil" style="icon" immediate="true"
+						<p:commandButton icon="ui-icon-search" style="icon" immediate="true"
 							update="faa-resource-edit-dlg-body-id, faa-resource-edit-dlg-buttons-id" action="#{resourceEditMB.editBean(faa_resource_dt_row)}"
-							oncomplete="faa_resource_edit_dlg.show()" title="Editar Informações" styleClass="margin" />
+							oncomplete="faa_resource_edit_dlg.show()" title="Editar Informações" styleClass="forItems" />
 
-						<p:commandButton icon="ui-icon-trash" style="icon" immediate="true" update="faa-resource-delete-dlg-id" styleClass="margin"
+						<p:commandButton icon="ui-icon-trash" style="icon" immediate="true" update="faa-resource-delete-dlg-id" styleClass="forItems"
 							action="#{resourceEditMB.editBean(faa_resource_dt_row)}" oncomplete="faa_resource_delete_dlg.show()" title="Excluir Recurso" />
 
 					</h:panelGroup>
