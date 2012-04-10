@@ -14,8 +14,8 @@
 	</url-mapping>
 
 	<url-mapping id="report">
-		<pattern value="/sites/report" />
-		<view-id value="/pages/sites/report.jsf" />
+		<pattern value="/web/report" />
+		<view-id value="/pages/web/report.jsf" />
 	</url-mapping>
 
 </pretty-config>
