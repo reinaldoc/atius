@@ -32,7 +32,7 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	private WebsiteDomainBC bc;
 
 	@Inject
-	@Path("report/WebsiteDomain.jasper")
+	@Path("reports/WebsiteDomain.jasper")
 	private Report report;
 
 	@Inject
