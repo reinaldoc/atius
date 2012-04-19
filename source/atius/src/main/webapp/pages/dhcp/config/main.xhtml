@@ -21,7 +21,7 @@
 
 			<p:dataTable id="atius-dhcp-config-server-datatable-id" widgetVar="atius_dhcp_server_wv" emptyMessage="Não há servidores DHCP"
 				value="#{dhcpServerListMB.resultList}" var="atius_dhcp_config_server_row" rows="9" paginator="true" paginatorAlwaysVisible="false"
-				pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+				pageLinks="#{fuselageMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
 
 				<p:column sortBy="#{atius_dhcp_config_server_row.cn}">
 
@@ -156,7 +156,7 @@
 
 			<p:dataTable id="atius-dhcp-config-network-datatable-id" widgetVar="atius_dhcp_config_network_wv" emptyMessage="Não há redes DHCP"
 				value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="13" paginator="true"
-				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" pageLinks="#{fuselageMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom"
 				styleClass="dialog-datatable dialog-datatable-small">
 
 				<p:column sortBy="#{atius_dhcp_config_network_row.cn}">

@@ -24,8 +24,8 @@
 
 		<h:panelGroup id="atius-sites-list-panel-id">
 			<p:dataTable id="atius-sites-list-datatable-id" widgetVar="atius_sites_list_datatable" emptyMessage="Não há registros"
-				value="#{websiteDomainListMB.resultList}" var="domain" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
-				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+				value="#{websiteDomainListMB.resultList}" var="domain" rows="#{fuselageMB.paginationConfig.pageSize}" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{fuselageMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 				<p:column headerText="Entidade" sortBy="#{domain.cn}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 						<h:outputText value="#{domain.cn} " />

@@ -10,13 +10,13 @@
 @font-face {
 	font-family: ChanceryMediumItalic;
 	src:
-		url("/atius/javax.faces.resource/urw-chancery-l-medium-italic.eot.jsf?ln=css");
+		url("/atius/javax.faces.resource/urw-chancery-l-medium-italic.eot.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: ChanceryMediumItalic;
 	src:
-		url("/atius/javax.faces.resource/urw-chancery-l-medium-italic.ttf.jsf?ln=css");
+		url("/atius/javax.faces.resource/urw-chancery-l-medium-italic.ttf.jsf?ln=css/fonts");
 }
 
 span.logo {
@@ -159,7 +159,7 @@ function getEngine() {
 			<h:outputText styleClass="loginText" value="Senha:" />
 			<h:panelGroup>
 				<h:inputSecret styleClass="loginInput" value="#{credential.password}" id="faa-input-password" />
-				<h:commandButton styleClass="loginButton" value="Entrar" action="#{authMB.login}" />
+				<h:commandButton styleClass="loginButton" value="Entrar" action="#{authenticatorMB.login}" />
 			</h:panelGroup>
 			<br />
 		</h:panelGrid>

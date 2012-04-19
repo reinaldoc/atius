@@ -16,8 +16,8 @@
 		<h:panelGroup id="atius-dhcp-subnet-list-panel-id">
 
 			<p:dataTable id="atius-dhcp-subnet-list-datatable-id" widgetVar="atius_dhcp_subnet_list_datatable" emptyMessage="Não há registros"
-				value="#{dhcpSubnetListMB.resultList}" var="dhcpSubnet" rows="#{proxyMB.paginationConfig.pageSize}" paginator="true"
-				paginatorAlwaysVisible="false" pageLinks="#{proxyMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+				value="#{dhcpSubnetListMB.resultList}" var="dhcpSubnet" rows="#{fuselageMB.paginationConfig.pageSize}" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{fuselageMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 
 				<p:column headerText="Subrede" sortBy="#{dhcpSubnet.cn}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
