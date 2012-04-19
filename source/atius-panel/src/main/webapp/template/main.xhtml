@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<h:outputStylesheet library="css" name="jquery.qtip.css" />
+	<h:outputStylesheet library="css" name="faa.css" />
+	<h:outputStylesheet library="css" name="primefaces-components.css" />
+
+	<h:outputScript library="javascript" name="jquery.qtip.js" />
+	<h:outputScript library="javascript" name="faa.js" />
+
+	<title><ui:insert name="title">#{messages['main.app.title']}</ui:insert></title>
+
+</h:head>
+
+<h:body>
+
+	<p:growl id="faa-growl-id" showDetail="false" life="9000" />
+
+	<h:panelGroup id="faa-top-id" layout="block" style="display: block;">
+
+		<ui:insert name="faa-top-ui">
+
+			<!-- @TopMenu  -->
+			<ui:include src="/pages/menu.xhtml" />
+
+		</ui:insert>
+
+	</h:panelGroup>
+
+
+	<h:panelGroup id="faa-header-id" layout="block" style="display: block;">
+
+		<ui:insert name="faa-header-ui">
+
+			<!-- Begin @Header  -->
+			<h:panelGroup layout="block" style="display: block;">
+
+				<h:panelGroup id="faa-header-left-id" layout="block" style="display: inline-block; vertical-align: middle;">
+
+					<ui:insert name="faa-header-left-ui">
+
+						<!-- Begin @HeaderLeft  -->
+						<h:form prependId="false">
+
+							<p:commandLink actionListener="#{menuContext.select('TopMenu', 'Sites')}" ajax="false" immediate="true" action="/index.jsf"
+								styleClass="logo">
+								<h:outputText value="Atius" styleClass="logo" />
+							</p:commandLink>
+
+						</h:form>
+						<!-- End @HeaderLeft  -->
+
+					</ui:insert>
+
+				</h:panelGroup>
+
+				<h:panelGroup id="faa-header-right-id" layout="block" style="display: inline-block;">
+
+					<ui:insert name="faa-header-right-ui">
+						<!-- @HeaderRight  -->
+					</ui:insert>
+
+				</h:panelGroup>
+
+			</h:panelGroup>
+			<!-- End @Header  -->
+
+		</ui:insert>
+
+	</h:panelGroup>
+
+	<h:panelGroup id="faa-body-id" layout="block" style="display: block;">
+
+		<ui:insert name="faa-body-ui">
+
+			<!-- Begin @Body  -->
+			<h:panelGroup id="faa-body-left-id" layout="block" style="display: block;">
+				<ui:insert name="faa-body-left-ui">
+					<!-- @BodyLeft -->
+				</ui:insert>
+			</h:panelGroup>
+
+			<h:panelGroup id="faa-body-right-id" layout="block" style="display: block;">
+				<ui:insert name="faa-body-right-ui">
+					<!-- @BodyRight -->
+				</ui:insert>
+			</h:panelGroup>
+			<!-- End @Body  -->
+
+		</ui:insert>
+
+	</h:panelGroup>
+
+	<h:panelGroup id="faa-footer-id" layout="block" style="display: block;">
+
+		<ui:insert name="faa-footer-ui">
+			<!-- @Footer  -->
+		</ui:insert>
+
+	</h:panelGroup>
+
+</h:body>
+
+</html>

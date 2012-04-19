@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
+
+	<h:form prependId="false">
+		<h:panelGrid id="atiuspanel-web-edit-panel-id">
+			<p:dialog id="atiuspanel-web-edit-dlg-id" header="Website - Trocar senha" widgetVar="atiuspanel_web_edit_dlg" modal="true" width="480"
+				resizable="false" closable="false">
+				<h:panelGrid columns="1" styleClass="dialog-body" id="atiuspanel-web-edit-dlg-body-id">
+					<h:outputText value="Entidade:" />
+					<h:outputText value="#{websiteDomainEditMB.bean.cn}" styleClass="asInput" />
+
+					<h:outputText value="Domínio:" />
+					<h:outputText value="#{websiteDomainEditMB.bean.serverName}" styleClass="asInput" />
+
+					<h:outputText value="Senha:" />
+					<h:panelGroup layout="block" style="display: inline-block; width: 100%;">
+						<h:inputSecret value="#{websiteDomainEditMB.bean.password}" style="width: 169px;" autocomplete="off"
+							onkeypress="return event.keyCode!=13" />
+						<h:outputText title="Repita a senha!" styleClass="ui-icon ui-icon-arrowthickstop-1-e"
+							style="margin-top: 2px; margin-left: 7px; margin-right: 7px; vertical-align: middle; display: inline-block;" />
+						<h:inputSecret value="#{websiteDomainEditMB.bean.passwordrepeat}" style="width: 169px;" autocomplete="off"
+							onkeypress="return event.keyCode!=13" />
+					</h:panelGroup>
+
+				</h:panelGrid>
+
+				<h:panelGroup id="atiuspanel-web-edit-dlg-buttons-id">
+					<faa:dialogButtons id="atiuspanel-web-edit-dlg-save-id" dialogId="atiuspanel-web-edit-dlg-id" dialogWidgetVar="atiuspanel_web_edit_dlg"
+						updateMode="#{websiteDomainEditMB.updateMode}" actionUpdater="#{websiteDomainEditMB.update}"
+						actionInserter="#{websiteDomainEditMB.insert}" actionCloser="#{websiteDomainListMB.clearValidation}"
+						updateOnClose="atiuspanel-web-list-datatable-id" />
+				</h:panelGroup>
+
+			</p:dialog>
+		</h:panelGrid>
+	</h:form>
+</ui:composition>

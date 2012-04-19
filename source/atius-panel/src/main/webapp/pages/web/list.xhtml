@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form prependId="false">
+
+		<p:confirmDialog message="Deseja excluir o web: #{webEditMB.bean.description} ?" header="Atenção!" severity="alert"
+			id="atiuspanel-web-delete-dlg-id" widgetVar="atiuspanel_web_delete_dlg">
+
+			<p:commandButton value="Sim" oncomplete="atiuspanel_web_delete_dlg.hide()" update="atiuspanel-web-list-datatable-id, faa-growl-id"
+				action="#{webEditMB.delete}" actionListener="#{webListMB.clearResultList}" style="margin-right: 20px;" />
+
+			<p:commandButton value="Não" onclick="atiuspanel_web_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+		</p:confirmDialog>
+
+		<p:dataTable id="atiuspanel-web-list-datatable-id" widgetVar="atiuspanel_web_list_datatable" emptyMessage="Não há registros"
+			value="#{websiteDomainListMB.resultList}" var="web" rows="#{fuselageMB.paginationConfig.pageSize}" paginator="true"
+			paginatorAlwaysVisible="false" pageLinks="#{fuselageMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+
+			<p:column headerText="Domínio" sortBy="#{web.serverName}">
+
+				<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 180px;">
+					<h:outputText value="#{web.serverName}" title="#{web.serverName}" />
+				</h:panelGroup>
+
+			</p:column>
+
+			<p:column headerText="Usuário" sortBy="#{web.uid}">
+
+				<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 120px;">
+					<h:outputText value="#{web.uid}" title="#{web.uid}" />
+				</h:panelGroup>
+
+			</p:column>
+
+			<p:column headerText="Categoria" sortBy="#{web.websiteCategory}">
+
+				<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 120px;">
+					<h:outputText value="#{web.websiteCategory}" title="#{web.websiteCategory}" />
+				</h:panelGroup>
+
+			</p:column>
+
+			<p:column headerText="Tipo" sortBy="#{web.websiteProfile}">
+
+				<h:panelGroup layout="block" style="overflow: hidden; white-space: pre;  width: 320px;">
+					<h:outputText value="#{web.websiteProfile}" title="#{web.websiteProfile}" />
+				</h:panelGroup>
+
+			</p:column>
+
+			<p:column style="text-align: right; padding: 0px">
+
+				<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+
+					<p:commandButton icon="ui-icon-key" oncomplete="atiuspanel_web_edit_dlg.show()" styleClass="forItems"
+						action="#{websiteDomainEditMB.editBean(web)}" update="atiuspanel-web-edit-dlg-body-id, atiuspanel-web-edit-dlg-buttons-id"
+						immediate="true" title="Trocar senha!" />
+
+				</h:panelGroup>
+
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+</ui:composition>
