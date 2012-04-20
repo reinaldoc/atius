@@ -323,11 +323,8 @@ ul.dialog-messages li {
 .dialog-message-success {
 	color: black;
 	font-weight: bold;
-	padding-left: 20px;
 	margin-left: 3px;
 	background-repeat: no-repeat;
-	background-image:
-		url('/atius/javax.faces.resource/faa-success.gif.jsf?ln=images');
 }
 
 .dialog-close-link {

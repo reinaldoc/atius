@@ -19,10 +19,12 @@
 			<p:commandLink value="#{fuselageMB.userNameProperCase}" style="float: right" actionListener="#{menuContext.select('MenuTop', 'Usuário')}"
 				styleClass="#{menuContext.menu['MenuTop']['Usuário']['Style']}" ajax="false" immediate="true" />
 
-			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;" />
+			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;"
+				rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
 
 			<p:commandLink value="Segurança" style="float: right" actionListener="#{menuContext.select('MenuTop', 'Segurança')}"
-				styleClass="#{menuContext.menu['MenuTop']['Segurança']['Style']}" ajax="false" immediate="true" />
+				styleClass="#{menuContext.menu['MenuTop']['Segurança']['Style']}" ajax="false" immediate="true"
+				rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
 
 		</h:form>
 
