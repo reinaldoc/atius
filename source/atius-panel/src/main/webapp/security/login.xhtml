@@ -159,7 +159,7 @@ function getEngine() {
 			<h:outputText styleClass="loginText" value="Senha:" />
 			<h:panelGroup>
 				<h:inputSecret styleClass="loginInput" value="#{credential.password}" id="faa-input-password" />
-				<h:commandButton styleClass="loginButton" value="Entrar" action="#{authenticatorMB.login}" />
+				<h:commandButton styleClass="loginButton" value="Entrar" action="#{securityContext.login}" />
 			</h:panelGroup>
 			<br />
 		</h:panelGrid>
