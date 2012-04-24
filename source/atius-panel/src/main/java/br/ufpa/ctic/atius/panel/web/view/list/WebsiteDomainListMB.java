@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.enumeration.contrib.Logic;
-import br.gov.frameworkdemoiselle.fuselage.view.application.FuselageMB;
+import br.gov.frameworkdemoiselle.fuselage.view.app.FuselageMB;
 import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
