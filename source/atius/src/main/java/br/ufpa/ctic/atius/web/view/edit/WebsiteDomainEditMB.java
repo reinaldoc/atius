@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.message.SeverityType;
@@ -115,10 +114,9 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 			if (Strings.isNotBlank(id.getValue())) {
 				WebsiteDomain websiteDomain = load(id.getValue());
 				if (websiteDomain != null && Strings.isNotBlank(websiteDomain.getServerName())) {
-					FacesContext context = FacesContext.getCurrentInstance();
 					Map<String, Object> params = new HashMap<String, Object>();
-					params.put("LOGO_LEFT", context.getExternalContext().getRealPath("WEB-INF/classes/report/images/ufpa_logo.jpg"));
-					params.put("LOGO_RIGHT", context.getExternalContext().getRealPath("WEB-INF/classes/report/images/ctic_logo.gif"));
+					params.put("LOGO_LEFT", Faces.getReportPath("images/ufpa_logo.jpg"));
+					params.put("LOGO_RIGHT", Faces.getReportPath("images/ctic_logo.gif"));
 
 					List<WebsiteDomain> beanReport = new ArrayList<WebsiteDomain>();
 					beanReport.add(websiteDomain);
