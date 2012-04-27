@@ -43,7 +43,7 @@
 				<h:panelGroup id="atius-dhcp-host-list-panel-id">
 					<p:dataTable id="atius-dhcp-host-list-datatable-id" widgetVar="atius_dhcp_host_list_datatable" emptyMessage="Não há registros"
 						value="#{dhcpHostListMB.resultList}" var="dhcpHost" rows="10" paginator="true" paginatorAlwaysVisible="false"
-						pageLinks="#{fuselageMB.paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable-small">
+						pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable-small">
 
 						<p:column headerText="Hostname" sortBy="#{dhcpHost.cn}">
 							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 170px;">

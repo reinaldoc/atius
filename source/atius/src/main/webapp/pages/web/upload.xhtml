@@ -27,7 +27,7 @@
 
 					<p:dataTable id="atius-sites-upload-datatable-id" widgetVar="atius_sites_upload_dt_wv" emptyMessage="Não há termos"
 						value="#{websiteFilesListMB.resultList}" var="atius_sites_upload_dt_row" rows="5" paginator="true" paginatorAlwaysVisible="true"
-						pageLinks="#{fuselageMB.paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-smallest">
+						pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="dialog-datatable dialog-datatable-smallest">
 
 						<p:column headerText="Website">
 							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
