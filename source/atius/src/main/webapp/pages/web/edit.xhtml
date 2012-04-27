@@ -23,7 +23,7 @@
 					<h:outputText value="Categoria:" />
 					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteCategory}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
-						<f:selectItems value="#{websiteDomainListMB.websiteCategories}" var="category" itemLabel="#{category.name}" itemValue="#{category.name}" />
+						<f:selectItems value="#{websiteCategoryListMB.resultList}" var="category" itemLabel="#{category.name}" itemValue="#{category.name}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Tipo:" />
@@ -46,8 +46,9 @@
 
 				<h:panelGroup id="atius-sites-edit-dlg-buttons-id">
 					<faa:dialogButtons id="atius-sites-edit-dlg-save-id" dialogId="atius-sites-edit-dlg-id" dialogWidgetVar="atius_sites_edit_dlg"
-						updateMode="#{websiteDomainEditMB.updateMode}" actionUpdater="#{websiteDomainEditMB.update}" actionInserter="#{websiteDomainEditMB.insert}"
-						actionCloser="#{websiteDomainListMB.clearValidation}" updateOnClose="atius-sites-list-datatable-id" />
+						updateMode="#{websiteDomainEditMB.updateMode}" actionUpdater="#{websiteDomainEditMB.update}"
+						actionInserter="#{websiteDomainEditMB.insert}" actionCloser="#{websiteDomainListMB.clearValidation}"
+						updateOnClose="atius-sites-list-datatable-id" />
 				</h:panelGroup>
 
 			</p:dialog>

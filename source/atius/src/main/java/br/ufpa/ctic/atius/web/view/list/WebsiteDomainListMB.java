@@ -2,7 +2,6 @@ package br.ufpa.ctic.atius.web.view.list;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
@@ -24,28 +23,9 @@ public class WebsiteDomainListMB extends AbstractListPageBean<WebsiteDomain, Str
 
 	List<String> websiteProfiles;
 
-	@SuppressWarnings("unused")
-	@PostConstruct
-	private void init() {
-		selectMenu(getFirstWebsiteCategory());
-	}
-
-	private String getFirstWebsiteCategory() {
-		if (getWebsiteCategories().size() > 0)
-			return getWebsiteCategories().get(0).getName();
-		else
-			return "Todos";
-	}
-
 	@Override
 	protected List<WebsiteDomain> handleResultList(QueryConfig<WebsiteDomain> queryConfig) {
-		return bc.find(getResultFilter(), getSelectedMenu());
-	}
-
-	public List<WebsiteCategory> getWebsiteCategories() {
-		if (websiteCategories == null)
-			websiteCategories = bc.getOrderedWebsiteCategories();
-		return websiteCategories;
+		return bc.find(getResultFilter(), getMenuContext().getSelected("WebsiteCategory"));
 	}
 
 	public List<String> getWebsiteProfiles() {
