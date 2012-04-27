@@ -44,10 +44,10 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	public String delete() {
 		try {
 			bc.delete(getBean().getServerName());
-			Faces.addI18nMessage("atius.sites.websites.delete.success", getBean().getServerName());
+			Faces.addI18nMessage("atius.web.websites.delete.success", getBean().getServerName());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.delete.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.delete.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
@@ -55,10 +55,10 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	public String disable() {
 		try {
 			bc.disable(getBean());
-			Faces.addI18nMessage("atius.sites.websites.disable.success", getBean().getServerName());
+			Faces.addI18nMessage("atius.web.websites.disable.success", getBean().getServerName());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.disable.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.disable.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
@@ -66,10 +66,10 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	public String enable() {
 		try {
 			bc.enable(getBean());
-			Faces.addI18nMessage("atius.sites.websites.enable.success", getBean().getServerName());
+			Faces.addI18nMessage("atius.web.websites.enable.success", getBean().getServerName());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.enable.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.enable.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
@@ -78,22 +78,22 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 		try {
 			if (!bc.domainAvailable(getBean().getServerName())) {
 				Faces.validationFailed();
-				Faces.addI18nMessage("atius.sites.websites.available.unavailable", getBean().getServerName());
+				Faces.addI18nMessage("atius.web.websites.available.unavailable", getBean().getServerName());
 				return null;
 			}
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.available.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.available.failed", SeverityType.ERROR);
 			return null;
 		}
 
 		getBean().prepare();
 		try {
 			bc.insert(getBean());
-			Faces.addI18nMessage("atius.sites.websites.insert.success", getBean().getServerName());
+			Faces.addI18nMessage("atius.web.websites.insert.success", getBean().getServerName());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.insert.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.insert.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
@@ -101,10 +101,10 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	public String update() {
 		try {
 			bc.update(getBean());
-			Faces.addI18nMessage("atius.sites.websites.update.success", getBean().getServerName());
+			Faces.addI18nMessage("atius.web.websites.update.success", getBean().getServerName());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.update.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.update.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
@@ -128,7 +128,7 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.report.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.report.failed", SeverityType.ERROR);
 		}
 		return null;
 	}
@@ -138,7 +138,7 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 			return bc.findPerson(search);
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.owner.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.owner.failed", SeverityType.ERROR);
 		}
 		return new ArrayList<InetOrgPerson>();
 	}
@@ -146,14 +146,14 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	public String domainAvailable() {
 		try {
 			if (bc.domainAvailable(getBean().getServerName()))
-				Faces.addI18nMessage("atius.sites.websites.available.success", getBean().getServerName());
+				Faces.addI18nMessage("atius.web.websites.available.success", getBean().getServerName());
 			else {
 				Faces.validationFailed();
-				Faces.addI18nMessage("atius.sites.websites.available.unavailable", getBean().getServerName());
+				Faces.addI18nMessage("atius.web.websites.available.unavailable", getBean().getServerName());
 			}
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.available.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.available.failed", SeverityType.ERROR);
 		}
 
 		return null;
@@ -165,7 +165,7 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 			return bc.load(id);
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
-			Faces.addI18nMessage("atius.sites.websites.load.failed", SeverityType.ERROR);
+			Faces.addI18nMessage("atius.web.websites.load.failed", SeverityType.ERROR);
 		}
 		return new WebsiteDomain();
 	}

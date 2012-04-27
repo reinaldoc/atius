@@ -1,6 +1,184 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-config
+	<h:panelGroup id="atius-web-config-panel-id" layout="block"
+		style="display: inline-block; vertical-align: top; margin-top: 25px; margin-left: 25px; width: 378px;">
+
+		<div class="panel">Servidores</div>
+
+		<h:form prependId="false">
+
+			<p:confirmDialog message="Deseja excluir o servidor: #{dhcpServerEditMB.bean.cn} ?" header="Atenção!" severity="alert"
+				id="atius-web-config-server-delete-dlg-id" widgetVar="atius_web_config_server_delete_dlg">
+
+				<p:commandButton value="Sim" oncomplete="atius_web_config_server_delete_dlg.hide()"
+					update="atius-web-config-server-datatable-id, atius-web-config-options-panel-id, faa-header-right-id, faa-body-left-id, faa-growl-id"
+					actionListener="#{dhcpServerEditMB.delete}" action="#{dhcpServiceEditMB.init}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_web_config_server_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
+			<p:dataTable id="atius-web-config-server-datatable-id" widgetVar="atius_web_server_wv" emptyMessage="Não há servidores DHCP"
+				value="#{dhcpServerListMB.resultList}" var="atius_web_config_server_row" rows="9" paginator="true" paginatorAlwaysVisible="false"
+				pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+
+				<p:column sortBy="#{atius_web_config_server_row.cn}">
+
+					<h:panelGroup layout="block" style="width: 300px; overflow: hidden; white-space: pre; float: left">
+						<h:outputText value="#{atius_web_config_server_row.cn}"
+							style="#{atius_web_config_server_row.cn.equals(dhcpSessionInfo.dhcpServer.cn) ? 'font-weight: bold' : '' }" />
+					</h:panelGroup>
+
+					<p:commandButton icon="#{dhcpSessionInfo.dhcpServer == atius_web_config_server_row ? 'ui-icon-circle-check' : 'ui-icon-radio-on'}"
+						style="float: right;" title="Selecionar servidor" actionListener="#{dhcpServerListMB.selectDhcpServer(atius_web_config_server_row)}"
+						action="#{dhcpSharedNetworkListMB.clearResultList}" immediate="true" update="faa-body-id, faa-header-right-id" />
+
+					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" styleClass="forItems" immediate="true"
+						title="Remover Servidor" update="atius-web-config-server-delete-dlg-id"
+						action="#{dhcpServerEditMB.editBean(atius_web_config_server_row)}" oncomplete="atius_web_config_server_delete_dlg.show()" />
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+		<h:panelGroup id="atius-web-config-options-panel-id">
+
+			<div class="panel" style="margin-top: 25px;">
+				<h:panelGroup layout="block" style="display: inline-block">Serviço</h:panelGroup>
+				<h:form prependId="false">
+					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true" styleClass="transparent"
+						disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
+						update="atius-web-service-edit-dlg-body-id, atius-web-service-edit-dlg-buttons-id" oncomplete="atius_web_service_edit_dlg.show()" />
+				</h:form>
+			</div>
+
+			<div class="asTable">
+
+				<div class="asRow asRowOdd">
+					<div class="asColumn asColumnLeft">Autoritativo:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpStatementsAuthoritative ? 'sim' : 'não' }" />
+					</div>
+				</div>
+
+				<div class="asRow asRowEven">
+					<div class="asColumn asColumnLeft">Tempo de sessão (seg):</div>
+					<div class="asColumn">
+						<h:outputText
+							value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime != null ? dhcpServiceEditMB.bean.dhcpStatementsLeaseTime : '-' }" />
+					</div>
+				</div>
+
+				<div class="asRow asRowOdd">
+					<div class="asColumn asColumnLeft">Tempo máx. de sessão:</div>
+					<div class="asColumn">
+						<h:outputText
+							value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime != null ? dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime : '-' }" />
+					</div>
+				</div>
+
+			</div>
+
+			<div class="panel" style="margin-top: 25px;">
+				<h:panelGroup layout="block" style="display: inline-block">Opções</h:panelGroup>
+				<h:form prependId="false">
+					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true" styleClass="transparent"
+						disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
+						action="#{dhcpOptionEditMB.setUpdateId('atius-web-config-options-panel-id')}"
+						actionListener="#{dhcpOptionEditMB.editBean(dhcpSessionInfo.dhcpService)}"
+						update="atius-web-option-edit-dlg-body-id, atius-web-option-edit-dlg-buttons-id" oncomplete="atius_web_option_edit_dlg.show()" />
+				</h:form>
+			</div>
+
+			<div class="asTable" style="margin-bottom: 25px;">
+
+				<div class="asRow asRowOdd">
+					<div class="asColumn asColumnLeft">DNS Prefix:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDomainPrefix != null ? dhcpServiceEditMB.bean.dhcpOptionDomainPrefix : '-' }" />
+					</div>
+				</div>
+
+				<div class="asRow asRowEven">
+					<div class="asColumn asColumnLeft">DNS Server:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionDNS != null ? dhcpServiceEditMB.bean.dhcpOptionDNS : '-' }" />
+					</div>
+				</div>
+
+				<div class="asRow asRowOdd">
+					<div class="asColumn asColumnLeft">NTP Server:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionNTP != null ? dhcpServiceEditMB.bean.dhcpOptionNTP : '-' }" />
+					</div>
+				</div>
+
+				<div class="asRow asRowEven">
+					<div class="asColumn asColumnLeft">Netbios Server:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionSMB != null ? dhcpServiceEditMB.bean.dhcpOptionSMB : '-' }" />
+					</div>
+				</div>
+
+				<div class="asRow asRowOdd">
+					<div class="asColumn asColumnLeft">Netbios Server Type:</div>
+					<div class="asColumn">
+						<h:outputText value="#{dhcpServiceEditMB.bean.dhcpOptionSMBtype != null ? dhcpServiceEditMB.bean.dhcpOptionSMBtype : '-' }" />
+					</div>
+				</div>
+
+			</div>
+
+		</h:panelGroup>
+
+	</h:panelGroup>
+
+	<h:panelGroup layout="block" id="atius-web-config-category-panel-id"
+		style="display: inline-block; padding-top: 25px; padding-left: 25px; width: 378px;">
+
+		<div class="panel">Categorias</div>
+
+		<h:form prependId="false">
+
+			<p:confirmDialog message="Deseja excluir a categoria: #{websiteCategoryEditMB.bean.name} ?" header="Atenção!" severity="alert"
+				id="atius-web-config-category-delete-dlg-id" widgetVar="atius_web_config_category_delete_dlg">
+
+				<p:commandButton value="Sim" oncomplete="atius_web_config_category_delete_dlg.hide()"
+					update="atius-web-config-category-datatable-id, faa-body-left-id, faa-growl-id" action="#{websiteCategoryEditMB.delete}"
+					actionListener="#{websiteCategoryListMB.clearResultList}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_web_config_category_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
+			<p:dataTable id="atius-web-config-category-datatable-id" widgetVar="atius_web_config_category_wv" emptyMessage="Não há categorias"
+				value="#{websiteCategoryListMB.resultList}" var="atius_web_config_category_row" rows="13" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
+				styleClass="dialog-datatable dialog-datatable-small">
+
+				<p:column sortBy="#{atius_web_config_category_row.cn}">
+
+					<h:panelGroup layout="block" style="width: 310px; overflow: hidden; white-space: pre; float: left">
+						<h:outputText value="#{atius_web_config_category_row.name}" />
+					</h:panelGroup>
+
+					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true"
+						actionListener="#{websiteCategoryEditMB.editBean(atius_web_config_category_row)}"
+						update="atius-web-category-edit-dlg-body-id, atius-web-category-edit-dlg-buttons-id" oncomplete="atius_web_category_edit_dlg.show()" />
+
+					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" immediate="true" title="Remover Rede"
+						update="atius-web-config-category-delete-dlg-id" action="#{websiteCategoryEditMB.editBean(atius_web_config_category_row)}"
+						oncomplete="atius_web_config_category_delete_dlg.show()" />
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+	</h:panelGroup>
 
 </ui:composition>

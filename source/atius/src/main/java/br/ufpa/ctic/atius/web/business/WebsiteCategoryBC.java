@@ -6,8 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
+import br.ufpa.ctic.atius.web.common.WebConfig;
 import br.ufpa.ctic.atius.web.domain.WebsiteCategory;
 import br.ufpa.ctic.atius.web.persistence.WebsiteCategoryDAO;
 
@@ -15,7 +18,16 @@ import br.ufpa.ctic.atius.web.persistence.WebsiteCategoryDAO;
 public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, WebsiteCategoryDAO> {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private WebConfig webConfig;
 
+	public void insert(WebsiteCategory websiteCategory) {
+		websiteCategory.setParentDN(webConfig.getCategoryContainerDN());
+		websiteCategory.setOrder(getCategoryNextOrder());
+		getDelegate().insert(websiteCategory);
+	}
+	
 	public List<WebsiteCategory> getOrderedWebsiteCategories() {
 		List<WebsiteCategory> list = findAll();
 
@@ -32,6 +44,16 @@ public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, Web
 			orderedList.add(orderIdx.get(idx));
 		}
 		return orderedList;
+	}
+	
+	public String getCategoryNextOrder() {
+		int i = 0;
+		for (WebsiteCategory websiteCategory: findAll()) {
+			int value = new Long(websiteCategory.getOrder()).intValue();
+			if (value > i)
+				i = value;
+		}
+		return String.valueOf(++i);
 	}
 
 }

@@ -12,13 +12,13 @@
 	<div id="faa-body-right-id">
 
 		<!-- Begin @BodyRight  -->
-		<h:panelGroup rendered="#{menuContext.isSelected('WebsiteDomain', 'Configuração')}">
+		<h:panelGroup rendered="#{menuContext.isSelected('WebsiteCategory', 'Configuração')}">
 
 			<ui:include src="config.xhtml" />
 
 		</h:panelGroup>
 
-		<h:panelGroup rendered="#{!menuContext.isSelected('WebsiteDomain', 'Configuração')}">
+		<h:panelGroup rendered="#{!menuContext.isSelected('WebsiteCategory', 'Configuração')}">
 
 			<ui:include src="upload.xhtml" />
 
