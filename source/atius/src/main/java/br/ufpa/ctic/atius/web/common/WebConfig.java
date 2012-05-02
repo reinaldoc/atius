@@ -16,12 +16,19 @@ public class WebConfig implements Serializable {
 	@Name("category.basedn")
 	private String categoryContainerDN;
 
+	@Name("profile.basedn")
+	private String profileContainerDN;
+
 	public String getWebsiteContainerDN() {
 		return websiteContainerDN;
 	}
 
 	public String getCategoryContainerDN() {
 		return categoryContainerDN;
+	}
+
+	public String getProfileContainerDN() {
+		return profileContainerDN;
 	}
 
 }

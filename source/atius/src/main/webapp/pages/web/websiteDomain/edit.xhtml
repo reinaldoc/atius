@@ -26,10 +26,10 @@
 						<f:selectItems value="#{websiteCategoryListMB.resultList}" var="category" itemLabel="#{category.name}" itemValue="#{category.name}" />
 					</p:selectOneMenu>
 
-					<h:outputText value="Tipo:" />
+					<h:outputText value="Perfil:" />
 					<p:selectOneMenu value="#{websiteDomainEditMB.bean.websiteProfile}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
-						<f:selectItems value="#{websiteDomainListMB.websiteProfiles}" var="profile" itemLabel="#{profile}" itemValue="#{profile}" />
+						<f:selectItems value="#{websiteProfileListMB.resultList}" var="profile" itemLabel="#{profile.name}" itemValue="#{profile.name}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Contato Administrativo:" />

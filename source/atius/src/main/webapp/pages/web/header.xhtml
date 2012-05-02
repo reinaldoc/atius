@@ -2,11 +2,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:panelGroup rendered="#{!menuContext.isSelected('WebsiteCategory', 'Configuração')}">
-		<ui:include src="edit.xhtml" />
+		<ui:include src="websiteDomain/edit.xhtml" />
 	</h:panelGroup>
 
 	<h:panelGroup rendered="#{menuContext.isSelected('WebsiteCategory', 'Configuração')}">
 		<ui:include src="category/edit.xhtml" />
+		<ui:include src="profile/edit.xhtml" />
 	</h:panelGroup>
 
 	<h:form prependId="false">
@@ -16,7 +17,7 @@
 			<h:inputText id="atius-sites-search-domain" value="#{websiteDomainListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 
 			<p:commandButton icon="ui-icon ui-icon-search" value="Buscar" update="atius-sites-list-datatable-id"
-				process="atius-sites-search-domain, @this" style="margin-right: 45px" />
+				process="atius-sites-search-domain, @this" styleClass="forHeader" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Novo Site" immediate="true" action="#{websiteDomainEditMB.editBean}"
 				update="atius-sites-edit-dlg-body-id, atius-sites-edit-dlg-buttons-id" oncomplete="atius_sites_edit_dlg.show()" />
@@ -24,6 +25,10 @@
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{menuContext.isSelected('WebsiteCategory', 'Configuração')}">
+
+			<p:commandButton icon="ui-icon-plusthick" value="Novo Perfil Web" immediate="true" action="#{websiteProfileEditMB.editBean}"
+				update="atius-web-profile-edit-dlg-body-id, atius-web-profile-edit-dlg-buttons-id" oncomplete="atius_web_profile_edit_dlg.show()"
+				styleClass="forHeader" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Categoria" immediate="true" action="#{websiteCategoryEditMB.editBean}"
 				update="atius-web-category-edit-dlg-body-id, atius-web-category-edit-dlg-buttons-id" oncomplete="atius_web_category_edit_dlg.show()" />

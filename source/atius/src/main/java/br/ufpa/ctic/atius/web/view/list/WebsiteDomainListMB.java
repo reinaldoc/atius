@@ -8,7 +8,6 @@ import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
 import br.ufpa.ctic.atius.web.business.WebsiteDomainBC;
-import br.ufpa.ctic.atius.web.domain.WebsiteCategory;
 import br.ufpa.ctic.atius.web.domain.WebsiteDomain;
 
 @ViewController
@@ -19,19 +18,9 @@ public class WebsiteDomainListMB extends AbstractListPageBean<WebsiteDomain, Str
 	@Inject
 	private WebsiteDomainBC bc;
 
-	List<WebsiteCategory> websiteCategories;
-
-	List<String> websiteProfiles;
-
 	@Override
 	protected List<WebsiteDomain> handleResultList(QueryConfig<WebsiteDomain> queryConfig) {
 		return bc.find(getResultFilter(), getMenuContext().getSelected("WebsiteCategory"));
-	}
-
-	public List<String> getWebsiteProfiles() {
-		if (websiteProfiles == null)
-			websiteProfiles = bc.getWebsiteProfiles();
-		return websiteProfiles;
 	}
 
 }

@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<h:panelGroup id="faa-body-left-id" layout="block" style="display: block;">
+	<h:panelGroup id="atius-dhcp-body-left-id" styleClass="faa-body-left" layout="block" style="display: block;">
 
 		<!-- Begin @BodyLeft  -->
 		<ui:include src="menu.xhtml" />
@@ -9,21 +9,16 @@
 
 	</h:panelGroup>
 
-	<h:panelGroup id="faa-body-right-id" layout="block" style="display: block;">
+	<h:panelGroup id="atius-dhcp-right-id" styleClass="faa-body-right" layout="block" style="display: block;">
 
 		<!-- Begin @BodyRight  -->
 		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
-
 			<ui:include src="config/main.xhtml" />
-
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
-
 			<ui:include src="subnet/list.xhtml" />
-
 			<ui:include src="host/list.xhtml" />
-
 		</h:panelGroup>
 		<!-- Begin @BodyRight  -->
 

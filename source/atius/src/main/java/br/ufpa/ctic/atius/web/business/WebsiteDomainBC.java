@@ -15,9 +15,7 @@ import br.gov.frameworkdemoiselle.util.contrib.Strings;
 import br.ufpa.ctic.atius.web.common.WebConfig;
 import br.ufpa.ctic.atius.web.domain.DomainContainer;
 import br.ufpa.ctic.atius.web.domain.InetOrgPerson;
-import br.ufpa.ctic.atius.web.domain.WebsiteCategory;
 import br.ufpa.ctic.atius.web.domain.WebsiteDomain;
-import br.ufpa.ctic.atius.web.domain.WebsiteProfile;
 import br.ufpa.ctic.atius.web.persistence.WebsiteDomainDAO;
 
 @BusinessController
@@ -32,30 +30,10 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	private InetOrgPersonBC inetOrgPersonBC;
 
 	@Inject
-	private WebsiteCategoryBC websiteCategoryBC;
-
-	@Inject
-	private WebsiteProfileBC websiteProfileBC;
-
-	@Inject
 	private DomainContainerBC domainContainerBC;
 
-	public List<WebsiteCategory> getOrderedWebsiteCategories() {
-		return websiteCategoryBC.getOrderedWebsiteCategories();
-	}
-
-	public List<String> getWebsiteProfiles() {
-		return websiteProfileBC.getNames();
-	}
-
 	public void insert(WebsiteDomain websiteDomain) {
-		WebsiteProfile websiteProfile = websiteProfileBC.load(websiteDomain.getWebsiteProfile());
-		if (Strings.isBlank(websiteProfile.getWebserverName())) {
-			Faces.addMessage(new DefaultMessage("Não foi possível identificar o webserver do tipo " + websiteDomain.getWebsiteProfile()));
-			Faces.validationFailed();
-			return;
-		}
-		DomainContainer domainContainer = domainContainerBC.getNextFreeUidNumber(websiteProfile.getWebserverName());
+		DomainContainer domainContainer = domainContainerBC.getNextFreeUidNumber(websiteDomain);
 		if (domainContainer == null) {
 			Faces.addMessage(new DefaultMessage("O uidNumber sugerido não esta disponível"));
 			Faces.validationFailed();
@@ -92,10 +70,10 @@ public class WebsiteDomainBC extends DelegateCrud<WebsiteDomain, String, Website
 	public List<WebsiteDomain> find(String search, String category) {
 		QueryConfig<WebsiteDomain> queryConfig = getQueryConfig();
 		queryConfig.setGeneric(webConfig.getWebsiteContainerDN());
-		
+
 		if (Strings.isNotBlank(search) && !"Todos".equals(category))
 			return getDelegate().findByCategory(category, search);
-		
+
 		if (Strings.isBlank(search)) {
 			if (!"Todos".equals(category))
 				queryConfig.getFilter().put("websiteCategory", category);

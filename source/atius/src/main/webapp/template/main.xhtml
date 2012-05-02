@@ -20,7 +20,7 @@
 
 	<p:growl id="faa-growl-id" showDetail="false" life="9000" />
 
-	<h:panelGroup id="faa-top-id" layout="block" style="display: block;">
+	<h:panelGroup id="faa-top-id" styleClass="faa-top" layout="block" style="display: block;">
 
 		<ui:insert name="faa-top-ui">
 
@@ -30,7 +30,6 @@
 		</ui:insert>
 
 	</h:panelGroup>
-
 
 	<h:panelGroup id="faa-header-id" layout="block" style="display: block;">
 
@@ -78,13 +77,13 @@
 		<ui:insert name="faa-body-ui">
 
 			<!-- Begin @Body  -->
-			<h:panelGroup id="faa-body-left-id" layout="block" style="display: block;">
+			<h:panelGroup id="faa-body-left-id" styleClass="faa-body-left" layout="block" style="display: block;">
 				<ui:insert name="faa-body-left-ui">
 					<!-- @BodyLeft -->
 				</ui:insert>
 			</h:panelGroup>
 
-			<h:panelGroup id="faa-body-right-id" layout="block" style="display: block;">
+			<h:panelGroup id="faa-body-right-id" styleClass="faa-body-right" layout="block" style="display: block;">
 				<ui:insert name="faa-body-right-ui">
 					<!-- @BodyRight -->
 				</ui:insert>

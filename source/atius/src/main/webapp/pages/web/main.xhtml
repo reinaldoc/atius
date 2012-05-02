@@ -1,32 +1,27 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<div id="faa-body-left-id">
+	<h:panelGroup id="atius-web-body-left-id" styleClass="faa-body-left" layout="block" style="display: block;">
 
 		<!-- Begin @BodyLeft  -->
 		<ui:include src="menu.xhtml" />
 		<!-- End @BodyLeft  -->
 
-	</div>
+	</h:panelGroup>
 
-	<div id="faa-body-right-id">
+	<h:panelGroup id="atius-web-right-id" styleClass="faa-body-right" layout="block" style="display: block;">
 
 		<!-- Begin @BodyRight  -->
 		<h:panelGroup rendered="#{menuContext.isSelected('WebsiteCategory', 'Configuração')}">
-
-			<ui:include src="config.xhtml" />
-
+			<ui:include src="config/main.xhtml" />
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{!menuContext.isSelected('WebsiteCategory', 'Configuração')}">
-
-			<ui:include src="upload.xhtml" />
-
-			<ui:include src="list.xhtml" />
-
+			<ui:include src="websiteDomain/upload.xhtml" />
+			<ui:include src="websiteDomain/list.xhtml" />
 		</h:panelGroup>
 		<!-- Begin @BodyRight  -->
 
-	</div>
+	</h:panelGroup>
 
 </ui:composition>

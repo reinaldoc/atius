@@ -19,10 +19,10 @@ public class WebsiteDomain extends Entry {
 	@Pattern(regexp = "^(?!www\\.).*$", message = "Não use www no domínio.")
 	private String serverName;
 
-	@NotEmpty(message = "Selecione o tipo do site requerido.")
+	@NotEmpty(message = "Selecione o perfil web do site.")
 	private String websiteProfile;
 
-	@NotEmpty(message = "Selecione a categoria do site requerido.")
+	@NotEmpty(message = "Selecione a categoria do site.")
 	private String websiteCategory;
 
 	@NotNull(message = "Especifique o proprietário do site.")

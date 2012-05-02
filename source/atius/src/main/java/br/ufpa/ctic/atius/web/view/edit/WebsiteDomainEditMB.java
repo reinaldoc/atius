@@ -160,7 +160,7 @@ public class WebsiteDomainEditMB extends AbstractEditPageBean<WebsiteDomain, Str
 	}
 
 	@Override
-	public WebsiteDomain load(String id) {
+	protected WebsiteDomain load(String id) {
 		try {
 			return bc.load(id);
 		} catch (RuntimeException e) {

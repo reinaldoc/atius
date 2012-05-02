@@ -59,7 +59,7 @@ body {
 	padding: 0px;
 }
 
-#faa-top-id {
+div.faa-top {
 	width: 100%;
 	background-color: #E8E8E8;
 	height: 25px;
@@ -67,7 +67,7 @@ body {
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-#faa-top-id a {
+div.faa-top a {
 	color: #4F4F4F;
 	text-decoration: none;
 	display: inline-block;
@@ -76,22 +76,22 @@ body {
 	padding-right: 10px;
 }
 
-#faa-top-id a:hover {
+div.faa-top a:hover {
 	background-color: #D0D0D0;
 }
 
-#faa-top-id a.selected {
+div.faa-top a.selected {
 	background-color: #CCCCCC;
 }
 
-#faa-body-left-id {
+div.faa-body-left {
 	float: left;
 	width: 180px;
 	padding-top: 20px;
 	overflow: hidden;
 }
 
-#faa-body-left-id a {
+div.faa-body-left a {
 	color: black;
 	text-decoration: none;
 	text-shadow: 1px 1px 9px #D6D6D6;
@@ -101,23 +101,23 @@ body {
 	padding-bottom: 4px;
 }
 
-#faa-body-left-id a:hover {
+div.faa-body-left a:hover {
 	font-weight: bold;
 }
 
-#faa-body-left-id a.selected {
+div.faa-body-left a.selected {
 	box-shadow: 0 4px 8px #888888;
 	background-color: #374140;
 	color: white;
 }
 
-#faa-body-left-id a.selected:hover {
+div.faa-body-left a.selected:hover {
 	background-color: #374140;
 	color: white;
 	font-weight: normal;
 }
 
-#faa-body-right-id {
+div.faa-body-right {
 	margin-right: 3px;
 	right: 1px;
 	border: 1px solid #374140;

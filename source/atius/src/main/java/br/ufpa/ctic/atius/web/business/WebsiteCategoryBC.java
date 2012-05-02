@@ -18,7 +18,7 @@ import br.ufpa.ctic.atius.web.persistence.WebsiteCategoryDAO;
 public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, WebsiteCategoryDAO> {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private WebConfig webConfig;
 
@@ -27,7 +27,7 @@ public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, Web
 		websiteCategory.setOrder(getCategoryNextOrder());
 		getDelegate().insert(websiteCategory);
 	}
-	
+
 	public List<WebsiteCategory> getOrderedWebsiteCategories() {
 		List<WebsiteCategory> list = findAll();
 
@@ -45,10 +45,10 @@ public class WebsiteCategoryBC extends DelegateCrud<WebsiteCategory, String, Web
 		}
 		return orderedList;
 	}
-	
+
 	public String getCategoryNextOrder() {
 		int i = 0;
-		for (WebsiteCategory websiteCategory: findAll()) {
+		for (WebsiteCategory websiteCategory : findAll()) {
 			int value = new Long(websiteCategory.getOrder()).intValue();
 			if (value > i)
 				i = value;

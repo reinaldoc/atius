@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGroup id="atius-web-config-profile-panel-id" layout="block"
+		style="display: inline-block; vertical-align: top; margin-top: 25px; margin-left: 25px; width: 378px;">
+
+		<div class="panel">Perfil Web</div>
+
+		<h:form prependId="false">
+
+			<p:confirmDialog message="Deseja excluir o perfil: #{websiteProfileEditMB.bean.name} ?" header="Atenção!" severity="alert"
+				id="atius-web-config-profile-delete-dlg-id" widgetVar="atius_web_config_profile_delete_dlg">
+
+				<p:commandButton value="Sim" oncomplete="atius_web_config_profile_delete_dlg.hide()"
+					update="atius-web-config-profile-datatable-id, faa-body-left-id, faa-growl-id" action="#{websiteProfileEditMB.delete}"
+					actionListener="#{websiteProfileListMB.clearResultList}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_web_config_profile_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
+			<p:dataTable id="atius-web-config-profile-datatable-id" widgetVar="atius_web_config_profile_wv" emptyMessage="Não há categorias"
+				value="#{websiteProfileListMB.resultList}" var="atius_web_config_profile_row" rows="13" paginator="true" paginatorAlwaysVisible="false"
+				pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+
+				<p:column sortBy="#{atius_web_config_profile_row.cn}">
+
+					<h:panelGroup layout="block" style="width: 310px; overflow: hidden; white-space: pre; float: left">
+						<h:outputText value="#{atius_web_config_profile_row.name}" />
+					</h:panelGroup>
+
+					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true"
+						actionListener="#{websiteProfileEditMB.editBean(atius_web_config_profile_row)}"
+						update="atius-web-profile-edit-dlg-body-id, atius-web-profile-edit-dlg-buttons-id" oncomplete="atius_web_profile_edit_dlg.show()" />
+
+					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" immediate="true" title="Remover Rede"
+						update="atius-web-config-profile-delete-dlg-id" action="#{websiteProfileEditMB.editBean(atius_web_config_profile_row)}"
+						oncomplete="atius_web_config_profile_delete_dlg.show()" />
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+	</h:panelGroup>
+
+	<h:panelGroup layout="block" id="atius-web-config-category-panel-id"
+		style="display: inline-block; padding-top: 25px; padding-left: 25px; width: 378px;">
+
+		<div class="panel">Categorias</div>
+
+		<h:form prependId="false">
+
+			<p:confirmDialog message="Deseja excluir a categoria: #{websiteCategoryEditMB.bean.name} ?" header="Atenção!" severity="alert"
+				id="atius-web-config-category-delete-dlg-id" widgetVar="atius_web_config_category_delete_dlg">
+
+				<p:commandButton value="Sim" oncomplete="atius_web_config_category_delete_dlg.hide()"
+					update="atius-web-config-category-datatable-id, atius-web-body-left-id, faa-growl-id" action="#{websiteCategoryEditMB.delete}"
+					actionListener="#{websiteCategoryListMB.clearResultList}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_web_config_category_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
+			<p:dataTable id="atius-web-config-category-datatable-id" widgetVar="atius_web_config_category_wv" emptyMessage="Não há categorias"
+				value="#{websiteCategoryListMB.resultList}" var="atius_web_config_category_row" rows="13" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
+				styleClass="dialog-datatable dialog-datatable-small">
+
+				<p:column sortBy="#{atius_web_config_category_row.cn}">
+
+					<h:panelGroup layout="block" style="width: 310px; overflow: hidden; white-space: pre; float: left">
+						<h:outputText value="#{atius_web_config_category_row.name}" />
+					</h:panelGroup>
+
+					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true"
+						actionListener="#{websiteCategoryEditMB.editBean(atius_web_config_category_row)}"
+						update="atius-web-category-edit-dlg-body-id, atius-web-category-edit-dlg-buttons-id" oncomplete="atius_web_category_edit_dlg.show()" />
+
+					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" immediate="true" title="Remover Rede"
+						update="atius-web-config-category-delete-dlg-id" action="#{websiteCategoryEditMB.editBean(atius_web_config_category_row)}"
+						oncomplete="atius_web_config_category_delete_dlg.show()" />
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+	</h:panelGroup>
+
+</ui:composition>
