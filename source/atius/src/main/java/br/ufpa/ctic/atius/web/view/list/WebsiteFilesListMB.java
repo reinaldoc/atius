@@ -34,12 +34,12 @@ public class WebsiteFilesListMB extends AbstractListPageBean<WebsiteFiles, Long>
 	}
 
 	public void selectWebsite(WebsiteDomain websiteDomain) {
-		clearResultList();
+		list();
 		this.websiteDomain = websiteDomain;
 	}
 
 	public void upload(FileUploadEvent event) {
-		clearResultList();
+		list();
 		bc.insert(websiteDomain, event.getFile());
 	}
 

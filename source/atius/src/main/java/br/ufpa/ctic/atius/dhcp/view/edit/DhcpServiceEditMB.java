@@ -37,7 +37,7 @@ public class DhcpServiceEditMB extends AbstractEditPageBean<DhcpService, String>
 			bc.insert(getBean());
 			Faces.addI18nMessage("atius.dhcp.service.insert.success", getBean().getCn());
 			DhcpServerListMB dhcpServerListMB = Faces.getManagedProperty("#{dhcpServerListMB}", DhcpServerListMB.class);
-			dhcpServerListMB.clearResultList();
+			dhcpServerListMB.list();
 			dhcpServerListMB.selectDhcpServer(dhcpServer);
 		} catch (RuntimeException e) {
 			Faces.validationFailed();

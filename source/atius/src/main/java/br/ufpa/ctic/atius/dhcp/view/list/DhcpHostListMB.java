@@ -62,7 +62,7 @@ public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 	}
 
 	public void selectSearchNode() {
-		clearResultList();
+		list();
 		if (searchNode.intValue() == 0) {
 			searchNode = 1;
 			Faces.addI18nMessage("atius.dhcp.search.network", bc.getDhcpSharedNetwork().getCn());
