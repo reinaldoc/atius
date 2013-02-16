@@ -1,0 +1,67 @@
+## Atius Core schema
+## This work is part of ATIUS Software.
+##
+## Copyright 2011-2013 Reinaldo Gil Lima de Carvalho <reinaldoc@gmail.com>
+## All rights reserved.
+##
+## Redistribution and use in source and binary forms, with or without
+## modification, are permitted only as authorized by the GPL v3
+## Public License.
+
+# OID Information: Prefix
+# 1.3.6.1.4.1. => IANA reference
+# 28339.       => UFPA node
+# 1.1.8.       => CTIC.LDAP.Schemas
+
+# OID Information: unique identifier
+# 2.1.X        => ATIUS Core schema.attributetypes.unique identifier
+# 2.2.X        => ATIUS Core schema.objectclasss.unique identifier
+
+# ATIUS Core Schema ObjectClass Structure
+#   atiusContainer
+#     |---mailContainer
+#     |     \--- (core.schema && inetOrgPerson.schema objectClasses)
+#     |
+#     |---dhcpContainer
+#     |     \--- (dhcp.schema objectClasses)
+#     |
+#     \---websiteContainer
+#           |---profileContainer
+#           |     \---websiteProfile
+#           |
+#           |---categoryContainer
+#           |     \---websiteCategory
+#           |
+#           |---webserverContainer
+#           |     \---domainContainer
+#           |           \---websiteDomain
+#           |
+#           \---databaseContainer
+#                 \---schemaContainer
+#                       \---websiteSchema
+#
+
+
+#
+# generics attribute types
+#
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1001	NAME 'order'
+	DESC 'Ordering of Entries'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
+
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1002	NAME 'availability'
+	DESC 'Generic Aavailability: enabled, disabled, hidden'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
+
+#
+# atiusContainer objectclass
+#
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1000	NAME 'atiusContainer'
+	DESC 'Atius Container'
+	SUP top STRUCTURAL
+	MUST ( cn ) )
+

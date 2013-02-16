@@ -1,0 +1,34 @@
+## Atius DHCP schema
+## This work is part of ATIUS Software.
+##
+## Copyright 2011-2013 Reinaldo Gil Lima de Carvalho <reinaldoc@gmail.com>
+## All rights reserved.
+##
+## Redistribution and use in source and binary forms, with or without
+## modification, are permitted only as authorized by the GPL v3
+## Public License.
+
+# OID Information: Prefix
+# 1.3.6.1.4.1. => IANA reference
+# 28339.       => UFPA node
+# 1.1.8.       => CTIC.LDAP.Schemas
+
+# OID Information: unique identifier
+# 4.1.X        => ATIUS DHCP schema.attributetypes.unique identifier
+# 4.2.X        => ATIUS DHCP schema.objectclasss.unique identifier
+
+#
+# attribute types for dhcpContainer objectclass
+#  * dhcpPrimaryServer
+#
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.4.1.1001	NAME 'dhcpPrimaryServer'
+	DESC 'The primary dhcp server for ATIUS'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
+
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.4.2.1000		NAME 'dhcpContainer'
+	DESC 'DHCP Container'
+	SUP top STRUCTURAL
+	MUST ( cn )
+	MAY ( dhcpPrimaryServer ) )

@@ -1,7 +1,7 @@
-## Atius Core schema
+## Atius Web schema
 ## This work is part of ATIUS Software.
 ##
-## Copyright 2011 Reinaldo Gil Lima de Carvalho <reinaldoc@gmail.com>
+## Copyright 2011-2013 Reinaldo Gil Lima de Carvalho <reinaldoc@gmail.com>
 ## All rights reserved.
 ##
 ## Redistribution and use in source and binary forms, with or without
@@ -14,77 +14,13 @@
 # 1.1.8.       => CTIC.LDAP.Schemas
 
 # OID Information: unique identifier
-# 2.1.X        => ATIUS Core schema.attributetypes.unique identifier
-# 2.2.X        => ATIUS Core schema.objectclasss.unique identifier
-
-# ATIUS Core Schema ObjectClass Structure
-#   atiusContainer
-#     |---mailContainer
-#     |     \--- (core.schema && inetOrgPerson.schema objectClasses)
-#     |
-#     |---dhcpContainer
-#     |     \--- (dhcp.schema objectClasses)
-#     |
-#     \---websiteContainer
-#           |---profileContainer
-#           |     \---websiteProfile
-#           |
-#           |---categoryContainer
-#           |     \---websiteCategory
-#           |
-#           |---webserverContainer
-#           |     \---domainContainer
-#           |           \---websiteDomain
-#           |
-#           \---databaseContainer
-#                 \---schemaContainer
-#                       \---websiteSchema
-#
-
-
-#
-# generics attribute types
-#
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.500	NAME 'order'
-	DESC 'Ordering of Entries'
-	EQUALITY caseIgnoreMatch
-	SUBSTR caseIgnoreSubstringsMatch
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
-
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.501	NAME 'availability'
-	DESC 'Generic Aavailability: enabled, disabled, hidden'
-	EQUALITY caseIgnoreMatch
-	SUBSTR caseIgnoreSubstringsMatch
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
-
-#
-# atiusContainer objectclass
-#
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1000	NAME 'atiusContainer'
-	DESC 'Atius Container'
-	SUP top STRUCTURAL
-	MUST ( cn ) )
-
-#
-# attribute types for dhcpContainer objectclass
-#  * dhcpPrimaryServer
-#
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1021	NAME 'dhcpPrimaryServer'
-	DESC 'The primary dhcp server for ATIUS'
-	EQUALITY caseIgnoreMatch
-	SUBSTR caseIgnoreSubstringsMatch
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
-
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1020		NAME 'dhcpContainer'
-	DESC 'DHCP Container'
-	SUP top STRUCTURAL
-	MUST ( cn )
-	MAY ( dhcpPrimaryServer ) )
+# 5.1.X        => ATIUS Web schema.attributetypes.unique identifier
+# 5.2.X        => ATIUS Web schema.objectclasss.unique identifier
 
 #
 # websiteContainer objectclass
 #
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1100	NAME 'websiteContainer'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1000	NAME 'websiteContainer'
 	DESC 'Website Container'
 	SUP top STRUCTURAL
 	MUST ( cn ) )
@@ -92,7 +28,7 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1100	NAME 'websiteContainer'
 #
 # profileContainer objectclass
 #
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1201	NAME 'websiteSchemaModel'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1101	NAME 'websiteSchemaModel'
 	DESC 'Template to determine o schema name like:
           db_%d or db_%p_%d or %p_%s, where:
           %s = example
@@ -102,7 +38,7 @@ attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1201	NAME 'websiteSchemaModel'
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1200	NAME 'profileContainer'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1100	NAME 'profileContainer'
 	DESC 'Website Profile Container'
 	SUP top STRUCTURAL
 	MUST ( cn $ websiteSchemaModel ) )
@@ -114,19 +50,19 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1200	NAME 'profileContainer'
 #  * websiteSchemaModel
 #
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1301	NAME 'webserverName'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1201	NAME 'webserverName'
 	DESC 'Webserver Name to find domainContainer to the new Website'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1302	NAME 'schemaserverName'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1202	NAME 'schemaserverName'
 	DESC 'Database server name to find schemaContainer to new Schema'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1300	NAME 'websiteProfile'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1200	NAME 'websiteProfile'
 	DESC 'Website Category'
 	SUP top STRUCTURAL
 	MUST ( cn $ webserverName )
@@ -135,7 +71,7 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1300	NAME 'websiteProfile'
 #
 # attribute types for categoryContainer objectclass
 #
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1400	NAME 'categoryContainer'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1300	NAME 'categoryContainer'
 	DESC 'Website Category Container'
 	SUP top STRUCTURAL
 	MUST ( cn ) )
@@ -149,31 +85,31 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1400	NAME 'categoryContainer'
 #  * inodeHardLimit
 #
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1501	NAME 'blockSoftLimit'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1401	NAME 'blockSoftLimit'
 	DESC 'Block Soft Quota Limit Category'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1502	NAME 'blockHardLimit'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1402	NAME 'blockHardLimit'
 	DESC 'Block Hard Quota Limit Category'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1503	NAME 'inodeSoftLimit'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1403	NAME 'inodeSoftLimit'
 	DESC 'Inode Soft Quota Limit Category'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1504	NAME 'inodeHardLimit'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1404	NAME 'inodeHardLimit'
 	DESC 'Inode Hard Quota Limit Category'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1500	NAME 'websiteCategory'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1400	NAME 'websiteCategory'
 	DESC 'Website Category'
 	SUP top STRUCTURAL
 	MUST ( cn )
@@ -185,25 +121,25 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1500	NAME 'websiteCategory'
 #  * blockGraceTimeModel
 #  * inodeGraceTimeModel
 #
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1601	NAME 'blockGraceTimeModel'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1501	NAME 'blockGraceTimeModel'
 	DESC 'Block Grace Time Model'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1602	NAME 'inodeGraceTimeModel'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1502	NAME 'inodeGraceTimeModel'
 	DESC 'Inode Grace Time Model'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1603	NAME 'nextUidNumberModel'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1503	NAME 'nextUidNumberModel'
 	DESC 'Next uid number model'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1600	NAME 'webserverContainer'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1500	NAME 'webserverContainer'
 	DESC 'Website Webserver Container'
 	SUP top STRUCTURAL
 	MUST ( cn )
@@ -214,25 +150,25 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1600	NAME 'webserverContainer'
 #  * blockGraceTime
 #  * inodeGraceTime
 #
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1701	NAME 'blockGraceTime'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1601	NAME 'blockGraceTime'
 	DESC 'Webserver Block Grace Time'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1702	NAME 'inodeGraceTime'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1602	NAME 'inodeGraceTime'
 	DESC 'Webserver Inode Grace Time'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1703	NAME 'nextUidNumber'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1603	NAME 'nextUidNumber'
 	DESC 'Next available uid number'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1700	NAME 'domainContainer'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1600	NAME 'domainContainer'
 	DESC 'Website Webserver Container'
 	SUP top STRUCTURAL
 	MUST ( cn )
@@ -258,74 +194,74 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1700	NAME 'domainContainer'
 #  * ownerId
 #
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1801	NAME 'serverName'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1701	NAME 'serverName'
 	SUP name
 	DESC 'Main domain name'
 	SINGLE-VALUE )
 	
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1802	NAME 'serverAlias'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1702	NAME 'serverAlias'
 	SUP name
 	DESC 'Domain alias' )
 	
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1803	NAME 'documentRoot'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1703	NAME 'documentRoot'
 	SUP name
 	DESC 'Domain home directory'
 	SINGLE-VALUE )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1804	NAME 'suPhpEngine'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1704	NAME 'suPhpEngine'
 	SUP name
 	DESC 'Define suPHP support'
 	SINGLE-VALUE )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1805	NAME 'blockCount'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1705	NAME 'blockCount'
 	DESC 'Block count in Bytes'
 	EQUALITY integerMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
 	SINGLE-VALUE )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1806	NAME 'inodeCount'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1706	NAME 'inodeCount'
 	DESC 'Inode count in Bytes'
 	EQUALITY integerMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
 	SINGLE-VALUE )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1807	NAME 'adminId'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1707	NAME 'adminId'
 	DESC 'Admin Identification'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1808	NAME 'ownerId'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1708	NAME 'ownerId'
 	DESC 'Owner Identification'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1809	NAME 'graceTimeCountdown'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1709	NAME 'graceTimeCountdown'
 	DESC 'Time before account lost write access because quota excedeed'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1810	NAME 'websiteProfile'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1710	NAME 'websiteProfile'
 	DESC 'Website Profile like a simple FTP area or a CMS name'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1811	NAME 'websiteCategory'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1711	NAME 'websiteCategory'
 	DESC 'Website Category'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-attributetype ( 1.3.6.1.4.1.28339.1.1.8.2.1.1812	NAME 'databaseSchemaDn'
+attributetype ( 1.3.6.1.4.1.28339.1.1.8.5.1.1712	NAME 'databaseSchemaDn'
 	DESC 'Database Schema DN'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
 
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1800	NAME 'websiteDomain'
+objectclass	( 1.3.6.1.4.1.28339.1.1.5.2.2.1700	NAME 'websiteDomain'
 	DESC 'Website Domain'
 	SUP top STRUCTURAL
 	MUST ( cn $ serverName $ documentRoot $ availability $ adminId $ ownerId )
@@ -337,7 +273,7 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1800	NAME 'websiteDomain'
 #
 # databaseContainer objectclass
 #
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1900	NAME 'databaseContainer'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1800	NAME 'databaseContainer'
 	DESC 'Website Database Container'
 	SUP top STRUCTURAL
 	MUST ( cn ) )
@@ -345,7 +281,7 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.1900	NAME 'databaseContainer'
 #
 # schemaContainer objectclass
 #
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.2000	NAME 'schemaContainer'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.1900	NAME 'schemaContainer'
 	DESC 'Database Server Container'
 	SUP top STRUCTURAL
 	MUST ( cn ) )
@@ -353,7 +289,7 @@ objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.2000	NAME 'schemaContainer'
 #
 # attribute types for websiteSchema objectclass
 #
-objectclass	( 1.3.6.1.4.1.28339.1.1.8.2.2.2100	NAME 'websiteSchema'
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.5.2.2000	NAME 'websiteSchema'
 	DESC 'Website Schema'
 	SUP top STRUCTURAL
 	MUST ( cn ) )
