@@ -1,4 +1,4 @@
-## Atius Mail schema
+## Atius Person schema
 ## This work is part of ATIUS Software.
 ##
 ## Copyright 2011-2013 Reinaldo Gil Lima de Carvalho <reinaldoc@gmail.com>
@@ -14,5 +14,13 @@
 # 1.1.8.       => CTIC.LDAP.Schemas
 
 # OID Information: unique identifier
-# 3.1.X        => ATIUS Mail schema.attributetypes.unique identifier
-# 3.2.X        => ATIUS Mail schema.objectclasss.unique identifier
+# 3.1.X        => ATIUS Person schema.attributetypes.unique identifier
+# 3.2.X        => ATIUS Person schema.objectclasss.unique identifier
+
+#
+# attribute types for personContainer objectclass
+#
+objectclass	( 1.3.6.1.4.1.28339.1.1.8.3.2.1000		NAME 'personContainer'
+	DESC 'personContainer'
+	SUP top STRUCTURAL
+	MUST ( cn ) )
