@@ -15,18 +15,18 @@
 
 
 --
--- Create schema atius
+-- Create schema ATIUS
 --
 
-CREATE DATABASE IF NOT EXISTS atius;
-USE atius;
+CREATE DATABASE IF NOT EXISTS ATIUS;
+USE ATIUS;
 
 --
--- Definition of table `atius`.`securityresource`
+-- Definition of table `ATIUS`.`SECURITYRESOURCE`
 --
 
-DROP TABLE IF EXISTS `atius`.`securityresource`;
-CREATE TABLE  `atius`.`securityresource` (
+DROP TABLE IF EXISTS `ATIUS`.`SECURITYRESOURCE`;
+CREATE TABLE  `ATIUS`.`SECURITYRESOURCE` (
   `id` bigint(20) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
@@ -35,12 +35,12 @@ CREATE TABLE  `atius`.`securityresource` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `atius`.`securityresource`
+-- Dumping data for table `ATIUS`.`SECURITYRESOURCE`
 --
 
-/*!40000 ALTER TABLE `securityresource` DISABLE KEYS */;
-LOCK TABLES `securityresource` WRITE;
-INSERT INTO `atius`.`securityresource` VALUES  (1,'public_url','/security/login.jsf',''),
+/*!40000 ALTER TABLE `SECURITYRESOURCE` DISABLE KEYS */;
+LOCK TABLES `SECURITYRESOURCE` WRITE;
+INSERT INTO `ATIUS`.`SECURITYRESOURCE` VALUES  (1,'public_url','/security/login.jsf',''),
  (2,'private_url','/index.jsf','Url da página inicial'),
  (3,'public_url_startswith','/javax.faces.resource/',''),
  (11,'private_url','/sites/report','URL para Acesso aos relatórios de Website'),
@@ -51,15 +51,15 @@ INSERT INTO `atius`.`securityresource` VALUES  (1,'public_url','/security/login.
  (16,'menu','ATIUS-EMAIL-MODULE','Item \"E-mail\" do menu superior'),
  (17,'menu','ATIUS-SECURITY-MODULE','Item \"Segurança\" do menu superior');
 UNLOCK TABLES;
-/*!40000 ALTER TABLE `securityresource` ENABLE KEYS */;
+/*!40000 ALTER TABLE `SECURITYRESOURCE` ENABLE KEYS */;
 
 
 --
--- Definition of table `atius`.`securityrole`
+-- Definition of table `ATIUS`.`SECURITYROLE`
 --
 
-DROP TABLE IF EXISTS `atius`.`securityrole`;
-CREATE TABLE  `atius`.`securityrole` (
+DROP TABLE IF EXISTS `ATIUS`.`SECURITYROLE`;
+CREATE TABLE  `ATIUS`.`SECURITYROLE` (
   `id` bigint(20) NOT NULL auto_increment,
   `description` varchar(255) default NULL,
   `humanName` varchar(255) default NULL,
@@ -70,42 +70,42 @@ CREATE TABLE  `atius`.`securityrole` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `atius`.`securityrole`
+-- Dumping data for table `ATIUS`.`SECURITYROLE`
 --
 
-/*!40000 ALTER TABLE `securityrole` DISABLE KEYS */;
-LOCK TABLES `securityrole` WRITE;
-INSERT INTO `atius`.`securityrole` VALUES  (12,'Papél que agrupa os recursos para remoção de website',NULL,'ROLE-SITES-DELETE',0x00,'Papél que agrupa os recursos para remoção de website'),
+/*!40000 ALTER TABLE `SECURITYROLE` DISABLE KEYS */;
+LOCK TABLES `SECURITYROLE` WRITE;
+INSERT INTO `ATIUS`.`SECURITYROLE` VALUES  (12,'Papél que agrupa os recursos para remoção de website',NULL,'ROLE-SITES-DELETE',0x00,'Papél que agrupa os recursos para remoção de website'),
  (13,'Papel que agrupa recursos para gerar relatórios asda sdasdasd ',NULL,'ROLE-SITES-REPORT',0x00,'Papel que agrupa recursos para gerar relatórios'),
  (15,'Acesso ao Módulo \"DHCP\"',NULL,'ROLE-DHCP-MODULE',0x00,'Acesso ao Módulo \"DHCP\"'),
  (16,'Acesso ao Módulo \"Sites\"',NULL,'ROLE-SITES-MODULE',0x00,'Acesso ao Módulo \"Sites\"'),
  (17,'Acesso ao Módulo \"E-mail\"',NULL,'ROLE-EMAIL-MODULE',0x00,'Acesso ao Módulo \"E-mail\"'),
  (18,'Acesso ao Módulo \"Segurança\"',NULL,'ROLE-SECURITY-MODULE',0x00,'Acesso ao Módulo \"Segurança\"');
 UNLOCK TABLES;
-/*!40000 ALTER TABLE `securityrole` ENABLE KEYS */;
+/*!40000 ALTER TABLE `SECURITYROLE` ENABLE KEYS */;
 
 
 --
--- Definition of table `atius`.`securityrole_resource`
+-- Definition of table `ATIUS`.`SECURITYROLE_RESOURCE`
 --
 
-DROP TABLE IF EXISTS `atius`.`securityrole_resource`;
-CREATE TABLE  `atius`.`securityrole_resource` (
+DROP TABLE IF EXISTS `ATIUS`.`SECURITYROLE_RESOURCE`;
+CREATE TABLE  `ATIUS`.`SECURITYROLE_RESOURCE` (
   `ROLE_ID` bigint(20) NOT NULL,
   `RESOURCE_ID` bigint(20) NOT NULL,
   KEY `FKB88AF277F0E5200B` (`ROLE_ID`),
   KEY `FKB88AF277E2B9E88B` (`RESOURCE_ID`),
-  CONSTRAINT `FKB88AF277E2B9E88B` FOREIGN KEY (`RESOURCE_ID`) REFERENCES `securityresource` (`id`),
-  CONSTRAINT `FKB88AF277F0E5200B` FOREIGN KEY (`ROLE_ID`) REFERENCES `securityrole` (`id`)
+  CONSTRAINT `FKB88AF277E2B9E88B` FOREIGN KEY (`RESOURCE_ID`) REFERENCES `SECURITYRESOURCE` (`id`),
+  CONSTRAINT `FKB88AF277F0E5200B` FOREIGN KEY (`ROLE_ID`) REFERENCES `SECURITYROLE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `atius`.`securityrole_resource`
+-- Dumping data for table `ATIUS`.`SECURITYROLE_RESOURCE`
 --
 
-/*!40000 ALTER TABLE `securityrole_resource` DISABLE KEYS */;
-LOCK TABLES `securityrole_resource` WRITE;
-INSERT INTO `atius`.`securityrole_resource` VALUES  (12,12),
+/*!40000 ALTER TABLE `SECURITYROLE_RESOURCE` DISABLE KEYS */;
+LOCK TABLES `SECURITYROLE_RESOURCE` WRITE;
+INSERT INTO `ATIUS`.`SECURITYROLE_RESOURCE` VALUES  (12,12),
  (13,13),
  (13,11),
  (15,14),
@@ -117,7 +117,7 @@ INSERT INTO `atius`.`securityrole_resource` VALUES  (12,12),
  (18,17),
  (18,2);
 UNLOCK TABLES;
-/*!40000 ALTER TABLE `securityrole_resource` ENABLE KEYS */;
+/*!40000 ALTER TABLE `SECURITYROLE_RESOURCE` ENABLE KEYS */;
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
