@@ -1,0 +1,191 @@
+#!/bin/bash
+# schemactl - A openldap schema tool
+# Copyright (c) 2013 - Reinaldo Gil Lima de Carvalho <reinaldoc@gmail.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+
+DEFAULT_SCHEMA_CONF="./schemas.conf"
+DEFAULT_SCHEMA_CONVERTED="./schemas"
+DEFAULT_SCHEMA_DSTDIR="/etc/ldap/slapd.d/cn=config/cn=schema"
+OPENLDAP_USER="openldap"
+
+if [ ! -d "${DEFAULT_SCHEMA_DSTDIR}" ] ; then
+	echo "(Error) Destination schema directory does not exist: ${DEFAULT_SCHEMA_DSTDIR}"
+	exit 1
+fi
+
+if !(id "${OPENLDAP_USER}">/dev/null 2>&1) ; then
+	echo "(Error) Openldap user does not exist: ${OPENLDAP_USER}"
+	exit 1
+fi
+
+function usage() {
+	cat <<EOF
+Usage: $0 OBJECT [...]
+
+OBJECT
+   dumpconf		Create the file schemas.conf with a list of schemas to convert
+   convert		Convert schemas to LDIF format
+   install		Add or update LDIF schemas to openldap configuration
+
+DUMPCONF
+	dumpconf {directory} [$DEFAULT_SCHEMA_CONF]
+
+CONVERT
+	convert [$DEFAULT_SCHEMA_CONF] [$DEFAULT_SCHEMA_CONVERTED]
+
+INSTALL
+	install [$DEFAULT_SCHEMA_CONVERTED] [$DEFAULT_SCHEMA_DSTDIR]
+
+EOF
+}
+
+function dumpconf() {
+	local dir=$1 conf=$2 schema content
+
+	if [ -z "$dir" ]; then
+		echo "Error: schemas directory required"
+		return
+	fi
+
+	if ! [ -d "$dir" ]; then
+		echo "Error: can not access schemas directory ($dir)"
+		return
+	fi
+
+	if [ -z "$conf" ]; then
+		conf="${DEFAULT_SCHEMA_CONF}"
+	fi
+
+	if [ "${dir#${dir%?}}" == "/" ]; then
+		dir=${dir%?}
+	fi
+
+	for schema in $(ls "$dir"/*.schema); do
+		content="${content}include	$schema\n"
+	done
+
+	echo -e "${content}" > "${conf}"
+
+}
+
+function convert() {
+	local conf=$1 dir=$2 workdir
+
+	if [ -z "$dir" ]; then
+		dir="${DEFAULT_SCHEMA_CONVERTED}"
+	fi
+
+	if [ -z "$conf" ]; then
+		conf="${DEFAULT_SCHEMA_CONF}"
+	fi
+	
+	if [ ! -f "$conf" ]; then
+		echo "Error: file not found ($conf)"
+		return
+	fi 
+	
+	mkdir -p "$dir"
+	rm "$dir"/*.ldif 2>/dev/null
+
+	workdir=$(mktemp -d)
+	slaptest -f "$conf" -F "${workdir}" >/dev/null 2>&1
+	mv "${workdir}/cn=config/cn=schema/"*.ldif "$dir"
+
+}
+
+# return: a integer with new schema id
+function getNextSchemaId() {
+
+	local dstdir=$1 nextid=-1 schema partial
+
+	for schema in $(ls "$dstdir"/*.ldif 2>/dev/null); do
+		id="$(basename $schema | sed -re 's/.*\{([0-9]+)\}.*/\1/')"
+		if [ -n "${id}" ] && [ "${id}" -gt "${nextid}" ]; then
+			nextid="${id}"
+		fi		
+	done
+	expr ${nextid} + 1
+
+}
+
+# @1: schema filename (e.g: dhcp.ldif)
+# return: a string with full path to install file (0: update; 1: new)
+function getInstallPath() {
+
+	local partialname=$1 dstdir=$2 schema schemaname
+
+	for schema in $(ls "$dstdir"/* 2>/dev/null) ; do
+		schemaname=$(basename $schema)
+		if [ "$partialname" == "${schemaname#*\}}" ] ; then
+			echo $schema
+			return 0
+		fi
+	done
+
+	echo "${dstdir}/cn={$(getNextSchemaId "$dstdir")}$partialname"
+	return 1
+
+}
+
+function install() {
+
+	local dir=$1 dstdir=$2
+	
+	if [ -z "$dir" ]; then
+		dir="${DEFAULT_SCHEMA_CONVERTED}"
+	fi
+
+	if ! [ -d "$dir" ]; then
+		echo "Error: can not access directory ($dir)"
+		return
+	fi
+
+	if [ -z "$dstdir" ]; then
+		dstdir="${DEFAULT_SCHEMA_DSTDIR}"
+	fi
+
+	cd "$dir"
+	for file in $(ls *.ldif); do
+		echo Searching path for "${file#*\}}"
+		dstfile=$(getInstallPath "${file#*\}}" "$dstdir")
+		if [ $? == 0 ] ; then
+			echo Update: $dstfile
+		else
+			echo New: $dstfile
+		fi
+		cp "$file" "$dstfile"
+		echo
+	done
+	chown "${OPENLDAP_USER}:" "${dstdir}"/*
+}
+
+
+
+case "$1" in
+	dumpconf)
+		dumpconf "$2" "$3"
+	;;
+	convert)
+		convert "$2" "$3"
+	;;
+	install)
+		install "$2" "$3"
+	;;
+	*)
+		usage
+	;;
+esac
+
