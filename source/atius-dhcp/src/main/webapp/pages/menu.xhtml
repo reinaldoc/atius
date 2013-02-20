@@ -5,21 +5,7 @@
 
 		<h:form prependId="false">
 			<!-- MENU LADO ESQUERDO -->
-			<p:commandLink value="E-mail" actionListener="#{menuContext.select('MenuTop', 'Email')}"
-				styleClass="#{menuContext.menu['MenuTop']['Email']['Style']}" ajax="false" immediate="true"
-				rendered="#{securityContext.hasRole('ROLE-EMAIL-MODULE')}" />
-
-			<h:outputText value="|" styleClass="separator"
-				rendered="#{securityContext.hasRole('ROLE-EMAIL-MODULE') and securityContext.hasRole('ROLE-SITES-MODULE')}" />
-
-			<p:commandLink value="Sites" actionListener="#{menuContext.select('MenuTop', 'Sites')}"
-				styleClass="#{menuContext.menu['MenuTop']['Sites']['Style']}" ajax="false" immediate="true"
-				rendered="#{securityContext.hasRole('ROLE-SITES-MODULE')}" />
-
-			<h:outputText value="|" styleClass="separator"
-				rendered="#{securityContext.hasRole('ROLE-SITES-MODULE') and securityContext.hasRole('ROLE-DHCP-MODULE')}" />
-
-			<p:commandLink value="DHCP" actionListener="#{menuContext.select('MenuTop', 'DHCP')}"
+			<p:commandLink value="DHCP Management" actionListener="#{menuContext.select('MenuTop', 'DHCP')}"
 				styleClass="#{menuContext.menu['MenuTop']['DHCP']['Style']}" ajax="false" immediate="true"
 				rendered="#{securityContext.hasRole('ROLE-DHCP-MODULE')}" />
 

@@ -8,7 +8,7 @@
 		<p:confirmDialog message="Deseja excluir a reserva: #{dhcpHostEditMB.bean.cn} ?" header="Atenção!" severity="alert"
 			id="atius-dhcp-host-delete-dlg-id" widgetVar="atius_dhcp_host_delete_dlg">
 			<p:commandButton value="Sim" oncomplete="atius_dhcp_host_delete_dlg.hide()" update="atius-dhcp-host-list-datatable-id, faa-growl-id"
-				action="#{dhcpHostEditMB.delete}" actionListener="#{dhcpHostListMB.clearResultList}" style="margin-right: 20px;" />
+				action="#{dhcpHostEditMB.delete}" actionListener="#{dhcpHostListMB.list}" style="margin-right: 20px;" />
 			<p:commandButton value="Não" onclick="atius_dhcp_host_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 		</p:confirmDialog>
 
@@ -31,7 +31,7 @@
 					</div>
 
 
-					<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpHostListMB.clearResultList}" update="atius-dhcp-host-list-datatable-id"
+					<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpHostListMB.list}" update="atius-dhcp-host-list-datatable-id"
 						oncomplete="getElementById('atius-dhcp-host-search').focus(); atius_dhcp_host_list_dlg.initPosition();" process="atius-dhcp-host-search, @this"
 						style="margin-right: 45px;" widgetVar="atius_dhcp_host_search" />
 

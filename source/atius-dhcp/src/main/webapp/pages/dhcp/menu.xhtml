@@ -12,7 +12,7 @@
 					<h:panelGroup layout="block" style="white-space: pre;">
 
 						<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update="faa-body-id, faa-header-right-id"
-							action="#{dhcpSharedNetworkListMB.selectDhcpSharedNetwork(dhcpSharedNetwork)}" actionListener="#{dhcpSubnetListMB.clearResultList}"
+							action="#{dhcpSharedNetworkListMB.selectDhcpSharedNetwork(dhcpSharedNetwork)}" actionListener="#{dhcpSubnetListMB.list}"
 							styleClass="#{menuContext.menu['DhcpSharedNetwork'][dhcpSharedNetwork.cn]['Style']}" />
 
 					</h:panelGroup>

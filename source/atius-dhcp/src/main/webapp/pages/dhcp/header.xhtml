@@ -18,7 +18,7 @@
 
 			<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 
-			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.clearResultList}"
+			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.list}"
 				update="atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search, @this" styleClass="forHeader" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"

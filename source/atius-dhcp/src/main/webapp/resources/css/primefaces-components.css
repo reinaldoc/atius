@@ -187,7 +187,7 @@ input[type=text].ui-state-focus,input[type=password].ui-state-focus,textarea.ui-
 
 .ui-confirm-dialog .ui-dialog-content .ui-icon {
 	background-image:
-		url("/atius/javax.faces.resource/growl/images/info.png.jsf?ln=primefaces");
+		url("/atius-dhcp/javax.faces.resource/growl/images/info.png.jsf?ln=primefaces");
 	height: 32px;
 	width: 32px;
 	margin-right: 20px;

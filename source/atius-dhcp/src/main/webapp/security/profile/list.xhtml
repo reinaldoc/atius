@@ -7,7 +7,7 @@
 			id="faa-profile-delete-dlg-id" widgetVar="faa_profile_delete_dlg">
 
 			<p:commandButton value="Sim" oncomplete="faa_profile_delete_dlg.hide()" update="faa-profile-list-datatable-id, faa-growl-id"
-				action="#{profileEditMB.delete}" actionListener="#{profileListMB.clearResultList}" style="margin-right: 20px;" />
+				action="#{profileEditMB.delete}" actionListener="#{profileListMB.list}" style="margin-right: 20px;" />
 
 			<p:commandButton value="Não" onclick="faa_profile_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 

@@ -7,7 +7,7 @@
 			id="faa-user-delete-dlg-id" widgetVar="faa_user_delete_dlg">
 
 			<p:commandButton value="Sim" oncomplete="faa_user_delete_dlg.hide()" update="faa-user-list-datatable-id, faa-growl-id"
-				action="#{userEditMB.delete}" actionListener="#{userListMB.clearResultList}" style="margin-right: 20px;" />
+				action="#{userEditMB.delete}" actionListener="#{userListMB.list}" style="margin-right: 20px;" />
 
 			<p:commandButton value="Não" onclick="faa_user_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 
@@ -17,11 +17,11 @@
 			header="Atenção!" severity="alert" id="faa-user-status-dlg-id" widgetVar="faa_user_status_dlg">
 
 			<p:commandButton value="Sim" oncomplete="faa_user_status_dlg.hide()" update="faa-user-list-datatable-id, faa-growl-id"
-				action="#{userEditMB.disable}" actionListener="#{userListMB.clearResultList}" style="margin-right: 20px;"
+				action="#{userEditMB.disable}" actionListener="#{userListMB.list}" style="margin-right: 20px;"
 				rendered="#{userEditMB.bean.enabled}" />
 
 			<p:commandButton value="Sim" oncomplete="faa_user_status_dlg.hide()" update="faa-user-list-datatable-id, faa-growl-id"
-				action="#{userEditMB.enable}" actionListener="#{userListMB.clearResultList}" style="margin-right: 20px;"
+				action="#{userEditMB.enable}" actionListener="#{userListMB.list}" style="margin-right: 20px;"
 				rendered="#{!userEditMB.bean.enabled}" />
 
 			<p:commandButton value="Não" onclick="faa_user_status_dlg.hide()" type="button" style="margin-left: 20px;" />

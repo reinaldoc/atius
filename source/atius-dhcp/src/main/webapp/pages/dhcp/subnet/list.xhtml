@@ -7,7 +7,7 @@
 			id="atius-dhcp-subnet-delete-dlg-id" widgetVar="atius_dhcp_subnet_delete_dlg">
 
 			<p:commandButton value="Sim" oncomplete="atius_dhcp_subnet_delete_dlg.hide()" update="atius-dhcp-subnet-list-datatable-id, faa-growl-id"
-				action="#{dhcpSubnetEditMB.delete}" actionListener="#{dhcpSubnetListMB.clearResultList}" style="margin-right: 20px;" />
+				action="#{dhcpSubnetEditMB.delete}" actionListener="#{dhcpSubnetListMB.list}" style="margin-right: 20px;" />
 
 			<p:commandButton value="Não" onclick="atius_dhcp_subnet_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 
