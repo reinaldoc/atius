@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout-atius.xhtml">
+
+	<ui:define name="header-right-ui">
+		<ui:include src="header-right.xhtml" />
+	</ui:define>
+
+	<ui:define name="body-left-ui">
+		<ui:include src="body-left.xhtml" />
+	</ui:define>
+
+	<ui:define name="body-right-ui">
+
+		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+			<ui:include src="config/body-right.xhtml" />
+		</h:panelGroup>
+
+		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+			<ui:include src="subnet/body-right.xhtml" />
+			<ui:include src="host/body-right.xhtml" />
+		</h:panelGroup>
+
+	</ui:define>
+
+</ui:composition>

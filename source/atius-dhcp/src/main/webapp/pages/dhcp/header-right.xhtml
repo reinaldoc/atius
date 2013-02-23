@@ -2,15 +2,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
-		<ui:include src="subnet/edit.xhtml" />
+		<ui:include src="subnet/dialog-edit.xhtml" />
 	</h:panelGroup>
 
 	<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
-		<ui:include src="network/edit.xhtml" />
-		<ui:include src="service/edit.xhtml" />
+		<ui:include src="network/dialog-edit.xhtml" />
+		<ui:include src="service/dialog-edit.xhtml" />
 	</h:panelGroup>
 
-	<ui:include src="option/edit.xhtml" />
+	<ui:include src="option/dialog-edit.xhtml" />
 
 	<h:form prependId="false">
 
