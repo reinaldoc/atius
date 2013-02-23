@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="faa-welcome-list-form-id">
+
+		<p:confirmDialog message="Deseja excluir o perfil: #{profileEditMB.bean.name} ?" header="Atenção!" severity="alert"
+			id="faa-welcome-delete-dlg-id" widgetVar="faa_welcome_delete_dlg">
+
+			<p:commandButton value="Sim" oncomplete="faa_welcome_delete_dlg.hide()"
+				update=":faa-welcome-list-form-id:faa-welcome-list-datatable-id, :growl-id" action="#{profileEditMB.delete}"
+				actionListener="#{profileListMB.list}" style="margin-right: 20px;" />
+
+			<p:commandButton value="Não" onclick="faa_welcome_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+		</p:confirmDialog>
+
+		<h:panelGroup id="faa-welcome-list-id">
+
+			<p:dataTable id="faa-welcome-list-datatable-id" widgetVar="faa_welcome_dt_wv" emptyMessage="Não há registros"
+				value="#{profileListMB.lazyDataModel}" var="faa_welcome_dt_row" rows="#{paginationConfig.pageSize}" paginator="true"
+				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+
+				<p:column styleClass="faa-label faa-label-welcome">
+					<h:outputText value="Welcome" />
+				</p:column>
+
+				<p:column headerText="Perfil" sortBy="#{faa_welcome_dt_row.name}">
+
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; margin-right: -120px;">
+						<h:outputText value="#{faa_welcome_dt_row.name}" title="#{faa_welcome_dt_row.shortDescription}" />
+					</h:panelGroup>
+
+				</p:column>
+
+				<p:column headerText="Pagina inicial" sortBy="#{faa_welcome_dt_row.welcomePage.value}">
+
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; margin-right: -120px;">
+						<h:outputText value="#{faa_welcome_dt_row.welcomePage.value}"
+							title="#{faa_welcome_dt_row.welcomePage.value} (#{faa_welcome_dt_row.welcomePage.name})" />
+					</h:panelGroup>
+
+				</p:column>
+
+				<p:column headerText="Prioridade" sortBy="#{faa_welcome_dt_row.welcomePagePriority}">
+
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; margin-right: -120px;">
+						<h:outputText value="#{faa_welcome_dt_row.welcomePagePriority}" title="#{faa_welcome_dt_row.welcomePagePriority}"
+							converter="longNullAsHyphen" />
+					</h:panelGroup>
+
+				</p:column>
+
+				<p:column style="text-align: right; padding: 0px">
+
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+
+						<p:commandButton icon="ui-icon-pencil" immediate="true" update=":faa-welcome-edit-form-id:faa-welcome-edit-dlg-body-id, :faa-welcome-edit-form-id:faa-welcome-edit-dlg-buttons-id"
+							action="#{profileEditMB.editById(faa_welcome_dt_row.id)}" oncomplete="faa_welcome_edit_dlg.show()" title="Editar Informações"
+							styleClass="forItems" />
+
+						<p:commandButton icon="ui-icon-trash" immediate="true" update=":faa-welcome-list-form-id:faa-welcome-delete-dlg-id" styleClass="forItems"
+							action="#{profileEditMB.editById(faa_welcome_dt_row.id)}" oncomplete="faa_welcome_delete_dlg.show()" title="Excluir Perfil" />
+
+					</h:panelGroup>
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

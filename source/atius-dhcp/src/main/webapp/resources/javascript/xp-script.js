@@ -87,7 +87,7 @@ function xp_popup(URL) {
 }
 
 function xp_report(reportPath, reportId) {
-	openWindow("/aelis2012/" + reportPath + "/report?id=" + reportId);
+	openWindow("/atius-dhcp/" + reportPath + "/report?id=" + reportId);
 }
 
 /**

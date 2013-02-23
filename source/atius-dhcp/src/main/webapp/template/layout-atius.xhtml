@@ -34,7 +34,7 @@
 	<h:outputStylesheet library="css" name="xp-style.css" />
 	<h:outputStylesheet library="css" name="xp-dialog-buttons.css" />
 
-	<h:outputStylesheet library="css" name="layout-aelis.css" />
+	<h:outputStylesheet library="css" name="layout-atius.css" />
 	<h:outputStylesheet library="css" name="primefaces-components.css" />
 
 	<h:outputScript library="javascript" name="jquery.qtip.js" />
@@ -70,9 +70,9 @@
 
 					<ui:insert name="header-left-ui">
 						<h:form prependId="false">
-							<p:commandLink actionListener="#{menuContext.select('TopMenu', 'Sites')}" ajax="false" immediate="true" action="/index.jsf">
-								<h:graphicImage library="images" name="logo.png" width="165px" height="44px" alt="#{messages['main.app.title']}"
-									style="border: 0px; margin-left: 0px; margin-top: 5px; margin-right: 8px;" />
+							<p:commandLink actionListener="#{menuContext.select('TopMenu', 'DHCP')}" ajax="false" immediate="true" action="/index.jsf"
+								styleClass="logo">
+								<h:outputText value="Atius" styleClass="logo" />
 							</p:commandLink>
 						</h:form>
 					</ui:insert>

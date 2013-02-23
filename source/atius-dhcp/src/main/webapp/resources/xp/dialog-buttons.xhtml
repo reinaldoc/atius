@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<composite:interface>
+		<composite:attribute name="id" required="true" />
+		<composite:attribute name="actionInserter" method-signature="java.lang.String f()" required="true" />
+		<composite:attribute name="actionUpdater" method-signature="java.lang.String f()" required="true" />
+		<composite:attribute name="actionCloser" method-signature="java.lang.String f()" required="true" />
+		<composite:attribute name="insertLabel" default="Salvar" />
+		<composite:attribute name="updateLabel" default="Salvar" />
+		<composite:attribute name="closeLabel" default="Fechar" />
+		<composite:attribute name="insertMessage" default="Operação realizada com sucesso!" />
+		<composite:attribute name="updateMessage" default="Operação realizada com sucesso!" />
+		<composite:attribute name="updateMode" required="true" />
+		<composite:attribute name="dialogId" required="true" />
+		<composite:attribute name="dialogWidgetVar" />
+		<composite:attribute name="update" />
+		<composite:attribute name="ajaxClose" default="true" />
+		<composite:attribute name="onClickClose" />
+		<composite:attribute name="updateOnClose" default="@none" />
+		<composite:attribute name="hiddenUpdate" />
+		<composite:attribute name="hiddenInsert" />
+	</composite:interface>
+	<composite:implementation>
+
+		<h:panelGroup id="error-bar" style="float: right;  display: none; margin-right: 15px;">
+			<p:commandButton id="message-link" icon="ui-icon-alert" styleClass="xp-dialog-buttons-alert-icon" onclick="return false;" />
+		</h:panelGroup>
+
+		<h:panelGroup id="default-bar">
+			<!-- Salvar insert -->
+			<p:commandButton id="save-button-insert" value="#{cc.attrs.insertLabel}" action="#{cc.attrs.actionInserter}"
+				update=":#{cc.clientId}:messages, #{cc.attrs.update}" onstart="xp_dialog_buttons_saving('#{cc.clientId}','#{cc.attrs.dialogId}')"
+				oncomplete="xp_dialog_buttons_complete(xhr, status, args, '#{cc.clientId}', '#{cc.attrs.dialogId}')"
+				rendered="#{!cc.attrs.updateMode and !cc.attrs.hiddenInsert}" styleClass="xp-button" />
+
+			<!-- Salvar update -->
+			<p:commandButton id="save-button-update" value="#{cc.attrs.updateLabel}" action="#{cc.attrs.actionUpdater}"
+				update=":#{cc.clientId}:messages, #{cc.attrs.update}" onstart="xp_dialog_buttons_saving('#{cc.clientId}','#{cc.attrs.dialogId}')"
+				oncomplete="xp_dialog_buttons_complete(xhr, status, args, '#{cc.clientId}', '#{cc.attrs.dialogId}')"
+				rendered="#{cc.attrs.updateMode and !cc.attrs.hiddenUpdate}" styleClass="xp-button" />
+
+			<!-- Fechar -->
+			<p:commandLink value="#{cc.attrs.closeLabel}" immediate="true" ajax="#{cc.attrs.ajaxClose}" update="#{cc.attrs.updateOnClose}"
+				styleClass="xp-close" action="#{cc.attrs.actionCloser}" process="@this"
+				onclick="xp_hideTip('#{cc.clientId}:message-link'); xp_hide(#{cc.attrs.dialogWidgetVar}); #{cc.attrs.onClickClose}" />
+
+		</h:panelGroup>
+
+		<!-- Barra de Salvando -->
+		<h:panelGroup id="saving-bar" style="display: none; height: 130px;">
+			<h:outputText value="Salvando dados..." styleClass="xp-dialog-buttons-saving" />
+		</h:panelGroup>
+
+		<!-- Barra de Sucesso -->
+		<h:panelGroup id="success-bar" style="display: none; line-height: 20px;">
+
+			<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-circle-check xp-dialog-buttons-success-icon" />
+
+			<h:outputText value="#{cc.attrs.insertMessage}" styleClass="xp-dialog-buttons-success-message" rendered="#{!cc.attrs.updateMode}" />
+
+			<h:outputText value="#{cc.attrs.updateMessage}" styleClass="xp-dialog-buttons-success-message" rendered="#{cc.attrs.updateMode}" />
+
+			<!-- Fechar -->
+			<p:commandLink value="#{cc.attrs.closeLabel}" immediate="true" ajax="#{cc.attrs.ajaxClose}" update="#{cc.attrs.updateOnClose}"
+				styleClass="xp-close" action="#{cc.attrs.actionCloser}" process="@this"
+				onclick="xp_hide(#{cc.attrs.dialogWidgetVar}); #{cc.attrs.onClickClose}" />
+
+		</h:panelGroup>
+
+		<!-- Componente de mensagem -->
+		<h:messages id="messages" style="display: none;" styleClass="xp-dialog-buttons-tooltip" />
+
+	</composite:implementation>
+
+</ui:composition>

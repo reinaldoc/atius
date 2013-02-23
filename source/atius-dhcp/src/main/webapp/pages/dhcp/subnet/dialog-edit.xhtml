@@ -1,5 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:faa="http://java.sun.com/jsf/composite/faa">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
 
 	<h:form prependId="false">
 
@@ -39,7 +39,7 @@
 				</h:panelGrid>
 
 				<h:panelGroup id="atius-dhcp-subnet-edit-dlg-buttons-id">
-					<faa:dialogButtons id="atius-dhcp-subnet-edit-dlg-save-id" dialogId="atius-dhcp-subnet-edit-dlg-id"
+					<xp:dialog-buttons id="atius-dhcp-subnet-edit-dlg-save-id" dialogId="atius-dhcp-subnet-edit-dlg-id"
 						dialogWidgetVar="atius_dhcp_subnet_edit_dlg" updateMode="#{dhcpSubnetEditMB.updateMode}" actionUpdater="#{dhcpSubnetEditMB.update}"
 						actionInserter="#{dhcpSubnetEditMB.insert}" actionCloser="#{dhcpSubnetListMB.clearValidation}"
 						updateOnClose="atius-dhcp-subnet-list-datatable-id" />

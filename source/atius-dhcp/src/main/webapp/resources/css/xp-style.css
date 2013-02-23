@@ -4,39 +4,39 @@
 @font-face {
 	font-family: DroidSans;
 	src:
-		url("/aelis2012/javax.faces.resource/DroidSans.eot.jsf?ln=css/fonts");
+		url("/atius-dhcp/javax.faces.resource/DroidSans.eot.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: DroidSans;
 	src:
-		url("/aelis2012/javax.faces.resource/DroidSans-Bold.eot.jsf?ln=css/fonts");
+		url("/atius-dhcp/javax.faces.resource/DroidSans-Bold.eot.jsf?ln=css/fonts");
 	font-weight: bold;
 }
 
 @font-face {
 	font-family: DroidSans;
 	src:
-		url("/aelis2012/javax.faces.resource/DroidSans.ttf.jsf?ln=css/fonts");
+		url("/atius-dhcp/javax.faces.resource/DroidSans.ttf.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: DroidSans;
 	src:
-		url("/aelis2012/javax.faces.resource/DroidSans-Bold.ttf.jsf?ln=css/fonts");
+		url("/atius-dhcp/javax.faces.resource/DroidSans-Bold.ttf.jsf?ln=css/fonts");
 	font-weight: bold;
 }
 
 @font-face {
 	font-family: PalladioBold;
 	src:
-		url("/aelis2012/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/fonts");
+		url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: PalladioBold;
 	src:
-		url("/aelis2012/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css/fonts");
+		url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css/fonts");
 }
 
 /* Basic XP Style */
@@ -228,7 +228,7 @@ body.xp-style {
 
 /* Background  for IE */
 .xp-style .xp-link {
-	background: url(/aelis2012/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.jsf?ln=primefaces-aristo) #c4c4c4 repeat-x 50% 50%;
+	background: url(/atius-dhcp/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.jsf?ln=primefaces-aristo) #c4c4c4 repeat-x 50% 50%;
 }
 
 .xp-style .xp-link:hover {
@@ -366,7 +366,7 @@ body.xp-style {
 	background-color: #E9E9E9;
 	background-repeat: repeat-x;
 	background-image:
-		url(/aelis2012/javax.faces.resource/acomp-box-bg.png.jsf?ln=images);
+		url(/atius-dhcp/javax.faces.resource/acomp-box-bg.png.jsf?ln=images);
 }
 
 .xp-itembox-link {

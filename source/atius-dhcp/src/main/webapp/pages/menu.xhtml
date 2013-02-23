@@ -5,7 +5,7 @@
 
 		<h:form prependId="false">
 			<!-- MENU LADO ESQUERDO -->
-			<p:commandLink value="DHCP Management" actionListener="#{menuContext.select('MenuTop', 'DHCP')}"
+			<p:commandLink value="DHCP Management" actionListener="#{menuContext.select('MenuTop', 'DHCP')}" action="/pages/dhcp/index.jsf"
 				styleClass="#{menuContext.menu['MenuTop']['DHCP']['Style']}" ajax="false" immediate="true"
 				rendered="#{securityContext.hasRole('ROLE-DHCP-MODULE')}" />
 
@@ -14,14 +14,15 @@
 
 			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;" />
 
-			<p:commandLink value="#{fuselageMB.userNameProperCase}" style="float: right" actionListener="#{menuContext.select('MenuTop', 'Usuário')}"
-				styleClass="#{menuContext.menu['MenuTop']['Usuário']['Style']}" ajax="false" immediate="true" />
+			<p:commandLink value="#{fuselageMB.userNameProperCase}" actionListener="#{menuContext.select('MenuTop', 'Usuário')}"
+				action="/pages/security/account/account.jsf" styleClass="#{menuContext.menu['MenuTop']['Usuário']['Style']}" style="float: right" ajax="false"
+				immediate="true" />
 
 			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;"
 				rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
 
-			<p:commandLink value="Segurança" style="float: right" actionListener="#{menuContext.select('MenuTop', 'Segurança')}"
-				styleClass="#{menuContext.menu['MenuTop']['Segurança']['Style']}" ajax="false" immediate="true"
+			<p:commandLink value="Segurança" actionListener="#{menuContext.select('MenuTop', 'Segurança')}" action="/pages/security/index.jsf"
+				styleClass="#{menuContext.menu['MenuTop']['Segurança']['Style']}" style="float: right" ajax="false" immediate="true"
 				rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
 
 		</h:form>
