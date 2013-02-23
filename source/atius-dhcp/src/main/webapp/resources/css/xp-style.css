@@ -1,0 +1,432 @@
+@CHARSET "UTF-8";
+
+/* Font Face */
+@font-face {
+	font-family: DroidSans;
+	src:
+		url("/aelis2012/javax.faces.resource/DroidSans.eot.jsf?ln=css/fonts");
+}
+
+@font-face {
+	font-family: DroidSans;
+	src:
+		url("/aelis2012/javax.faces.resource/DroidSans-Bold.eot.jsf?ln=css/fonts");
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: DroidSans;
+	src:
+		url("/aelis2012/javax.faces.resource/DroidSans.ttf.jsf?ln=css/fonts");
+}
+
+@font-face {
+	font-family: DroidSans;
+	src:
+		url("/aelis2012/javax.faces.resource/DroidSans-Bold.ttf.jsf?ln=css/fonts");
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: PalladioBold;
+	src:
+		url("/aelis2012/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/fonts");
+}
+
+@font-face {
+	font-family: PalladioBold;
+	src:
+		url("/aelis2012/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css/fonts");
+}
+
+/* Basic XP Style */
+.xp-style .xp-left {
+	float: left;
+}
+
+.xp-style .xp-right {
+	float: right;
+}
+
+.xp-style .xp-bold {
+	font-weight: bold;
+}
+
+.xp-style .xp-italic {
+	font-style: italic;
+}
+
+.xp-style .xp-underline {
+	text-decoration: underline;
+}
+
+.xp-style .xp-top {
+	vertical-align: top;
+}
+
+.xp-style .xp-none {
+	display: none;
+}
+
+.xp-style .xp-nowrap {
+	white-space: nowrap;
+}
+
+.xp-style .xp-hidden {
+	overflow: hidden;
+}
+
+.xp-style .xp-hidden-line {
+	overflow: hidden;
+	height: 26px;
+	line-height: 26px;
+}
+
+.xp-style .xp-hidden-pre {
+	overflow: hidden;
+	white-space: pre;
+}
+
+.xp-style .xp-inline {
+	display: inline-block;
+}
+
+.xp-style .xp-inline-block {
+	display: inline-block;
+	width: 100%;
+}
+
+.xp-style .xp-block {
+	display: block;
+}
+
+.xp-style .xp-block-line {
+	display: block;
+	width: 100%;
+}
+
+/* Body */
+body.xp-style {
+	font-family: DroidSans;
+	font-size: 12.5px;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Input */
+.xp-style .xp-input-label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.xp-style .xp-input {
+	border: 1px solid #BBC5CD;
+	margin-bottom: 10px;
+}
+
+.xp-style span.xp-input {
+	display: block;
+	font-weight: normal;
+	line-height: 22px;
+	padding-left: 4px;
+	width: 378px;
+	height: 22px;
+	overflow: hidden;
+}
+
+.xp-style span.xp-input-1rightbtn {
+	width: 344px;
+	display: inline-block;
+}
+
+.xp-style .xp-input-style1 {
+	border: 1px solid #AFAFAF;
+	font-weight: bold;
+	padding: 8px;
+	width: 500px;
+}
+
+.xp-style .xp-input-style1:focus {
+	border-color: #1A5EC0;
+	box-shadow: inset 0 0 2px #5A7EFF;
+}
+
+.xp-style .xp-input-style2 {
+	border: 1px solid #AFAFAF;
+	font-weight: bold;
+	padding: 5px;
+	width: 350px;
+}
+
+.xp-style textarea.xp-textarea,.xp-style input.xp-input,.xp-style select.xp-select
+	{
+	width: 375px;
+	padding: 3px;
+}
+
+.xp-style textarea.xp-textarea:focus,.xp-style input.xp-input:focus,.xp-style select.xp-select:focus
+	{
+	background-color: #FFFFE0;
+}
+
+/* Autocomplete */
+.xp-autocomplete .ui-autocomplete-input {
+	border: 1px solid #BBC5CD;
+	margin-bottom: 10px;
+}
+
+/* SelectOneRadio */
+.xp-style .xp-radiobutton-m20px .ui-radiobutton {
+	margin-left: 20px;
+}
+
+/* SelectOneMenu */
+.xp-style .xp-combobox .ui-selectonemenu-label {
+	box-shadow: none;
+	cursor: pointer;
+}
+
+/* Dialog Tableless */
+.xp-style .xp-dialog {
+	border-bottom: 1px solid #AFAFAF;
+	padding: 15px 15px 5px;
+}
+
+/* Buttons */
+.xp-style .xp-button {
+	margin: 5px 0 0 10px;
+}
+
+.xp-style .xp-button .ui-button-text {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.xp-style .xp-close {
+	color: #3F586D;
+	font-weight: bold;
+	text-decoration: none;
+	margin-right: 25px;
+	padding-top: 10px;
+	float: right;
+}
+
+.xp-style a.xp-link {
+	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5),
+		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #D6D6D6;
+	border: 0 solid #DEE5F2;
+	border-radius: 6px 6px 6px 6px;
+	box-shadow: 2px 2px 4px #CCCCCC;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	padding: 6px 13px 7px 8px;
+	display: block;
+	box-shadow: 2px 2px 4px #CCCCCC;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.698);
+}
+
+/* Background  for IE */
+.xp-style .xp-link {
+	background: url(/aelis2012/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.jsf?ln=primefaces-aristo) #c4c4c4 repeat-x 50% 50%;
+}
+
+.xp-style .xp-link:hover {
+	background: none repeat scroll 0 0 #5CC6C6;
+	box-shadow: 0 0 8px #85B2CB;
+	color: #313131;
+}
+
+.xp-style .xp-button-style1 {
+	background: none repeat-x scroll 0 0 #F0F0F0 !important;
+	border: 1px solid #AFAFAF !important;
+	border-radius: 2px 2px 2px 2px;
+	color: #000000;
+	cursor: pointer;
+	font-size: 12px;
+	margin-top: 13px;
+	padding: 1px 17px;
+}
+
+.xp-style .xp-button-style1:hover {
+	border-radius: 2px 2px 2px 2px;
+}
+
+/* Datatable */
+.xp-style .xp-datatable td.ui-paginator {
+	background: none repeat scroll 0 0 #F4F4F4;
+	border: 0 none;
+}
+
+.xp-style .xp-datatable td.ui-paginator span.ui-paginator-first {
+	margin-top: 3px;
+}
+
+.xp-style .xp-datatable .ui-datatable-empty-message {
+	text-decoration: underline;
+}
+
+.xp-style .xp-datatable-th th {
+	border-radius: 3px 3px 3px 3px;
+}
+
+.xp-style .xp-datatable-th-dialog th.ui-state-default {
+	background-color: transparent !important;
+	padding: 0 0 0 6px;
+}
+
+.xp-style .xp-datatable-th-dialog th div.ui-dt-c {
+	padding: 0 !important;
+}
+
+.xp-style .xp-datatable-th-title th {
+	background-color: none;
+	color: #000000;
+	display: block;
+	letter-spacing: 1.4px;
+}
+
+.xp-style .xp-datatable-th-title-darkgray th {
+	padding: 4px 10px !important;
+	text-shadow: 0 0 0;
+	font-weight: normal;
+	color: #FFFFFF;
+	border: 1px solid #BBBBBB !important;
+	background-color: #555555 !important;
+}
+
+.xp-style .xp-datatable-th-title-darkgray td {
+	padding: 3px 11px !important
+}
+
+/* Datagrid */
+.xp-style .xp-datagrid .ui-datagrid-content-empty {
+	text-align: center;
+	text-decoration: underline;
+	line-height: 50px;
+}
+
+.xp-style .xp-datagrid-style1 .ui-datagrid-content-empty {
+	text-align: center;
+	text-decoration: underline;
+	font-size: 14px;
+	line-height: 100px;
+}
+
+.xp-style .xp-datagrid-style2 .ui-datagrid-content-empty {
+	text-align: center;
+	text-decoration: underline;
+	font-size: 14px;
+	line-height: 200px;
+}
+
+/* XP Style - TITLE */
+.xp-style .xp-title {
+	display: block;
+	padding-left: 29px;
+	color: #000000;
+	letter-spacing: 1.4px;
+	text-shadow: 0 0 0;
+	background-color: none;
+	border-radius: 3px 3px 3px 3px;
+	line-height: 29px;
+	height: 29px;
+	overflow: hidden;
+}
+
+.xp-style .xp-title-selectOneRadio {
+	padding-right: 35px;
+}
+
+.xp-style .xp-title-selectOneRadio table {
+	line-height: 17px;
+}
+
+/* Temporary */
+.xp-style .xp-title .ui-widget {
+	text-shadow: 0 0 0;
+}
+
+.xp-style .xp-title-darkgray {
+	color: #FFFFFF;
+	border: 1px solid #BBBBBB;
+	background-color: #555555;
+	text-shadow: 0 0 0;
+}
+
+/* XP Style - ITEMBOX */
+.xp-itembox {
+	overflow: hidden;
+	width: 150px;
+	margin: 10px 0 5px;
+	padding: 0;
+	min-height: 108.5px;
+	border-radius: 3px;
+	box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+	background-color: #E9E9E9;
+	background-repeat: repeat-x;
+	background-image:
+		url(/aelis2012/javax.faces.resource/acomp-box-bg.png.jsf?ln=images);
+}
+
+.xp-itembox-link {
+	display: block;
+	min-height: 108.5px;
+}
+
+.xp-itembox .xp-progress-outside {
+	margin-bottom: 10px;
+}
+
+.xp-itembox .xp-itembox-header {
+	overflow: hidden;
+	white-space: pre;
+	margin: 3px 10px 0 4px;
+	height: 20px;
+}
+
+.xp-itembox .xp-itembox-header-title {
+	color: #333333;
+	font-family: Arial;
+	display: inline-block;
+	font-size: 11px;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.xp-itembox .xp-itembox-header-subtitle {
+	display: inline-block;
+	margin-left: 5px;
+	text-align: center;
+	font-size: 10px;
+	color: #A52A2A;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.xp-itembox .xp-itembox-body {
+	margin: 5px 3px;
+	height: 100%;
+}
+
+.xp-itembox .xp-itembox-body-title {
+	font-size: 11px;
+	font-weight: bold;
+	color: #777777;
+	margin: 0 5px 0 0;
+}
+
+.xp-itembox .xp-itembox-body-subtitle {
+	font-size: 11px;
+	font-weight: bold;
+	color: #A52A2A;
+	font-family: Arial, Helvetica;
+}
+
+/* XP Style - Fix qtooltip css */
+.xp-style .ui-tooltip .ui-tooltip-tip {
+	margin-right: 10px;
+	margin-left: 10px;
+	bottom: -4px !important;
+}

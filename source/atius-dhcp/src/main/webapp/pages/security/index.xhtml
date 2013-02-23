@@ -1,42 +1,44 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout-atius.xhtml">
 
-	<div id="faa-body-left-id">
+	<ui:define name="header-right-ui">
+		<ui:include src="header-right.xhtml" />
+	</ui:define>
 
-		<!-- Begin @BodyLeft  -->
-		<ui:include src="menu.xhtml" />
-		<!-- End @BodyLeft  -->
+	<ui:define name="body-left-ui">
+		<ui:include src="body-left.xhtml" />
+	</ui:define>
 
-	</div>
-
-	<div id="faa-body-right-id">
-
-		<!-- Begin @BodyRight  -->
+	<ui:define name="body-right-ui">
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'User')}">
-			<ui:include src="user/edit.xhtml" />
-			<ui:include src="user/list.xhtml" />
+			<ui:include src="user/dialog-edit.xhtml" />
+			<ui:include src="user/body-right.xhtml" />
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Profile')}">
-			<ui:include src="profile/edit.xhtml" />
-			<ui:include src="profile/list.xhtml" />
+			<ui:include src="profile/dialog-edit.xhtml" />
+			<ui:include src="profile/body-right.xhtml" />
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Role')}">
-			<ui:include src="role/edit.xhtml" />
-			<ui:include src="role/list.xhtml" />
+			<ui:include src="role/dialog-edit.xhtml" />
+			<ui:include src="role/body-right.xhtml" />
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Resource')}">
-			<ui:include src="resource/edit.xhtml" />
-			<ui:include src="resource/list.xhtml" />
+			<ui:include src="resource/dialog-edit.xhtml" />
+			<ui:include src="resource/body-right.xhtml" />
 		</h:panelGroup>
 
-		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Configuração')}">
-			<ui:include src="config/main.xhtml" />
+		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Rule')}">
+			<ui:include src="rule/dialog-edit.xhtml" />
+			<ui:include src="rule/body-right.xhtml" />
 		</h:panelGroup>
-		<!-- Begin @BodyRight  -->
 
-	</div>
+		<h:panelGroup rendered="#{menuContext.isSelected('Security', 'Welcome')}">
+			<ui:include src="welcome/dialog-edit.xhtml" />
+			<ui:include src="welcome/body-right.xhtml" />
+		</h:panelGroup>
+	</ui:define>
 
 </ui:composition>

@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+.xp-dialog-buttons-saving {
+	display: block;
+	padding-left: 25px;
+	margin: 15px 0 3px 12px;
+	line-height: 10px;
+	color: black;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-image:
+		url('/aelis2012/javax.faces.resource/faa-wait.gif.jsf?ln=images');
+}
+
+.xp-dialog-buttons-success-icon {
+	float: left;
+	margin-top: 12px;
+}
+
+.xp-dialog-buttons-success-message {
+	color: black;
+	font-weight: bold;
+	margin-left: 5px;
+	margin-top: 9px;
+	display: inline-block;
+}
+
+ul.xp-dialog-buttons-tooltip {
+	margin: 0px;
+	list-style: square;
+	padding: 0px;
+	padding-left: 14px;
+}
+
+ul.xp-dialog-buttons-tooltip li {
+	margin: 0px;
+	font-size: 11px;
+}
+
+.xp-dialog-buttons-alert-icon {
+	margin-top: 4px;
+}
