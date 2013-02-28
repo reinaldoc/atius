@@ -1,33 +1,30 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<h:form prependId="false">
+	<h:form>
 
-		<h:panelGroup id="atius-dhcp-menu-id">
+		<p:dataGrid value="#{dhcpSharedNetworkListMB.resultList}" var="dhcpSharedNetwork" columns="1"
+			rendered="#{dhcpSharedNetworkListMB.resultSize > 0}">
 
-			<p:dataGrid value="#{dhcpSharedNetworkListMB.resultList}" var="dhcpSharedNetwork" columns="1">
+			<p:column>
 
-				<p:column>
+				<h:panelGroup layout="block" style="white-space: pre;">
 
-					<h:panelGroup layout="block" style="white-space: pre;">
+					<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update=":body-id, :header-right-id"
+						action="#{dhcpSharedNetworkListMB.selectDhcpSharedNetwork(dhcpSharedNetwork)}" actionListener="#{dhcpSubnetListMB.list}"
+						styleClass="#{menuContext.menu['DhcpSharedNetwork'][dhcpSharedNetwork.cn]['Style']}" />
 
-						<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update="faa-body-id, faa-header-right-id"
-							action="#{dhcpSharedNetworkListMB.selectDhcpSharedNetwork(dhcpSharedNetwork)}" actionListener="#{dhcpSubnetListMB.list}"
-							styleClass="#{menuContext.menu['DhcpSharedNetwork'][dhcpSharedNetwork.cn]['Style']}" />
+				</h:panelGroup>
 
-					</h:panelGroup>
+			</p:column>
 
-				</p:column>
+		</p:dataGrid>
 
-			</p:dataGrid>
+		<p:spacer height="10px" />
 
-			<p:spacer height="10px" />
-
-			<p:commandLink value="Configuração" immediate="true" update="faa-body-id, faa-header-right-id"
-				actionListener="#{menuContext.select('DhcpSharedNetwork', 'Configuração')}"
-				styleClass="#{menuContext.menu['DhcpSharedNetwork']['Configuração']['Style']}" style="margin-bottom: 15px;" />
-
-		</h:panelGroup>
+		<p:commandLink value="Configuração" immediate="true" update=":body-id, :header-right-id"
+			actionListener="#{menuContext.select('DhcpSharedNetwork', 'Config')}"
+			styleClass="#{menuContext.menu['DhcpSharedNetwork']['Config']['Style']}" style="margin-bottom: 15px;" />
 
 	</h:form>
 

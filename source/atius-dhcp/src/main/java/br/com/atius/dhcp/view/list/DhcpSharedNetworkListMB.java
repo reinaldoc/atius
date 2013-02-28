@@ -35,7 +35,7 @@ public class DhcpSharedNetworkListMB extends AbstractListPageBean<DhcpSharedNetw
 				selectMenu(getResultList().get(0).getCn());
 				bc.selectDhcpSharedNetwork(getResultList().get(0));
 			} else
-				selectMenu("Configuração");
+				selectMenu("Config");
 	}
 
 	public void selectDhcpSharedNetwork(DhcpSharedNetwork dhcpSharedNetwork) {

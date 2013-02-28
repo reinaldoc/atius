@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
 
-	<h:form prependId="false">
+	<h:form id="atius-dhcp-service-edit-form-id">
 
 		<h:panelGrid id="atius-dhcp-service-edit-panel-id" cellpadding="0" cellspacing="0">
 
@@ -30,7 +30,7 @@
 				<h:panelGroup id="atius-dhcp-service-edit-dlg-buttons-id">
 					<xp:dialog-buttons id="atius-dhcp-service-edit-dlg-save-id" dialogId="atius-dhcp-service-edit-dlg-id"
 						dialogWidgetVar="atius_dhcp_service_edit_dlg" updateMode="#{dhcpServiceEditMB.updateMode}" actionUpdater="#{dhcpServiceEditMB.update}"
-						actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServiceEditMB.init}" updateOnClose="faa-body-id" />
+						actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServiceEditMB.init}" updateOnClose=":body-id" />
 				</h:panelGroup>
 
 			</p:dialog>

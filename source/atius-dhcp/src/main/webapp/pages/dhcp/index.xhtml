@@ -11,11 +11,11 @@
 
 	<ui:define name="body-right-ui">
 
-		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 			<ui:include src="config/body-right.xhtml" />
 		</h:panelGroup>
 
-		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 			<ui:include src="subnet/body-right.xhtml" />
 			<ui:include src="host/body-right.xhtml" />
 		</h:panelGroup>

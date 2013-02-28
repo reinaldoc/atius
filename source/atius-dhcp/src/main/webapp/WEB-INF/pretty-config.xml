@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.2"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.2 http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.2.xsd">
 
 	<url-mapping id="index">
 		<pattern value="/" />
-		<view-id value="/index.jsf" />
+		<view-id value="/pages/dhcp/index.jsf" />
 	</url-mapping>
 
 	<url-mapping id="login">

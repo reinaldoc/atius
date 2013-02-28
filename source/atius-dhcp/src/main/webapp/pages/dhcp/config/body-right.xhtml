@@ -6,13 +6,13 @@
 
 		<div class="panel">Servidores</div>
 
-		<h:form prependId="false">
+		<h:form id="atius-dhcp-config-form-id">
 
 			<p:confirmDialog message="Deseja excluir o servidor: #{dhcpServerEditMB.bean.cn} ?" header="Atenção!" severity="alert"
 				id="atius-dhcp-config-server-delete-dlg-id" widgetVar="atius_dhcp_config_server_delete_dlg">
 
 				<p:commandButton value="Sim" oncomplete="atius_dhcp_config_server_delete_dlg.hide()"
-					update="atius-dhcp-config-server-datatable-id, atius-dhcp-config-options-panel-id, faa-header-right-id, faa-body-left-id, faa-growl-id"
+					update=":atius-dhcp-config-form-id:atius-dhcp-config-server-datatable-id, :atius-dhcp-config-options-panel-id, :header-right-id, :body-left-id, :growl-id"
 					actionListener="#{dhcpServerEditMB.delete}" action="#{dhcpServiceEditMB.init}" style="margin-right: 20px;" />
 
 				<p:commandButton value="Não" onclick="atius_dhcp_config_server_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
@@ -32,10 +32,10 @@
 
 					<p:commandButton icon="#{dhcpSessionInfo.dhcpServer == atius_dhcp_config_server_row ? 'ui-icon-circle-check' : 'ui-icon-radio-on'}"
 						style="float: right;" title="Selecionar servidor" actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_config_server_row)}"
-						action="#{dhcpSharedNetworkListMB.list}" immediate="true" update="faa-body-id, faa-header-right-id" />
+						action="#{dhcpSharedNetworkListMB.list}" immediate="true" update=":body-id, :header-right-id" />
 
 					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" styleClass="forItems" immediate="true"
-						title="Remover Servidor" update="atius-dhcp-config-server-delete-dlg-id"
+						title="Remover Servidor" update=":atius-dhcp-config-form-id:atius-dhcp-config-server-delete-dlg-id"
 						action="#{dhcpServerEditMB.editBean(atius_dhcp_config_server_row)}" oncomplete="atius_dhcp_config_server_delete_dlg.show()" />
 
 				</p:column>
@@ -48,10 +48,11 @@
 
 			<div class="panel" style="margin-top: 25px;">
 				<h:panelGroup layout="block" style="display: inline-block">Serviço</h:panelGroup>
-				<h:form prependId="false">
+				<h:form>
 					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true" styleClass="transparent"
 						disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
-						update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id" oncomplete="atius_dhcp_service_edit_dlg.show()" />
+						update=":atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-body-id, :atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-buttons-id"
+						oncomplete="atius_dhcp_service_edit_dlg.show()" />
 				</h:form>
 			</div>
 
@@ -87,9 +88,10 @@
 				<h:form prependId="false">
 					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true" styleClass="transparent"
 						disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }"
-						action="#{dhcpOptionEditMB.setUpdateId('atius-dhcp-config-options-panel-id')}"
+						action="#{dhcpOptionEditMB.setUpdateId(':atius-dhcp-config-options-panel-id')}"
 						actionListener="#{dhcpOptionEditMB.editBean(dhcpSessionInfo.dhcpService)}"
-						update="atius-dhcp-option-edit-dlg-body-id, atius-dhcp-option-edit-dlg-buttons-id" oncomplete="atius_dhcp_option_edit_dlg.show()" />
+						update=":atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-dlg-body-id, :atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-dlg-buttons-id"
+						oncomplete="atius_dhcp_option_edit_dlg.show()" />
 				</h:form>
 			</div>
 
@@ -136,50 +138,53 @@
 
 	</h:panelGroup>
 
-	<h:panelGroup layout="block" id="atius-dhcp-config-network-panel-id"
-		style="display: inline-block; padding-top: 25px; padding-left: 25px; width: 378px;">
+	<h:panelGroup layout="block" style="display: inline-block; padding-top: 25px; padding-left: 25px; width: 378px;">
 
-		<div class="panel">Redes</div>
+		<h:form id="atius-dhcp-config-network-form-id">
 
-		<h:form prependId="false">
+			<h:panelGroup id="atius-dhcp-config-network-panel-id">
 
-			<p:confirmDialog message="Deseja excluir a rede: #{dhcpSharedNetworkEditMB.bean.cn} ?" header="Atenção!" severity="alert"
-				id="atius-dhcp-config-network-delete-dlg-id" widgetVar="atius_dhcp_config_network_delete_dlg">
+				<div class="panel">Redes</div>
 
-				<p:commandButton value="Sim" oncomplete="atius_dhcp_config_network_delete_dlg.hide()"
-					update="atius-dhcp-config-network-datatable-id, faa-body-left-id, faa-growl-id" action="#{dhcpSharedNetworkEditMB.delete}"
-					actionListener="#{dhcpSharedNetworkListMB.list}" style="margin-right: 20px;" />
+				<p:confirmDialog message="Deseja excluir a rede: #{dhcpSharedNetworkEditMB.bean.cn} ?" header="Atenção!" severity="alert"
+					id="atius-dhcp-config-network-delete-dlg-id" widgetVar="atius_dhcp_config_network_delete_dlg">
 
-				<p:commandButton value="Não" onclick="atius_dhcp_config_network_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+					<p:commandButton value="Sim" oncomplete="atius_dhcp_config_network_delete_dlg.hide()"
+						update=":atius-dhcp-config-network-form-id:atius-dhcp-config-network-datatable-id, :body-left-id, :growl-id"
+						action="#{dhcpSharedNetworkEditMB.delete}" actionListener="#{dhcpSharedNetworkListMB.list}" style="margin-right: 20px;" />
 
-			</p:confirmDialog>
+					<p:commandButton value="Não" onclick="atius_dhcp_config_network_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 
-			<p:dataTable id="atius-dhcp-config-network-datatable-id" widgetVar="atius_dhcp_config_network_wv" emptyMessage="Não há redes DHCP"
-				value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="13" paginator="true"
-				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
-				styleClass="dialog-datatable dialog-datatable-small">
+				</p:confirmDialog>
 
-				<p:column sortBy="#{atius_dhcp_config_network_row.cn}">
+				<p:dataTable id="atius-dhcp-config-network-datatable-id" widgetVar="atius_dhcp_config_network_wv" emptyMessage="Não há redes DHCP"
+					value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="13" paginator="true"
+					paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
+					styleClass="dialog-datatable dialog-datatable-small">
 
-					<h:panelGroup layout="block" style="width: 310px; overflow: hidden; white-space: pre; float: left">
-						<h:outputText value="#{atius_dhcp_config_network_row.cn}" />
-					</h:panelGroup>
+					<p:column sortBy="#{atius_dhcp_config_network_row.cn}">
 
-					<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true"
-						action="#{dhcpOptionEditMB.setUpdateId('atius-dhcp-config-network-panel-id')}"
-						actionListener="#{dhcpOptionEditMB.editBean(atius_dhcp_config_network_row)}"
-						update="atius-dhcp-option-edit-dlg-body-id, atius-dhcp-option-edit-dlg-buttons-id" oncomplete="atius_dhcp_option_edit_dlg.show()" />
+						<h:panelGroup layout="block" style="width: 310px; overflow: hidden; white-space: pre; float: left">
+							<h:outputText value="#{atius_dhcp_config_network_row.cn}" />
+						</h:panelGroup>
 
-					<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" immediate="true" title="Remover Rede"
-						update="atius-dhcp-config-network-delete-dlg-id" action="#{dhcpSharedNetworkEditMB.editBean(atius_dhcp_config_network_row)}"
-						oncomplete="atius_dhcp_config_network_delete_dlg.show()" />
+						<p:commandButton icon="ui-icon-pencil" title="Editar" immediate="true"
+							action="#{dhcpOptionEditMB.setUpdateId(':atius-dhcp-config-network-form-id:atius-dhcp-config-network-panel-id')}"
+							actionListener="#{dhcpOptionEditMB.editBean(atius_dhcp_config_network_row)}"
+							update=":atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-dlg-body-id, :atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-dlg-buttons-id"
+							oncomplete="atius_dhcp_option_edit_dlg.show()" />
 
-				</p:column>
+						<p:commandButton icon="ui-icon-close" style="float: right; margin-bottom: 2px;" immediate="true" title="Remover Rede"
+							update=":atius-dhcp-config-network-form-id:atius-dhcp-config-network-delete-dlg-id"
+							action="#{dhcpSharedNetworkEditMB.editBean(atius_dhcp_config_network_row)}" oncomplete="atius_dhcp_config_network_delete_dlg.show()" />
 
-			</p:dataTable>
+					</p:column>
+
+				</p:dataTable>
+
+			</h:panelGroup>
 
 		</h:form>
 
 	</h:panelGroup>
-
 </ui:composition>

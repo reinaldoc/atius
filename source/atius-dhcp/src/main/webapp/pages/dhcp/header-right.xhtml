@@ -1,40 +1,43 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+	<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 		<ui:include src="subnet/dialog-edit.xhtml" />
 	</h:panelGroup>
 
-	<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+	<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 		<ui:include src="network/dialog-edit.xhtml" />
 		<ui:include src="service/dialog-edit.xhtml" />
 	</h:panelGroup>
 
 	<ui:include src="option/dialog-edit.xhtml" />
 
-	<h:form prependId="false">
+	<h:form>
 
-		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 
 			<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 
 			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.list}"
-				update="atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search, @this" styleClass="forHeader" />
+				update=":atius-dhcp-subnet-list-form-id:atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search, @this"
+				styleClass="forHeader" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
-				update="atius-dhcp-subnet-edit-dlg-body-id, atius-dhcp-subnet-edit-dlg-buttons-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
+				update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-dlg-body-id, :atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-dlg-buttons-id"
+				oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
 
 		</h:panelGroup>
 
-		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Configuração')}">
+		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 
 			<p:commandButton icon="ui-icon-plusthick" value="Novo Servidor" immediate="true" action="#{dhcpServiceEditMB.editBean}"
-				styleClass="forHeader" update="atius-dhcp-service-edit-dlg-body-id, atius-dhcp-service-edit-dlg-buttons-id"
+				styleClass="forHeader"
+				update=":atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-body-id, :atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-buttons-id"
 				oncomplete="atius_dhcp_service_edit_dlg.show()" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
-				update="atius-dhcp-network-edit-dlg-body-id, atius-dhcp-network-edit-dlg-buttons-id" oncomplete="atius_dhcp_network_edit_dlg.show()"
-				disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }" />
+				update=":atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-dlg-body-id, :atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-dlg-buttons-id"
+				oncomplete="atius_dhcp_network_edit_dlg.show()" disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }" />
 
 		</h:panelGroup>
 
