@@ -23,7 +23,7 @@ public class DhcpSubnet extends DhcpOption {
 	@Ignore
 	private String dhcpRangeLast;
 
-	@Size(min = 3, message = "Identifique melhor o nome da subrede")
+	@Size(min = 3, message = "Identifique melhor a descrição da subrede")
 	private String dhcpComments;
 
 	public DhcpSubnet() {
