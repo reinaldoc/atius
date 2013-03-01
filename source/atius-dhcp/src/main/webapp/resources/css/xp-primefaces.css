@@ -64,6 +64,10 @@ span.ui-icon-bullet {
 	font-family: inherit !important;
 }
 
+.ui-datatable span.ui-sortable-column-icon {
+	margin-left: -4px;
+}
+
 .ui-datatable th.ui-state-default {
 	background: none;
 	background-color: #E8E8EB;
