@@ -64,10 +64,6 @@ span.ui-icon-bullet {
 	font-family: inherit !important;
 }
 
-.ui-datatable div.ui-dt-c {
-	width: 100%;
-}
-
 .ui-datatable th.ui-state-default {
 	background: none;
 	background-color: #E8E8EB;
