@@ -118,6 +118,7 @@ body.xp-style {
 	display: block;
 	font-weight: bold;
 	margin-bottom: 5px;
+	color: #3F586D;
 }
 
 .xp-style .xp-input {
@@ -163,6 +164,7 @@ body.xp-style {
 	{
 	width: 375px;
 	padding: 3px;
+	border: 1px solid #BBC5CD;
 }
 
 .xp-style textarea.xp-textarea:focus,.xp-style input.xp-input:focus,.xp-style select.xp-select:focus
@@ -228,7 +230,9 @@ body.xp-style {
 
 /* Background  for IE */
 .xp-style .xp-link {
-	background: url(/atius-dhcp/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.jsf?ln=primefaces-aristo) #c4c4c4 repeat-x 50% 50%;
+	background:
+		url(/atius-dhcp/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.jsf?ln=primefaces-aristo)
+		#c4c4c4 repeat-x 50% 50%;
 }
 
 .xp-style .xp-link:hover {
