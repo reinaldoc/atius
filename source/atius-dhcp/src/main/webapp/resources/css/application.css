@@ -305,7 +305,9 @@ button.forHeader {
 }
 
 .dialog-selectonemenu-numbers {
-	width: 55px !important;
+    margin: -4px 0 0 4px;
+    vertical-align: middle;
+    width: 58px !important;
 }
 
 ul.dialog-messages {
