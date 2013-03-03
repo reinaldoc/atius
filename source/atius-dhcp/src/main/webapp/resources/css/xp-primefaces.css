@@ -174,7 +174,7 @@ input[type=text].ui-state-focus,input[type=password].ui-state-focus,textarea.ui-
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Confirm Dialog*/
+/* Confirm Dialog */
 .ui-confirm-dialog .ui-dialog-buttonpane {
 	text-align: center !important;
 	padding: 0 1em 0.5em 0.4em;
@@ -185,14 +185,7 @@ input[type=text].ui-state-focus,input[type=password].ui-state-focus,textarea.ui-
 }
 
 .ui-confirm-dialog .ui-dialog-content .ui-icon {
-	background-image: url("/atius-dhcp/javax.faces.resource/growl/images/info.png.jsf?ln=primefaces");
-	height: 32px;
-	width: 32px;
-	margin-right: 20px;
-}
-
-.ui-confirm-dialog .ui-dialog-content .ui-icon-alert {
-	background-position: 0 0 !important;
+	margin: 0 7px 20px 0;
 }
 
 /* Growl */
