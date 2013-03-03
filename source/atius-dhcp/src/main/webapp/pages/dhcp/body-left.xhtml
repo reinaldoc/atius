@@ -3,12 +3,20 @@
 
 	<h:form>
 
+		<p:commandLink value="Opções" immediate="true" update=":body-id, :header-right-id"
+			actionListener="#{menuContext.select('DhcpSharedNetwork', 'Config')}"
+			styleClass="#{menuContext.menu['DhcpSharedNetwork']['Config']['Style']}" style="margin-bottom: 15px;" />
+
+		<h:panelGroup layout="block" styleClass="menu-group" rendered="#{dhcpSharedNetworkListMB.resultSize > 0}">
+			<h:outputText value="Redes" />
+		</h:panelGroup>
+
 		<p:dataGrid value="#{dhcpSharedNetworkListMB.resultList}" var="dhcpSharedNetwork" columns="1"
 			rendered="#{dhcpSharedNetworkListMB.resultSize > 0}">
 
 			<p:column>
 
-				<h:panelGroup layout="block" style="white-space: pre;">
+				<h:panelGroup layout="block" styleClass="xp-nowrap">
 
 					<p:commandLink value="#{dhcpSharedNetwork.cn}" immediate="true" update=":body-id, :header-right-id"
 						action="#{dhcpSharedNetworkListMB.selectDhcpSharedNetwork(dhcpSharedNetwork)}" actionListener="#{dhcpSubnetListMB.list}"
@@ -19,12 +27,6 @@
 			</p:column>
 
 		</p:dataGrid>
-
-		<p:spacer height="10px" />
-
-		<p:commandLink value="Configuração" immediate="true" update=":body-id, :header-right-id"
-			actionListener="#{menuContext.select('DhcpSharedNetwork', 'Config')}"
-			styleClass="#{menuContext.menu['DhcpSharedNetwork']['Config']['Style']}" style="margin-bottom: 15px;" />
 
 	</h:form>
 

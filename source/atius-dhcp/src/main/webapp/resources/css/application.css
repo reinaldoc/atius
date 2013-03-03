@@ -26,26 +26,22 @@
 
 @font-face {
 	font-family: ChanceryMediumItalic;
-	src:
-		url("/atius-dhcp/javax.faces.resource/urw-chancery-l-medium-italic.eot.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/urw-chancery-l-medium-italic.eot.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: ChanceryMediumItalic;
-	src:
-		url("/atius-dhcp/javax.faces.resource/urw-chancery-l-medium-italic.ttf.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/urw-chancery-l-medium-italic.ttf.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: PalladioBold;
-	src:
-		url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: PalladioBold;
-	src:
-		url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css/fonts");
 }
 
 /*	Layout	*/
@@ -227,8 +223,7 @@ button.forHeader {
 	text-align: left;
 }
 
-.dialog-body input[type=text],.dialog-body input[type=password],.dialog-body textarea,.dialog-body select
-	{
+.dialog-body input[type=text],.dialog-body input[type=password],.dialog-body textarea,.dialog-body select {
 	width: 375px;
 	border: 1px solid #BBC5CD !important;
 	padding: 3px !important;
@@ -246,13 +241,11 @@ button.forHeader {
 	width: 378px;
 }
 
-.dialog-body-input input[type=text],.dialog-body-input input[type=password],.dialog-body-input textarea,.dialog-body-input select
-	{
+.dialog-body-input input[type=text],.dialog-body-input input[type=password],.dialog-body-input textarea,.dialog-body-input select {
 	width: 340px;
 }
 
-.dialog-body input[type=text]:focus,.dialog-body input[type=password]:focus,.dialog-body textarea:focus,.dialog-body select:focus
-	{
+.dialog-body input[type=text]:focus,.dialog-body input[type=password]:focus,.dialog-body textarea:focus,.dialog-body select:focus {
 	border: 1px solid #BBC5CD;
 	background-color: #FFFFE0;
 }
@@ -305,9 +298,9 @@ button.forHeader {
 }
 
 .dialog-selectonemenu-numbers {
-    margin: -4px 0 0 4px;
-    vertical-align: middle;
-    width: 58px !important;
+	margin: -4px 0 0 4px;
+	vertical-align: middle;
+	width: 58px !important;
 }
 
 ul.dialog-messages {
@@ -344,8 +337,7 @@ ul.dialog-messages li {
 	color: black;
 	font-weight: bold;
 	background-repeat: no-repeat;
-	background-image:
-		url('/atius-dhcp/javax.faces.resource/faa-wait.gif.jsf?ln=images');
+	background-image: url('/atius-dhcp/javax.faces.resource/faa-wait.gif.jsf?ln=images');
 }
 
 .dialog-datatable td {
@@ -494,4 +486,12 @@ div.asColumn {
 div.asColumnLeft {
 	float: left;
 	width: 170px;
+}
+
+div.menu-group {
+	border-bottom: solid 1px #374140;
+	margin: 20px 40px 8px 8px;
+	font-family: PalladioBold;
+	font-size: 15px;
+	letter-spacing: 1px;
 }
