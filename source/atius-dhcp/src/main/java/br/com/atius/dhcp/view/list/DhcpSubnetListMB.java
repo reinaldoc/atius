@@ -30,6 +30,8 @@ public class DhcpSubnetListMB extends AbstractListPageBean<DhcpSubnet, String> {
 
 		List<DhcpSubnet> dhcpSubnets = new ArrayList<DhcpSubnet>();
 		if (Strings.isNotBlank(getResultFilter())) {
+			// dhcpComments is defined as caseIgnoreIA5Match on dhcp.schema
+			// from ISC than we can not do substring search
 			queryConfig.getFilter().put("dhcpComments", getResultFilter());
 			dhcpSubnets.addAll(bc.findAll());
 			
