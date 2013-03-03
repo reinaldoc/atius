@@ -12,7 +12,6 @@ import br.com.atius.dhcp.domain.DhcpSubnet;
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
-import br.gov.frameworkdemoiselle.util.Beans;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
