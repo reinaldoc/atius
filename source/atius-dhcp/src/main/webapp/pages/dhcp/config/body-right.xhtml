@@ -21,9 +21,10 @@
 
 			<p:dataTable id="atius-dhcp-config-server-datatable-id" widgetVar="atius_dhcp_server_wv" emptyMessage="Não há servidores DHCP"
 				value="#{dhcpServerListMB.resultList}" var="atius_dhcp_config_server_row" rows="9" paginator="true" paginatorAlwaysVisible="false"
-				pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+				pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small"
+				sortBy="#{atius_dhcp_config_server_row.cn}">
 
-				<p:column sortBy="#{atius_dhcp_config_server_row.cn}">
+				<p:column>
 
 					<h:panelGroup layout="block" style="width: 275px; overflow: hidden; white-space: pre; float: left">
 						<h:outputText value="#{atius_dhcp_config_server_row.cn}"
@@ -160,9 +161,9 @@
 				<p:dataTable id="atius-dhcp-config-network-datatable-id" widgetVar="atius_dhcp_config_network_wv" emptyMessage="Não há redes DHCP"
 					value="#{dhcpSharedNetworkListMB.resultList}" var="atius_dhcp_config_network_row" rows="13" paginator="true"
 					paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
-					styleClass="dialog-datatable dialog-datatable-small">
+					styleClass="dialog-datatable dialog-datatable-small" sortBy="#{atius_dhcp_config_network_row.cn}">
 
-					<p:column sortBy="#{atius_dhcp_config_network_row.cn}">
+					<p:column>
 
 						<h:panelGroup layout="block" style="width: 280px; overflow: hidden; white-space: pre; float: left">
 							<h:outputText value="#{atius_dhcp_config_network_row.cn}" />
