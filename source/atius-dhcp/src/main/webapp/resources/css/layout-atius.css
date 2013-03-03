@@ -16,6 +16,10 @@
 	padding-right: 10px;
 }
 
+#top-id a.selected {
+	color: #D5D5D5;
+}
+
 #top-id a:hover {
 	color: #ffffff;
 	background-color: #6D6D6D;
@@ -25,9 +29,19 @@
 	overflow: hidden;
 }
 
+#header-left-id {
+	float: left;
+	width: 200px;
+	overflow: hidden;
+}
+
+#header-right-id {
+	margin-top: 15px;
+}
+
 #body-left-id {
 	float: left;
-	width: 180px;
+	width: 200px;
 	padding-top: 20px;
 	overflow: hidden;
 }

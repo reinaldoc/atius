@@ -52,9 +52,7 @@
 	<h:panelGroup id="top-id" layout="block">
 
 		<ui:insert name="top-ui">
-
-			<ui:include src="/pages/menu.xhtml" />
-
+			<ui:include src="/pages/top.xhtml" />
 		</ui:insert>
 
 	</h:panelGroup>
@@ -63,26 +61,15 @@
 
 		<ui:insert name="header-ui">
 
-			<h:panelGrid columns="2" style="margin-bottom: 5px;">
+			<h:panelGroup id="header-left-id" layout="block">
+				<ui:insert name="header-left-ui">
+					<ui:include src="/pages/header-left.xhtml" />
+				</ui:insert>
+			</h:panelGroup>
 
-				<h:panelGroup id="header-left-id" layout="block">
-
-					<ui:insert name="header-left-ui">
-						<h:form prependId="false">
-							<p:commandLink actionListener="#{menuContext.select('TopMenu', 'DHCP')}" ajax="false" immediate="true" action="/index.jsf"
-								styleClass="logo">
-								<h:outputText value="Atius" styleClass="logo" />
-							</p:commandLink>
-						</h:form>
-					</ui:insert>
-
-				</h:panelGroup>
-
-				<h:panelGroup id="header-right-id" layout="block">
-					<ui:insert name="header-right-ui" />
-				</h:panelGroup>
-
-			</h:panelGrid>
+			<h:panelGroup id="header-right-id" layout="block">
+				<ui:insert name="header-right-ui" />
+			</h:panelGroup>
 
 		</ui:insert>
 
@@ -105,9 +92,7 @@
 	</h:panelGroup>
 
 	<h:panelGroup id="footer-id" layout="block">
-
 		<ui:insert name="footer-ui" />
-
 	</h:panelGroup>
 
 </h:body>
