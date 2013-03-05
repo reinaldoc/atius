@@ -6,18 +6,18 @@ import br.gov.frameworkdemoiselle.annotation.Ignore;
 import br.gov.frameworkdemoiselle.ldap.template.Entry;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
-public class DhcpOption extends Entry {
+public class DhcpOptions extends Entry {
 
 	private String[] dhcpStatements;
 
 	@Ignore
-	private Boolean dhcpStatementsAuthoritative;
+	private Boolean dhcpStatementsAuthoritative = true;
 
 	@Ignore
-	private String dhcpStatementsLeaseTime;
+	private String dhcpStatementsLeaseTime = "36000";
 
 	@Ignore
-	private String dhcpStatementsMaxLeaseTime;
+	private String dhcpStatementsMaxLeaseTime = "72000";
 
 	private String[] dhcpOption;
 
@@ -42,12 +42,12 @@ public class DhcpOption extends Entry {
 	@Ignore
 	private String dhcpOptionSMBtype;
 
-	public DhcpOption() {
+	public DhcpOptions() {
 		super();
 		dhcpLoaded = false;
 	}
 
-	public DhcpOption(boolean skipObjectClass) {
+	public DhcpOptions(boolean skipObjectClass) {
 		super(skipObjectClass);
 		dhcpLoaded = false;
 	}

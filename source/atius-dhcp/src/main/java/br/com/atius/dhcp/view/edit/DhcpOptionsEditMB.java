@@ -4,9 +4,9 @@ import javax.inject.Inject;
 
 import org.apache.commons.net.util.SubnetUtils;
 
-import br.com.atius.dhcp.business.DhcpOptionBC;
+import br.com.atius.dhcp.business.DhcpOptionsBC;
 import br.com.atius.dhcp.domain.DhcpHost;
-import br.com.atius.dhcp.domain.DhcpOption;
+import br.com.atius.dhcp.domain.DhcpOptions;
 import br.com.atius.dhcp.domain.DhcpService;
 import br.com.atius.dhcp.domain.DhcpSharedNetwork;
 import br.com.atius.dhcp.domain.DhcpSubnet;
@@ -17,12 +17,12 @@ import br.gov.frameworkdemoiselle.util.contrib.Faces;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
 @ViewController
-public class DhcpOptionEditMB extends AbstractEditPageBean<DhcpOption, String> {
+public class DhcpOptionsEditMB extends AbstractEditPageBean<DhcpOptions, String> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private DhcpOptionBC bc;
+	private DhcpOptionsBC bc;
 
 	private String updateId;
 
@@ -86,8 +86,8 @@ public class DhcpOptionEditMB extends AbstractEditPageBean<DhcpOption, String> {
 	}
 
 	@Override
-	protected DhcpOption load(String id) {
-		return new DhcpOption();
+	protected DhcpOptions load(String id) {
+		return bc.load(id);
 	}
 
 	public String getUpdateId() {

@@ -3,7 +3,7 @@ package br.com.atius.dhcp.domain;
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
-public class DhcpHost extends DhcpOption {
+public class DhcpHost extends DhcpOptions {
 
 	@Id
 	private String cn;

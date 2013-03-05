@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 import br.gov.frameworkdemoiselle.annotation.Ignore;
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 
-public class DhcpService extends DhcpOption {
+public class DhcpService extends DhcpOptions {
 
 	@Id
 	private String cn;

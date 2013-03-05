@@ -7,7 +7,7 @@ import br.gov.frameworkdemoiselle.annotation.Ignore;
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 import br.gov.frameworkdemoiselle.util.contrib.Strings;
 
-public class DhcpSubnet extends DhcpOption {
+public class DhcpSubnet extends DhcpOptions {
 
 	@Id
 	@Pattern(regexp = "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})", message = "Especifique um endereço válido para a subrede")

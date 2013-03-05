@@ -4,7 +4,7 @@ import javax.validation.constraints.Size;
 
 import br.gov.frameworkdemoiselle.ldap.annotation.Id;
 
-public class DhcpSharedNetwork extends DhcpOption {
+public class DhcpSharedNetwork extends DhcpOptions {
 
 	@Id
 	@Size(min = 3, message = "Identifique melhor a rede")
