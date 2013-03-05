@@ -3,30 +3,31 @@
 
 	<h:form id="atius-dhcp-network-edit-form-id">
 
-		<h:panelGrid id="atius-dhcp-network-edit-panel-id" cellpadding="0" cellspacing="0">
+		<p:dialog id="atius-dhcp-network-edit-dlg-id" header="ATIUS - Cadastro de Rede" widgetVar="atius_dhcp_network_edit_dlg" modal="true"
+			width="440" resizable="false" closable="false">
 
-			<p:dialog id="atius-dhcp-network-edit-dlg-id" header="ATIUS - Cadastro de Rede" widgetVar="atius_dhcp_network_edit_dlg" modal="true"
-				width="480" resizable="false" closable="false">
+			<h:panelGroup id="atius-dhcp-network-edit-panel-id">
 
-				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-network-edit-dlg-body-id">
+				<div class="xp-dialog" style="padding-bottom: 15px;">
 
-					<h:outputText value="Servidor:" />
-					<h:outputText value="#{dhcpSessionInfo.dhcpServer.cn}" styleClass="asInput" />
+					<h:outputText value="Servidor:" styleClass="xp-input-label" />
+					<h:outputText value="#{dhcpSessionInfo.dhcpServer.cn}" styleClass="xp-input" />
 
-					<h:outputText value="Nome da Rede:" />
-					<h:inputText value="#{dhcpSharedNetworkEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Nome da Rede:" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpSharedNetworkEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
 
-				</h:panelGrid>
+				</div>
 
-				<h:panelGroup id="atius-dhcp-network-edit-dlg-buttons-id">
-					<xp:dialog-buttons id="atius-dhcp-network-edit-dlg-save-id" dialogId="atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-dlg-id"
-						dialogWidgetVar="atius_dhcp_network_edit_dlg" updateMode="#{dhcpSharedNetworkEditMB.updateMode}"
-						actionUpdater="#{dhcpSharedNetworkEditMB.update}" actionInserter="#{dhcpSharedNetworkEditMB.insert}"
-						actionCloser="#{dhcpSharedNetworkListMB.clearValidation}" updateOnClose=":body-id" insertMessage="Rede cadastrada com sucesso!"
-						updateMessage="Rede atualizada com sucesso!" />
-				</h:panelGroup>
+				<xp:dialog-buttons id="atius-dhcp-network-edit-dlg-save-id" dialogId="atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-dlg-id"
+					dialogWidgetVar="atius_dhcp_network_edit_dlg" updateMode="#{dhcpSharedNetworkEditMB.updateMode}"
+					actionUpdater="#{dhcpSharedNetworkEditMB.update}" actionInserter="#{dhcpSharedNetworkEditMB.insert}"
+					actionCloser="#{dhcpSharedNetworkListMB.list}" updateOnClose=":body-id" insertMessage="Rede cadastrada com sucesso!"
+					updateMessage="Rede atualizada com sucesso!" />
 
-			</p:dialog>
-		</h:panelGrid>
+			</h:panelGroup>
+
+		</p:dialog>
+
 	</h:form>
+
 </ui:composition>

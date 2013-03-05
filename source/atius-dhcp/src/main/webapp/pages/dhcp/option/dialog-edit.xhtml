@@ -3,30 +3,34 @@
 
 	<h:form id="atius-dhcp-option-edit-form-id">
 
-		<h:panelGrid id="atius-dhcp-option-edit-panel-id" cellpadding="0" cellspacing="0">
+		<p:dialog id="atius-dhcp-option-edit-dlg-id" header="ATIUS - Opções DHCP" widgetVar="atius_dhcp_option_edit_dlg" modal="true" width="440"
+			resizable="false" closable="false">
 
-			<p:dialog id="atius-dhcp-option-edit-dlg-id" header="ATIUS - Opções DHCP" widgetVar="atius_dhcp_option_edit_dlg" modal="true" width="480"
-				resizable="false" closable="false">
+			<h:panelGroup id="atius-dhcp-option-edit-panel-id">
 
-				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-option-edit-dlg-body-id">
+				<div class="xp-dialog" style="padding-bottom: 15px;">
 
-					<h:outputText value="#{dhcpOptionEditMB.objectType}:" />
-					<h:outputText value="#{dhcpOptionEditMB.objectName}" styleClass="asInput" />
+					<h:outputText value="#{dhcpOptionsEditMB.objectType}:" styleClass="xp-input-label" />
+					<h:outputText value="#{dhcpOptionsEditMB.objectName}" styleClass="xp-input" />
 
-					<h:outputText value="DNS Prefix:" />
-					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionDomainPrefix}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="DNS Prefix:" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpOptionsEditMB.bean.dhcpOptionDomainPrefix}" autocomplete="off" onkeypress="return event.keyCode!=13"
+						styleClass="xp-input" />
 
-					<h:outputText value="Servidor DNS:" />
-					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionDNS}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Servidor DNS:" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpOptionsEditMB.bean.dhcpOptionDNS}" autocomplete="off" onkeypress="return event.keyCode!=13"
+						styleClass="xp-input" />
 
-					<h:outputText value="Servidor NTP:" />
-					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionNTP}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Servidor NTP:" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpOptionsEditMB.bean.dhcpOptionNTP}" autocomplete="off" onkeypress="return event.keyCode!=13"
+						styleClass="xp-input" />
 
-					<h:outputText value="Servidor Netbios:" />
-					<h:inputText value="#{dhcpOptionEditMB.bean.dhcpOptionSMB}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Servidor Netbios:" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpOptionsEditMB.bean.dhcpOptionSMB}" autocomplete="off" onkeypress="return event.keyCode!=13"
+						styleClass="xp-input" />
 
-					<h:outputText value="Consulta Netbios:" />
-					<p:selectOneMenu value="#{dhcpOptionEditMB.bean.dhcpOptionSMBtype}" effect="fade" styleClass="dialog-selectonemenu">
+					<h:outputText value="Consulta Netbios:" styleClass="xp-input-label" />
+					<p:selectOneMenu value="#{dhcpOptionsEditMB.bean.dhcpOptionSMBtype}" effect="fade" styleClass="dialog-selectonemenu">
 						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
 						<f:selectItem itemLabel="Broadcast (no WINS)" itemValue="1" />
 						<f:selectItem itemLabel="Peer (WINS only)" itemValue="2" />
@@ -34,16 +38,17 @@
 						<f:selectItem itemLabel="Hybrid (WINS, then broadcast)" itemValue="8" />
 					</p:selectOneMenu>
 
-				</h:panelGrid>
+				</div>
 
-				<h:panelGroup id="atius-dhcp-option-edit-dlg-buttons-id">
-					<xp:dialog-buttons id="atius-dhcp-option-edit-dlg-save-id" dialogId="atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-dlg-id"
-						dialogWidgetVar="atius_dhcp_option_edit_dlg" updateMode="#{dhcpOptionEditMB.updateMode}" actionUpdater="#{dhcpOptionEditMB.update}"
-						actionInserter="#{dhcpOptionEditMB.insert}" actionCloser="#{dhcpOptionEditMB.editBean()}" update="#{dhcpOptionEditMB.updateId}"
-						updateMessage="Opções DHCP atualizadas com sucesso!" />
-				</h:panelGroup>
+				<xp:dialog-buttons id="atius-dhcp-option-edit-dlg-save-id" dialogId="atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-dlg-id"
+					dialogWidgetVar="atius_dhcp_option_edit_dlg" updateMode="#{dhcpOptionsEditMB.updateMode}" actionUpdater="#{dhcpOptionsEditMB.update}"
+					actionInserter="#{dhcpOptionsEditMB.insert}" actionCloser="#{dhcpOptionsEditMB.editBean()}" updateOnClose="#{dhcpOptionsEditMB.updateId}"
+					updateMessage="Opções DHCP atualizadas com sucesso!" />
 
-			</p:dialog>
-		</h:panelGrid>
+			</h:panelGroup>
+
+		</p:dialog>
+
 	</h:form>
+
 </ui:composition>

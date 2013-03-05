@@ -3,46 +3,43 @@
 
 	<h:form id="atius-dhcp-host-edit-form-id">
 
-		<h:panelGrid id="atius-dhcp-host-edit-panel-id" cellpadding="0" cellspacing="0">
+		<p:dialog id="atius-dhcp-host-edit-dlg-id" header="ATIUS - Cadastro de Reserva DHCP" widgetVar="atius_dhcp_host_edit_dlg" modal="true"
+			width="440" resizable="false" closable="false">
 
-			<p:dialog id="atius-dhcp-host-edit-dlg-id" header="ATIUS - Cadastro de Reserva DHCP" widgetVar="atius_dhcp_host_edit_dlg" modal="true"
-				width="480" resizable="false" closable="false">
+			<h:panelGroup id="atius-dhcp-host-edit-panel-id">
 
-				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-host-edit-dlg-body-id">
+				<div class="xp-dialog" style="padding-bottom: 15px;">
 
-					<h:outputText value="Subrede:" rendered="#{!dhcpHostEditMB.updateMode}" />
+					<h:outputText value="Subrede:" styleClass="xp-input-label" rendered="#{!dhcpHostEditMB.updateMode}" />
 					<h:outputText
 						value="#{dhcpSessionInfo.dhcpSubnet.cn}/#{dhcpSessionInfo.dhcpSubnet.dhcpNetMask} - #{dhcpSessionInfo.dhcpSubnet.dhcpComments}"
-						styleClass="asInput" rendered="#{!dhcpHostEditMB.updateMode}" />
+						styleClass="xp-input" rendered="#{!dhcpHostEditMB.updateMode}" />
 
-					<h:outputText value="Hostname:" />
-					<h:inputText value="#{dhcpHostEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13"
-						readonly="#{dhcpHostEditMB.updateMode ? 'true' : 'false' }" />
+					<h:outputText value="Hostname:" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpHostEditMB.bean.cn}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input"
+						rendered="#{!dhcpHostEditMB.updateMode}" />
+					<h:outputText value="#{dhcpHostEditMB.bean.cn}" styleClass="xp-input" rendered="#{dhcpHostEditMB.updateMode}" />
 
-					<h:outputText value="IP:" />
-					<h:inputText value="#{dhcpHostEditMB.bean.dhcpStatements}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="IP:" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpHostEditMB.bean.dhcpStatements}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
 
-					<h:outputText value="MAC:" />
-					<h:inputText value="#{dhcpHostEditMB.bean.dhcpHWAddress}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="MAC:" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpHostEditMB.bean.dhcpHWAddress}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
 
-					<h:outputText value="Comentários:" />
-					<h:inputTextarea value="#{dhcpHostEditMB.bean.dhcpComments}" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Comentários:" styleClass="xp-input-label" />
+					<h:inputTextarea value="#{dhcpHostEditMB.bean.dhcpComments}" onkeypress="return event.keyCode!=13" styleClass="xp-textarea" />
 
-				</h:panelGrid>
+				</div>
 
-				<h:panelGroup id="atius-dhcp-host-edit-dlg-buttons-id">
+				<xp:dialog-buttons id="atius-dhcp-host-edit-dlg-save-id" dialogId="atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-dlg-id"
+					dialogWidgetVar="atius_dhcp_host_edit_dlg" updateMode="#{dhcpHostEditMB.updateMode}" actionUpdater="#{dhcpHostEditMB.update}"
+					actionInserter="#{dhcpHostEditMB.insert}" actionCloser="#{dhcpHostListMB.list}"
+					updateOnClose=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id" insertMessage="Reserva de IP cadastrada com sucesso!"
+					updateMessage="Reserva de IP atualizada com sucesso!" />
 
-					<xp:dialog-buttons id="atius-dhcp-host-edit-dlg-save-id" dialogId="atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-dlg-id"
-						dialogWidgetVar="atius_dhcp_host_edit_dlg" updateMode="#{dhcpHostEditMB.updateMode}" actionUpdater="#{dhcpHostEditMB.update}"
-						actionInserter="#{dhcpHostEditMB.insert}" actionCloser="#{dhcpHostListMB.list}"
-						updateOnClose=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id"
-						insertMessage="Reserva de IP cadastrada com sucesso!" updateMessage="Reserva de IP atualizada com sucesso!" />
+			</h:panelGroup>
 
-				</h:panelGroup>
-
-			</p:dialog>
-
-		</h:panelGrid>
+		</p:dialog>
 
 	</h:form>
 

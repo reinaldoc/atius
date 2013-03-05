@@ -3,40 +3,34 @@
 /* Font Face */
 @font-face {
 	font-family: DroidSans;
-	src:
-		url("/atius-dhcp/javax.faces.resource/DroidSans.eot.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/DroidSans.eot.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: DroidSans;
-	src:
-		url("/atius-dhcp/javax.faces.resource/DroidSans-Bold.eot.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/DroidSans-Bold.eot.jsf?ln=css/fonts");
 	font-weight: bold;
 }
 
 @font-face {
 	font-family: DroidSans;
-	src:
-		url("/atius-dhcp/javax.faces.resource/DroidSans.ttf.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/DroidSans.ttf.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: DroidSans;
-	src:
-		url("/atius-dhcp/javax.faces.resource/DroidSans-Bold.ttf.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/DroidSans-Bold.ttf.jsf?ln=css/fonts");
 	font-weight: bold;
 }
 
 @font-face {
 	font-family: PalladioBold;
-	src:
-		url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/fonts");
 }
 
 @font-face {
 	font-family: PalladioBold;
-	src:
-		url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css/fonts");
+	src: url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css/fonts");
 }
 
 /* Basic XP Style */
@@ -123,6 +117,7 @@ body.xp-style {
 
 .xp-style .xp-input {
 	border: 1px solid #BBC5CD;
+	border-radius: 3px 3px 3px 3px;
 	margin-bottom: 10px;
 }
 
@@ -134,6 +129,7 @@ body.xp-style {
 	width: 378px;
 	height: 22px;
 	overflow: hidden;
+	border-radius: 3px 3px 3px 3px;
 }
 
 .xp-style span.xp-input-1rightbtn {
@@ -160,15 +156,14 @@ body.xp-style {
 	width: 350px;
 }
 
-.xp-style textarea.xp-textarea,.xp-style input.xp-input,.xp-style select.xp-select
-	{
+.xp-style textarea.xp-textarea,.xp-style input.xp-input,.xp-style select.xp-select {
 	width: 375px;
 	padding: 3px;
 	border: 1px solid #BBC5CD;
+	border-radius: 3px 3px 3px 3px;
 }
 
-.xp-style textarea.xp-textarea:focus,.xp-style input.xp-input:focus,.xp-style select.xp-select:focus
-	{
+.xp-style textarea.xp-textarea:focus,.xp-style input.xp-input:focus,.xp-style select.xp-select:focus {
 	background-color: #FFFFE0;
 }
 
@@ -215,8 +210,7 @@ body.xp-style {
 }
 
 .xp-style a.xp-link {
-	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5),
-		rgba(255, 255, 255, 0) ) repeat scroll 0 0 #D6D6D6;
+	background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) ) repeat scroll 0 0 #D6D6D6;
 	border: 0 solid #DEE5F2;
 	border-radius: 6px 6px 6px 6px;
 	box-shadow: 2px 2px 4px #CCCCCC;
@@ -230,9 +224,8 @@ body.xp-style {
 
 /* Background  for IE */
 .xp-style .xp-link {
-	background:
-		url(/atius-dhcp/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.jsf?ln=primefaces-aristo)
-		#c4c4c4 repeat-x 50% 50%;
+	background: url(/atius-dhcp/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.jsf?ln=primefaces-aristo) #c4c4c4 repeat-x
+		50% 50%;
 }
 
 .xp-style .xp-link:hover {
@@ -369,8 +362,7 @@ body.xp-style {
 	box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
 	background-color: #E9E9E9;
 	background-repeat: repeat-x;
-	background-image:
-		url(/atius-dhcp/javax.faces.resource/acomp-box-bg.png.jsf?ln=images);
+	background-image: url(/atius-dhcp/javax.faces.resource/acomp-box-bg.png.jsf?ln=images);
 }
 
 .xp-itembox-link {

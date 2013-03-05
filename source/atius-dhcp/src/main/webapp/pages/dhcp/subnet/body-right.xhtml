@@ -16,9 +16,10 @@
 
 		<h:panelGroup id="atius-dhcp-subnet-list-panel-id">
 
-			<p:dataTable id="atius-dhcp-subnet-list-datatable-id" widgetVar="atius_dhcp_subnet_list_datatable" emptyMessage="Não há subredes para esta rede"
-				value="#{dhcpSubnetListMB.resultList}" var="dhcpSubnet" rows="#{paginationConfig.pageSize}" paginator="true"
-				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom">
+			<p:dataTable id="atius-dhcp-subnet-list-datatable-id" widgetVar="atius_dhcp_subnet_list_datatable"
+				emptyMessage="Não há subredes para esta rede" value="#{dhcpSubnetListMB.resultList}" var="dhcpSubnet"
+				rows="#{paginationConfig.pageSize}" paginator="true" paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}"
+				paginatorPosition="bottom">
 
 				<p:column headerText="Subrede" sortBy="#{dhcpSubnet.cn}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
@@ -48,15 +49,14 @@
 
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
 
-						<p:commandButton icon="ui-icon-pencil" title="Editar Subrede" oncomplete="atius_dhcp_subnet_edit_dlg.show()" styleClass="forItems"
-							action="#{dhcpSubnetEditMB.editBean(dhcpSubnet)}"
-							update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-panel-id"
-							immediate="true" />
-
 						<p:commandButton icon="ui-icon-search" title="Visualizar reservas"
 							oncomplete="atius_dhcp_host_list_dlg.initPosition(); atius_dhcp_host_list_dlg.show()" styleClass="forItems"
 							action="#{dhcpSubnetEditMB.selectDhcpSubnet(dhcpSubnet)}" actionListener="#{dhcpHostListMB.init()}"
 							update=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-dlg-body-id" immediate="true" />
+
+						<p:commandButton icon="ui-icon-pencil" title="Editar Subrede" oncomplete="atius_dhcp_subnet_edit_dlg.show()" styleClass="forItems"
+							action="#{dhcpSubnetEditMB.editBean(dhcpSubnet)}" update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-panel-id"
+							immediate="true" />
 
 						<p:commandButton icon="ui-icon-trash" title="Excluir Subrede" oncomplete="atius_dhcp_subnet_delete_dlg.show()"
 							action="#{dhcpSubnetEditMB.editBean(dhcpSubnet)}" update=":atius-dhcp-subnet-list-form-id:atius-dhcp-subnet-delete-dlg-id" />

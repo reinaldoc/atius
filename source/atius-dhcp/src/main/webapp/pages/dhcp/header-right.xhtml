@@ -30,13 +30,12 @@
 		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 
 			<p:commandButton icon="ui-icon-plusthick" value="Novo Servidor" immediate="true" action="#{dhcpServiceEditMB.editBean}"
-				styleClass="forHeader"
-				update=":atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-body-id, :atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-buttons-id"
+				styleClass="forHeader" update=":atius-dhcp-service-edit-form-id:atius-dhcp-subnet-edit-panel-id"
 				oncomplete="atius_dhcp_service_edit_dlg.show()" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
-				update=":atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-dlg-body-id, :atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-dlg-buttons-id"
-				oncomplete="atius_dhcp_network_edit_dlg.show()" disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }" />
+				update=":atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-panel-id" oncomplete="atius_dhcp_network_edit_dlg.show()"
+				disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }" />
 
 		</h:panelGroup>
 

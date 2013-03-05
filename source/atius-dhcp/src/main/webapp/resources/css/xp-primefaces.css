@@ -105,8 +105,8 @@ span.ui-icon-bullet {
 	vertical-align: middle;
 }
 
-.ui-datatable-data-empty td {
-	border-bottom: 0px !important;
+.ui-datatable-empty-message {
+	background: none repeat scroll 0 0 #F6F6F6;
 }
 
 .ui-datatable-data tr {

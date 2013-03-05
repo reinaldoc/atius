@@ -3,38 +3,40 @@
 
 	<h:form id="atius-dhcp-service-edit-form-id">
 
-		<h:panelGrid id="atius-dhcp-service-edit-panel-id" cellpadding="0" cellspacing="0">
+		<p:dialog id="atius-dhcp-service-edit-dlg-id" header="ATIUS - Serviço DHCP" widgetVar="atius_dhcp_service_edit_dlg" modal="true"
+			width="440" resizable="false" closable="false">
 
-			<p:dialog id="atius-dhcp-service-edit-dlg-id" header="ATIUS - Serviço DHCP" widgetVar="atius_dhcp_service_edit_dlg" modal="true"
-				width="480" resizable="false" closable="false">
+			<h:panelGroup id="atius-dhcp-subnet-edit-panel-id">
 
-				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-service-edit-dlg-body-id">
+				<div class="xp-dialog" style="padding-bottom: 15px;">
 
-					<h:outputText value="Servidor:" />
+					<h:outputText value="Servidor:" styleClass="xp-input-label" />
 					<h:inputText value="#{dhcpServiceEditMB.bean.dhcpServerName}" autocomplete="off" onkeypress="return event.keyCode!=13"
-						readonly="#{dhcpServiceEditMB.updateMode ? 'true' : 'false' }" />
+						rendered="#{!dhcpServiceEditMB.updateMode}" styleClass="xp-input" />
+					<h:outputText value="#{dhcpServiceEditMB.bean.dhcpServerName}" rendered="#{dhcpServiceEditMB.updateMode}" styleClass="xp-input" />
 
-					<h:panelGroup>
-						<h:outputText value="Autoritativo:" />
-						<p:selectBooleanCheckbox value="#{dhcpServiceEditMB.bean.dhcpStatementsAuthoritative}" onkeypress="return event.keyCode!=13" />
-					</h:panelGroup>
+					<h:outputText value="Autoritativo:" styleClass="xp-input-label" style="display: inline-block; margin-bottom: 15px;" />
+					<p:selectBooleanCheckbox value="#{dhcpServiceEditMB.bean.dhcpStatementsAuthoritative}" onkeypress="return event.keyCode!=13" />
 
-					<h:outputText value="Tempo de sessão (segundos):" />
-					<h:inputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Tempo de sessão (segundos):" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpServiceEditMB.bean.dhcpStatementsLeaseTime}" autocomplete="off" onkeypress="return event.keyCode!=13"
+						styleClass="xp-input" />
 
-					<h:outputText value="Tempo máximo de sessão (segundos):" />
-					<h:inputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" autocomplete="off" onkeypress="return event.keyCode!=13" />
+					<h:outputText value="Tempo máximo de sessão (segundos):" styleClass="xp-input-label" />
+					<h:inputText value="#{dhcpServiceEditMB.bean.dhcpStatementsMaxLeaseTime}" autocomplete="off" onkeypress="return event.keyCode!=13"
+						styleClass="xp-input" />
 
-				</h:panelGrid>
+				</div>
 
-				<h:panelGroup id="atius-dhcp-service-edit-dlg-buttons-id">
-					<xp:dialog-buttons id="atius-dhcp-service-edit-dlg-save-id" dialogId="atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-id"
-						dialogWidgetVar="atius_dhcp_service_edit_dlg" updateMode="#{dhcpServiceEditMB.updateMode}" actionUpdater="#{dhcpServiceEditMB.update}"
-						actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServiceEditMB.init}" updateOnClose=":body-id"
-						updateMessage="Serviço DHCP atualizado com sucesso!" />
-				</h:panelGroup>
+				<xp:dialog-buttons id="atius-dhcp-service-edit-dlg-save-id" dialogId="atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-id"
+					dialogWidgetVar="atius_dhcp_service_edit_dlg" updateMode="#{dhcpServiceEditMB.updateMode}" actionUpdater="#{dhcpServiceEditMB.update}"
+					actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServiceEditMB.init}" updateOnClose=":body-id"
+					insertMessage="Servidor DHCP cadastrado com sucesso!" updateMessage="Serviço DHCP atualizado com sucesso!" />
 
-			</p:dialog>
-		</h:panelGrid>
+			</h:panelGroup>
+
+		</p:dialog>
+
 	</h:form>
+
 </ui:composition>
