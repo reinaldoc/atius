@@ -28,9 +28,10 @@
 				</h:panelGrid>
 
 				<h:panelGroup id="atius-dhcp-service-edit-dlg-buttons-id">
-					<xp:dialog-buttons id="atius-dhcp-service-edit-dlg-save-id" dialogId="atius-dhcp-service-edit-dlg-id"
+					<xp:dialog-buttons id="atius-dhcp-service-edit-dlg-save-id" dialogId="atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-dlg-id"
 						dialogWidgetVar="atius_dhcp_service_edit_dlg" updateMode="#{dhcpServiceEditMB.updateMode}" actionUpdater="#{dhcpServiceEditMB.update}"
-						actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServiceEditMB.init}" updateOnClose=":body-id" />
+						actionInserter="#{dhcpServiceEditMB.insert}" actionCloser="#{dhcpServiceEditMB.init}" updateOnClose=":body-id"
+						updateMessage="Serviço DHCP atualizado com sucesso!" />
 				</h:panelGroup>
 
 			</p:dialog>

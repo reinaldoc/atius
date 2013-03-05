@@ -5,8 +5,8 @@
 
 		<h:panelGrid id="atius-dhcp-network-edit-panel-id" cellpadding="0" cellspacing="0">
 
-			<p:dialog id="atius-dhcp-network-edit-dlg-id" header="ATIUS - Cadastro de Rede" widgetVar="atius_dhcp_network_edit_dlg" modal="true" width="480"
-				resizable="false" closable="false">
+			<p:dialog id="atius-dhcp-network-edit-dlg-id" header="ATIUS - Cadastro de Rede" widgetVar="atius_dhcp_network_edit_dlg" modal="true"
+				width="480" resizable="false" closable="false">
 
 				<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-network-edit-dlg-body-id">
 
@@ -19,9 +19,11 @@
 				</h:panelGrid>
 
 				<h:panelGroup id="atius-dhcp-network-edit-dlg-buttons-id">
-					<xp:dialog-buttons id="atius-dhcp-network-edit-dlg-save-id" dialogId="atius-dhcp-network-edit-dlg-id" dialogWidgetVar="atius_dhcp_network_edit_dlg"
-						updateMode="#{dhcpSharedNetworkEditMB.updateMode}" actionUpdater="#{dhcpSharedNetworkEditMB.update}" actionInserter="#{dhcpSharedNetworkEditMB.insert}"
-						actionCloser="#{dhcpSharedNetworkListMB.clearValidation}" updateOnClose=":body-id" />
+					<xp:dialog-buttons id="atius-dhcp-network-edit-dlg-save-id" dialogId="atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-dlg-id"
+						dialogWidgetVar="atius_dhcp_network_edit_dlg" updateMode="#{dhcpSharedNetworkEditMB.updateMode}"
+						actionUpdater="#{dhcpSharedNetworkEditMB.update}" actionInserter="#{dhcpSharedNetworkEditMB.insert}"
+						actionCloser="#{dhcpSharedNetworkListMB.clearValidation}" updateOnClose=":body-id" insertMessage="Rede cadastrada com sucesso!"
+						updateMessage="Rede atualizada com sucesso!" />
 				</h:panelGroup>
 
 			</p:dialog>

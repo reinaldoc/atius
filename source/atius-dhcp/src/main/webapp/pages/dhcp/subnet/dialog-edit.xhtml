@@ -41,10 +41,11 @@
 
 				</div>
 
-				<xp:dialog-buttons id="atius-dhcp-subnet-edit-dlg-save-id" dialogId="atius-dhcp-subnet-edit-dlg-id"
+				<xp:dialog-buttons id="atius-dhcp-subnet-edit-dlg-save-id" dialogId="atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-dlg-id"
 					dialogWidgetVar="atius_dhcp_subnet_edit_dlg" updateMode="#{dhcpSubnetEditMB.updateMode}" actionUpdater="#{dhcpSubnetEditMB.update}"
-					actionInserter="#{dhcpSubnetEditMB.insert}" actionCloser="#{dhcpSubnetListMB.clearValidation}"
-					updateOnClose=":atius-dhcp-subnet-list-form-id:atius-dhcp-subnet-list-datatable-id" />
+					actionInserter="#{dhcpSubnetEditMB.insert}" actionCloser="#{dhcpSubnetListMB.list}"
+					updateOnClose=":atius-dhcp-subnet-list-form-id:atius-dhcp-subnet-list-datatable-id"
+					insertMessage="Subrede cadastrada com sucesso!" updateMessage="Subrede atualizada com sucesso!" />
 
 			</h:panelGroup>
 

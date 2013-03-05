@@ -32,10 +32,11 @@
 
 				<h:panelGroup id="atius-dhcp-host-edit-dlg-buttons-id">
 
-					<xp:dialog-buttons id="atius-dhcp-host-edit-dlg-save-id" dialogId="atius-dhcp-host-edit-dlg-id"
+					<xp:dialog-buttons id="atius-dhcp-host-edit-dlg-save-id" dialogId="atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-dlg-id"
 						dialogWidgetVar="atius_dhcp_host_edit_dlg" updateMode="#{dhcpHostEditMB.updateMode}" actionUpdater="#{dhcpHostEditMB.update}"
-						actionInserter="#{dhcpHostEditMB.insert}" actionCloser="#{dhcpHostListMB.clearValidation}"
-						updateOnClose=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id" />
+						actionInserter="#{dhcpHostEditMB.insert}" actionCloser="#{dhcpHostListMB.list}"
+						updateOnClose=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id"
+						insertMessage="Reserva de IP cadastrada com sucesso!" updateMessage="Reserva de IP atualizada com sucesso!" />
 
 				</h:panelGroup>
 

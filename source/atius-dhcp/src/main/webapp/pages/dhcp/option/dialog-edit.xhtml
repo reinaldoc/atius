@@ -37,9 +37,10 @@
 				</h:panelGrid>
 
 				<h:panelGroup id="atius-dhcp-option-edit-dlg-buttons-id">
-					<xp:dialog-buttons id="atius-dhcp-option-edit-dlg-save-id" dialogId="atius-dhcp-option-edit-dlg-id"
+					<xp:dialog-buttons id="atius-dhcp-option-edit-dlg-save-id" dialogId="atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-dlg-id"
 						dialogWidgetVar="atius_dhcp_option_edit_dlg" updateMode="#{dhcpOptionEditMB.updateMode}" actionUpdater="#{dhcpOptionEditMB.update}"
-						actionInserter="#{dhcpOptionEditMB.insert}" actionCloser="#{dhcpOptionEditMB.editBean()}" update="#{dhcpOptionEditMB.updateId}" />
+						actionInserter="#{dhcpOptionEditMB.insert}" actionCloser="#{dhcpOptionEditMB.editBean()}" update="#{dhcpOptionEditMB.updateId}"
+						updateMessage="Opções DHCP atualizadas com sucesso!" />
 				</h:panelGroup>
 
 			</p:dialog>
