@@ -24,6 +24,16 @@
 }
 
 @font-face {
+	font-family: ChanceryMediumItalic;
+	src: url("/atius-dhcp/javax.faces.resource/urw-chancery-l-medium-italic.eot.jsf?ln=css/fonts");
+}
+
+@font-face {
+	font-family: ChanceryMediumItalic;
+	src: url("/atius-dhcp/javax.faces.resource/urw-chancery-l-medium-italic.ttf.jsf?ln=css/fonts");
+}
+
+@font-face {
 	font-family: PalladioBold;
 	src: url("/atius-dhcp/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/fonts");
 }
@@ -187,7 +197,7 @@ body.xp-style {
 /* Dialog Tableless */
 .xp-style .xp-dialog {
 	border-bottom: 1px solid #AFAFAF;
-	padding: 15px 15px 5px;
+	padding: 15px;
 }
 
 /* Buttons */
