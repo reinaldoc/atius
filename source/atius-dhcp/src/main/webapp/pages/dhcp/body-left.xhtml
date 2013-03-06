@@ -3,9 +3,17 @@
 
 	<h:form>
 
+		<div class="menu-group">
+			<h:outputText value="Geral" />
+		</div>
+
 		<p:commandLink value="Opções" immediate="true" update=":body-id, :header-right-id"
 			actionListener="#{menuContext.select('DhcpSharedNetwork', 'Config')}"
-			styleClass="#{menuContext.menu['DhcpSharedNetwork']['Config']['Style']}" style="margin-bottom: 15px;" />
+			styleClass="#{menuContext.menu['DhcpSharedNetwork']['Config']['Style']}" />
+
+		<p:commandLink value="Reservas de IP" immediate="true" actionListener="#{dhcpHostListMB.searchOnServer}"
+			action="#{menuContext.select('DhcpSharedNetwork', 'Reservation')}" update=":body-id, :header-right-id"
+			styleClass="#{menuContext.menu['DhcpSharedNetwork']['Reservation']['Style']}" style="margin-bottom: 15px;" />
 
 		<h:panelGroup layout="block" styleClass="menu-group" rendered="#{dhcpSharedNetworkListMB.resultSize > 0}">
 			<h:outputText value="Redes" />

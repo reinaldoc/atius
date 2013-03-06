@@ -1,14 +1,12 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<ui:include src="dialog-edit.xhtml" />
-
-	<h:form id="atius-dhcp-host-list-form-id">
+	<h:form id="atius-dhcp-host-list-dlg-form-id">
 
 		<p:confirmDialog message="Deseja excluir a reserva: #{dhcpHostEditMB.bean.cn} ?" header="Atenção!" severity="alert"
 			id="atius-dhcp-host-delete-dlg-id" widgetVar="atius_dhcp_host_delete_dlg">
 			<p:commandButton value="Sim" oncomplete="atius_dhcp_host_delete_dlg.hide()"
-				update=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id, :growl-id" action="#{dhcpHostEditMB.delete}"
+				update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-list-datatable-id, :growl-id" action="#{dhcpHostEditMB.delete}"
 				actionListener="#{dhcpHostListMB.list}" style="margin-right: 20px;" />
 			<p:commandButton value="Não" onclick="atius_dhcp_host_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 		</p:confirmDialog>
@@ -16,32 +14,30 @@
 		<p:dialog id="atius-dhcp-host-list-dlg-id" header="ATIUS - Reserva de IP" widgetVar="atius_dhcp_host_list_dlg" modal="true" width="900"
 			resizable="false" closable="false">
 
-			<h:panelGrid columns="1" styleClass="dialog-body" id="atius-dhcp-host-list-dlg-body-id">
+			<h:panelGroup id="atius-dhcp-host-list-dlg-body-id" layout="block" styleClass="xp-dialog">
 
-				<h:panelGroup layout="block">
+				<div class="xp-block" style="margin: 0 0 10px;">
 
 					<div class="filter">
 
 						<p:commandButton icon="ui-icon-gear" action="#{dhcpHostListMB.selectSearchNode()}"
-							update=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id, :growl-id"
-							oncomplete="getElementById('atius-dhcp-host-search').focus(); atius_dhcp_host_list_dlg.initPosition();" process="@this"
-							title="Alterar escopo da busca" />
+							update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-list-datatable-id, :growl-id" oncomplete="dhcp_host_scope_oncomplete();"
+							process="@this" title="Alterar escopo da busca" />
 
 						<h:inputText id="atius-dhcp-host-search" value="#{dhcpHostListMB.resultFilter}" autocomplete="off"
 							onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); atius_dhcp_host_list_dlg.initPosition(); return false; }" />
 
 					</div>
 
-
 					<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpHostListMB.list}"
-						update=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id"
+						update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-list-datatable-id"
 						oncomplete="getElementById('atius-dhcp-host-search').focus(); atius_dhcp_host_list_dlg.initPosition();"
 						process="atius-dhcp-host-search, @this" style="margin-right: 45px;" widgetVar="atius_dhcp_host_search" />
 
 					<p:commandButton icon="ui-icon-plusthick" value="Nova Reserva de IP" immediate="true" action="#{dhcpHostEditMB.editBean}"
 						style="float: right" update=":atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-panel-id" oncomplete="atius_dhcp_host_edit_dlg.show()" />
 
-				</h:panelGroup>
+				</div>
 
 				<h:panelGroup id="atius-dhcp-host-list-panel-id">
 
@@ -83,7 +79,7 @@
 									update=":atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-panel-id" immediate="true" />
 
 								<p:commandButton icon="ui-icon-trash" title="Excluir reserva DHCP" oncomplete="atius_dhcp_host_delete_dlg.show()"
-									action="#{dhcpHostEditMB.editBean(dhcpHost)}" update=":atius-dhcp-host-list-form-id:atius-dhcp-host-delete-dlg-id" />
+									action="#{dhcpHostEditMB.editBean(dhcpHost)}" update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-delete-dlg-id" />
 
 							</h:panelGroup>
 						</p:column>
@@ -91,11 +87,12 @@
 
 				</h:panelGroup>
 
-			</h:panelGrid>
+			</h:panelGroup>
 
 			<p:commandLink value="Fechar" styleClass="dialog-close-link" onclick="atius_dhcp_host_list_dlg.hide(); return false;" />
 
 		</p:dialog>
+
 	</h:form>
 
 </ui:composition>

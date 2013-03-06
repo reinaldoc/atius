@@ -1,20 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-	<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
-		<ui:include src="subnet/dialog-edit.xhtml" />
-	</h:panelGroup>
-
-	<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
-		<ui:include src="network/dialog-edit.xhtml" />
-		<ui:include src="service/dialog-edit.xhtml" />
-	</h:panelGroup>
-
-	<ui:include src="option/dialog-edit.xhtml" />
-
 	<h:form>
 
-		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
+		<h:panelGroup
+			rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config') and !menuContext.isSelected('DhcpSharedNetwork', 'Reservation')}">
 
 			<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
 
@@ -24,6 +14,17 @@
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
 				update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-panel-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
+
+		</h:panelGroup>
+
+		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Reservation')}">
+
+			<h:inputText id="atius-dhcp-host-search" value="#{dhcpHostListMB.resultFilter}" autocomplete="off"
+				onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); return false; }" styleClass="filter" />
+
+			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpHostListMB.list}"
+				update=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id" process="atius-dhcp-host-search, @this"
+				styleClass="forHeader" widgetVar="atius_dhcp_host_search" />
 
 		</h:panelGroup>
 

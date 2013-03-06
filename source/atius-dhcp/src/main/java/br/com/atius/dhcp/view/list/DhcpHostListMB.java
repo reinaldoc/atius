@@ -74,5 +74,10 @@ public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 			Faces.addI18nMessage("atius.dhcp.search.subnet", bc.getDhcpSubnet().getCn() + "/" + bc.getDhcpSubnet().getDhcpNetMask());
 		}
 	}
+	
+	public void searchOnServer() {
+		list();
+		searchNode = 2;
+	}
 
 }

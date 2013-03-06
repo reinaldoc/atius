@@ -11,13 +11,24 @@
 
 	<ui:define name="body-right-ui">
 
+		<ui:include src="host/dialog-edit.xhtml" />
+
 		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
+			<ui:include src="network/dialog-edit.xhtml" />
+			<ui:include src="service/dialog-edit.xhtml" />
 			<ui:include src="config/body-right.xhtml" />
+			<ui:include src="option/dialog-edit.xhtml" />
 		</h:panelGroup>
 
-		<h:panelGroup rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
-			<ui:include src="subnet/body-right.xhtml" />
+		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Reservation')}">
 			<ui:include src="host/body-right.xhtml" />
+		</h:panelGroup>
+
+		<h:panelGroup
+			rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config') and !menuContext.isSelected('DhcpSharedNetwork', 'Reservation')}">
+			<ui:include src="subnet/body-right.xhtml" />
+			<ui:include src="subnet/dialog-edit.xhtml" />
+			<ui:include src="host/dialog-list.xhtml" />
 		</h:panelGroup>
 
 	</ui:define>

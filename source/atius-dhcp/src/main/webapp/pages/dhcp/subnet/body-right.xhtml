@@ -52,7 +52,7 @@
 						<p:commandButton icon="ui-icon-search" title="Visualizar reservas"
 							oncomplete="atius_dhcp_host_list_dlg.initPosition(); atius_dhcp_host_list_dlg.show()" styleClass="forItems"
 							action="#{dhcpSubnetEditMB.selectDhcpSubnet(dhcpSubnet)}" actionListener="#{dhcpHostListMB.init()}"
-							update=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-dlg-body-id" immediate="true" />
+							update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-list-dlg-body-id" immediate="true" />
 
 						<p:commandButton icon="ui-icon-pencil" title="Editar Subrede" oncomplete="atius_dhcp_subnet_edit_dlg.show()" styleClass="forItems"
 							action="#{dhcpSubnetEditMB.editBean(dhcpSubnet)}" update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-panel-id"
