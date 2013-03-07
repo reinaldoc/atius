@@ -13,7 +13,7 @@
 				styleClass="forHeader" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
-				update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-panel-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
+				update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-service-edit-panel-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
 
 		</h:panelGroup>
 
@@ -31,7 +31,7 @@
 		<h:panelGroup rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 
 			<p:commandButton icon="ui-icon-plusthick" value="Novo Servidor" immediate="true" action="#{dhcpServiceEditMB.editBean}"
-				styleClass="forHeader" update=":atius-dhcp-service-edit-form-id:atius-dhcp-subnet-edit-panel-id"
+				styleClass="forHeader" update=":atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-panel-id"
 				oncomplete="atius_dhcp_service_edit_dlg.show()" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
