@@ -18,6 +18,12 @@
 				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
 				styleClass="dialog-datatable-small">
 
+				<p:column headerText="Local" sortBy="#{dhcpHost.dn}">
+					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 270px;">
+						<h:outputText value="#{dhcpHost.from}" title="#{dhcpHost.from}" />
+					</h:panelGroup>
+				</p:column>
+
 				<p:column headerText="Hostname" sortBy="#{dhcpHost.cn}">
 					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 170px;">
 						<h:outputText value="#{dhcpHost.cn}" title="#{dhcpHost.cn}" />

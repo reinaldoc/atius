@@ -66,4 +66,9 @@ public class DhcpHost extends DhcpOptions {
 		this.dhcpComments = dhcpComments;
 	}
 
+	public String getFrom() {
+		String[] dn = getDn().split(",");
+		return dn[2].split("=")[1] + " (" + dn[1].split("=")[1] + ")";
+	}
+
 }
