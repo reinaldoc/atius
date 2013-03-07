@@ -22,12 +22,7 @@ public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 	@Inject
 	private DhcpHostBC bc;
 
-	private Integer searchNode = 0;
-	
-	public void init() {
-		searchNode = 0;
-		clearResultFilter();
-	}
+	private Integer searchNode = 2;
 
 	@Override
 	protected List<DhcpHost> handleResultList(QueryConfig<DhcpHost> queryConfig) {
@@ -74,9 +69,16 @@ public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 			Faces.addI18nMessage("atius.dhcp.search.subnet", bc.getDhcpSubnet().getCn() + "/" + bc.getDhcpSubnet().getDhcpNetMask());
 		}
 	}
-	
+
+	public void searchOnSubnet() {
+		list();
+		clearResultFilter();
+		searchNode = 0;
+	}
+
 	public void searchOnServer() {
 		list();
+		clearResultFilter();
 		searchNode = 2;
 	}
 

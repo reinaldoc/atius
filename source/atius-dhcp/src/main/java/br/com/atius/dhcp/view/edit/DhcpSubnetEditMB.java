@@ -22,11 +22,17 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 
 	@Inject
 	private DhcpSubnetBC bc;
-	
+
 	@Override
 	public void editBean() {
 		super.editBean();
 		getBean().setDhcpNetMask("24");
+	}
+
+	@Override
+	public void editBean(DhcpSubnet bean) {
+		super.editBean(bean);
+		bc.selectDhcpSubnet(bean);
 	}
 
 	@Override
@@ -89,7 +95,8 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 					throw new IllegalArgumentException("Range is not in subnet");
 			} catch (RuntimeException e) {
 				Faces.validationFailed();
-				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/" + getBean().getDhcpNetMask());
+				Faces.addI18nMessage("atius.dhcp.validation.range.failed", SeverityType.ERROR, getBean().getCn() + "/"
+						+ getBean().getDhcpNetMask());
 				validate = false;
 			}
 		}
@@ -124,10 +131,6 @@ public class DhcpSubnetEditMB extends AbstractEditPageBean<DhcpSubnet, String> {
 		for (int i = 32; i > -1; i--)
 			netmasks.add(String.valueOf(i));
 		return netmasks;
-	}
-
-	public void selectDhcpSubnet(DhcpSubnet dhcpSubnet) {
-		bc.selectDhcpSubnet(dhcpSubnet);
 	}
 
 }
