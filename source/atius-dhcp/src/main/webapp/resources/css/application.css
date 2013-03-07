@@ -355,8 +355,8 @@ div.asRowEven {
 }
 
 div.asColumn {
-	line-height: 28px;
-	min-height: 28px;
+	line-height: 32px;
+	min-height: 32px;
 }
 
 div.asColumnLeft {
