@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-dhcp-server-default-edit-form-id">
+
+		<p:dialog id="atius-dhcp-server-default-edit-dlg-id" header="ATIUS - Servidor DHCP" widgetVar="atius_dhcp_server_default_edit_dlg" modal="true"
+			width="440" resizable="false" closable="false">
+
+			<h:panelGroup id="atius-dhcp-server-default-edit-panel-id">
+
+				<div class="xp-dialog" style="padding-bottom: 15px;">
+
+					<h:outputText value="Servidor padrão:" styleClass="xp-input-label" />
+					<p:selectOneMenu value="#{dhcpServerListMB.defaultDhcpServer}" effect="fade" styleClass="dialog-selectonemenu">
+						<f:selectItem itemLabel=" --- selecione ---" itemValue="" />
+						<f:selectItems value="#{dhcpServerListMB.resultList}" var="dhcpServerItem" itemLabel="#{dhcpServerItem.cn}" itemValue="#{dhcpServerItem.cn}" />
+					</p:selectOneMenu>
+
+				</div>
+
+				<xp:dialog-buttons id="atius-dhcp-server-default-edit-dlg-save-id" dialogId="atius-dhcp-server-default-edit-form-id:atius-dhcp-server-default-edit-dlg-id"
+					dialogWidgetVar="atius_dhcp_server_default_edit_dlg" updateMode="#{true}" actionUpdater="#{dhcpServerListMB.updateDefaultDhcpServer}"
+					actionInserter="#{dhcpServerListMB.updateDefaultDhcpServer}" actionCloser="#{dhcpServiceEditMB.init}" updateOnClose=":body-id"
+					updateMessage="Servidor DHCP padrão atualizado com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>
