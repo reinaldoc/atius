@@ -43,7 +43,9 @@ public class DhcpServerListMB extends AbstractListPageBean<DhcpServer, String> {
 	}
 
 	public String getDefaultDhcpServer() {
-		return dhcpContainerBC.getPrimaryDhcpServer();
+		if (defaultDhcpServer == null)
+			defaultDhcpServer = dhcpContainerBC.getPrimaryDhcpServer();
+		return defaultDhcpServer;
 	}
 
 	public void setDefaultDhcpServer(String defaultDhcpServer) {
@@ -54,14 +56,16 @@ public class DhcpServerListMB extends AbstractListPageBean<DhcpServer, String> {
 		if (Strings.isBlank(defaultDhcpServer)) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.server.defaultserver.empty", SeverityType.ERROR);
+			defaultDhcpServer = null;
 			return;
 		}
-		
+
 		try {
 			bc.selectPrimaryDhcpServer(defaultDhcpServer);
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.server.defaultserver.failed", SeverityType.ERROR);
+			defaultDhcpServer = null;
 		}
 
 	}
