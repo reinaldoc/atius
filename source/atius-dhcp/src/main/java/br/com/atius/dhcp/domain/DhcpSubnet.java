@@ -1,5 +1,8 @@
 package br.com.atius.dhcp.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -25,6 +28,9 @@ public class DhcpSubnet extends DhcpOptions {
 
 	@Size(min = 3, message = "Identifique melhor a descrição da subrede")
 	private String dhcpComments;
+
+	@Ignore
+	private List<DhcpHost> dhcpHosts = new ArrayList<DhcpHost>();
 
 	public DhcpSubnet() {
 		super();
@@ -94,6 +100,14 @@ public class DhcpSubnet extends DhcpOptions {
 
 	public String getInfo() {
 		return cn + "/" + dhcpNetMask + " (" + dhcpComments + ")";
+	}
+
+	public List<DhcpHost> getDhcpHosts() {
+		return dhcpHosts;
+	}
+
+	public void setDhcpHosts(List<DhcpHost> dhcpHosts) {
+		this.dhcpHosts = dhcpHosts;
 	}
 
 }

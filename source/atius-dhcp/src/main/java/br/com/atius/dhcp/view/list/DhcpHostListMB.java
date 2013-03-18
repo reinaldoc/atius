@@ -71,13 +71,16 @@ public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 	}
 
 	public void searchOnSubnet() {
-		list();
 		clearResultFilter();
 		searchNode = 0;
 	}
 
+	public void searchOnSharedNetwork() {
+		clearResultFilter();
+		searchNode = 1;
+	}
+
 	public void searchOnServer() {
-		list();
 		clearResultFilter();
 		searchNode = 2;
 	}

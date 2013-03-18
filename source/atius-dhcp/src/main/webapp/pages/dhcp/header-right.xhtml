@@ -13,7 +13,10 @@
 				styleClass="forHeader" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
-				update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-panel-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()" />
+				update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-panel-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()"
+				styleClass="forHeader" />
+
+			<p:commandButton icon="ui-icon-print" value="Imprimir" action="#{dhcpSubnetListMB.print}" process="@this" ajax="false" />
 
 		</h:panelGroup>
 

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dhcpSubnet" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6528925619834758"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.default.font.name" value="Droid Sans"/>
+	<import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dhcpSharedNetwork" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="dhcpServer" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cn" class="java.lang.String"/>
+	<field name="dhcpRangeFirst" class="java.lang.String"/>
+	<field name="dhcpRangeLast" class="java.lang.String"/>
+	<field name="dhcpNetMask" class="java.lang.String"/>
+	<field name="dhcpComments" class="java.lang.String"/>
+	<field name="dhcpGateway" class="java.lang.String"/>
+	<field name="dhcpHosts" class="java.util.Collection"/>
+	<group name="Subnet">
+		<groupExpression><![CDATA[$F{cn}]]></groupExpression>
+		<groupHeader>
+			<band height="59">
+				<textField isBlankWhenNull="true">
+					<reportElement x="115" y="36" width="437" height="11"/>
+					<textElement>
+						<font fontName="Droid Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{dhcpComments}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="115" y="25" width="437" height="11"/>
+					<textElement>
+						<font fontName="Droid Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{dhcpGateway}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="115" y="14" width="437" height="11"/>
+					<textElement>
+						<font fontName="Droid Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{dhcpRangeFirst} + " - " + $F{dhcpRangeLast}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="18" y="47" width="97" height="12"/>
+					<textElement>
+						<font fontName="URW Palladio L" size="8" isBold="true" isItalic="false" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Reservas de IP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="18" y="36" width="97" height="11"/>
+					<textElement>
+						<font fontName="Droid Sans" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Descrição:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="18" y="25" width="97" height="11"/>
+					<textElement>
+						<font fontName="Droid Sans" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Gateway:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="18" y="14" width="97" height="11"/>
+					<textElement>
+						<font fontName="Droid Sans" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Range:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="18" y="3" width="534" height="11" forecolor="#330066" backcolor="#EBEBF3"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font fontName="Droid Sans" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Subrede:                                " + $F{cn} +"/" + $F{dhcpNetMask}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="130" y="15" width="313" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Droid Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATIUS - DHCP]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="480" y="14" width="72" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="26" width="112" height="12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape">
+				<reportElement x="18" y="10" width="85" height="36"/>
+				<imageExpression class="java.io.File"><![CDATA[new File($P{logo})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="130" y="29" width="313" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Droid Sans" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Relatório de Subrede e Reservas de IP]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="3" y="67" width="552" height="11" forecolor="#330066" backcolor="#EBEBF3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Droid Sans" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["   Rede "+$P{dhcpSharedNetwork} + " em " + $P{dhcpServer}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<subreport>
+				<reportElement x="35" y="0" width="517" height="16"/>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($F{dhcpHosts},false)]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "/dhcpSubnet_dhcpHost.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
