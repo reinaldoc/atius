@@ -5,7 +5,7 @@ import java.io.Serializable;
 import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.configuration.Configuration;
 
-@Configuration(resource = "atius", prefix = "web")
+@Configuration(resource = "atius", prefix = "atius.web.")
 public class WebConfig implements Serializable {
 
 	private static final long serialVersionUID = 1L;
