@@ -22,7 +22,7 @@ public class DhcpHostListMB extends AbstractListPageBean<DhcpHost, String> {
 	@Inject
 	private DhcpHostBC bc;
 
-	private Integer searchNode = 2;
+	private Integer searchNode = 0;
 
 	@Override
 	protected List<DhcpHost> handleResultList(QueryConfig<DhcpHost> queryConfig) {
