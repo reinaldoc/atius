@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,7 +23,7 @@ public class WebsiteFiles implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
-	@SequenceGenerator(name = "system-uuid", sequenceName = "guid")
+	//@SequenceGenerator(name = "system-uuid", sequenceName = "guid")
 	private Long id;
 
 	@Column
