@@ -15,7 +15,7 @@
 
 		<h:panelGroup id="faa-profile-list-id">
 
-			<p:dataTable id="faa-profile-list-datatable-id" widgetVar="faa_profile_dt_wv" emptyMessage="Não há perfís"
+			<p:dataTable id="faa-profile-list-datatable-id" widgetVar="faa_profile_dt_wv" emptyMessage="Não há perfís" lazy="true"
 				value="#{profileListMB.lazyDataModel}" var="faa_profile_dt_row" rows="#{paginationConfig.pageSize}" paginator="true"
 				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 

@@ -15,7 +15,7 @@
 
 		<h:panelGroup id="faa-role-list-id">
 
-			<p:dataTable id="faa-role-list-datatable-id" widgetVar="faa_role_dt_wv" emptyMessage="Não há papéis"
+			<p:dataTable id="faa-role-list-datatable-id" widgetVar="faa_role_dt_wv" emptyMessage="Não há papéis" lazy="true"
 				value="#{roleListMB.lazyDataModel}" var="faa_role_dt_row" rows="#{paginationConfig.pageSize}" paginator="true"
 				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 

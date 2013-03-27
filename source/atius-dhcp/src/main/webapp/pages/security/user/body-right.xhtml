@@ -31,7 +31,7 @@
 
 		<h:panelGroup id="faa-user-list-id">
 
-			<p:dataTable id="faa-user-list-datatable-id" widgetVar="faa_user_dt_wv" emptyMessage="Não há usuários"
+			<p:dataTable id="faa-user-list-datatable-id" widgetVar="faa_user_dt_wv" emptyMessage="Não há usuários" lazy="true"
 				value="#{userListMB.lazyDataModel}" var="faa_user_dt_row" rows="#{paginationConfig.pageSize}" paginator="true"
 				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 

@@ -32,7 +32,7 @@
 
 		<h:panelGroup id="faa-profileByRule-list-id">
 
-			<p:dataTable id="faa-profileByRule-list-datatable-id" widgetVar="faa_profileByRule_dt_wv" emptyMessage="Não há regras"
+			<p:dataTable id="faa-profileByRule-list-datatable-id" widgetVar="faa_profileByRule_dt_wv" emptyMessage="Não há regras" lazy="true"
 				value="#{profileByRuleListMB.lazyDataModel}" var="faa_profileByRule_dt_row" rows="#{paginationConfig.pageSize}" paginator="true"
 				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 

@@ -16,7 +16,7 @@
 
 		<h:panelGroup id="faa-resource-list-id">
 
-			<p:dataTable id="faa-resource-list-datatable-id" widgetVar="faa_resource_dt_wv" emptyMessage="Não há recursos"
+			<p:dataTable id="faa-resource-list-datatable-id" widgetVar="faa_resource_dt_wv" emptyMessage="Não há recursos" lazy="true"
 				value="#{resourceListMB.lazyDataModel}" var="faa_resource_dt_row" rows="#{paginationConfig.pageSize}" paginator="true"
 				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom">
 
