@@ -19,7 +19,6 @@ public class WebsiteCategoryListMB extends AbstractListPageBean<WebsiteCategory,
 	@Inject
 	private WebsiteCategoryBC bc;
 
-	@SuppressWarnings("unused")
 	@PostConstruct
 	private void init() {
 		selectMenu(getFirstWebsiteCategory());
