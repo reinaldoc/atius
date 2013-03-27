@@ -13,7 +13,7 @@
 
 				<p:commandButton value="Sim" oncomplete="atius_web_config_profile_delete_dlg.hide()"
 					update="atius-web-config-profile-datatable-id, faa-body-left-id, faa-growl-id" action="#{websiteProfileEditMB.delete}"
-					actionListener="#{websiteProfileListMB.clearResultList}" style="margin-right: 20px;" />
+					actionListener="#{websiteProfileListMB.list}" style="margin-right: 20px;" />
 
 				<p:commandButton value="Não" onclick="atius_web_config_profile_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 
@@ -23,7 +23,7 @@
 				value="#{websiteProfileListMB.resultList}" var="atius_web_config_profile_row" rows="13" paginator="true" paginatorAlwaysVisible="false"
 				pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
 
-				<p:column sortBy="#{atius_web_config_profile_row.cn}">
+				<p:column sortBy="#{atius_web_config_profile_row.name}">
 
 					<h:panelGroup layout="block" style="width: 310px; overflow: hidden; white-space: pre; float: left">
 						<h:outputText value="#{atius_web_config_profile_row.name}" />
@@ -57,7 +57,7 @@
 
 				<p:commandButton value="Sim" oncomplete="atius_web_config_category_delete_dlg.hide()"
 					update="atius-web-config-category-datatable-id, atius-web-body-left-id, faa-growl-id" action="#{websiteCategoryEditMB.delete}"
-					actionListener="#{websiteCategoryListMB.clearResultList}" style="margin-right: 20px;" />
+					actionListener="#{websiteCategoryListMB.list}" style="margin-right: 20px;" />
 
 				<p:commandButton value="Não" onclick="atius_web_config_category_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
 
@@ -68,7 +68,7 @@
 				paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
 				styleClass="dialog-datatable dialog-datatable-small">
 
-				<p:column sortBy="#{atius_web_config_category_row.cn}">
+				<p:column sortBy="#{atius_web_config_category_row.name}">
 
 					<h:panelGroup layout="block" style="width: 310px; overflow: hidden; white-space: pre; float: left">
 						<h:outputText value="#{atius_web_config_category_row.name}" />
