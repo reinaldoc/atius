@@ -26,6 +26,15 @@ public class DhcpServerListMB extends AbstractListPageBean<DhcpServer, String> {
 	@Inject
 	private DhcpContainerBC dhcpContainerBC;
 
+	@Inject
+	private DhcpSharedNetworkListMB dhcpSharedNetworkListMB;
+
+	@Inject
+	private DhcpServiceEditMB dhcpServiceEditMB;
+
+	@Inject
+	private DhcpSubnetListMB dhcpSubnetListMB;
+
 	private String defaultDhcpServer;
 
 	@Override
@@ -36,10 +45,10 @@ public class DhcpServerListMB extends AbstractListPageBean<DhcpServer, String> {
 
 	public void selectDhcpServer(DhcpServer dhcpServer) {
 		bc.selectDhcpServer(dhcpServer);
-		Faces.getManagedProperty("#{dhcpSharedNetworkListMB}", DhcpSharedNetworkListMB.class).list();
-		Faces.getManagedProperty("#{dhcpSharedNetworkListMB}", DhcpSharedNetworkListMB.class).init();
-		Faces.getManagedProperty("#{dhcpServiceEditMB}", DhcpServiceEditMB.class).init();
-		Faces.getManagedProperty("#{dhcpSubnetListMB}", DhcpSubnetListMB.class).list();
+		dhcpSharedNetworkListMB.list();
+		dhcpSharedNetworkListMB.init();
+		dhcpServiceEditMB.init();
+		dhcpSubnetListMB.list();
 	}
 
 	public String getDefaultDhcpServer() {

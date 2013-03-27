@@ -18,6 +18,9 @@ public class DhcpServerEditMB extends AbstractEditPageBean<DhcpServer, String> {
 	@Inject
 	private DhcpServerBC bc;
 
+	@Inject
+	private DhcpServerListMB dhcpServerListMB;
+
 	@Override
 	public String insert() {
 		try {
@@ -51,7 +54,7 @@ public class DhcpServerEditMB extends AbstractEditPageBean<DhcpServer, String> {
 			Faces.addI18nMessage("atius.dhcp.server.delete.success", getBean().getCn());
 			if (getBean().equals(bc.getDhcpServer()))
 				bc.selectDhcpServer(new DhcpServer());
-			Faces.getManagedProperty("#{dhcpServerListMB}", DhcpServerListMB.class).list();
+			dhcpServerListMB.list();
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.dhcp.server.delete.failed", SeverityType.ERROR);
