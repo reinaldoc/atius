@@ -5,7 +5,7 @@ import java.io.Serializable;
 import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.configuration.Configuration;
 
-@Configuration(resource = "atius", prefix = "dhcp")
+@Configuration(resource = "demoiselle", prefix = "atius.dhcp.")
 public class DhcpConfig implements Serializable {
 
 	private static final long serialVersionUID = 1L;
