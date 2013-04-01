@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<ui:include src="dialog-pick-role.xhtml" />
+
+	<h:form id="faa-profile-edit-form-id">
+
+		<p:dialog id="faa-profile-edit-dlg-id" header="Perfís" widgetVar="faa_profile_edit_dlg" modal="true" width="800" resizable="false"
+			closable="false">
+
+			<h:panelGroup layout="block" id="faa-profile-edit-panel-id">
+
+				<div class="xp-dialog xp-inline">
+
+					<div class="xp-left" style="margin-right: 20px;">
+
+						<h:outputText value="Nome:" styleClass="xp-input-label" />
+						<h:inputText value="#{profileEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Descrição curta:" styleClass="xp-input-label" />
+						<h:inputText value="#{profileEditMB.bean.shortDescription}" autocomplete="off" onkeypress="return event.keyCode!=13"
+							styleClass="xp-input" />
+
+						<h:outputText value="Descrição:" styleClass="xp-input-label" />
+						<h:inputTextarea value="#{profileEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Página inicial:" styleClass="xp-input-label" />
+						<p:selectOneMenu value="#{profileEditMB.bean.welcomePage}" effect="fade" converter="securityResource" styleClass="xp-selectonemenu">
+							<f:selectItem itemLabel="--- selecione ---" itemValue="" />
+							<f:selectItems value="#{profileEditMB.resourceList}" var="selectResource" itemLabel="#{selectResource.label}"
+								itemValue="#{selectResource}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Prioridade:" styleClass="xp-input-label" />
+						<h:panelGroup layout="block" style="display: block;">
+							<p:selectOneMenu value="#{profileEditMB.bean.welcomePagePriority}" effect="fade" styleClass="xp-selectonemenu xp-selectonemenu-small">
+								<f:selectItem itemLabel="-" itemValue="" />
+								<f:selectItems value="#{profileEditMB.resourcePriorities}" />
+							</p:selectOneMenu>
+							<p:commandButton icon="ui-icon-plus" value="Vincular papel" style="float: right;" immediate="true"
+								update=":faa-profile-edit-role-form-id:faa-profile-edit-role-panel-id" oncomplete="faa_profile_edit_role_dlg.show()"
+								title="Selecionar papéis" actionListener="#{profileEditMB.clearRoleList()}" styleClass="xp-button" />
+						</h:panelGroup>
+
+					</div>
+
+					<h:panelGroup id="faa-profile-edit-panel-role-id" layout="block" styleClass="xp-left">
+
+						<p:dataTable id="faa-profile-edit-datatable-role-id" widgetVar="faa_profile_dt_role_wv" emptyMessage="Não há papéis selecionados"
+							value="#{profileEditMB.bean.roles}" var="faa_profile_dt_role_row" rows="8" paginator="true" paginatorAlwaysVisible="true"
+							pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="xp-datatable xp-datatable-style1">
+
+							<p:column headerText="Papéis:" sortBy="#{faa_profile_dt_role_row.name}">
+
+								<div class="xp-left xp-hidden-line" style="width: 295px; margin-right: 10px;">
+									<h:outputText value="#{faa_profile_dt_role_row.name}" title="#{faa_profile_dt_role_row.shortDescription}" />
+								</div>
+
+								<p:commandButton icon="ui-icon-close" action="#{profileEditMB.unselectRole(faa_profile_dt_role_row)}" immediate="true"
+									update=":faa-profile-edit-form-id:faa-profile-edit-panel-role-id" title="Desvincular role" styleClass="xp-button" />
+
+							</p:column>
+
+						</p:dataTable>
+
+					</h:panelGroup>
+
+				</div>
+
+				<xp:dialog-buttons id="faa-profile-edit-dlg-save-id" dialogId="faa-profile-edit-dlg-id" dialogWidgetVar="faa_profile_edit_dlg"
+					updateMode="#{profileEditMB.updateMode}" actionUpdater="#{profileEditMB.update}" actionInserter="#{profileEditMB.insert}"
+					actionCloser="#{profileListMB.clearValidation}" updateOnClose=":faa-profile-list-form-id:faa-profile-list-id"
+					actionNew="#{profileEditMB.editBean()}" updateOnNew=":faa-profile-edit-form-id:faa-profile-edit-panel-id"
+					insertMessage="Perfil cadastrado com sucesso!" updateMessage="Perfil atualizado com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

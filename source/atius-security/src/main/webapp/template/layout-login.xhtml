@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<!-- 
+
+	+==================================================================+
+	|                            ll-top-ui                             |
+	+==================================================================+
+	|                                                                  |
+	|     +===============================+                            |
+	|     |                               |    +===================+   |
+	|     |                               |    |                   |   |
+	|     |                               |    |   ll-body-right   |   |
+	|     |         ll-body-left          |    |                   |   |
+	|     |                               |    |                   |   |
+	|     |                               |    +===================+   |
+	|     |                               |                            |
+	|     |                               |                            |
+	|     |                               |                            |
+	|     +===============================+                            |
+	|                                                                  |
+	+==================================================================+
+	|                           ll-footer-ui                           |
+	+==================================================================+
+
+-->
+
+<h:head>
+	<h:outputStylesheet library="css" name="layout-login.css" />
+	<h:outputStylesheet library="css" name="xp-style.css" />
+	<h:outputStylesheet library="css" name="jquery.qtip.css" />
+
+	<h:outputScript library="javascript" name="jquery.qtip.js" />
+	<h:outputScript library="javascript" name="xp-script.js" />
+	<h:outputScript library="javascript" name="application.js" />
+	<script language="javascript" type="text/javascript">
+	//<![CDATA[
+
+		function setLoginFocus(userId, passId) {
+			field = document.getElementById(userId);
+			if (field.value == "") {
+				field.focus();
+			} else {
+				document.getElementById(passId).focus();
+			}
+		}
+
+		function requireIE8() {
+			if (getEngine() > 7)
+				return true;
+			else {
+				alert('Este sistema utiliza recursos não disponíveis em seu navegador.\nUtilize um navegador mais recente, ou desative o modo de compatibilidade.');
+				return false;
+			}
+		}
+
+		function getEngine() {
+			// From: http://msdn.microsoft.com/en-us/library/cc817574.aspx
+			engine = 10;
+			if (window.navigator.appName == "Microsoft Internet Explorer") {
+				if (document.documentMode) // IE8
+					engine = document.documentMode;
+				else {
+					engine = 5;
+					if (document.compatMode) {
+						if (document.compatMode == "CSS1Compat")
+							engine = 7;
+					}
+				}
+			}
+			return engine;
+		}
+
+		function require1024() {
+			if (window.screen.availWidth < 1000) {
+				alert('Sua resolucao ' + window.screen.availWidth + 'x' + window.screen.availHeight + ' é incompatível. Minímo 1024x768.');				
+				return false;
+			}
+			return true;
+		}
+
+		function isApple() {
+			if (navigator.userAgent)
+				if (navigator.userAgent.indexOf('Apple') != -1)
+					return true;
+			return false;
+		}
+
+		function requireLogin() {
+			if (isApple())
+				return true;
+			if (requireIE8() && require1024())
+				return true;
+			return false;
+		}
+
+	//]]>
+	</script>
+	
+	<title><ui:insert name="title">#{messages['atius.title']}</ui:insert></title>
+
+</h:head>
+
+<h:body styleClass="xp-style" onload="setLoginFocus('login-form-id:login-user-id', 'login-form-id:login-pass-id');">
+
+	<div id="ll-wrapper">
+
+		<div id="ll-top">
+			<div id="ll-top-content">
+				<ui:insert name="ll-top-ui">
+					<h:outputText value="Atius" styleClass="at-logo xp-block" style="padding-top: 13px; color: white;" />
+				</ui:insert>
+			</div>
+		</div>
+
+		<div id="ll-body">
+			<div id="ll-body-right">
+				<ui:insert name="ll-body-right" />
+			</div>
+			<div id="ll-body-left">
+				<ui:insert name="ll-body-left" />
+			</div>
+		</div>
+
+		<div id="ll-footer-bar">
+			<div id="ll-footer-content">
+				<ui:insert name="ll-footer-ui">
+					<h:panelGroup id="ll-bottom-id" layout="block">
+						<h:outputText value="ATIUS - Opensource IT Management Software" style="float: left;" styleClass="footer-label" />
+						<h:outputText value="ATIUS Corp. ©2013" styleClass="footer-label" />
+					</h:panelGroup>
+				</ui:insert>
+			</div>
+		</div>
+
+	</div>
+
+</h:body>
+
+</html>

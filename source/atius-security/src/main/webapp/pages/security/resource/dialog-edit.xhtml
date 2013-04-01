@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="faa-resource-edit-form-id">
+
+		<p:dialog id="faa-resource-edit-dlg-id" header="Recursos" widgetVar="faa_resource_edit_dlg" modal="true" width="440" resizable="false"
+			closable="false">
+
+			<h:panelGroup id="faa-resource-edit-panel-id">
+
+				<div class="xp-dialog">
+
+					<h:outputText value="Tipo:" styleClass="xp-input-label" />
+					<p:autoComplete value="#{resourceEditMB.bean.name}" completeMethod="#{resourceEditMB.names}" onkeypress="return event.keyCode!=13"
+						styleClass="xp-autocomplete" />
+
+					<h:outputText value="Valor:" styleClass="xp-input-label" />
+					<h:inputText value="#{resourceEditMB.bean.value}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+					<h:outputText value="Descrição:" styleClass="xp-input-label" />
+					<h:inputTextarea value="#{resourceEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+				</div>
+
+				<xp:dialog-buttons id="faa-resource-edit-dlg-save-id" dialogId="faa-resource-edit-form-id:faa-resource-edit-dlg-id"
+					dialogWidgetVar="faa_resource_edit_dlg" updateMode="#{resourceEditMB.updateMode}" actionUpdater="#{resourceEditMB.update}"
+					actionInserter="#{resourceEditMB.insert}" actionCloser="#{resourceListMB.clearValidation}"
+					updateOnClose=":faa-resource-list-form-id:faa-resource-list-id" actionNew="#{resourceEditMB.editBean()}"
+					updateOnNew=":faa-resource-edit-form-id:faa-resource-edit-panel-id" insertMessage="Recurso cadastrado com sucesso!"
+					updateMessage="Recurso atualizado com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

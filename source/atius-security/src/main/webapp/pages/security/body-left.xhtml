@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+
+		<h:panelGroup id="faa-security-menu-id">
+
+			<p:commandLink value="#{messages['atius.security.users']}" immediate="true" update=":body-id, :header-id" action="#{userListMB.list()}"
+				actionListener="#{menuContext.select('Security', 'User')}" styleClass="#{menuContext.menu['Security']['User']['Style']}" />
+
+			<p:commandLink value="#{messages['atius.security.profiles']}" immediate="true" update=":body-id, :header-id"
+				action="#{profileListMB.list()}" actionListener="#{menuContext.select('Security', 'Profile')}"
+				styleClass="#{menuContext.menu['Security']['Profile']['Style']}" />
+
+			<p:commandLink value="#{messages['atius.security.rules']}" immediate="true" update=":body-id, :header-id"
+				action="#{profileByRuleListMB.list()}" actionListener="#{menuContext.select('Security', 'Rule')}"
+				styleClass="#{menuContext.menu['Security']['Rule']['Style']}" style="margin-left: 15px;" />
+
+			<p:commandLink value="#{messages['atius.security.welcome']}" immediate="true" update=":body-id, :header-id"
+				actionListener="#{menuContext.select('Security', 'Welcome')}" styleClass="#{menuContext.menu['Security']['Welcome']['Style']}"
+				style="margin-left: 15px;" />
+
+			<p:commandLink value="#{messages['atius.security.roles']}" immediate="true" update=":body-id, :header-id" action="#{roleListMB.list()}"
+				actionListener="#{menuContext.select('Security', 'Role')}" styleClass="#{menuContext.menu['Security']['Role']['Style']}" />
+
+			<p:commandLink value="#{messages['atius.security.resources']}" immediate="true" update=":body-id, :header-id"
+				action="#{resourceListMB.list()}" actionListener="#{menuContext.select('Security', 'Resource')}"
+				styleClass="#{menuContext.menu['Security']['Resource']['Style']}" />
+
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<!-- 
+
+	+==================================================================+
+	|                              top-ui                              |
+	+================+=================================================+
+	| header-left-ui |                 header-right-ui                 | 
+	+================+=================================================+
+	|                |                                                 |
+	|                |                                                 |
+	|                |                                                 |
+	|                |                                                 |
+	|  body-left-ui  |                  body-right-ui                  |
+	|                |                                                 |
+	|                |                                                 |
+	|                |                                                 |
+	|                |                                                 |
+	|                |                                                 |
+	|                |                                                 |
+	+==================================================================+
+	|                              footer-ui                           |
+	+==================================================================+
+
+-->
+
+<h:head>
+
+	<h:outputStylesheet library="css" name="jquery.qtip.css" />
+	<h:outputStylesheet library="css" name="layout-atius.css" />
+	<h:outputStylesheet library="css" name="xp-style.css" />
+	<h:outputStylesheet library="css" name="xp-dialog-buttons.css" />
+
+	<h:outputScript library="javascript" name="jquery.qtip.js" />
+	<h:outputScript library="javascript" name="xp-primefaces.js" />
+	<h:outputScript library="javascript" name="xp-script.js" />
+	<h:outputScript library="javascript" name="xp-dialog-buttons.js" />
+	<h:outputScript library="javascript" name="application.js" />
+
+	<title><ui:insert name="title">#{messages['atius.title']}</ui:insert></title>
+
+</h:head>
+
+<h:body styleClass="xp-style">
+
+	<p:growl id="growl-id" showDetail="false" life="9000" />
+
+	<h:panelGroup id="top-id" layout="block">
+
+		<ui:insert name="top-ui">
+			<ui:include src="/pages/top.xhtml" />
+		</ui:insert>
+
+	</h:panelGroup>
+
+	<h:panelGroup id="header-id" layout="block">
+
+		<ui:insert name="header-ui">
+
+			<h:panelGroup id="header-left-id" layout="block">
+				<ui:insert name="header-left-ui">
+					<ui:include src="/pages/header-left.xhtml" />
+				</ui:insert>
+			</h:panelGroup>
+
+			<h:panelGroup id="header-right-id" layout="block">
+				<ui:insert name="header-right-ui" />
+			</h:panelGroup>
+
+		</ui:insert>
+
+	</h:panelGroup>
+
+	<h:panelGroup id="body-id" layout="block">
+
+		<ui:insert name="body-ui">
+
+			<h:panelGroup id="body-left-id" layout="block">
+				<ui:insert name="body-left-ui" />
+			</h:panelGroup>
+
+			<h:panelGroup id="body-right-id" layout="block">
+				<ui:insert name="body-right-ui" />
+			</h:panelGroup>
+
+		</ui:insert>
+
+	</h:panelGroup>
+
+	<h:panelGroup id="footer-id" layout="block">
+		<ui:insert name="footer-ui" />
+	</h:panelGroup>
+
+</h:body>
+
+</html>

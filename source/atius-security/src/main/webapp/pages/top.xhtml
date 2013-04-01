@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGroup>
+
+		<h:form prependId="false">
+			<!-- MENU LADO ESQUERDO -->
+
+			<!-- MENU LADO DIREITO -->
+			<p:commandLink value="Sair" style="float: right; margin-right: 20px;" ajax="false" immediate="true" action="#{securityContext.logout}" />
+
+			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;" />
+
+			<p:commandLink value="#{fuselageMB.userNameProperCase}" actionListener="#{menuContext.select('MenuTop', 'Usuário')}"
+				action="/pages/security/account/account.jsf" styleClass="#{menuContext.menu['MenuTop']['Usuário']['Style']}" style="float: right" ajax="false"
+				immediate="true" />
+
+			<h:outputText value="|" styleClass="separator" style="float: right; line-height: 25px;"
+				rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
+
+			<p:commandLink value="Segurança" actionListener="#{menuContext.select('MenuTop', 'Segurança')}" action="/pages/security/index.jsf"
+				styleClass="#{menuContext.menu['MenuTop']['Segurança']['Style']}" style="float: right" ajax="false" immediate="true"
+				rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
+
+		</h:form>
+
+	</h:panelGroup>
+
+</ui:composition>

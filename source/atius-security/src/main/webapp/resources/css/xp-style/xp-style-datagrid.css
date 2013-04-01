@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Datagrid %%
+*/
+.xp-style .xp-datagrid .ui-datagrid-content-empty {
+	text-align: center;
+	text-decoration: underline;
+	line-height: 50px;
+}
+
+.xp-style .xp-datagrid-style1 .ui-datagrid-content-empty {
+	text-align: center;
+	text-decoration: underline;
+	font-size: 14px;
+	line-height: 100px;
+}
+
+.xp-style .xp-datagrid-style2 .ui-datagrid-content-empty {
+	text-align: center;
+	text-decoration: underline;
+	font-size: 14px;
+	line-height: 200px;
+}

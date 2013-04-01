@@ -1,0 +1,142 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Primefaces Basic %%
+*/
+.ui-widget {
+	font-family: DroidSans;
+	font-size: 12.5px !important;
+	text-shadow: 1px 1px 9px #D6D6D6;
+}
+
+.ui-widget-header {
+	text-shadow: 1px 1px 9px #D6D6D6;
+}
+
+.ui-widget-content {
+	border: none;
+	color: #333333;
+}
+
+/*
+	%% Primefaces %% Autocomplete %% 
+*/
+div.ui-autocomplete-panel {
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+div.ui-autocomplete-panel ul.ui-autocomplete-list {
+	border: 1px solid #D6D6D6;
+}
+
+/*
+	To be cleared
+*/
+div.ui-radiobutton div.ui-radiobutton-box {
+	height: 13px;
+	width: 13px;
+}
+
+span.ui-icon-bullet {
+	background-position: -82px -146px;
+}
+
+label.ui-state-focus {
+	background: none !important;
+}
+
+input[type=text].ui-state-focus,input[type=password].ui-state-focus,textarea.ui-state-focus,select.ui-state-focus {
+	background-color: #FFFFE0 !important;
+}
+
+.ui-selectonemenu-panel {
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Menu */
+.ui-menu {
+	background: #FAFAFA;
+	border-radius: 6px;
+	border: 2px solid #74ffcc;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ui-menu .ui-menu-list .ui-state-hover {
+	background-color: #74ffcc !important;
+	color: white;
+	font-weight: bold;
+}
+
+/*
+	%% TabView %%
+*/
+div.ui-tabs ul.ui-helper-clearfix {
+	display: inline-block;
+}
+
+div.ui-tabs div.ui-tabs-panel {
+	padding: 8px 4px 2px;
+}
+
+div.ui-tabs ul.ui-tabs-nav {
+	background: none;
+}
+
+div.ui-tabs ul.ui-tabs-nav li {
+	border-bottom: 1px solid #A8A8A8 !important;
+	background-color: #74ffcc;
+}
+
+div.ui-tabs ul.ui-tabs-nav li.ui-tabs-selected {
+	padding-bottom: 0;
+	border-bottom: 1px solid #A8A8A8 !important;
+	background-color: #54dfac;
+	box-shadow: 4px 4px 4px #CCCCCC;
+}
+
+div.ui-tabs ul.ui-tabs-nav li.ui-tabs-selected.ui-state-hover {
+	background-color: #54dfac !important;
+}
+
+div.ui-tabs ul.ui-tabs-nav li.ui-state-hover {
+	background-color: #64efbc !important;
+}
+
+/*
+	%% File Upload %%
+*/
+.fileupload-content div.ui-progressbar {
+	width: 150px;
+}
+
+.fileupload-content td {
+	vertical-align: middle;
+}
+
+.fileupload-buttonbar {
+	background: transparent;
+	border: 0px;
+}
+
+.fileupload-buttonbar label.ui-button {
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #74FFCC !important;
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #74FFCC !important;
+	float: right;
+}
+
+.fileupload-buttonbar label.ui-button:hover {
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)) repeat scroll 0 0 #2EC890 !important;
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)) repeat scroll 0 0 #2EC890 !important;
+}
+
+/*
+	%% Select Bool Checkbox %%
+*/
+div.ui-chkbox {
+	margin: 5px 5px 5px 10px;
+	vertical-align: middle;
+}
+
+div.ui-chkbox div.ui-chkbox-box {
+	background: transparent;
+}

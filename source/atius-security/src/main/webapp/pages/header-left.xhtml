@@ -1,0 +1,13 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<h:form prependId="false">
+
+		<p:commandLink actionListener="#{menuContext.select('TopMenu', 'DHCP')}" ajax="false" immediate="true" action="/index.jsf"
+			styleClass="at-logo-link">
+			<h:outputText value="Atius" styleClass="at-logo" />
+		</p:commandLink>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="faa-role-edit-resource-form-id">
+
+		<p:dialog id="faa-role-edit-resource-dlg-id" header="Recursos" widgetVar="faa_role_edit_resource_dlg" modal="true" width="600"
+			resizable="false" closable="false">
+
+			<h:panelGroup layout="block" id="faa-role-edit-resource-panel-id">
+
+				<div class="xp-dialog">
+
+					<p:dataTable id="faa-role-edit-datatable-resource-select-id" widgetVar="faa_role_dt_resource_select_wv"
+						emptyMessage="Não há recursos disponíveis" value="#{roleEditMB.resourceList}" var="faa_role_dt_resource_select_row" rows="10"
+						paginator="true" paginatorAlwaysVisible="true" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="top"
+						styleClass="xp-datatable xp-datatable-style1" selection="#{roleEditMB.resourceArray}" rowKey="#{faa_role_dt_resource_select_row.id}">
+
+						<p:column selectionMode="multiple" style="text-align: center; vertical-align: middle;" />
+
+						<p:column headerText="Recurso:">
+
+							<h:panelGroup layout="block" style="width: 130px; overflow: hidden; white-space: pre; float: left">
+								<h:outputText value="#{faa_role_dt_resource_select_row.name}" title="#{faa_role_dt_resource_select_row.name}" />
+							</h:panelGroup>
+
+							<h:panelGroup layout="block" style="width: 340px; overflow: hidden; white-space: pre; float: right">
+								<h:outputText value="#{faa_role_dt_resource_select_row.value}" title="#{faa_role_dt_resource_select_row.value}" />
+							</h:panelGroup>
+
+						</p:column>
+
+					</p:dataTable>
+
+				</div>
+
+				<p:commandButton value="Selecionar" update=":faa-role-edit-form-id:faa-role-edit-panel-resource-id"
+					oncomplete="faa_role_edit_resource_dlg.hide()" action="#{roleEditMB.selectResources()}"
+					styleClass="xp-button xp-dialog-button xp-button-small" />
+
+				<p:commandLink value="Fechar" immediate="true" styleClass="xp-close" process="@this" onclick="faa_role_edit_resource_dlg.hide()" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+.at-logo {
+	color: #374140;
+	font-family: ChanceryMediumItalic;
+	font-size: 64px;
+	text-shadow: 2px 2px 2px #888888;
+}
+
+.at-logo-link {
+	margin-left: 20px;
+	display: block;
+	text-decoration: none;
+	height: 60px;
+}
+
+.xp-style .at-icon-spacer {
+	margin-right: 12px;
+}
+
+.xp-style .at-button-spacer {
+	margin-right: 45px;
+}

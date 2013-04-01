@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<ui:include src="dialog-pick-resource.xhtml" />
+
+	<h:form id="faa-role-edit-form-id">
+
+		<p:dialog id="faa-role-edit-dlg-id" header="Papéis" widgetVar="faa_role_edit_dlg" modal="true" width="820" resizable="false"
+			closable="false">
+
+			<h:panelGroup layout="block" id="faa-role-edit-panel-id">
+
+				<div class="xp-dialog xp-inline" style="padding: 15px;">
+
+					<div class="xp-left" style="margin-right: 20px;">
+
+						<h:outputText value="Nome:" styleClass="xp-input-label" />
+						<h:inputText value="#{roleEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Descrição curta:" styleClass="xp-input-label" />
+						<h:inputText value="#{roleEditMB.bean.shortDescription}" autocomplete="off" onkeypress="return event.keyCode!=13"
+							styleClass="xp-input" />
+
+						<h:outputText value="Descrição:" styleClass="xp-input-label" />
+						<h:inputTextarea value="#{roleEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Restritiva:" styleClass="xp-input-label" />
+						<h:panelGroup>
+
+							<h:selectBooleanCheckbox id="faa-role-edit-restriction-id" value="#{roleEditMB.bean.restriction}"
+								onkeypress="return event.keyCode!=13" />
+							<p:tooltip for="faa-role-edit-restriction-id" value="Apenas indica que este papél não deve ser adicionado a perfis administrativos." />
+
+							<p:commandButton icon="ui-icon-plus" value="Vincular Recursos" style="float: right; margin-bottom: 2px; margin-right: 0px;"
+								immediate="true" update=":faa-role-edit-resource-form-id:faa-role-edit-resource-panel-id"
+								oncomplete="faa_role_edit_resource_dlg.show()" title="Selecionar recursos" actionListener="#{roleEditMB.clearResourceList()}"
+								styleClass="xp-button xp-button-small" />
+
+						</h:panelGroup>
+
+					</div>
+
+					<h:panelGroup id="faa-role-edit-panel-resource-id" layout="block" styleClass="xp-left">
+
+						<p:dataTable id="faa-role-edit-datatable-resource-id" widgetVar="faa_role_dt_resource_wv" emptyMessage="Não há recursos selecionados"
+							value="#{roleEditMB.bean.resources}" var="faa_role_dt_resource_row" rows="6" paginator="true" paginatorAlwaysVisible="true"
+							pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="xp-datatable xp-datatable-style1">
+
+							<p:column headerText="Recursos:" sortBy="#{faa_role_dt_resource_row.name}">
+
+								<div class="xp-left xp-hidden-line" style="width: 110px; margin-right: 10px;">
+									<h:outputText value="#{faa_role_dt_resource_row.name}" title="#{faa_role_dt_resource_row.name}" />
+								</div>
+
+								<div class="xp-left xp-hidden-line" style="width: 190px; margin-right: 10px;">
+									<h:outputText value="#{faa_role_dt_resource_row.value}" title="#{faa_role_dt_resource_row.value}" />
+								</div>
+
+								<p:commandButton icon="ui-icon-close" action="#{roleEditMB.unselectResource(faa_role_dt_resource_row)}" immediate="true"
+									update=":faa-role-edit-form-id:faa-role-edit-panel-resource-id" title="Desvincular recurso" styleClass="xp-button" />
+
+							</p:column>
+
+						</p:dataTable>
+
+					</h:panelGroup>
+
+				</div>
+
+				<xp:dialog-buttons id="faa-role-edit-dlg-save-id" dialogId="faa-role-edit-dlg-id" dialogWidgetVar="faa_role_edit_dlg"
+					updateMode="#{roleEditMB.updateMode}" actionUpdater="#{roleEditMB.update}" actionInserter="#{roleEditMB.insert}"
+					actionCloser="#{roleListMB.clearValidation}" updateOnClose=":faa-role-list-form-id:faa-role-list-datatable-id"
+					actionNew="#{roleEditMB.editBean()}" updateOnNew=":faa-role-edit-form-id:faa-role-edit-panel-id"
+					insertMessage="Papél cadastrado com sucesso!" updateMessage="Papél atualizado com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

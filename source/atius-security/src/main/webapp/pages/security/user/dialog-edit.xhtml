@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<ui:include src="dialog-pick-profile.xhtml" />
+
+	<h:form id="faa-user-edit-form-id">
+
+		<p:dialog id="faa-user-edit-dlg-id" header="Usuários" widgetVar="faa_user_edit_dlg" modal="true" width="800" resizable="false"
+			closable="false">
+
+			<h:panelGroup layout="block" id="faa-user-edit-panel-id">
+
+				<div class="xp-dialog xp-inline">
+
+					<div class="xp-left" style="margin-right: 20px;">
+
+						<h:outputText value="Nome:" styleClass="xp-input-label" />
+						<h:inputText value="#{userEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Login:" styleClass="xp-input-label" />
+						<h:panelGroup layout="block" styleClass="xp-block">
+							<h:inputText id="faa-user-edit-login-id" value="#{userEditMB.bean.login}" autocomplete="off" onkeypress="return event.keyCode!=13"
+								style="width: #{userEditMB.updateMode ? '375px' : '337px' };" readonly="#{userEditMB.updateMode ? 'true' : 'false' }"
+								styleClass="xp-input" />
+							<p:commandButton icon="ui-icon-gear" title="Verificar" action="#{userEditMB.userAvailable}"
+								update=":faa-user-edit-form-id:faa-user-edit-dlg-save-id:messages" styleClass="xp-button"
+								style="margin-left: 10px; margin-right: 0px; vertical-align: top;" process="@this, faa-user-edit-login-id"
+								oncomplete="xp_dialog_buttons_showTip(args, 'faa-user-edit-form-id:faa-user-edit-dlg-save-id');"
+								rendered="#{!userEditMB.updateMode}" />
+						</h:panelGroup>
+
+						<h:outputText value="Unidade:" styleClass="xp-input-label" />
+						<h:inputText value="#{userEditMB.bean.orgunit}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Comentários:" styleClass="xp-input-label" />
+						<h:inputTextarea value="#{userEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Password:" styleClass="xp-input-label" />
+						<h:panelGroup layout="block" style="display: inline-block; width: 100%;">
+							<h:inputSecret value="#{userEditMB.bean.password}" style="width: 120px;" autocomplete="off" onkeypress="return event.keyCode!=13"
+								styleClass="xp-input" />
+							<h:outputText styleClass="xp-icon ui-icon ui-icon-arrowthickstop-1-e" title="Repita a senha" />
+							<h:inputSecret value="#{userEditMB.bean.passwordrepeat}" style="width: 120px;" autocomplete="off"
+								onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+							<p:commandButton icon="ui-icon-plus" value="Perfil" action="#{userEditMB.clearProfileList()}" immediate="true"
+								update=":faa-user-edit-profile-form-id:faa-user-edit-profile-panel-id" oncomplete="faa_user_edit_profile_dlg.show()"
+								title="Selecionar perfis" style="float: right; vertical-align: bottom;" styleClass="xp-button xp-button-small" />
+						</h:panelGroup>
+
+					</div>
+
+					<h:panelGroup id="faa-user-edit-panel-profile-id" layout="block" styleClass="xp-left">
+
+						<p:dataTable id="faa-user-edit-datatable-profile-id" widgetVar="faa_user_dt_profile_wv" emptyMessage="Não há perfis selecionados"
+							value="#{userEditMB.bean.profiles}" var="faa_user_dt_profile_row" rows="7" paginator="true" paginatorAlwaysVisible="true"
+							pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="top" styleClass="xp-datatable xp-datatable-style1">
+
+							<p:column headerText="Perfis:" sortBy="#{faa_user_dt_profile_row.name}">
+
+								<div class="xp-left xp-hidden-line" style="width: 290px; margin-right: 10px;">
+									<h:outputText value="#{faa_user_dt_profile_row.name}" title="#{faa_user_dt_profile_row.shortDescription}" />
+								</div>
+
+								<p:commandButton icon="ui-icon-close" action="#{userEditMB.unselectProfile(faa_user_dt_profile_row)}" immediate="true"
+									update=":faa-user-edit-form-id:faa-user-edit-panel-profile-id" title="Desvincular perfil" styleClass="xp-button" />
+
+							</p:column>
+
+						</p:dataTable>
+
+					</h:panelGroup>
+
+				</div>
+
+				<xp:dialog-buttons id="faa-user-edit-dlg-save-id" dialogId="faa-user-edit-form-id:faa-user-edit-dlg-id"
+					dialogWidgetVar="faa_user_edit_dlg" updateMode="#{userEditMB.updateMode}" actionUpdater="#{userEditMB.update}"
+					actionInserter="#{userEditMB.insert}" actionCloser="#{userListMB.clearValidation}"
+					updateOnClose=":faa-user-list-form-id:faa-user-list-datatable-id" actionNew="#{userEditMB.editBean()}"
+					updateOnNew=":faa-user-edit-form-id:faa-user-edit-panel-id" insertMessage="Usuário cadastrado com sucesso!"
+					updateMessage="Usuário atualizado com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

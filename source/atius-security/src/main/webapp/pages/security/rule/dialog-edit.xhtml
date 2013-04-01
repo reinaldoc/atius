@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<ui:include src="dialog-pick-profile.xhtml" />
+
+	<h:form id="faa-profileByRule-edit-form-id">
+
+		<p:dialog id="faa-profileByRule-edit-dlg-id" header="Regras de Perfil" widgetVar="faa_profileByRule_edit_dlg" modal="true" width="800"
+			resizable="false" closable="false">
+
+			<h:panelGroup layout="block" id="faa-profileByRule-edit-panel-id">
+
+				<div class="xp-dialog xp-inline">
+
+					<div class="xp-left" style="margin-right: 20px;">
+
+						<h:outputText value="Nome:" styleClass="xp-input-label" />
+						<h:inputText value="#{profileByRuleEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Descrição:" styleClass="xp-input-label" />
+						<h:inputTextarea value="#{profileByRuleEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+						<h:outputText value="Implementação:" styleClass="xp-input-label" />
+						<p:selectOneMenu value="#{profileByRuleEditMB.bean.implementation}" effect="fade" styleClass="xp-selectonemenu">
+							<f:selectItem itemLabel="--- selecione ---" itemValue="" />
+							<f:selectItems value="#{profileByRuleEditMB.implementationList}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Chave:" styleClass="xp-input-label" />
+						<h:inputText value="#{profileByRuleEditMB.bean.keyname}" autocomplete="off" onkeypress="return event.keyCode!=13"
+							styleClass="xp-input" />
+
+						<h:panelGroup layout="block" style="width: 383px; margin-top: 9px;">
+
+							<h:outputText value="Valor:" style="float: left; margin-right: 15px; margin-top: 3px;" />
+							<p:selectOneMenu value="#{profileByRuleEditMB.bean.valuenotation}" effect="fade"
+								style="float: left; margin-right: 15px; width: 100px">
+								<f:selectItem itemLabel="-" itemValue="" />
+								<f:selectItem itemLabel="Igual" itemValue="EXACT" />
+								<f:selectItem itemLabel="Contém" itemValue="CONTAINS" />
+							</p:selectOneMenu>
+
+							<h:inputText value="#{profileByRuleEditMB.bean.value}" autocomplete="off" onkeypress="return event.keyCode!=13" style="width: 150px" />
+							<p:commandButton icon="ui-icon-plus" action="#{profileByRuleEditMB.clearProfileList()}" immediate="true"
+								update=":faa-profileByRule-edit-profile-form-id:faa-profileByRule-edit-profile-panel-id"
+								oncomplete="faa_profileByRule_edit_profile_dlg.show()" title="Selecionar perfis" styleClass="xp-button"
+								style="float: right; vertical-align: bottom;" />
+
+						</h:panelGroup>
+
+
+					</div>
+
+					<h:panelGroup id="faa-profileByRule-edit-panel-profile-id" layout="block" styleClass="xp-left">
+
+						<p:dataTable id="faa-profileByRule-edit-datatable-profile-id" widgetVar="faa_profileByRule_dt_profile_wv"
+							emptyMessage="Não há perfis selecionados" value="#{profileByRuleEditMB.bean.profiles}" var="faa_profileByRule_dt_profile_row"
+							rows="7" paginator="true" paginatorAlwaysVisible="true" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="top"
+							styleClass="xp-datatable xp-datatable-style1">
+
+							<p:column headerText="Perfis:" sortBy="#{faa_profileByRule_dt_profile_row.name}">
+
+								<div class="xp-left xp-hidden-line" style="width: 295px; margin-right: 10px;">
+									<h:outputText value="#{faa_profileByRule_dt_profile_row.name}" title="#{faa_profileByRule_dt_profile_row.shortDescription}" />
+								</div>
+
+								<p:commandButton icon="ui-icon-close" action="#{profileByRuleEditMB.unselectProfile(faa_profileByRule_dt_profile_row)}"
+									immediate="true" update=":faa-profileByRule-edit-form-id:faa-profileByRule-edit-panel-profile-id" title="Desvincular perfil"
+									styleClass="xp-button" />
+
+							</p:column>
+
+						</p:dataTable>
+
+					</h:panelGroup>
+
+				</div>
+
+				<xp:dialog-buttons id="faa-profileByRule-edit-dlg-save-id" dialogId="faa-profileByRule-edit-dlg-id"
+					dialogWidgetVar="faa_profileByRule_edit_dlg" updateMode="#{profileByRuleEditMB.updateMode}"
+					actionUpdater="#{profileByRuleEditMB.update}" actionInserter="#{profileByRuleEditMB.insert}"
+					actionCloser="#{profileByRuleListMB.clearValidation}" actionNew="#{profileByRuleEditMB.editBean}"
+					updateOnNew=":faa-profileByRule-edit-form-id:faa-profileByRule-edit-panel-id"
+					updateOnClose=":faa-profileByRule-list-form-id:faa-profileByRule-list-datatable-id" insertMessage="Regra cadastrada com sucesso!"
+					updateMessage="Regra atualizada com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="faa-welcome-edit-form-id">
+
+		<p:dialog id="faa-welcome-edit-dlg-id" header="Perfís" widgetVar="faa_welcome_edit_dlg" modal="true" width="440" resizable="false"
+			closable="false">
+
+			<h:panelGroup layout="block" id="faa-welcome-edit-panel-id">
+
+				<div class="xp-dialog">
+
+					<h:outputText value="Nome:" styleClass="xp-input-label" />
+					<h:outputText value="#{profileEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+					<h:outputText value="Página inicial:" styleClass="xp-input-label" />
+					<p:selectOneMenu value="#{profileEditMB.bean.welcomePage}" effect="fade" converter="securityResource" styleClass="xp-selectonemenu">
+
+						<f:selectItem itemLabel="--- selecione ---" itemValue="" />
+						<f:selectItems value="#{profileEditMB.resourceList}" var="selectResource" itemLabel="#{selectResource.label}"
+							itemValue="#{selectResource}" />
+
+					</p:selectOneMenu>
+
+					<h:outputText value="Prioridade:" styleClass="xp-input-label" />
+					<p:selectOneMenu value="#{profileEditMB.bean.welcomePagePriority}" effect="fade" styleClass="xp-selectonemenu xp-selectonemenu-small">
+
+						<f:selectItem itemLabel="-" itemValue="" />
+						<f:selectItems value="#{profileEditMB.resourcePriorities}" />
+
+					</p:selectOneMenu>
+
+				</div>
+
+				<xp:dialog-buttons id="faa-welcome-edit-dlg-save-id" dialogId="faa-welcome-edit-dlg-id" dialogWidgetVar="faa_welcome_edit_dlg"
+					updateMode="#{profileEditMB.updateMode}" actionUpdater="#{profileEditMB.update}" actionInserter="#{profileEditMB.insert}"
+					actionCloser="#{profileListMB.clearValidation}" updateOnClose=":faa-welcome-list-form-id:faa-welcome-list-datatable-id"
+					updateMessage="Página inicial atualizada" hiddenNew="#{true}" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

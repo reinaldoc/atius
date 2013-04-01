@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="faa-profileByRule-edit-profile-form-id">
+
+		<p:dialog id="faa-profileByRule-edit-profile-dlg-id" header="Perfis" widgetVar="faa_profileByRule_edit_profile_dlg" modal="true"
+			width="600" resizable="false" closable="false">
+
+			<h:panelGroup layout="block" id="faa-profileByRule-edit-profile-panel-id">
+
+				<div class="xp-dialog">
+
+					<p:dataTable id="faa-profileByRule-edit-datatable-profile-select-id" widgetVar="faa_profileByRule_dt_profile_select_wv"
+						emptyMessage="Não há perfis" value="#{profileByRuleEditMB.profileList}" var="faa_profileByRule_dt_profile_select_row" rows="10"
+						paginator="true" paginatorAlwaysVisible="true" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="top"
+						styleClass="xp-datatable xp-datatable-style1" selection="#{profileByRuleEditMB.profileArray}"
+						rowKey="#{faa_profileByRule_dt_profile_select_row.id}">
+
+						<p:column selectionMode="multiple" style="text-align: center" />
+
+						<p:column headerText="Perfil:">
+							<h:panelGroup layout="block" style="width: 470px; overflow: hidden; white-space: pre; float: left">
+								<h:outputText value="#{faa_profileByRule_dt_profile_select_row.name}"
+									title="#{faa_profileByRule_dt_profile_select_row.shortDescription}" />
+							</h:panelGroup>
+						</p:column>
+
+					</p:dataTable>
+
+				</div>
+
+				<p:commandButton value="Selecionar" update=":faa-profileByRule-edit-form-id:faa-profileByRule-edit-panel-profile-id"
+					oncomplete="faa_profileByRule_edit_profile_dlg.hide()" action="#{profileByRuleEditMB.selectProfiles()}"
+					styleClass="xp-button xp-dialog-button xp-button-small" />
+
+				<p:commandLink value="Fechar" immediate="true" styleClass="xp-close" process="@this" onclick="faa_profileByRule_edit_profile_dlg.hide()" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>
