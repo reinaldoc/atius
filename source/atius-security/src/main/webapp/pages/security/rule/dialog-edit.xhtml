@@ -32,7 +32,7 @@
 
 						<h:panelGroup layout="block" style="width: 383px; margin-top: 9px;">
 
-							<h:outputText value="Valor:" style="float: left; margin-right: 15px; margin-top: 3px;" />
+							<h:outputText value="Valor:" style="float: left; margin-right: 15px; margin-top: 3px;" styleClass="xp-input-label" />
 							<p:selectOneMenu value="#{profileByRuleEditMB.bean.valuenotation}" effect="fade"
 								style="float: left; margin-right: 15px; width: 100px">
 								<f:selectItem itemLabel="-" itemValue="" />
@@ -40,7 +40,8 @@
 								<f:selectItem itemLabel="Contém" itemValue="CONTAINS" />
 							</p:selectOneMenu>
 
-							<h:inputText value="#{profileByRuleEditMB.bean.value}" autocomplete="off" onkeypress="return event.keyCode!=13" style="width: 150px" />
+							<h:inputText value="#{profileByRuleEditMB.bean.value}" autocomplete="off" onkeypress="return event.keyCode!=13" style="width: 150px"
+								styleClass="xp-input" />
 							<p:commandButton icon="ui-icon-plus" action="#{profileByRuleEditMB.clearProfileList()}" immediate="true"
 								update=":faa-profileByRule-edit-profile-form-id:faa-profileByRule-edit-profile-panel-id"
 								oncomplete="faa_profileByRule_edit_profile_dlg.show()" title="Selecionar perfis" styleClass="xp-button"

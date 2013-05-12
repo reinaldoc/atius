@@ -77,22 +77,18 @@
 
 				<p:column styleClass="xp-text-right">
 
-					<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+					<p:commandButton icon="ui-icon-pencil" action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" immediate="true"
+						update=":faa-profileByRule-edit-form-id:faa-profileByRule-edit-panel-id" oncomplete="faa_profileByRule_edit_dlg.show()"
+						title="Editar Regra" styleClass="xp-button at-icon-spacer" />
 
-						<p:commandButton icon="ui-icon-pencil" action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" immediate="true"
-							update=":faa-profileByRule-edit-form-id:faa-profileByRule-edit-panel-id" oncomplete="faa_profileByRule_edit_dlg.show()"
-							title="Editar Regra" styleClass="xp-button at-icon-spacer" />
+					<p:commandButton icon="#{!faa_profileByRule_dt_row.enabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }"
+						action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" immediate="true"
+						update=":faa-profileByRule-list-form-id:faa-profileByRule-status-dlg-id" oncomplete="faa_profileByRule_status_dlg.show()"
+						title="#{!faa_profileByRule_dt_row.enabled ? 'Ativar' : 'Desativar' } Regra" styleClass="xp-button at-icon-spacer" />
 
-						<p:commandButton icon="#{!faa_profileByRule_dt_row.enabled ? 'ui-icon-locked' : 'ui-icon-unlocked' }"
-							action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" immediate="true"
-							update=":faa-profileByRule-list-form-id:faa-profileByRule-status-dlg-id" oncomplete="faa_profileByRule_status_dlg.show()"
-							title="#{!faa_profileByRule_dt_row.enabled ? 'Ativar' : 'Desativar' } Regra" styleClass="xp-button at-icon-spacer" />
-
-						<p:commandButton icon="ui-icon-trash" action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" immediate="true"
-							update=":faa-profileByRule-list-form-id:faa-profileByRule-delete-dlg-id" oncomplete="faa_profileByRule_delete_dlg.show()"
-							title="Excluir Regra" styleClass="xp-button at-icon-spacer" />
-
-					</h:panelGroup>
+					<p:commandButton icon="ui-icon-trash" action="#{profileByRuleEditMB.editById(faa_profileByRule_dt_row.id)}" immediate="true"
+						update=":faa-profileByRule-list-form-id:faa-profileByRule-delete-dlg-id" oncomplete="faa_profileByRule_delete_dlg.show()"
+						title="Excluir Regra" styleClass="xp-button at-icon-spacer" />
 
 				</p:column>
 
