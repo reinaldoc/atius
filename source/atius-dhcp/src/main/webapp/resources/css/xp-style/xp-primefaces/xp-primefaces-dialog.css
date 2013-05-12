@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Dialog %%
+*/
+div.ui-dialog {
+	border: 3px solid white;
+	border-radius: 3px 3px 3px 3px;
+}
+
+div.ui-dialog div.ui-dialog-titlebar {
+	border-radius: 3px 3px 3px 3px;
+	background: none repeat scroll 0 0 #374140;
+	color: white;
+	padding: 0px 0px 5px 7px;
+	height: 19px;
+}

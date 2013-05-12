@@ -1,0 +1,141 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Datatable %% Pagination %%
+*/
+.xp-style .xp-datatable .ui-paginator {
+	background: none repeat scroll 0 0 #E8E8E8;
+}
+
+.xp-style .xp-datatable .ui-paginator-top {
+	border: 1px solid #CCCCCC;
+}
+
+.xp-style .xp-datatable .ui-paginator-bottom {
+	border: medium none;
+}
+
+/*
+	%% Datatable %% Header %%
+*/
+.xp-style .xp-datatable th {
+	background: none repeat scroll 0 0 #E8E8E8;
+	border: 0px;
+	padding: 5px 10px;
+	text-align: left;
+}
+
+.xp-style .xp-datatable th.ui-state-hover {
+	box-shadow: none;
+}
+
+/*
+	%% Datatable %% Cells %%
+*/
+.xp-style .xp-datatable.ui-datatable tr {
+	border-bottom: 1px solid #D6D6D6;
+	border-left: medium none;
+	border-right: medium none;
+}
+
+.xp-style .xp-datatable td {
+	border: 0 none;
+	padding: 2px 4px 3px;
+	vertical-align: middle;
+}
+
+.xp-style .xp-datatable .ui-datatable-odd {
+	background: none repeat scroll 0 0 #EBEBF3;
+}
+
+.xp-style .xp-datatable .ui-datatable-even {
+	background: none repeat scroll 0 0 #F9F9F9;
+}
+
+/*
+	%% Datatable %% Cells for Selection %%
+*/
+.xp-style .ui-datatable.xp-datatable tr.ui-state-hover {
+	box-shadow: none;
+	border-bottom: 1px solid #D6D6D6;
+	border-left: medium none;
+	border-right: medium none;
+}
+
+.xp-style .ui-datatable.xp-datatable tr.ui-state-highlight {
+	text-shadow: inherit;
+	color: inherit;
+	border-bottom: 1px solid #D6D6D6;
+	border-left: medium none;
+	border-right: medium none;
+}
+
+/*
+	%% Datatable %% Empty Table %%
+*/
+.xp-style .xp-datatable .ui-datatable-empty-message {
+	background: none repeat scroll 0 0 #F6F6F6;
+	height: 375px;
+}
+
+.xp-style .xp-datatable .ui-datatable-empty-message td {
+	vertical-align: top;
+	padding: 50px 60px;
+	text-decoration: underline;
+	text-shadow: 7px 4px 15px #666666;
+}
+
+/*
+	%% Datatable %% Style1 for dialog %%
+*/
+.xp-style .xp-datatable-style1 th.ui-state-default {
+	background: none repeat scroll 0 0 transparent;
+}
+
+.xp-style .xp-datatable.xp-datatable-style1 .ui-paginator {
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+	padding: 0;
+}
+
+.xp-style .xp-datatable.xp-datatable-style1 .ui-datatable-odd {
+	background: none repeat scroll 0 0 transparent;
+}
+
+.xp-style .xp-datatable.xp-datatable-style1 .ui-datatable-empty-message {
+	background: none repeat scroll 0 0 transparent;
+	height: 116px;
+	border-bottom: medium none;
+}
+
+.xp-style .xp-datatable.xp-datatable-style1 .ui-datatable-empty-message td {
+	vertical-align: middle;
+	text-align: center;
+	padding: 0;
+	width: 340px;
+	text-decoration: underline;
+	text-shadow: 7px 4px 15px #666666;
+}
+
+/*
+	%% Datatable %% Header Style1 %%
+*/
+.xp-style .xp-datatable-th-title th {
+	background-color: none;
+	color: #000000;
+	display: block;
+	letter-spacing: 1.4px;
+}
+
+.xp-style .xp-datatable-th-title-darkgray th {
+	padding: 4px 10px !important;
+	text-shadow: 0 0 0;
+	font-weight: normal;
+	color: #FFFFFF;
+	border: 1px solid #BBBBBB !important;
+	background-color: #555555 !important;
+}
+
+.xp-style .xp-datatable-th-title-darkgray td {
+	padding: 3px 11px !important
+}

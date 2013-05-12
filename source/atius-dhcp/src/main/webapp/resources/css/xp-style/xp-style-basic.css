@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Basic XP Style %%
+*/
+.xp-style .xp-left {
+	float: left;
+}
+
+.xp-style .xp-right {
+	float: right;
+}
+
+.xp-style .xp-text-right {
+	text-align: right;
+}
+
+.xp-style .xp-bold {
+	font-weight: bold;
+}
+
+.xp-style .xp-italic {
+	font-style: italic;
+}
+
+.xp-style .xp-underline {
+	text-decoration: underline;
+}
+
+.xp-style .xp-top {
+	vertical-align: top;
+}
+
+.xp-style .xp-none {
+	display: none;
+}
+
+.xp-style .xp-nowrap {
+	white-space: nowrap;
+}
+
+.xp-style .xp-hidden {
+	overflow: hidden;
+}
+
+.xp-style .xp-hidden-line {
+	overflow: hidden;
+	height: 26px;
+	line-height: 26px;
+}
+
+.xp-style .xp-hidden-pre {
+	overflow: hidden;
+	white-space: pre;
+}
+
+.xp-style .xp-inline {
+	display: inline-block;
+}
+
+.xp-style .xp-inline-block {
+	display: inline-block;
+	width: 100%;
+}
+
+.xp-style .xp-block {
+	display: block;
+}
+
+.xp-style .xp-block-line {
+	display: block;
+	width: 100%;
+}
+
+.xp-style .xp-icon {
+	display: inline-block;
+	margin: 4px 7px 0;
+	vertical-align: top;
+}

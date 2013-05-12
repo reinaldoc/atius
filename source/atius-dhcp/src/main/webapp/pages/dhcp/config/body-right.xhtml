@@ -28,23 +28,25 @@
 
 			<p:dataTable id="atius-dhcp-config-server-datatable-id" widgetVar="atius_dhcp_server_wv" emptyMessage="Não há servidores DHCP"
 				value="#{dhcpServerListMB.resultList}" var="atius_dhcp_config_server_row" rows="9" paginator="true" paginatorAlwaysVisible="false"
-				pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small"
+				pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="xp-datatable"
 				sortBy="#{atius_dhcp_config_server_row.cn}">
 
 				<p:column>
 
-					<h:panelGroup layout="block" style="width: 285px; overflow: hidden; white-space: pre; float: left">
+					<h:panelGroup layout="block" style="width: 300px; overflow: hidden; white-space: pre; float: left">
 						<h:outputText value="#{atius_dhcp_config_server_row.cn}"
 							style="#{atius_dhcp_config_server_row.cn.equals(dhcpSessionInfo.dhcpServer.cn) ? 'text-decoration: underline;' : '' }" />
 					</h:panelGroup>
 
 					<p:commandButton icon="#{dhcpSessionInfo.dhcpServer == atius_dhcp_config_server_row ? 'ui-icon-circle-check' : 'ui-icon-radio-on'}"
-						styleClass="forItems" title="Selecionar servidor" actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_config_server_row)}"
-						action="#{dhcpSharedNetworkListMB.list}" immediate="true" update=":body-id, :header-right-id" />
+						title="Selecionar servidor" action="#{dhcpSharedNetworkListMB.list}" immediate="true"
+						actionListener="#{dhcpServerListMB.selectDhcpServer(atius_dhcp_config_server_row)}" update=":body-id, :header-right-id"
+						styleClass="xp-button at-icon-spacer" />
 
-					<p:commandButton icon="ui-icon-trash" style="margin-bottom: 2px;" immediate="true" title="Remover Servidor"
+					<p:commandButton icon="ui-icon-trash" title="Remover Servidor" action="#{dhcpServerEditMB.editBean(atius_dhcp_config_server_row)}" immediate="true"
 						update=":atius-dhcp-config-form-id:atius-dhcp-config-server-delete-dlg-id"
-						action="#{dhcpServerEditMB.editBean(atius_dhcp_config_server_row)}" oncomplete="atius_dhcp_config_server_delete_dlg.show()" />
+						
+						oncomplete="atius_dhcp_config_server_delete_dlg.show()" styleClass="xp-button at-icon-spacer" />
 
 				</p:column>
 
@@ -166,7 +168,7 @@
 				<p:dataTable id="atius-dhcp-config-network-datatable-id" widgetVar="atius_dhcp_config_network_wv"
 					emptyMessage="Não há redes DHCP no servidor selecionado" value="#{dhcpSharedNetworkListMB.resultList}"
 					var="atius_dhcp_config_network_row" rows="13" paginator="true" paginatorAlwaysVisible="false"
-					pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="dialog-datatable dialog-datatable-small">
+					pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="xp-datatable">
 
 					<p:column>
 
@@ -175,13 +177,14 @@
 						</h:panelGroup>
 
 						<p:commandButton icon="ui-icon-trash" style="float: right;" immediate="true" title="Remover Rede"
+							oncomplete="atius_dhcp_config_network_delete_dlg.show()"
 							update=":atius-dhcp-config-network-form-id:atius-dhcp-config-network-delete-dlg-id"
-							action="#{dhcpSharedNetworkEditMB.editBean(atius_dhcp_config_network_row)}" oncomplete="atius_dhcp_config_network_delete_dlg.show()" />
+							action="#{dhcpSharedNetworkEditMB.editBean(atius_dhcp_config_network_row)}" styleClass="xp-button at-icon-spacer" />
 
-						<p:commandButton icon="ui-icon-pencil" title="Editar" styleClass="forItems" style="float: right;" immediate="true"
-							action="#{dhcpOptionsEditMB.setUpdateId(':atius-dhcp-config-network-form-id:atius-dhcp-config-network-panel-id')}"
+						<p:commandButton icon="ui-icon-pencil" title="Editar" style="float: right;" oncomplete="atius_dhcp_option_edit_dlg.show()"
+							immediate="true" action="#{dhcpOptionsEditMB.setUpdateId(':atius-dhcp-config-network-form-id:atius-dhcp-config-network-panel-id')}"
 							actionListener="#{dhcpOptionsEditMB.editBean(atius_dhcp_config_network_row)}"
-							update=":atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-panel-id" oncomplete="atius_dhcp_option_edit_dlg.show()" />
+							update=":atius-dhcp-option-edit-form-id:atius-dhcp-option-edit-panel-id" styleClass="xp-button at-icon-spacer" />
 
 					</p:column>
 

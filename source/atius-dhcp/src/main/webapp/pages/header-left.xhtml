@@ -2,10 +2,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 	<h:form prependId="false">
+
 		<p:commandLink actionListener="#{menuContext.select('TopMenu', 'DHCP')}" ajax="false" immediate="true" action="/index.jsf"
-			styleClass="logo">
-			<h:outputText value="Atius" styleClass="logo" />
+			styleClass="at-logo-link">
+			<h:outputText value="Atius" styleClass="at-logo" />
 		</p:commandLink>
+
 	</h:form>
 
 </ui:composition>

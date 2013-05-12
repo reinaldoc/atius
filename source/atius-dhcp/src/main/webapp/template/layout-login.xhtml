@@ -27,10 +27,13 @@
 -->
 
 <h:head>
-	<h:outputStylesheet library="css" name="xp-style.css" />
-	<h:outputStylesheet library="css" name="application.css" />
 	<h:outputStylesheet library="css" name="layout-login.css" />
+	<h:outputStylesheet library="css" name="xp-style.css" />
+	<h:outputStylesheet library="css" name="jquery.qtip.css" />
 
+	<h:outputScript library="javascript" name="jquery.qtip.js" />
+	<h:outputScript library="javascript" name="xp-script.js" />
+	<h:outputScript library="javascript" name="application.js" />
 	<script language="javascript" type="text/javascript">
 	//<![CDATA[
 
@@ -94,15 +97,19 @@
 
 	//]]>
 	</script>
+	
+	<title><ui:insert name="title">#{messages['atius.title']}</ui:insert></title>
 
 </h:head>
+
 <h:body styleClass="xp-style" onload="setLoginFocus('login-form-id:login-user-id', 'login-form-id:login-pass-id');">
+
 	<div id="ll-wrapper">
 
 		<div id="ll-top">
 			<div id="ll-top-content">
 				<ui:insert name="ll-top-ui">
-					<h:outputText value="Atius" styleClass="logo" style="margin-top:8px; color: white;" />
+					<h:outputText value="Atius" styleClass="at-logo xp-block" style="padding-top: 13px; color: white;" />
 				</ui:insert>
 			</div>
 		</div>
@@ -120,8 +127,8 @@
 			<div id="ll-footer-content">
 				<ui:insert name="ll-footer-ui">
 					<h:panelGroup id="ll-bottom-id" layout="block">
-						<h:outputText value="ATIUS Project" style="float: left;" styleClass="footer-label" />
-						<h:outputText value="©2013" styleClass="footer-label" />
+						<h:outputText value="ATIUS - Opensource IT Management Software" style="float: left;" styleClass="footer-label" />
+						<h:outputText value="ATIUS Corp. ©2013" styleClass="footer-label" />
 					</h:panelGroup>
 				</ui:insert>
 			</div>
@@ -130,4 +137,5 @@
 	</div>
 
 </h:body>
+
 </html>

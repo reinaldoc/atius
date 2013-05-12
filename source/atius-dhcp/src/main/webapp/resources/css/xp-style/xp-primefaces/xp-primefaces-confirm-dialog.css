@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Confirm Dialog %%
+*/
+.ui-confirm-dialog .ui-dialog-buttonpane {
+	text-align: center !important;
+	padding: 0 1em 0.5em 0.4em;
+}
+
+.ui-confirm-dialog .ui-dialog-content {
+	padding: 10px 20px 0 !important;
+}
+
+.ui-confirm-dialog .ui-dialog-content .ui-icon {
+	margin: 0 7px 20px 0;
+}

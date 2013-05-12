@@ -1,0 +1,82 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Buttons %%
+*/
+.xp-style .xp-button {
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #D6D6D6;
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #D6D6D6;
+	font-family: Arial, sans-serif;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.698);
+	border: 0px solid #DEE5F2;
+	border-radius: 6px;
+	font-weight: bold;
+	box-shadow: 2px 2px 4px #CCCCCC;
+}
+
+.xp-style .xp-button-small.ui-button-text-only .ui-button-text {
+	padding: 0.25em 1em;
+	margin-bottom: -1px;
+}
+
+.xp-style .xp-button-small .ui-button-text {
+	padding: 0.2em 1em 0.4em 2.1em;
+	margin-bottom: -2px;
+}
+
+.xp-style .xp-button:hover {
+	background: repeat scroll 0 0 #5CC6C6 !important;
+	border: 0px;
+	border-radius: 6px;
+	font-weight: bold;
+}
+
+.xp-style .xp-close {
+	color: #3F586D;
+	font-weight: bold;
+	text-decoration: none;
+	margin-right: 25px;
+	padding-top: 10px;
+	float: right;
+}
+
+.xp-style a.xp-link {
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #D6D6D6;
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #D6D6D6;
+	border: 0 solid #DEE5F2;
+	border-radius: 6px 6px 6px 6px;
+	box-shadow: 2px 2px 4px #CCCCCC;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	padding: 6px 13px 7px 8px;
+	display: block;
+	box-shadow: 2px 2px 4px #CCCCCC;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.698);
+}
+
+/* Background  for IE */
+.xp-style .xp-link {
+	background: url(/atius-security/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.jsf?ln=primefaces-aristo) #c4c4c4
+		repeat-x 50% 50%;
+}
+
+.xp-style .xp-link:hover {
+	background: none repeat scroll 0 0 #5CC6C6;
+	box-shadow: 0 0 8px #85B2CB;
+	color: #313131;
+}
+
+.xp-style .xp-button-style1 {
+	background: none repeat-x scroll 0 0 #F0F0F0 !important;
+	border: 1px solid #AFAFAF !important;
+	border-radius: 2px 2px 2px 2px;
+	color: #000000;
+	cursor: pointer;
+	font-size: 12px;
+	margin-top: 13px;
+	padding: 1px 17px;
+}
+
+.xp-style .xp-button-style1:hover {
+	border-radius: 2px 2px 2px 2px;
+}

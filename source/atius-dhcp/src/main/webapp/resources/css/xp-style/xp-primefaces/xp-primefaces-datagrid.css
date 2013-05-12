@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Datagrid %%
+	* Permit no spacing in <p:dataGrid>
+*/
+.ui-datagrid-data {
+	border-collapse: collapse;
+}
+
+.ui-datagrid-column {
+	padding: 0px !important;
+}

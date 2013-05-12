@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 .xp-dialog-buttons-saving {
+	float: left;
 	display: block;
 	padding-left: 25px;
 	margin: 15px 0 3px 12px;
@@ -8,8 +9,7 @@
 	color: black;
 	font-weight: bold;
 	background-repeat: no-repeat;
-	background-image:
-		url('/atius-dhcp/javax.faces.resource/faa-wait.gif.jsf?ln=images');
+	background-image: url('/atius-dhcp/javax.faces.resource/xp-wait.gif.jsf?ln=images');
 }
 
 .xp-dialog-buttons-success-icon {

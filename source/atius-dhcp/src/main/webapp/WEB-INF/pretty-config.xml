@@ -9,23 +9,12 @@
 
 	<url-mapping id="login">
 		<pattern value="/login" />
-		<view-id value="/pages/security/account/login.jsf" />
-	</url-mapping>
-
-	<url-mapping id="security">
-		<pattern value="/security" />
-		<view-id value="/pages/security/index.jsf" />
+		<view-id value="/pages/login/login.jsf" />
 	</url-mapping>
 
 	<url-mapping id="account">
 		<pattern value="/security/account" />
 		<view-id value="/pages/security/account/account.jsf" />
-	</url-mapping>
-
-
-	<url-mapping id="report">
-		<pattern value="/web/report" />
-		<view-id value="/pages/web/report.jsf" />
 	</url-mapping>
 
 </pretty-config>

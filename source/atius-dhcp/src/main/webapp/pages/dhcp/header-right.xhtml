@@ -6,40 +6,41 @@
 		<h:panelGroup layout="block" styleClass="xp-nowrap"
 			rendered="#{!menuContext.isSelected('DhcpSharedNetwork', 'Config') and !menuContext.isSelected('DhcpSharedNetwork', 'Reservation')}">
 
-			<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="filter" />
+			<h:inputText id="atius-dhcp-subnet-search" value="#{dhcpSubnetListMB.resultFilter}" autocomplete="off" styleClass="xp-input-style3" />
 
 			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpSubnetListMB.list}"
 				update=":atius-dhcp-subnet-list-form-id:atius-dhcp-subnet-list-datatable-id" process="atius-dhcp-subnet-search, @this"
-				styleClass="forHeader" />
+				styleClass="xp-button at-button-spacer" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Subrede" immediate="true" action="#{dhcpSubnetEditMB.editBean}"
 				update=":atius-dhcp-subnet-edit-form-id:atius-dhcp-subnet-edit-panel-id" oncomplete="atius_dhcp_subnet_edit_dlg.show()"
-				styleClass="forHeader" />
+				styleClass="xp-button at-button-spacer" />
 
-			<p:commandButton icon="ui-icon-print" value="Imprimir" action="#{dhcpSubnetListMB.print}" process="@this" ajax="false" />
+			<p:commandButton icon="ui-icon-print" value="Imprimir" action="#{dhcpSubnetListMB.print}" process="@this" ajax="false"
+				styleClass="xp-button" />
 
 		</h:panelGroup>
 
 		<h:panelGroup layout="block" styleClass="xp-nowrap" rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Reservation')}">
 
 			<h:inputText id="atius-dhcp-host-search" value="#{dhcpHostListMB.resultFilter}" autocomplete="off"
-				onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); return false; }" styleClass="filter" />
+				onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); return false; }" styleClass="xp-input-style3" />
 
 			<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpHostListMB.list}"
 				update=":atius-dhcp-host-list-form-id:atius-dhcp-host-list-datatable-id" process="atius-dhcp-host-search, @this"
-				widgetVar="atius_dhcp_host_search" />
+				widgetVar="atius_dhcp_host_search" styleClass="xp-button" />
 
 		</h:panelGroup>
 
 		<h:panelGroup layout="block" styleClass="xp-nowrap" rendered="#{menuContext.isSelected('DhcpSharedNetwork', 'Config')}">
 
 			<p:commandButton icon="ui-icon-plusthick" value="Novo Servidor" immediate="true" action="#{dhcpServiceEditMB.editBean}"
-				styleClass="forHeader" update=":atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-panel-id"
-				oncomplete="atius_dhcp_service_edit_dlg.show()" />
+				update=":atius-dhcp-service-edit-form-id:atius-dhcp-service-edit-panel-id" oncomplete="atius_dhcp_service_edit_dlg.show()"
+				styleClass="xp-button at-button-spacer" />
 
 			<p:commandButton icon="ui-icon-plusthick" value="Nova Rede" immediate="true" action="#{dhcpSharedNetworkEditMB.editBean}"
 				update=":atius-dhcp-network-edit-form-id:atius-dhcp-network-edit-panel-id" oncomplete="atius_dhcp_network_edit_dlg.show()"
-				disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }" />
+				disabled="#{dhcpSessionInfo.dhcpServer.dn == null ? 'true' : 'false' }" styleClass="xp-button" />
 
 		</h:panelGroup>
 

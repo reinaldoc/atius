@@ -1,0 +1,103 @@
+@CHARSET "UTF-8";
+
+.at-logo {
+	color: #374140;
+	font-family: ChanceryMediumItalic;
+	font-size: 64px;
+	text-shadow: 2px 2px 2px #888888;
+}
+
+.at-logo-link {
+	margin-left: 20px;
+	display: block;
+	text-decoration: none;
+	height: 60px;
+}
+
+.xp-style .at-icon-spacer {
+	margin-right: 12px;
+}
+
+.xp-style .at-button-spacer {
+	margin-right: 45px;
+}
+
+
+div.panel {
+	font-family: PalladioBold;
+	font-size: 14px;
+	letter-spacing: 1px;
+	background-color: #374140;
+	color: #E0E0E0;
+	box-shadow: 4px 4px 8px #888888;
+	border: 1px solid #BBC5CD;
+	display: block;
+	background-color: #374140;
+	padding: 5px 10px;
+}
+
+div.panel-menu {
+	border: none;
+	padding: 0px 0px 0px 5px;
+	margin: 0px 10px 10px 10px;
+	line-height: 25px;
+}
+
+div.panel button.transparent {
+	background: none !important;
+	border: none;
+	box-shadow: none;
+}
+
+div.panel form {
+	display: inline-block;
+	float: right;
+	margin-top: -5px;
+}
+
+div.panel form button.ui-button .ui-icon {
+	background-color: #BBCCCC;
+}
+
+div.panel form button.ui-button:hover .ui-icon {
+	background-color: #5CC6C6;
+}
+
+div.asTable {
+	margin-top: 10px;
+	color: #3F586D;
+}
+
+div.asRow {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #D6D6D6;
+	padding-left: 3px;
+	border-bottom-width: 1px;
+}
+
+div.asRowOdd {
+	background-color: #F9F9F9;
+}
+
+div.asRowEven {
+	background-color: #EBEBF3;
+}
+
+div.asColumn {
+	line-height: 32px;
+	min-height: 32px;
+}
+
+div.asColumnLeft {
+	float: left;
+	width: 170px;
+}
+
+div.menu-group {
+	border-bottom: solid 1px #374140;
+	margin: 20px 40px 8px 8px;
+	font-family: PalladioBold;
+	font-size: 15px;
+	letter-spacing: 1px;
+}

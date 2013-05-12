@@ -108,7 +108,7 @@ li {
 	background-color: #333;
 	vertical-align: middle;
 	text-align: right;
-	padding-right: 10px;
+	padding: 0 10px;
 }
 
 .footer-label {
@@ -197,6 +197,13 @@ li {
 	border: 1px solid #29447E #29447E #1A356E;
 	color: #FFFFFF;
 	text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.login-button:hover {
+	box-shadow: 0 0 8px #85B2CB, 0 1px 0 #FFFFFF inset;
+	background-color: #333333 !important;
+	border: 1px solid #29447E #29447E #1A356E;
+	text-shadow: 0px;
 }
 
 ul.features li {
