@@ -18,24 +18,22 @@
 
 				<div class="xp-block" style="margin: 0 0 10px;">
 
-					<div class="filter">
+					<p:commandButton icon="ui-icon-gear" action="#{dhcpHostListMB.selectSearchNode()}"
+						update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-list-datatable-id, :growl-id" oncomplete="dhcp_host_scope_oncomplete();"
+						process="@this" title="Alterar escopo da busca" styleClass="xp-button" />
 
-						<p:commandButton icon="ui-icon-gear" action="#{dhcpHostListMB.selectSearchNode()}"
-							update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-list-datatable-id, :growl-id" oncomplete="dhcp_host_scope_oncomplete();"
-							process="@this" title="Alterar escopo da busca" />
-
-						<h:inputText id="atius-dhcp-host-search" value="#{dhcpHostListMB.resultFilter}" autocomplete="off"
-							onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); atius_dhcp_host_list_dlg.initPosition(); return false; }" />
-
-					</div>
+					<h:inputText id="atius-dhcp-host-search" value="#{dhcpHostListMB.resultFilter}" autocomplete="off"
+						onkeypress="if (event.keyCode==13) { atius_dhcp_host_search.jq.click(); atius_dhcp_host_list_dlg.initPosition(); return false; }"
+						style="width: 240px; margin-left: 5px;" styleClass="xp-input" />
 
 					<p:commandButton icon="ui-icon-search" value="Buscar" action="#{dhcpHostListMB.list}"
 						update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-list-datatable-id"
 						oncomplete="getElementById('atius-dhcp-host-search').focus(); atius_dhcp_host_list_dlg.initPosition();"
-						process="atius-dhcp-host-search, @this" style="margin-right: 45px;" widgetVar="atius_dhcp_host_search" />
+						process="atius-dhcp-host-search, @this" style="margin-left: 5px;" widgetVar="atius_dhcp_host_search" styleClass="xp-button" />
 
 					<p:commandButton icon="ui-icon-plusthick" value="Nova Reserva de IP" immediate="true" action="#{dhcpHostEditMB.editBean}"
-						style="float: right" update=":atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-panel-id" oncomplete="atius_dhcp_host_edit_dlg.show()" />
+						style="float: right" update=":atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-panel-id" oncomplete="atius_dhcp_host_edit_dlg.show()"
+						styleClass="xp-button" />
 
 				</div>
 
@@ -43,8 +41,7 @@
 
 					<p:dataTable id="atius-dhcp-host-list-datatable-id" widgetVar="atius_dhcp_host_list_datatable"
 						emptyMessage="Não há reservas de IP para esta subrede" value="#{dhcpHostListMB.resultList}" var="dhcpHost" rows="10" paginator="true"
-						paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
-						styleClass="dialog-datatable-small">
+						paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom" styleClass="xp-datatable">
 
 						<p:column headerText="Hostname" sortBy="#{dhcpHost.cn}">
 							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre; width: 170px;">
@@ -72,24 +69,23 @@
 
 						<p:column style="text-align: right; padding: 0px">
 
-							<h:panelGroup layout="block" style="overflow: hidden; white-space: pre">
+							<p:commandButton icon="ui-icon-pencil" title="Editar reserva DHCP" oncomplete="atius_dhcp_host_edit_dlg.show()"
+								action="#{dhcpHostEditMB.editBean(dhcpHost)}" update=":atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-panel-id" immediate="true"
+								styleClass="xp-button at-icon-spacer" />
 
-								<p:commandButton icon="ui-icon-pencil" title="Editar reserva DHCP" oncomplete="atius_dhcp_host_edit_dlg.show()"
-									styleClass="forItems" action="#{dhcpHostEditMB.editBean(dhcpHost)}"
-									update=":atius-dhcp-host-edit-form-id:atius-dhcp-host-edit-panel-id" immediate="true" />
+							<p:commandButton icon="ui-icon-trash" title="Excluir reserva DHCP" oncomplete="atius_dhcp_host_delete_dlg.show()"
+								action="#{dhcpHostEditMB.editBean(dhcpHost)}" update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-delete-dlg-id"
+								styleClass="xp-button at-icon-spacerr" />
 
-								<p:commandButton icon="ui-icon-trash" title="Excluir reserva DHCP" oncomplete="atius_dhcp_host_delete_dlg.show()"
-									action="#{dhcpHostEditMB.editBean(dhcpHost)}" update=":atius-dhcp-host-list-dlg-form-id:atius-dhcp-host-delete-dlg-id" />
-
-							</h:panelGroup>
 						</p:column>
+
 					</p:dataTable>
 
 				</h:panelGroup>
 
 			</h:panelGroup>
 
-			<p:commandLink value="Fechar" styleClass="dialog-close-link" onclick="atius_dhcp_host_list_dlg.hide(); return false;" />
+			<p:commandLink value="Fechar" onclick="atius_dhcp_host_list_dlg.hide(); return false;" styleClass="xp-close" />
 
 		</p:dialog>
 
