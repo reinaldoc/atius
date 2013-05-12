@@ -4,13 +4,13 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.ufpa.ctic</groupId>
+	<groupId>atius</groupId>
 	<artifactId>atius-dhcp</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>ATIUS - DHCP Management</name>
-	<description>Software de Gestão de Serviços de TI Universitário</description>
+	<name>ATIUS - IT Services Management</name>
+	<description>Opensource IT Management Software - DHCP Management Package</description>
 	<url>atius.com.br</url>
 
 	<parent>
@@ -66,13 +66,6 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- LDAP Implementation -->
-		<dependency>
-			<groupId>com.novell.ldap</groupId>
-			<artifactId>jldap</artifactId>
-			<version>4.3</version>
-		</dependency>
-
 	</dependencies>
 
 	<repositories>
@@ -80,7 +73,7 @@
 		<repository>
 			<id>demoiselle-contrib</id>
 			<name>Demoiselle Contrib Maven Repository</name>
-			<url>http://reinaldoc.github.com/maven</url>
+			<url>http://reinaldoc.github.io/maven</url>
 		</repository>
 
 	</repositories>
