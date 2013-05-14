@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Primefaces Basic %%
+*/
+.ui-widget {
+	font-family: DroidSans;
+	font-size: 12.5px;
+	text-shadow: 1px 1px 9px #D6D6D6;
+}

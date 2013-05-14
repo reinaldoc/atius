@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+#lsrv-top-id {
+	background: -moz-linear-gradient(center top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	border-bottom: 1px solid #EEEEEE;
+	color: #444444;
+	min-height: 44px;
+	padding: 14px 15px 13px;
+}
+
+.lsrv-child-id {
+	margin: auto;
+	max-width: 978px;
+}
+
+#lsrv-menu-id {
+	background: none repeat scroll 0 0 #FCFCFC;
+	border-bottom: 1px solid #F2F2F2;
+	font-size: 11px;
+	margin: 0 0 30px;
+	min-height: 28px;
+	overflow: hidden;
+	padding: 0 12px;
+}
+
+#lsrv-body-id {
+	padding: 0 12px;
+}

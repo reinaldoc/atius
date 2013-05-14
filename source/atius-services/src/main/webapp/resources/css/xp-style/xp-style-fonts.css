@@ -1,0 +1,44 @@
+/*
+	%% Font Face %%
+*/
+@font-face {
+	font-family: DroidSans;
+	src: url("/atius-services/javax.faces.resource/DroidSans.eot.jsf?ln=css/xp-style/fonts");
+}
+
+@font-face {
+	font-family: DroidSans;
+	src: url("/atius-services/javax.faces.resource/DroidSans-Bold.eot.jsf?ln=css/xp-style/fonts");
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: DroidSans;
+	src: url("/atius-services/javax.faces.resource/DroidSans.ttf.jsf?ln=css/xp-style/fonts");
+}
+
+@font-face {
+	font-family: DroidSans;
+	src: url("/atius-services/javax.faces.resource/DroidSans-Bold.ttf.jsf?ln=css/xp-style/fonts");
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: ChanceryMediumItalic;
+	src: url("/atius-services/javax.faces.resource/urw-chancery-l-medium-italic.eot.jsf?ln=css/xp-style/fonts");
+}
+
+@font-face {
+	font-family: ChanceryMediumItalic;
+	src: url("/atius-services/javax.faces.resource/urw-chancery-l-medium-italic.ttf.jsf?ln=css/xp-style/fonts");
+}
+
+@font-face {
+	font-family: PalladioBold;
+	src: url("/atius-services/javax.faces.resource/urw-palladio-l-bold.eot.jsf?ln=css/xp-style/fonts");
+}
+
+@font-face {
+	font-family: PalladioBold;
+	src: url("/atius-services/javax.faces.resource/urw-palladio-l-bold.ttf.jsf?ln=css/xp-style/fonts");
+}

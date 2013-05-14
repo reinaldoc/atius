@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+@IMPORT url("application.css.jsf?ln=css/xp-style");
+
+@IMPORT url("xp-style-basic.css.jsf?ln=css/xp-style");
+
+@IMPORT url("xp-style-datagrid.css.jsf?ln=css/xp-style");
+
+@IMPORT url("xp-style-datalist.css.jsf?ln=css/xp-style");
+
+@IMPORT url("xp-style-fonts.css.jsf?ln=css/xp-style");
+
+@IMPORT url("xp-primefaces-basic.css.jsf?ln=css/xp-style/xp-primefaces");
+
+/*
+	%% Body %%
+*/
+body.xp-style {
+	font-family: DroidSans;
+	font-size: 12.5px;
+	margin: 0px;
+	padding: 0px;
+}
+

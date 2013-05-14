@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Datalist %%
+*/
+.xp-style .xp-datalist .ui-datalist-content {
+	border: none;
+}
+
+.xp-style .xp-datalist .ui-datalist-content ul {
+	list-style: none outside none;
+}
+

@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+.xp-style .at-serv-link {
+	text-decoration: none;
+	font-size: 12px !important;
+	color: #245DC1;
+}
+
+.xp-style .at-serv-link:hover {
+	text-decoration: underline;
+}
+
+.xp-style .at-list {
+	list-style: none outside none;
+	float: left;
+	line-height: 0.7;
+	margin-right: 20px;
+}
+
+.xp-style .at-datalist-item {
+	border-bottom: 1px solid #EBEBEB;
+	font-size: 1.077em;
+	font-weight: bold;
+	margin: 25px 0 10px;
+	display: block;
+}
+
+.xp-style .at-datagrid-item {
+	display: block;
+	color: #245DC1;
+	font-size: 13px;
+	margin-bottom: 5px;
+	text-decoration: none;
+}
+
+.xp-style .at-datagrid-item:hover {
+	text-decoration: underline;
+}

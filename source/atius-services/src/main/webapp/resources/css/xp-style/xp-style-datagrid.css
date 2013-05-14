@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Datagrid %%
+*/
+.xp-style .xp-datagrid .ui-datagrid-content {
+	border: none;
+}
+
+.xp-style .xp-datagrid-2cols .ui-datagrid-content .ui-datagrid-column {
+	width: 50%;
+}

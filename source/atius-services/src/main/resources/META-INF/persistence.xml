@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<!-- If you are using JBoss AS7 with non JTA transaction then use this persistence-unit -->
+	<!-- -->
+	<persistence-unit name="atius-ds" transaction-type="RESOURCE_LOCAL">
+		<non-jta-data-source>java:jboss/datasources/AtiusDS</non-jta-data-source>
+
+		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityUser</class>
+		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfile</class>
+		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityProfileByRule</class>
+		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityRole</class>
+		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityResource</class>
+
+		<class>br.com.atius.services.domain.ServiceArea</class>
+		<class>br.com.atius.services.domain.ServiceGroup</class>
+		<class>br.com.atius.services.domain.ServiceItem</class>
+
+		<properties>
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.generate_statistics" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
+		</properties>
+	</persistence-unit>
+
+</persistence>
