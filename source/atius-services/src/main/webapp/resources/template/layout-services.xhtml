@@ -28,8 +28,17 @@
 
 <h:head>
 
+	<h:outputStylesheet library="css" name="jquery.qtip.css" />
 	<h:outputStylesheet library="css" name="xp-style.css" />
 	<h:outputStylesheet library="css" name="layout-services.css" />
+	<h:outputStylesheet library="css" name="xp-dialog-buttons.css" />
+
+	<h:outputScript library="javascript" name="jquery.qtip.js" />
+	<h:outputScript library="javascript" name="xp-primefaces.js" />
+	<h:outputScript library="javascript" name="xp-script.js" />
+	<h:outputScript library="javascript" name="xp-dialog-buttons.js" />
+	<h:outputScript library="javascript" name="application.js" />
+
 	<title><ui:insert name="title">#{messages['atius.title']}</ui:insert></title>
 
 </h:head>
@@ -48,11 +57,11 @@
 		</div>
 	</div>
 
-	<div id="lsrv-body-id">
+	<h:panelGroup layout="block" id="lsrv-body-id">
 		<div class="lsrv-child-id">
 			<ui:insert name="lsrv-body-ui" />
 		</div>
-	</div>
+	</h:panelGroup>
 
 </h:body>
 
