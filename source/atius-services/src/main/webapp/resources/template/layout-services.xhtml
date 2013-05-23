@@ -3,6 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
+<!-- 
+
+	+==================================================================+
+	|                                                                  |
+	|                            lsrv-top-ui                           |
+	|                                                                  |
+	+==================================================================+
+	|                           lsrv-menu-ui                           |
+	+==================================================================+
+	|                                                                  |
+	|                                                                  |
+	|                                                                  |
+	|                                                                  |
+	|                           lsrv-body-ui                           |
+	|                                                                  |
+	|                                                                  |
+	|                                                                  |
+	|                                                                  |
+	|                                                                  |
+	+==================================================================+
+
+-->
+
 <h:head>
 
 	<h:outputStylesheet library="css" name="xp-style.css" />
@@ -15,41 +38,19 @@
 
 	<div id="lsrv-top-id">
 		<div class="lsrv-child-id">
-			<h:form>
-				<p:commandLink ajax="false" action="/index.jsf" immediate="true">
-					<h:graphicImage library="images" name="tre-topo.png" alt="#{messages['atius.title']}" />
-				</p:commandLink>
-			</h:form>
+			<ui:insert name="lsrv-top-ui" />
 		</div>
 	</div>
 
 	<div id="lsrv-menu-id">
 		<div class="lsrv-child-id">
-			<h:form>
-				<ol>
-					<li class="at-list"><p:commandLink ajax="false" action="/index.jsf" immediate="true" value="Catálogo de Serviços"
-							styleClass="at-serv-link" /></li>
-					<li class="at-list"><p:commandLink ajax="false" action="/index.jsf" immediate="true" value="Central de Serviços"
-							styleClass="at-serv-link" /></li>
-					<li class="at-list"><p:commandLink ajax="false" action="/index.jsf" immediate="true" value="Banco de Soluções"
-							styleClass="at-serv-link" /></li>
-				</ol>
-			</h:form>
+			<ui:insert name="lsrv-menu-ui" />
 		</div>
 	</div>
 
 	<div id="lsrv-body-id">
 		<div class="lsrv-child-id">
-			<h:form>
-				<p:dataList value="#{serviceAreaListMB.resultList}" var="serviceArea" styleClass="xp-datalist">
-					<h:outputText value="#{serviceArea.description}" styleClass="at-datalist-item" />
-					<p:dataGrid value="#{serviceArea.serviceGroups}" var="serviceGroup" columns="2" styleClass="xp-datagrid xp-datagrid-2cols">
-						<p:commandLink value="#{serviceGroup.description}" ajax="false" action="/index.jsf" immediate="true" styleClass="at-datagrid-item" />
-						<h:outputText
-							value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus arcu lectus, rhoncus quis imperdiet ut, elementum et mauris. Sed eget erat lorem, quis sodales felis. Duis aliquet facilisis nisl, non mattis elit ultricies non. Suspendisse in ante massa. Maecenas eget aliquet massa." />
-					</p:dataGrid>
-				</p:dataList>
-			</h:form>
+			<ui:insert name="lsrv-body-ui" />
 		</div>
 	</div>
 
