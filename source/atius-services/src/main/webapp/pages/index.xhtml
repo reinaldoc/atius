@@ -20,7 +20,9 @@
 	</ui:define>
 
 	<ui:define name="lsrv-body-ui">
+		<ui:include src="area/dialog-edit.xhtml" />
 		<h:form>
+			<p:commandButton icon="ui-icon-plus" value="Área" action="#{serviceAreaEditMB.editBean}" oncomplete="atius_services_area_edit_dlg.show();" />
 			<p:dataList value="#{serviceAreaListMB.resultList}" var="serviceArea" styleClass="xp-datalist">
 				<h:outputText value="#{serviceArea.description}" styleClass="at-datalist-item" />
 				<p:dataGrid value="#{serviceArea.serviceGroups}" var="serviceGroup" columns="2" styleClass="xp-datagrid xp-datagrid-2cols">

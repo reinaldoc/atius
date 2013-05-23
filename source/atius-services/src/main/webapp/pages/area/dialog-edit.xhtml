@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-services-area-edit-form-id">
+
+		<p:dialog id="atius-services-area-edit-dlg-id" header="Recursos" widgetVar="atius_services_area_edit_dlg" modal="true" width="440" resizable="false"
+			closable="false">
+
+			<h:panelGroup id="atius-services-area-edit-panel-id">
+
+				<div class="xp-dialog">
+
+					<h:outputText value="Nome da área:" styleClass="xp-input-label" />
+					<h:inputText value="#{serviceAreaEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+					<h:outputText value="Descrição:" styleClass="xp-input-label" />
+					<h:inputTextarea value="#{serviceAreaEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+				</div>
+
+				<xp:dialog-buttons id="atius-services-area-edit-dlg-save-id" dialogId="atius-services-area-edit-form-id:atius-services-area-edit-dlg-id"
+					dialogWidgetVar="atius_services_area_edit_dlg" updateMode="#{serviceAreaEditMB.updateMode}" actionUpdater="#{serviceAreaEditMB.update}"
+					actionInserter="#{serviceAreaEditMB.insert}" actionCloser="#{serviceAreaListMB.clearValidation}" updateOnClose=":lsrv-body-id"
+					actionNew="#{serviceAreaEditMB.editBean()}" updateOnNew=":atius-services-area-edit-form-id:atius-services-area-edit-panel-id"
+					insertMessage="Área cadastrada com sucesso!" updateMessage="Área atualizada com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>
