@@ -29,7 +29,7 @@
 			</div>
 			<p:dataList value="#{serviceAreaListMB.resultList}" var="serviceArea" styleClass="xp-datalist">
 				<div class="at-datalist-item">
-					<h:outputText value="#{serviceArea.description}" />
+					<h:outputText value="#{serviceArea.name}" />
 					<p:commandButton icon="ui-icon-plus" value="Grupo" action="#{serviceGroupEditMB.editBean(serviceArea)}"
 						oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id"
 						styleClass="at-datalist-itembutton xp-right" />
