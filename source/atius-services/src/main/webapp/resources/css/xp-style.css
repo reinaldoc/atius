@@ -4,13 +4,19 @@
 
 @IMPORT url("xp-style-basic.css.jsf?ln=css/xp-style");
 
+@IMPORT url("xp-style-button.css.jsf?ln=css/xp-style");
+
 @IMPORT url("xp-style-datagrid.css.jsf?ln=css/xp-style");
 
 @IMPORT url("xp-style-datalist.css.jsf?ln=css/xp-style");
 
 @IMPORT url("xp-style-fonts.css.jsf?ln=css/xp-style");
 
+@IMPORT url("xp-style-input.css.jsf?ln=css/xp-style");
+
 @IMPORT url("xp-primefaces-basic.css.jsf?ln=css/xp-style/xp-primefaces");
+
+@IMPORT url("xp-primefaces-dialog.css.jsf?ln=css/xp-style/xp-primefaces");
 
 /*
 	%% Body %%
@@ -22,3 +28,25 @@ body.xp-style {
 	padding: 0px;
 }
 
+/*
+	%% Dialog Tableless %%
+*/
+.xp-style .xp-dialog {
+	border-bottom: 1px solid #AFAFAF;
+	padding: 15px 15px 5px 15px;
+}
+
+.xp-style .xp-dialog-button {
+	margin: 5px 0 0 10px;
+}
+
+/*
+	%% Fix qtooltip css %%
+*/
+.xp-style .ui-tooltip .ui-tooltip-tip {
+/*	margin-right: 10px;
+	margin-left: 10px;
+	bottom: -4px !important;
+	*/
+	margin: 3px 10px;
+}
