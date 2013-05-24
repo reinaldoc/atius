@@ -17,12 +17,35 @@
 	margin-right: 20px;
 }
 
+.xp-style .at-button-blue {
+	background: -moz-linear-gradient(center top , #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+    border-color: #1992DA #0C75BB #00589C;
+    box-shadow: 0 1px 1px 0 #6FC5F5 inset;
+    color: #FFFFFF;
+    text-shadow: 0;
+}
+
+.xp-style .at-button-blue .ui-icon {
+	background-image: url("/atius-services/javax.faces.resource/images/ui-icons_ffffff_256x240.png.jsf?ln=primefaces-aristo");
+}
+
 .xp-style .at-datalist-item {
 	border-bottom: 1px solid #EBEBEB;
 	font-size: 1.077em;
 	font-weight: bold;
-	margin: 25px 0 10px;
 	display: block;
+	line-height: 24px;
+}
+
+.xp-style .at-datalist-itembutton {
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+}
+
+.xp-style .at-datalist-itembutton:hover {
+	border: medium none;
+	box-shadow: 0 0 0;
+	border-radius: 0; 
 }
 
 .xp-style .at-datagrid-item {
