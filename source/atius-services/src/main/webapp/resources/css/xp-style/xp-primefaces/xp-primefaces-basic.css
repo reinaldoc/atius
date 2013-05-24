@@ -7,3 +7,11 @@
 	font-family: DroidSans;
 	font-size: 12.5px;
 }
+
+/*
+	%% Primefaces Button %%
+*/
+button.ui-button-icon-only {
+    height: 2.1em;
+    width: 2.3em;
+}

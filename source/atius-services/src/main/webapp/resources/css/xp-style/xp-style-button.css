@@ -4,14 +4,21 @@
 	%% Buttons %%
 */
 .xp-style .xp-button {
-	background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #D6D6D6;
-	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) repeat scroll 0 0 #D6D6D6;
-	font-family: Arial, sans-serif;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.698);
-	border: 0px solid #DEE5F2;
-	border-radius: 6px;
-	font-weight: bold;
-	box-shadow: 2px 2px 4px #CCCCCC;
+	background: -moz-linear-gradient(top, #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	background: -webkit-linear-gradient(top, #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	background: -ie-linear-gradient(top, #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	background: linear-gradient(to bottom, #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	border-color: #1992DA #0C75BB #00589C;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 1px 0 #6FC5F5 inset;
+	font-family: arial;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-shadow: 0px 0px 0px;
+}
+
+.xp-style .xp-button .ui-icon {
+	background-image: url("/atius-services/javax.faces.resource/images/ui-icons_ffffff_256x240.png.jsf?ln=primefaces-aristo");
 }
 
 .xp-style .xp-button-small.ui-button-text-only .ui-button-text {
@@ -25,10 +32,11 @@
 }
 
 .xp-style .xp-button:hover {
-	background: repeat scroll 0 0 #5CC6C6 !important;
-	border: 0px;
-	border-radius: 6px;
-	font-weight: bold;
+	background: -moz-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: -webkit-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: -ie-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: linear-gradient(to bottom, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	box-shadow: 0 1px 1px 0 #64BEF1 inset;
 }
 
 .xp-style .xp-close {
