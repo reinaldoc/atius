@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Dialog %%
+*/
+div.ui-dialog {
+	border: 3px solid white;
+	border-radius: 3px 3px 3px 3px;
+}
+
+div.ui-dialog div.ui-dialog-titlebar {
+	border-radius: 3px 3px 3px 3px;
+	background: -moz-linear-gradient(center top , #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	border-color: #1992DA #0C75BB #00589C;
+	border-style: solid;
+	border-width: 1px;
+	color: white;
+	padding: 0px 0px 5px 7px;
+	height: 19px;
+	font-weight: normal;
+	letter-spacing: 0.8px;
+	text-shadow: -1px 1px 7px;
+}
+}
