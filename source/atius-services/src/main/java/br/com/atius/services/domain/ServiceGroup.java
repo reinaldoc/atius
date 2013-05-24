@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -26,12 +27,16 @@ public class ServiceGroup implements Serializable {
 	private Integer id;
 
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message="{catalog.group.name}")
 	private String name;
 
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message="{catalog.group.description}")
 	private String description;
+
+	@OneToOne
+	@JoinColumn(name = "area_id")
+	private ServiceArea serviceArea;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "group_id")
@@ -59,6 +64,14 @@ public class ServiceGroup implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ServiceArea getServiceArea() {
+		return serviceArea;
+	}
+
+	public void setServiceArea(ServiceArea serviceArea) {
+		this.serviceArea = serviceArea;
 	}
 
 	public List<ServiceItem> getServiceItems() {

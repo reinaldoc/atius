@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -26,15 +27,16 @@ public class ServiceArea implements Serializable {
 	private Integer id;
 
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message="{catalog.area.name}")
 	private String name;
 
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message="{catalog.area.description}")
 	private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "area_id")
+	@BatchSize(size = 10)
 	private List<ServiceGroup> serviceGroups = new ArrayList<ServiceGroup>();
 
 	public Integer getId() {
