@@ -1,7 +1,10 @@
 @CHARSET "UTF-8";
 
 #lsrv-top-id {
-	background: -moz-linear-gradient(center top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: -moz-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: -webkit-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: -ms-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: linear-gradient(to bottom, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
 	border-bottom: 1px solid #EEEEEE;
 	color: #444444;
 	min-height: 44px;
@@ -20,6 +23,17 @@
 	min-height: 28px;
 	overflow: hidden;
 	padding: 0 12px;
+}
+
+#lsrv-bottom-id {
+	background: -moz-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: -webkit-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: -ms-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: linear-gradient(to bottom, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	border-top: 1px solid #EEEEEE;
+	color: #444444;
+	min-height: 44px;
+	padding: 14px 15px 13px;
 }
 
 #lsrv-body-id {
