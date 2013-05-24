@@ -5,9 +5,8 @@
 */
 .xp-style .xp-datagrid .ui-datagrid-content {
 	border: none;
-	margin: 25px 0 10px;
 }
 
-.xp-style .xp-datagrid-2cols .ui-datagrid-content .ui-datagrid-column {
-	width: 50%;
+.xp-style .xp-datagrid .ui-datagrid-content .ui-datagrid-column {
+	vertical-align: top;
 }
