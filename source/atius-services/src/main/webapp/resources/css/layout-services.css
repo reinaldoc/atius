@@ -25,17 +25,15 @@
 	padding: 0 12px;
 }
 
-#lsrv-bottom-id {
-	background: -moz-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
-	background: -webkit-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
-	background: -ms-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
-	background: linear-gradient(to bottom, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
-	border-top: 1px solid #EEEEEE;
-	color: #444444;
-	min-height: 44px;
-	padding: 14px 15px 13px;
+#lsrv-body-id {
+	padding: 0 12px 1px;
+	background-color: #FFFFFF;
 }
 
-#lsrv-body-id {
-	padding: 0 12px;
+#lsrv-bottom-id {
+	background: none repeat scroll 0 0 #FCFCFC;
+	border-top: 1px solid #EEEEEE;
+	border-bottom: 1px solid #EEEEEE;
+	color: #444444;
+	padding: 14px 15px 13px;
 }

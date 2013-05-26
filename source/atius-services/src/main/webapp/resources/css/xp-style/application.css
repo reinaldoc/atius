@@ -1,5 +1,12 @@
 @CHARSET "UTF-8";
 
+.xp-style.at-body {
+	background: -moz-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: -webkit-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: -ms-linear-gradient(top, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	background: linear-gradient(to bottom, #FAFAFA, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+}
+
 .xp-style .at-serv-link {
 	text-decoration: none;
 	font-size: 12px !important;
@@ -25,12 +32,14 @@
 	line-height: 24px;
 }
 
-.xp-style .at-datalist-itembutton {
+.xp-style .at-itembutton {
 	background: none repeat scroll 0 0 transparent;
 	border: medium none;
+	border-radius: 0 0 0 0;
+	box-shadow: 0 0 0;
 }
 
-.xp-style .at-datalist-itembutton:hover {
+.xp-style .at-itembutton:hover {
 	border: medium none;
 	box-shadow: 0 0 0;
 	border-radius: 0;
@@ -38,7 +47,7 @@
 
 .xp-style .at-datagrid .ui-datagrid-content .ui-datagrid-column {
 	width: 50%;
-	padding: 15px 20px 2px 0;
+	padding: 15px 20px 10px 0;
 }
 
 .xp-style .at-datagrid .ui-datagrid-content-empty {
@@ -46,7 +55,6 @@
 }
 
 .xp-style .at-datagrid-item {
-	display: block;
 	color: #245DC1;
 	font-size: 13px;
 	margin-bottom: 5px;

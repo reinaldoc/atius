@@ -21,6 +21,25 @@
 	background-image: url("/atius-services/javax.faces.resource/images/ui-icons_ffffff_256x240.png.jsf?ln=primefaces-aristo");
 }
 
+.xp-style .xp-button-icon {
+	background: none;
+	border: none;
+	box-shadow: 0 0 0;
+	border-radius: 0 0 0 0;
+}
+
+.xp-style .xp-button-icon:hover {
+	background: none;
+	border: none;
+	box-shadow: 0 0 0;
+	border-radius: 0 0 0 0;
+}
+
+.xp-style .xp-button-icon.ui-button-icon-only:hover .ui-icon {
+	background-color: #F2F2F2;
+	border-radius: 2px 2px 2px 2px;
+}
+
 .xp-style .xp-button-small.ui-button-text-only .ui-button-text {
 	padding: 0.25em 1em;
 	margin-bottom: -1px;
