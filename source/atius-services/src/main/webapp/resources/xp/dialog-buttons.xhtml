@@ -70,7 +70,7 @@
 				<!-- New -->
 				<p:commandButton value="#{cc.attrs.newLabel}" action="#{cc.attrs.actionNew}" immediate="true" update="#{cc.attrs.updateOnNew}"
 					oncomplete="xp_id('#{cc.attrs.dialogId}').find(':input').filter(':visible:first').focus();" process="@this"
-					rendered="#{!cc.attrs.hiddenNew}" styleClass="xp-button xp-dialog-button xp-button-small" />
+					rendered="#{!cc.attrs.updateMode and !cc.attrs.hiddenNew}" styleClass="xp-button xp-dialog-button xp-button-small" />
 
 				<!-- Close -->
 				<p:commandLink value="#{cc.attrs.closeLabel}" immediate="true" ajax="#{cc.attrs.ajaxClose}" update="#{cc.attrs.updateOnClose}"
