@@ -2,15 +2,25 @@
 
 <datasources>
   <local-tx-datasource>
+
     <jndi-name>AtiusDS</jndi-name>
     <connection-url>jdbc:mysql://localhost:3306/ATIUS</connection-url>
     <driver-class>com.mysql.jdbc.Driver</driver-class>
+    <!--
+    <connection-url>jdbc:oracle:thin:@10.13.1.1:1521:adm</connection-url>
+    <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+    -->
     <user-name>atius</user-name>
     <password>atius</password>
+
+    <min-pool-size>5</min-pool-size>      
+    <max-pool-size>20</max-pool-size>
+    <idle-timeout-minutes>10</idle-timeout-minutes>
+
     <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.MySQLExceptionSorter</exception-sorter-class-name>
     <metadata>
        <type-mapping>mySQL</type-mapping>
     </metadata>
+
   </local-tx-datasource>
 </datasources>
-
