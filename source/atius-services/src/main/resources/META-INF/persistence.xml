@@ -13,9 +13,9 @@
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityRole</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityResource</class>
 
-		<class>br.com.atius.services.domain.ServiceArea</class>
-		<class>br.com.atius.services.domain.ServiceGroup</class>
-		<class>br.com.atius.services.domain.ServiceItem</class>
+		<class>br.com.atius.catalog.domain.ServiceArea</class>
+		<class>br.com.atius.catalog.domain.ServiceGroup</class>
+		<class>br.com.atius.catalog.domain.ServiceItem</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />

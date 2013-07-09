@@ -1,6 +1,6 @@
-package br.com.atius.services.persistence;
+package br.com.atius.catalog.persistence;
 
-import br.com.atius.services.domain.ServiceGroup;
+import br.com.atius.catalog.domain.ServiceGroup;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import br.gov.frameworkdemoiselle.template.contrib.JPACrud;
 

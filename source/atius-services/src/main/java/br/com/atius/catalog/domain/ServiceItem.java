@@ -1,4 +1,4 @@
-package br.com.atius.services.domain;
+package br.com.atius.catalog.domain;
 
 import java.io.Serializable;
 

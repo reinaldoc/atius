@@ -1,11 +1,11 @@
-package br.com.atius.services.view.list;
+package br.com.atius.catalog.view.list;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.atius.services.business.ServiceAreaBC;
-import br.com.atius.services.domain.ServiceArea;
+import br.com.atius.catalog.business.ServiceAreaBC;
+import br.com.atius.catalog.domain.ServiceArea;
 import br.gov.frameworkdemoiselle.query.contrib.QueryConfig;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractListPageBean;
