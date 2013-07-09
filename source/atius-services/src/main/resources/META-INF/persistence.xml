@@ -16,6 +16,7 @@
 		<class>br.com.atius.catalog.domain.ServiceArea</class>
 		<class>br.com.atius.catalog.domain.ServiceGroup</class>
 		<class>br.com.atius.catalog.domain.ServiceItem</class>
+		<class>br.com.atius.knowledge.domain.Knowledge</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
