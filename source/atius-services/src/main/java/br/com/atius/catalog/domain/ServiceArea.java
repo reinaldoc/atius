@@ -1,4 +1,4 @@
-package br.com.atius.services.domain;
+package br.com.atius.catalog.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,15 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "SERVICEGROUP")
-public class ServiceGroup implements Serializable {
+@Table(name = "SERVICEAREA")
+public class ServiceArea implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,20 +27,17 @@ public class ServiceGroup implements Serializable {
 	private Integer id;
 
 	@NotNull
-	@NotEmpty(message="{catalog.group.name}")
+	@NotEmpty(message="{catalog.area.name}")
 	private String name;
 
 	@NotNull
-	@NotEmpty(message="{catalog.group.description}")
+	@NotEmpty(message="{catalog.area.description}")
 	private String description;
 
-	@OneToOne
-	@JoinColumn(name = "area_id")
-	private ServiceArea serviceArea;
-
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "group_id")
-	private List<ServiceItem> serviceItems = new ArrayList<ServiceItem>();
+	@JoinColumn(name = "area_id")
+	@BatchSize(size = 10)
+	private List<ServiceGroup> serviceGroups = new ArrayList<ServiceGroup>();
 
 	public Integer getId() {
 		return id;
@@ -66,20 +63,12 @@ public class ServiceGroup implements Serializable {
 		this.description = description;
 	}
 
-	public ServiceArea getServiceArea() {
-		return serviceArea;
+	public List<ServiceGroup> getServiceGroups() {
+		return serviceGroups;
 	}
 
-	public void setServiceArea(ServiceArea serviceArea) {
-		this.serviceArea = serviceArea;
-	}
-
-	public List<ServiceItem> getServiceItems() {
-		return serviceItems;
-	}
-
-	public void setServiceItems(List<ServiceItem> serviceItems) {
-		this.serviceItems = serviceItems;
+	public void setServiceGroups(List<ServiceGroup> serviceGroups) {
+		this.serviceGroups = serviceGroups;
 	}
 
 }

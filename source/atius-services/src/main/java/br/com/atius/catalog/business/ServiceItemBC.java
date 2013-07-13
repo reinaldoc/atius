@@ -1,7 +1,7 @@
-package br.com.atius.services.business;
+package br.com.atius.catalog.business;
 
-import br.com.atius.services.domain.ServiceItem;
-import br.com.atius.services.persistence.ServiceItemDAO;
+import br.com.atius.catalog.domain.ServiceItem;
+import br.com.atius.catalog.persistence.ServiceItemDAO;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 

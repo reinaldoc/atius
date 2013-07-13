@@ -1,4 +1,4 @@
-package br.com.atius.services.domain;
+package br.com.atius.knowledge.domain;
 
 import java.io.Serializable;
 
@@ -8,11 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
-@Table(name = "SERVICEITEM")
-public class ServiceItem implements Serializable {
+@Table(name = "KNOWLEDGE")
+public class Knowledge implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,11 +19,9 @@ public class ServiceItem implements Serializable {
 	private Integer id;
 
 	@NotNull
-	@NotEmpty
-	private String name;
+	private String title;
 
 	@NotNull
-	@NotEmpty
 	private String description;
 
 	public Integer getId() {
@@ -36,12 +32,12 @@ public class ServiceItem implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {

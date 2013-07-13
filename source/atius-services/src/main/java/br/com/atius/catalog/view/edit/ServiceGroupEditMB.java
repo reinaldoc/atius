@@ -1,10 +1,10 @@
-package br.com.atius.services.view.edit;
+package br.com.atius.catalog.view.edit;
 
 import javax.inject.Inject;
 
-import br.com.atius.services.business.ServiceGroupBC;
-import br.com.atius.services.domain.ServiceArea;
-import br.com.atius.services.domain.ServiceGroup;
+import br.com.atius.catalog.business.ServiceGroupBC;
+import br.com.atius.catalog.domain.ServiceArea;
+import br.com.atius.catalog.domain.ServiceGroup;
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;

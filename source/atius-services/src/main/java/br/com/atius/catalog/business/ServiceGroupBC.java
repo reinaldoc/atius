@@ -1,10 +1,10 @@
-package br.com.atius.services.business;
+package br.com.atius.catalog.business;
 
 import javax.inject.Inject;
 
-import br.com.atius.services.domain.ServiceArea;
-import br.com.atius.services.domain.ServiceGroup;
-import br.com.atius.services.persistence.ServiceGroupDAO;
+import br.com.atius.catalog.domain.ServiceArea;
+import br.com.atius.catalog.domain.ServiceGroup;
+import br.com.atius.catalog.persistence.ServiceGroupDAO;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 
