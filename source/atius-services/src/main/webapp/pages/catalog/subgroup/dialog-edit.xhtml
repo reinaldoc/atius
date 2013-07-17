@@ -25,8 +25,9 @@
 					dialogId="atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-dlg-id" dialogWidgetVar="atius_services_subgroup_edit_dlg"
 					updateMode="#{serviceSubgroupEditMB.updateMode}" actionUpdater="#{serviceSubgroupEditMB.update}" actionInserter="#{serviceSubgroupEditMB.insert}"
 					actionCloser="#{serviceGroupEditMB.editById(serviceGroupEditMB.bean.id)}" updateOnClose=":lsrv-body-id"
-					actionNew="#{serviceSubgroupEditMB.editBean()}" updateOnNew=":atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-panel-id"
-					insertMessage="Subgrupo cadastrado com sucesso!" updateMessage="Subgrupo atualizado com sucesso!" />
+					actionNew="#{serviceSubgroupEditMB.editBean(serviceSubgroupEditMB.bean.group)}"
+					updateOnNew=":atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-panel-id" insertMessage="Subgrupo cadastrado com sucesso!"
+					updateMessage="Subgrupo atualizado com sucesso!" />
 
 			</h:panelGroup>
 
