@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +30,14 @@ public class ServiceItem implements Serializable {
 	@NotEmpty
 	private String description;
 
+	@OneToOne
+	@JoinColumn(name = "group_id")
+	private ServiceGroup group;
+
+	@OneToOne
+	@JoinColumn(name = "subgroup_id")
+	private ServiceSubgroup subgroup;
+
 	public Integer getId() {
 		return id;
 	}
@@ -50,6 +60,22 @@ public class ServiceItem implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ServiceGroup getGroup() {
+		return group;
+	}
+
+	public void setGroup(ServiceGroup group) {
+		this.group = group;
+	}
+
+	public ServiceSubgroup getSubgroup() {
+		return subgroup;
+	}
+
+	public void setSubgroup(ServiceSubgroup subgroup) {
+		this.subgroup = subgroup;
 	}
 
 }

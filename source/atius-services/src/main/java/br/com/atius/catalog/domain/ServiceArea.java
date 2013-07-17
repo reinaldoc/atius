@@ -37,7 +37,7 @@ public class ServiceArea implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "area_id")
 	@BatchSize(size = 10)
-	private List<ServiceGroup> serviceGroups = new ArrayList<ServiceGroup>();
+	private List<ServiceGroup> groups = new ArrayList<ServiceGroup>();
 
 	public Integer getId() {
 		return id;
@@ -63,12 +63,12 @@ public class ServiceArea implements Serializable {
 		this.description = description;
 	}
 
-	public List<ServiceGroup> getServiceGroups() {
-		return serviceGroups;
+	public List<ServiceGroup> getGroups() {
+		return groups;
 	}
 
-	public void setServiceGroups(List<ServiceGroup> serviceGroups) {
-		this.serviceGroups = serviceGroups;
+	public void setGroups(List<ServiceGroup> groups) {
+		this.groups = groups;
 	}
 
 }

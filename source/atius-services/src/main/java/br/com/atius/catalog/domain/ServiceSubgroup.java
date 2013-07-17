@@ -17,8 +17,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "SERVICEGROUP")
-public class ServiceGroup implements Serializable {
+@Table(name = "SERVICESUBGROUP")
+public class ServiceSubgroup implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,23 +27,19 @@ public class ServiceGroup implements Serializable {
 	private Integer id;
 
 	@NotNull
-	@NotEmpty(message = "{catalog.group.name}")
+	@NotEmpty
 	private String name;
 
 	@NotNull
-	@NotEmpty(message = "{catalog.group.description}")
+	@NotEmpty
 	private String description;
 
 	@OneToOne
-	@JoinColumn(name = "area_id")
-	private ServiceArea area;
+	@JoinColumn(name = "group_id")
+	private ServiceGroup group;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "group_id")
-	private List<ServiceSubgroup> subgroups = new ArrayList<ServiceSubgroup>();
-
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "group_id")
+	@JoinColumn(name = "subgroup_id")
 	private List<ServiceItem> items = new ArrayList<ServiceItem>();
 
 	public Integer getId() {
@@ -70,20 +66,12 @@ public class ServiceGroup implements Serializable {
 		this.description = description;
 	}
 
-	public ServiceArea getArea() {
-		return area;
+	public ServiceGroup getGroup() {
+		return group;
 	}
 
-	public void setArea(ServiceArea area) {
-		this.area = area;
-	}
-
-	public List<ServiceSubgroup> getSubgroups() {
-		return subgroups;
-	}
-
-	public void setSubgroups(List<ServiceSubgroup> serviceSubgroups) {
-		this.subgroups = serviceSubgroups;
+	public void setGroup(ServiceGroup group) {
+		this.group = group;
 	}
 
 	public List<ServiceItem> getItems() {
