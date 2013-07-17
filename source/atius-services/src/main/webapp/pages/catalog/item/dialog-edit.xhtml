@@ -27,7 +27,7 @@
 				<xp:dialog-buttons id="atius-services-item-edit-dlg-save-id" dialogId="atius-services-item-edit-form-id:atius-services-item-edit-dlg-id"
 					dialogWidgetVar="atius_services_item_edit_dlg" updateMode="#{serviceItemEditMB.updateMode}" actionUpdater="#{serviceItemEditMB.update}"
 					actionInserter="#{serviceItemEditMB.insert}" actionCloser="#{serviceGroupEditMB.editById(serviceGroupEditMB.bean.id)}"
-					updateOnClose=":lsrv-body-id" actionNew="#{serviceItemEditMB.editBean()}"
+					updateOnClose=":lsrv-body-id" actionNew="#{serviceItemEditMB.editBean()}" hiddenNew="true"
 					updateOnNew=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id" insertMessage="Serviço cadastrado com sucesso!"
 					updateMessage="Serviço atualizado com sucesso!" />
 
