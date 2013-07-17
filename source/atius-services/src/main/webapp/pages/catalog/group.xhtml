@@ -28,7 +28,7 @@
 		<ui:include src="item/dialog-edit.xhtml" />
 		<h:form id="atius-services-group-list-form-id">
 
-			<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 30px;">
+			<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 40px;">
 				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/area.jsf" ajax="false" immediate="true" styleClass="xp-button" />
 			</div>
 
@@ -64,7 +64,7 @@
 					styleClass="at-itembutton xp-right" />
 			</div>
 
-			<div class="xp-block" style="margin: 0 0 0 32px;">
+			<div class="xp-block" style="margin: 0 0 0 40px;">
 				<p:dataGrid value="#{serviceGroupEditMB.bean.items}" var="serviceItem" columns="1"
 					emptyMessage="Cadastre um subgrupo ou um serviço para este grupo" styleClass="xp-datagrid at-datagrid"
 					rendered="#{not empty serviceGroupEditMB.bean.items or (empty serviceGroupEditMB.bean.items and empty serviceGroupEditMB.bean.subgroups)}">
@@ -79,37 +79,39 @@
 				</p:dataGrid>
 			</div>
 
-			<p:spacer height="15"
-				rendered="#{empty serviceGroupEditMB.bean.items and empty serviceGroupEditMB.bean.subgroups}" />
+			<p:spacer height="15" rendered="#{empty serviceGroupEditMB.bean.items and empty serviceGroupEditMB.bean.subgroups}" />
 
-			<p:dataList value="#{serviceGroupEditMB.bean.subgroups}" var="serviceSubgroup" styleClass="xp-datalist">
+			<div class="xp-block" style="margin: 0 0 0 14px;">
+				<p:dataList value="#{serviceGroupEditMB.bean.subgroups}" var="serviceSubgroup" styleClass="xp-datalist">
 
-				<div class="at-datalist-item">
-					<h:outputText value="#{serviceSubgroup.name}" />
-					<p:commandButton icon="ui-icon-pencil" action="#{serviceSubgroupEditMB.editById(serviceSubgroup.id)}"
-						oncomplete="atius_services_subgroup_edit_dlg.show();" update=":atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-panel-id"
-						styleClass="xp-button-icon" />
-					<p:commandButton icon="ui-icon-close" action="#{serviceSubgroupEditMB.editById(serviceSubgroup.id)}"
-						oncomplete="atius_services_subgroup_delete_dlg.show();" update=":atius-services-group-list-form-id:atius-services-subgroup-delete-dlg-id"
-						styleClass="xp-button-icon" />
-					<p:commandButton icon="ui-icon-plus" value="Serviço" action="#{serviceItemEditMB.editBean(serviceSubgroup)}"
-						oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id"
-						styleClass="at-itembutton xp-right" />
-				</div>
-
-				<p:dataGrid value="#{serviceSubgroup.items}" var="serviceItem" columns="2" emptyMessage="Cadastre um serviço para este subgrupo"
-					styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
-					<div class="xp-block">
-						<p:commandLink value="#{serviceItem.name}" ajax="false" action="/index.jsf" immediate="true" styleClass="at-datagrid-item" />
-						<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
-							update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id" styleClass="xp-button-icon" />
-						<p:commandButton icon="ui-icon-close" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_delete_dlg.show();"
-							update=":atius-services-group-list-form-id:atius-services-item-delete-dlg-id" styleClass="xp-button-icon" />
+					<div class="at-datalist-item">
+						<h:outputText value="#{serviceSubgroup.name}" />
+						<p:commandButton icon="ui-icon-pencil" action="#{serviceSubgroupEditMB.editById(serviceSubgroup.id)}"
+							oncomplete="atius_services_subgroup_edit_dlg.show();" update=":atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-panel-id"
+							styleClass="xp-button-icon" />
+						<p:commandButton icon="ui-icon-close" action="#{serviceSubgroupEditMB.editById(serviceSubgroup.id)}"
+							oncomplete="atius_services_subgroup_delete_dlg.show();" update=":atius-services-group-list-form-id:atius-services-subgroup-delete-dlg-id"
+							styleClass="xp-button-icon" />
+						<p:commandButton icon="ui-icon-plus" value="Serviço" action="#{serviceItemEditMB.editBean(serviceSubgroup)}"
+							oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id"
+							styleClass="at-itembutton xp-right" />
 					</div>
-					<h:outputText value="#{serviceItem.description}" />
-				</p:dataGrid>
 
-			</p:dataList>
+					<p:dataGrid value="#{serviceSubgroup.items}" var="serviceItem" columns="2" emptyMessage="Cadastre um serviço para este subgrupo"
+						styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
+						<div class="xp-block">
+							<p:commandLink value="#{serviceItem.name}" ajax="false" action="/index.jsf" immediate="true" styleClass="at-datagrid-item" />
+							<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
+								update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id" styleClass="xp-button-icon" />
+							<p:commandButton icon="ui-icon-close" action="#{serviceItemEditMB.editById(serviceItem.id)}"
+								oncomplete="atius_services_item_delete_dlg.show();" update=":atius-services-group-list-form-id:atius-services-item-delete-dlg-id"
+								styleClass="xp-button-icon" />
+						</div>
+						<h:outputText value="#{serviceItem.description}" />
+					</p:dataGrid>
+
+				</p:dataList>
+			</div>
 
 		</h:form>
 
