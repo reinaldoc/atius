@@ -66,7 +66,7 @@
 						styleClass="at-itembutton xp-right" />
 				</div>
 
-				<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Não há grupos de serviços cadastrados"
+				<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Cadastre um grupo para esta área"
 					styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
 					<div class="xp-block">
 						<p:commandLink value="#{serviceGroup.name}" actionListener="#{serviceGroupEditMB.editById(serviceGroup.id)}" action="/pages/catalog/group.jsf"
