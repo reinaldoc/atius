@@ -1,28 +1,26 @@
 package br.com.atius.catalog.view.edit;
 
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
-import br.com.atius.catalog.business.ServiceGroupBC;
-import br.com.atius.catalog.domain.ServiceArea;
+import br.com.atius.catalog.business.ServiceSubgroupBC;
 import br.com.atius.catalog.domain.ServiceGroup;
+import br.com.atius.catalog.domain.ServiceSubgroup;
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 
-@SessionScoped
 @ViewController
-public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integer> {
+public class ServiceSubgroupEditMB extends AbstractEditPageBean<ServiceSubgroup, Integer> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private ServiceGroupBC bc;
+	private ServiceSubgroupBC bc;
 
-	public void editBean(ServiceArea serviceArea) {
+	public void editBean(ServiceGroup serviceGroup) {
 		super.editBean();
-		getBean().setArea(bc.loadArea(serviceArea.getId()));
+		getBean().setGroup(bc.loadGroup(serviceGroup.getId()));
 	}
 
 	@Override
@@ -60,14 +58,14 @@ public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integ
 	}
 
 	@Override
-	public ServiceGroup load(Integer id) {
+	public ServiceSubgroup load(Integer id) {
 		try {
 			return bc.load(id);
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.error.generic", SeverityType.ERROR);
 		}
-		return new ServiceGroup();
+		return new ServiceSubgroup();
 	}
 
 }
