@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+	<ui:include src="../area/dialog-edit.xhtml" />
+	<ui:include src="../group/dialog-edit.xhtml" />
+	<h:form id="atius-services-area-list-form-id">
+
+		<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 0;">
+			<p:commandButton icon="ui-icon-plus" value="Área" action="#{serviceAreaEditMB.editBean}" oncomplete="atius_services_area_edit_dlg.show();"
+				update=":atius-services-area-edit-form-id:atius-services-area-edit-panel-id" styleClass="xp-button xp-right" />
+		</div>
+
+		<p:confirmDialog message="Deseja excluir a área: #{serviceAreaEditMB.bean.name} ?" header="Atenção!" severity="alert"
+			id="atius-services-area-delete-dlg-id" widgetVar="atius_services_area_delete_dlg" closable="false">
+
+			<p:commandButton value="Sim" oncomplete="atius_services_area_delete_dlg.hide()" update=":lsrv-body-id, :growl-id"
+				action="#{serviceAreaEditMB.delete}" actionListener="#{serviceAreaListMB.list}" style="margin-right: 20px;" />
+
+			<p:commandButton value="Não" onclick="atius_services_area_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+		</p:confirmDialog>
+
+		<p:confirmDialog message="Deseja excluir o grupo: #{serviceGroupEditMB.bean.name} ?" header="Atenção!" severity="alert"
+			id="atius-services-group-delete-dlg-id" widgetVar="atius_services_group_delete_dlg" closable="false">
+
+			<p:commandButton value="Sim" oncomplete="atius_services_group_delete_dlg.hide()" update=":lsrv-body-id, :growl-id"
+				action="#{serviceGroupEditMB.delete}" actionListener="#{serviceAreaListMB.list}" style="margin-right: 20px;" />
+
+			<p:commandButton value="Não" onclick="atius_services_group_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+		</p:confirmDialog>
+
+		<p:dataList value="#{serviceAreaListMB.resultList}" var="serviceArea" styleClass="xp-datalist">
+
+			<div class="at-datalist-item">
+				<h:outputText value="#{serviceArea.name}" />
+				<p:commandButton icon="ui-icon-pencil" action="#{serviceAreaEditMB.editById(serviceArea.id)}" oncomplete="atius_services_area_edit_dlg.show();"
+					update=":atius-services-area-edit-form-id:atius-services-area-edit-panel-id" styleClass="xp-button-icon" />
+				<p:commandButton icon="ui-icon-close" action="#{serviceAreaEditMB.editById(serviceArea.id)}" oncomplete="atius_services_area_delete_dlg.show();"
+					update=":atius-services-area-list-form-id:atius-services-area-delete-dlg-id" styleClass="xp-button-icon" />
+				<p:commandButton icon="ui-icon-plus" value="Grupo" action="#{serviceGroupEditMB.editBean(serviceArea)}"
+					oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id"
+					styleClass="at-itembutton xp-right" />
+			</div>
+
+			<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Não há grupos de serviços cadastrados"
+				styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
+				<div class="xp-block">
+					<p:commandLink value="#{serviceGroup.name}" action="#{serviceGroupEditMB.editById(serviceGroup.id)}" immediate="true" update=":lsrv-body-id"
+						styleClass="at-datagrid-item" />
+					<p:commandButton icon="ui-icon-pencil" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
+						oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id"
+						styleClass="xp-button-icon" />
+					<p:commandButton icon="ui-icon-close" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
+						oncomplete="atius_services_group_delete_dlg.show();" update=":atius-services-area-list-form-id:atius-services-group-delete-dlg-id"
+						styleClass="xp-button-icon" />
+				</div>
+				<h:outputText value="#{serviceGroup.description}" />
+			</p:dataGrid>
+
+		</p:dataList>
+	</h:form>
+
+</ui:composition>

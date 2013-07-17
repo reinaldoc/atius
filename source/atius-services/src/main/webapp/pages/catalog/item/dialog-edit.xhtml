@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-services-item-edit-form-id">
+
+		<p:dialog id="atius-services-item-edit-dlg-id" header="Serviço" widgetVar="atius_services_item_edit_dlg" modal="true" width="440" resizable="false"
+			closable="false">
+
+			<h:panelGroup id="atius-services-item-edit-panel-id">
+
+				<div class="xp-dialog">
+
+					<h:outputText value="Grupo do serviço:" styleClass="xp-input-label" rendered="#{not empty serviceItemEditMB.bean.group}" />
+					<h:outputText value="#{serviceItemEditMB.bean.group.name}" styleClass="xp-input" rendered="#{not empty serviceItemEditMB.bean.group}" />
+
+					<h:outputText value="Subgrupo do serviço:" styleClass="xp-input-label" rendered="#{not empty serviceItemEditMB.bean.subgroup}" />
+					<h:outputText value="#{serviceItemEditMB.bean.subgroup.name}" styleClass="xp-input" rendered="#{not empty serviceItemEditMB.bean.subgroup}" />
+
+					<h:outputText value="Serviço:" styleClass="xp-input-label" />
+					<h:inputText value="#{serviceItemEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+					<h:outputText value="Descrição:" styleClass="xp-input-label" />
+					<h:inputTextarea value="#{serviceItemEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" rows="4" />
+
+				</div>
+
+				<xp:dialog-buttons id="atius-services-item-edit-dlg-save-id" dialogId="atius-services-item-edit-form-id:atius-services-item-edit-dlg-id"
+					dialogWidgetVar="atius_services_item_edit_dlg" updateMode="#{serviceItemEditMB.updateMode}" actionUpdater="#{serviceItemEditMB.update}"
+					actionInserter="#{serviceItemEditMB.insert}" actionCloser="#{serviceGroupEditMB.editById(serviceGroupEditMB.bean.id)}"
+					updateOnClose=":lsrv-body-id" actionNew="#{serviceItemEditMB.editBean()}"
+					updateOnNew=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id" insertMessage="Serviço cadastrado com sucesso!"
+					updateMessage="Serviço atualizado com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

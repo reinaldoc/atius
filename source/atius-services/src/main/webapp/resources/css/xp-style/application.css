@@ -32,6 +32,11 @@
 	line-height: 24px;
 }
 
+.xp-style .at-datalist-item-div {
+	color:	#4F4F4F;
+	margin: 15px 0 0 32px;
+}
+
 .xp-style .at-itembutton {
 	background: none repeat scroll 0 0 transparent;
 	border: medium none;
@@ -47,7 +52,7 @@
 
 .xp-style .at-datagrid .ui-datagrid-content .ui-datagrid-column {
 	width: 50%;
-	padding: 15px 20px 10px 0;
+	padding: 15px 20px 10px 10px;
 }
 
 .xp-style .at-datagrid .ui-datagrid-content-empty {

@@ -11,7 +11,7 @@
 				<div class="xp-dialog">
 
 					<h:outputText value="Área do serviço:" styleClass="xp-input-label" />
-					<h:outputText value="#{serviceGroupEditMB.bean.serviceArea.name}" styleClass="xp-input" />
+					<h:outputText value="#{serviceGroupEditMB.bean.area.name}" styleClass="xp-input" />
 
 					<h:outputText value="Nome do grupo:" styleClass="xp-input-label" />
 					<h:inputText value="#{serviceGroupEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
@@ -24,7 +24,7 @@
 				<xp:dialog-buttons id="atius-services-group-edit-dlg-save-id" dialogId="atius-services-group-edit-form-id:atius-services-group-edit-dlg-id"
 					dialogWidgetVar="atius_services_group_edit_dlg" updateMode="#{serviceGroupEditMB.updateMode}" actionUpdater="#{serviceGroupEditMB.update}"
 					actionInserter="#{serviceGroupEditMB.insert}" actionCloser="#{serviceAreaListMB.clearValidation}" updateOnClose=":lsrv-body-id"
-					actionNew="#{serviceGroupEditMB.editBean(serviceGroupEditMB.bean.serviceArea)}"
+					actionNew="#{serviceGroupEditMB.editBean(serviceGroupEditMB.bean.area)}"
 					updateOnNew=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id" insertMessage="Grupo cadastrado com sucesso!"
 					updateMessage="Grupo atualizado com sucesso!" />
 

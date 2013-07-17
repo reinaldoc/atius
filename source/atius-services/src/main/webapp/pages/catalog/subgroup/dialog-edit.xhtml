@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-services-subgroup-edit-form-id">
+
+		<p:dialog id="atius-services-subgroup-edit-dlg-id" header="Subgrupo de Serviço" widgetVar="atius_services_subgroup_edit_dlg" modal="true"
+			width="440" resizable="false" closable="false">
+
+			<h:panelGroup id="atius-services-subgroup-edit-panel-id">
+
+				<div class="xp-dialog">
+
+					<h:outputText value="Grupo do serviço:" styleClass="xp-input-label" />
+					<h:outputText value="#{serviceSubgroupEditMB.bean.group.name}" styleClass="xp-input" />
+
+					<h:outputText value="Nome do subgrupo:" styleClass="xp-input-label" />
+					<h:inputText value="#{serviceSubgroupEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+					<h:outputText value="Descrição:" styleClass="xp-input-label" />
+					<h:inputTextarea value="#{serviceSubgroupEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" rows="4" />
+
+				</div>
+
+				<xp:dialog-buttons id="atius-services-subgroup-edit-dlg-save-id"
+					dialogId="atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-dlg-id" dialogWidgetVar="atius_services_subgroup_edit_dlg"
+					updateMode="#{serviceSubgroupEditMB.updateMode}" actionUpdater="#{serviceSubgroupEditMB.update}" actionInserter="#{serviceSubgroupEditMB.insert}"
+					actionCloser="#{serviceGroupEditMB.editById(serviceGroupEditMB.bean.id)}" updateOnClose=":lsrv-body-id"
+					actionNew="#{serviceSubgroupEditMB.editBean()}" updateOnNew=":atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-panel-id"
+					insertMessage="Subgrupo cadastrado com sucesso!" updateMessage="Subgrupo atualizado com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>
