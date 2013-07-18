@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/resources/template/layout-services.xhtml">
+
+	<ui:define name="lsrv-top-ui">
+		<h:form>
+			<p:commandLink ajax="false" action="/index.jsf" immediate="true">
+				<h:graphicImage library="images" name="tre-topo.png" alt="#{messages['atius.title']}" />
+			</p:commandLink>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="lsrv-menu-ui">
+		<h:form>
+			<ol>
+				<li class="at-list"><p:commandLink ajax="false" action="/pages/catalog/by-area.jsf" immediate="true" value="Catálogo de Serviços"
+						styleClass="at-serv-link" /></li>
+				<li class="at-list"><p:commandLink ajax="false" action="/pages/catalog/by-area.jsf" immediate="true" value="Central de Serviços"
+						styleClass="at-serv-link" /></li>
+				<li class="at-list"><p:commandLink ajax="false" action="/pages/knowledge/index.jsf" immediate="true" value="Banco de Soluções"
+						styleClass="at-serv-link" /></li>
+			</ol>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="lsrv-body-ui">
+
+		<h:form id="atius-services-group-list-form-id">
+
+			<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 40px;">
+				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/group.jsf" ajax="false" immediate="true" styleClass="xp-button" />
+			</div>
+
+			<div class="at-datalist-item at-datalist-item-div">
+				<h:outputText value="#{serviceItemEditMB.bean.group.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.group}" />
+				<h:outputText value="#{serviceItemEditMB.bean.subgroup.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.subgroup}" />
+				<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-carat-1-e xp-left" style="margin: 5px 3px 0 2px;" />
+				<span>#{serviceItemEditMB.bean.name}</span>
+			</div>
+
+			<div class="xp-block" style="margin: 0 0 0 40px;">
+				<h:outputText value="Serviço:" styleClass="xp-input-label" />
+				<h:outputText value="#{serviceItemEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+				<h:outputText value="Descrição:" styleClass="xp-input-label" />
+				<h:outputText value="#{serviceItemEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input"
+					style="height: 64px; width: 100%" rows="4" />
+			</div>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -7,6 +7,16 @@
 		<view-id value="/pages/catalog/area.jsf" />
 	</url-mapping>
 
+	<url-mapping id="servicegroup">
+		<pattern value="/service-group" />
+		<view-id value="/pages/catalog/group.jsf" />
+	</url-mapping>
+
+	<url-mapping id="serviceitem">
+		<pattern value="/service" />
+		<view-id value="/pages/catalog/item.jsf" />
+	</url-mapping>
+
 	<url-mapping id="login">
 		<pattern value="/login" />
 		<view-id value="/pages/security/account/login.jsf" />

@@ -69,7 +69,8 @@
 					emptyMessage="Cadastre um subgrupo ou um serviço para este grupo" styleClass="xp-datagrid at-datagrid"
 					rendered="#{not empty serviceGroupEditMB.bean.items or (empty serviceGroupEditMB.bean.items and empty serviceGroupEditMB.bean.subgroups)}">
 					<div class="xp-block">
-						<p:commandLink value="#{serviceItem.name}" ajax="false" action="/index.jsf" immediate="true" styleClass="at-datagrid-item" />
+						<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
+							ajax="false" immediate="true" styleClass="at-datagrid-item" />
 						<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
 							update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id" styleClass="xp-button-icon" />
 						<p:commandButton icon="ui-icon-close" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_delete_dlg.show();"
@@ -100,7 +101,8 @@
 					<p:dataGrid value="#{serviceSubgroup.items}" var="serviceItem" columns="2" emptyMessage="Cadastre um serviço para este subgrupo"
 						styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
 						<div class="xp-block">
-							<p:commandLink value="#{serviceItem.name}" ajax="false" action="/index.jsf" immediate="true" styleClass="at-datagrid-item" />
+							<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
+								ajax="false" immediate="true" styleClass="at-datagrid-item" />
 							<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
 								update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id" styleClass="xp-button-icon" />
 							<p:commandButton icon="ui-icon-close" action="#{serviceItemEditMB.editById(serviceItem.id)}"

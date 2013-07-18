@@ -1,5 +1,6 @@
 package br.com.atius.catalog.view.edit;
 
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 import br.com.atius.catalog.business.ServiceItemBC;
@@ -11,6 +12,7 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 
+@SessionScoped
 @ViewController
 public class ServiceItemEditMB extends AbstractEditPageBean<ServiceItem, Integer> {
 
