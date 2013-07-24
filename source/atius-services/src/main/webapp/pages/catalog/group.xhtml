@@ -98,7 +98,7 @@
 							styleClass="at-itembutton xp-right" />
 					</div>
 
-					<p:dataGrid value="#{serviceSubgroup.items}" var="serviceItem" columns="2" emptyMessage="Cadastre um serviço para este subgrupo"
+					<p:dataGrid value="#{serviceSubgroup.items}" var="serviceItem" columns="1" emptyMessage="Cadastre um serviço para este subgrupo"
 						styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
 						<div class="xp-block">
 							<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
