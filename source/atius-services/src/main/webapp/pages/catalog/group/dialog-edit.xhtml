@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
 
-	<h:form id="atius-services-group-edit-form-id">
+	<h:form id="atius-services-group-edit-form-id" enctype="multipart/form-data">
 
 		<p:dialog id="atius-services-group-edit-dlg-id" header="Grupo de Serviço" widgetVar="atius_services_group_edit_dlg" modal="true" width="440"
 			resizable="false" closable="false">
@@ -18,6 +18,9 @@
 
 					<h:outputText value="Descrição:" styleClass="xp-input-label" />
 					<h:inputTextarea value="#{serviceGroupEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" rows="4" />
+
+					<p:fileUpload fileUploadListener="#{serviceGroupEditMB.upload}" auto="true" label="Selecionar logo..." mode="advanced" dragDropSupport="false"
+						sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(jpe?g|png)$/" />
 
 				</div>
 

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,6 +34,9 @@ public class ServiceGroup implements Serializable {
 	@NotNull
 	@NotEmpty(message = "{catalog.group.description}")
 	private String description;
+
+	@Lob
+	private byte[] image;
 
 	@OneToOne
 	@JoinColumn(name = "area_id")
@@ -68,6 +72,14 @@ public class ServiceGroup implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	public ServiceArea getArea() {

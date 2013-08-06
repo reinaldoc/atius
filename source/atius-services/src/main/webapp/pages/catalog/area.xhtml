@@ -69,6 +69,10 @@
 				<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Cadastre um grupo para esta área"
 					styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
 					<div class="xp-block">
+						<p:graphicImage value="#{serviceGroupEditMB.imageByParamId}" height="32" width="32" styleClass="xp-left" style="margin: 5px 10px 0 0;"
+							rendered="#{serviceGroup.image != null}">
+							<f:param name="id" value="#{serviceGroup.id}" />
+						</p:graphicImage>
 						<p:commandLink value="#{serviceGroup.name}" actionListener="#{serviceGroupEditMB.editById(serviceGroup.id)}" action="/pages/catalog/group.jsf"
 							ajax="false" immediate="true" styleClass="at-datagrid-item" />
 						<p:commandButton icon="ui-icon-pencil" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
