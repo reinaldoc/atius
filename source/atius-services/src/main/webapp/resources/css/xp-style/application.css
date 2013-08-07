@@ -72,3 +72,7 @@
 .xp-style .at-datagrid-item:hover {
 	text-decoration: underline;
 }
+
+.xp-style .at-fileupload-hide {
+	display: none !important;
+}
