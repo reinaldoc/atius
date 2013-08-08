@@ -52,10 +52,19 @@
 	<div id="lsrv-top-id">
 		<div class="lsrv-child-id">
 			<ui:insert name="lsrv-top-ui">
+				<ui:include src="../../pages/login/dialog-login.xhtml" />
 				<h:form>
 					<p:commandLink ajax="false" action="/index.jsf" immediate="true">
 						<h:graphicImage library="images" name="tre-topo.png" alt="#{messages['atius.title']}" />
 					</p:commandLink>
+					<p:commandLink value="Login" onclick="atius_services_login_dlg.show();" update=":atius-services-login-form-id:atius-services-login-panel-id"
+						oncomplete="xp_id('atius-services-login-form-id:login-user-id').val(''); xp_id('atius-services-login-form-id:login-user-id').focus();"
+						styleClass="at-serv-link xp-right" rendered="#{not securityContext.loggedIn}" />
+					<p:commandLink value="Logout" action="#{securityContext.logout}" styleClass="at-serv-link xp-right" rendered="#{securityContext.loggedIn}" />
+					<h:outputText value="|" styleClass="xp-right" style="margin: 0 7px 0" rendered="#{fuselageMB.userNameProperCase != 'null'}" />
+					<p:commandLink value="#{fuselageMB.userNameProperCase}" onclick="atius_services_login_dlg.show(); return false;"
+						update=":atius-services-login-form-id:atius-services-login-panel-id" styleClass="at-serv-link xp-right"
+						rendered="#{fuselageMB.userNameProperCase != 'null'}" />
 				</h:form>
 			</ui:insert>
 		</div>

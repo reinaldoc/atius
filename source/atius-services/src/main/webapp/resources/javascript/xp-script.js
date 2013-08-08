@@ -145,6 +145,10 @@ function xp_hideTip(_id) {
 		xp_tip.qtip('api').hide();
 }
 
+function xp_removeTip(_id) {
+	xp_id(_id).qtip('destroy');
+}
+
 /**
  * XP Browser data
  */

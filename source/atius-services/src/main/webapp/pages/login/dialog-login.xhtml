@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-services-login-form-id">
+
+		<p:dialog id="atius-services-login-dlg-id" header="Autenticação" widgetVar="atius_services_login_dlg" modal="true" width="440" resizable="false"
+			closable="false">
+
+			<h:panelGroup id="atius-services-login-panel-id">
+
+				<div class="xp-dialog">
+
+					<h:outputText value="Usuário:" styleClass="xp-input-label" />
+					<h:inputText id="login-user-id" value="#{credential.username}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
+
+					<h:outputText value="Senha:" styleClass="xp-input-label" />
+					<h:inputSecret value="#{credential.password}" styleClass="xp-input" />
+
+				</div>
+
+				<h:panelGroup layout="block">
+					<p:commandButton id="login-action-id" value="Login" action="#{securityContext.login}" oncomplete="at_login(args);"
+						onmouseout="at_login_hide_message()" styleClass="xp-button xp-dialog-button xp-button-small" />
+
+					<p:commandLink value="Fechar" styleClass="xp-close" onclick="atius_services_login_dlg.hide(); return false;" />
+				</h:panelGroup>
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>
