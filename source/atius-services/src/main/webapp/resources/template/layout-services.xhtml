@@ -51,13 +51,30 @@
 
 	<div id="lsrv-top-id">
 		<div class="lsrv-child-id">
-			<ui:insert name="lsrv-top-ui" />
+			<ui:insert name="lsrv-top-ui">
+				<h:form>
+					<p:commandLink ajax="false" action="/index.jsf" immediate="true">
+						<h:graphicImage library="images" name="tre-topo.png" alt="#{messages['atius.title']}" />
+					</p:commandLink>
+				</h:form>
+			</ui:insert>
 		</div>
 	</div>
 
 	<div id="lsrv-menu-id">
 		<div class="lsrv-child-id">
-			<ui:insert name="lsrv-menu-ui" />
+			<ui:insert name="lsrv-menu-ui">
+				<h:form>
+					<ol>
+						<li class="at-list"><p:commandLink ajax="false" action="/pages/catalog/index.jsf" immediate="true" value="Catálogo de Serviços"
+								styleClass="at-serv-link" /></li>
+						<li class="at-list"><p:commandLink ajax="false" action="/pages/catalog/index.jsf" immediate="true" value="Central de Serviços"
+								styleClass="at-serv-link" /></li>
+						<li class="at-list"><p:commandLink ajax="false" action="/pages/knowledge/index.jsf" immediate="true" value="Banco de Soluções"
+								styleClass="at-serv-link" /></li>
+					</ol>
+				</h:form>
+			</ui:insert>
 		</div>
 	</div>
 
