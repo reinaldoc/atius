@@ -41,10 +41,12 @@
 				<span>#{serviceGroupEditMB.bean.name}</span>
 				<p:commandButton icon="ui-icon-plus" value="Serviço" action="#{serviceItemEditMB.editBean(serviceGroupEditMB.bean)}"
 					oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id"
-					styleClass="at-itembutton xp-right" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+					styleClass="at-itembutton xp-right"
+					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 				<p:commandButton icon="ui-icon-plus" value="Subgrupo" action="#{serviceSubgroupEditMB.editBean(serviceGroupEditMB.bean)}"
 					oncomplete="atius_services_subgroup_edit_dlg.show();" update=":atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-panel-id"
-					styleClass="at-itembutton xp-right" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+					styleClass="at-itembutton xp-right"
+					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 			</div>
 
 			<div class="xp-block" style="margin: 0 0 0 40px;">
@@ -57,10 +59,10 @@
 							ajax="false" immediate="true" styleClass="at-datagrid-item" />
 						<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
 							update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 						<p:commandButton icon="ui-icon-close" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_delete_dlg.show();"
 							update=":atius-services-group-list-form-id:atius-services-item-delete-dlg-id" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 					</div>
 					<h:outputText value="#{serviceItem.description}" />
 				</p:dataGrid>
@@ -79,13 +81,16 @@
 						<h:outputText value="#{serviceSubgroup.name}" />
 						<p:commandButton icon="ui-icon-pencil" action="#{serviceSubgroupEditMB.editById(serviceSubgroup.id)}"
 							oncomplete="atius_services_subgroup_edit_dlg.show();" update=":atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-panel-id"
-							styleClass="xp-button-icon" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+							styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 						<p:commandButton icon="ui-icon-close" action="#{serviceSubgroupEditMB.editById(serviceSubgroup.id)}"
 							oncomplete="atius_services_subgroup_delete_dlg.show();" update=":atius-services-group-list-form-id:atius-services-subgroup-delete-dlg-id"
-							styleClass="xp-button-icon" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+							styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 						<p:commandButton icon="ui-icon-plus" value="Serviço" action="#{serviceItemEditMB.editBean(serviceSubgroup)}"
 							oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id"
-							styleClass="at-itembutton xp-right" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+							styleClass="at-itembutton xp-right"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 					</div>
 
 					<p:dataGrid value="#{serviceSubgroup.items}" var="serviceItem" columns="1" emptyMessage="Cadastre um serviço para este subgrupo"
@@ -97,10 +102,11 @@
 								ajax="false" immediate="true" styleClass="at-datagrid-item" />
 							<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
 								update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id" styleClass="xp-button-icon"
-								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 							<p:commandButton icon="ui-icon-close" action="#{serviceItemEditMB.editById(serviceItem.id)}"
 								oncomplete="atius_services_item_delete_dlg.show();" update=":atius-services-group-list-form-id:atius-services-item-delete-dlg-id"
-								styleClass="xp-button-icon" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+								styleClass="xp-button-icon"
+								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
 						</div>
 						<h:outputText value="#{serviceItem.description}" />
 					</p:dataGrid>
