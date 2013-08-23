@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
@@ -54,7 +54,7 @@
 			<ui:insert name="lsrv-top-ui">
 				<ui:include src="../../pages/login/dialog-login.xhtml" />
 				<h:form>
-					<p:commandLink ajax="false" action="/index.jsf" immediate="true">
+					<p:commandLink ajax="false" action="/pages/catalog/area.jsf" immediate="true">
 						<h:graphicImage library="images" name="tre-topo.png" alt="#{messages['atius.title']}" />
 					</p:commandLink>
 					<p:commandLink value="Login" onclick="atius_services_login_dlg.show();" update=":atius-services-login-form-id:atius-services-login-panel-id"
