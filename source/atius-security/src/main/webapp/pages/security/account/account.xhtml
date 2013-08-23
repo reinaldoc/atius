@@ -57,12 +57,12 @@
 
 					</p:dataTable>
 
-					<p:spacer height="15px;" rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
+					<p:spacer height="15px;" rendered="#{securityContext.hasRole('ATIUS-SECURITY')}" />
 
 					<p:dataTable id="faa-permissons-roles-dt-id" widgetVar="faa_permissons_roles_dt_wv" emptyMessage="Não há papéis"
 						value="#{permissionsListMB.rolesList}" var="faa_permissons_roles_dt_row" rows="#{paginationConfig.pageSize}" paginator="true"
 						paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
-						styleClass="xp-datatable xp-datatable-style1" rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}">
+						styleClass="xp-datatable xp-datatable-style1" rendered="#{securityContext.hasRole('ATIUS-SECURITY')}">
 
 						<p:column headerText="Papéis">
 
@@ -74,12 +74,12 @@
 
 					</p:dataTable>
 
-					<p:spacer height="15px;" rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}" />
+					<p:spacer height="15px;" rendered="#{securityContext.hasRole('ATIUS-SECURITY')}" />
 
 					<p:dataTable id="faa-permissons-resources-id" widgetVar="faa_permissons_resources_dt_wv" emptyMessage="Não há recursos"
 						value="#{permissionsListMB.resourcesList}" var="faa_permissons_resources_dt_row" rows="#{paginationConfig.pageSize}" paginator="true"
 						paginatorAlwaysVisible="false" pageLinks="#{paginationConfig.maxPageLinks}" paginatorPosition="bottom"
-						styleClass="xp-datatable xp-datatable-style1" rendered="#{securityContext.hasRole('ROLE-SECURITY-MODULE')}">
+						styleClass="xp-datatable xp-datatable-style1" rendered="#{securityContext.hasRole('ATIUS-SECURITY')}">
 
 						<p:column headerText="Recursos" style="width: 20%">
 
