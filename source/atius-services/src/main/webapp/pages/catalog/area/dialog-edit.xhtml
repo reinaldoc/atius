@@ -16,6 +16,11 @@
 					<h:outputText value="Descrição:" styleClass="xp-input-label" />
 					<h:inputTextarea value="#{serviceAreaEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" rows="4" />
 
+					<h:outputText value="Gestor da Área:" styleClass="xp-input-label" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+					<p:autoComplete value="#{serviceAreaEditMB.bean.role}" completeMethod="#{groupListMB.getResultListFilteredByName}" forceSelection="true"
+						maxResults="10" minQueryLength="1" onkeypress="return event.keyCode!=13" styleClass="xp-autocomplete"
+						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
+
 				</div>
 
 				<xp:dialog-buttons id="atius-services-area-edit-dlg-save-id" dialogId="atius-services-area-edit-form-id:atius-services-area-edit-dlg-id"

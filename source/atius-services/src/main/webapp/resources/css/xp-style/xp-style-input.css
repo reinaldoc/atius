@@ -33,3 +33,18 @@
 	overflow: hidden;
 	border-radius: 3px 3px 3px 3px;
 }
+
+/*
+	%% Autocomplete %%
+*/
+.xp-style .xp-autocomplete .ui-autocomplete-input {
+	width: 375px;
+	border: 1px solid #BBC5CD;
+	margin-bottom: 10px;
+	box-shadow: 0 0 0 #FFFFFF;
+}
+
+.xp-style .xp-autocomplete .ui-state-focus {
+	box-shadow: 0 0 2px #5A7EFF inset;
+	border-color: #1A5EC0;
+}

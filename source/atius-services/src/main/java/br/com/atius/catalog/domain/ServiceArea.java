@@ -26,12 +26,14 @@ public class ServiceArea implements Serializable {
 	@GeneratedValue
 	private Integer id;
 
+	private String role;
+
 	@NotNull
-	@NotEmpty(message="{catalog.area.name}")
+	@NotEmpty(message = "{catalog.area.name}")
 	private String name;
 
 	@NotNull
-	@NotEmpty(message="{catalog.area.description}")
+	@NotEmpty(message = "{catalog.area.description}")
 	private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -69,6 +71,14 @@ public class ServiceArea implements Serializable {
 
 	public void setGroups(List<ServiceGroup> groups) {
 		this.groups = groups;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }
