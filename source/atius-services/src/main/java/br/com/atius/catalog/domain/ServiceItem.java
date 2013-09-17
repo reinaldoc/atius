@@ -1,16 +1,22 @@
 package br.com.atius.catalog.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import br.com.atius.knowledge.domain.Knowledge;
 
 @Entity
 @Table(name = "SERVICEITEM")
@@ -37,6 +43,10 @@ public class ServiceItem implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "subgroup_id")
 	private ServiceSubgroup subgroup;
+
+	@ManyToMany
+	@JoinTable(name = "KNOWLEDGE_SERVICEITEM", joinColumns = { @JoinColumn(name = "SERVICE_ID") }, inverseJoinColumns = { @JoinColumn(name = "KNOWLEDGE_ID") })
+	private List<Knowledge> knowledges = new ArrayList<Knowledge>();
 
 	public Integer getId() {
 		return id;
@@ -76,6 +86,14 @@ public class ServiceItem implements Serializable {
 
 	public void setSubgroup(ServiceSubgroup subgroup) {
 		this.subgroup = subgroup;
+	}
+
+	public List<Knowledge> getKnowledges() {
+		return knowledges;
+	}
+
+	public void setKnowledges(List<Knowledge> knowledges) {
+		this.knowledges = knowledges;
 	}
 
 }
