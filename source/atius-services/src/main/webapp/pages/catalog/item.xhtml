@@ -43,7 +43,7 @@
 
 			<h:panelGroup layout="block" styleClass="xp-block" style="margin: 0 0 0 40px;" id="atius-services-item-knowledge-list-form-id">
 				<p:dataGrid value="#{serviceItemEditMB.bean.knowledges}" var="knowledge" columns="1" emptyMessage="Cadastre um conhecimento para este serviço"
-					styleClass="xp-datagrid at-datagrid">
+					styleClass="xp-datagrid at-datagrid-knowledge">
 					<div class="xp-block">
 						<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon" />
 						<p:commandLink value="#{knowledge.title}" actionListener="#{knowledgeEditMB.editById(knowledge.id)}"

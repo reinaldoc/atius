@@ -32,7 +32,7 @@
 			</p:confirmDialog>
 
 			<div class="at-datalist-item at-datalist-item-div">
-				<p:graphicImage value="#{serviceGroupEditMB.imageByParamId}" height="16" width="16" styleClass="xp-left at-icon"
+				<p:graphicImage value="#{serviceGroupEditMB.imageByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
 					rendered="#{serviceGroupEditMB.bean.image != null}">
 					<f:param name="id" value="#{serviceGroupEditMB.bean.id}" />
 				</p:graphicImage>
@@ -51,7 +51,7 @@
 
 			<div class="xp-block" style="margin: 0 0 0 40px;">
 				<p:dataGrid value="#{serviceGroupEditMB.bean.items}" var="serviceItem" columns="1"
-					emptyMessage="Cadastre um subgrupo ou um serviço para este grupo" styleClass="xp-datagrid at-datagrid"
+					emptyMessage="Cadastre um subgrupo ou um serviço para este grupo" styleClass="xp-datagrid at-datagrid-group"
 					rendered="#{not empty serviceGroupEditMB.bean.items or (empty serviceGroupEditMB.bean.items and empty serviceGroupEditMB.bean.subgroups)}">
 					<div class="xp-block">
 						<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon" />
@@ -94,7 +94,7 @@
 					</div>
 
 					<p:dataGrid value="#{serviceSubgroup.items}" var="serviceItem" columns="1" emptyMessage="Cadastre um serviço para este subgrupo"
-						styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
+						styleClass="xp-datagrid at-datagrid-group">
 						<div class="xp-block">
 							<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon" />
 							<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"

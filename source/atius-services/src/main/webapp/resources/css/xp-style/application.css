@@ -34,7 +34,7 @@
 
 .xp-style .at-datalist-item-div {
 	color: #4F4F4F;
-	margin: 15px 0 0 40px;
+	margin: 15px 0 5px 40px;
 	padding: 0 0 2px;
 }
 
@@ -53,13 +53,17 @@
 	border-radius: 0;
 }
 
-.xp-style .at-datagrid .ui-datagrid-content .ui-datagrid-column {
+.xp-style .at-datagrid-area .ui-datagrid-content .ui-datagrid-column {
 	width: 50%;
 	padding: 15px 20px 10px 13px;
 }
 
-.xp-style .at-datagrid .ui-datagrid-content-empty {
-	margin: 15px 0 10px 12px;
+.xp-style .at-datagrid-group .ui-datagrid-content .ui-datagrid-column {
+	padding: 10px 20px 10px 13px;
+}
+
+.xp-style .at-datagrid-knowledge .ui-datagrid-content .ui-datagrid-column {
+	padding: 5px 20px 0 13px;
 }
 
 .xp-style .at-datagrid-item {
@@ -77,8 +81,12 @@
 	display: none !important;
 }
 
+.xp-style .at-icon-title {
+	margin: 4px 5px 0 0;
+}
+
 .xp-style .at-icon {
-	margin: 6px 10px 0 0;
+	margin: 7px 8px 10px 0;
 }
 
 .xp-style .at-dialog-item-label {

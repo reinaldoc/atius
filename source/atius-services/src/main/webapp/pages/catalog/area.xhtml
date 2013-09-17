@@ -50,7 +50,7 @@
 				</div>
 
 				<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Cadastre um grupo para esta área"
-					styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
+					styleClass="xp-datagrid at-datagrid-area">
 					<div class="xp-block">
 						<p:graphicImage value="#{serviceGroupEditMB.imageByParamId}" height="32" width="32" styleClass="xp-left" style="margin: 5px 10px 0 0;"
 							rendered="#{serviceGroup.image != null}">
@@ -60,10 +60,12 @@
 							ajax="false" immediate="true" styleClass="at-datagrid-item" />
 						<p:commandButton icon="ui-icon-pencil" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
 							oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id"
-							styleClass="xp-button-icon" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroup.area.role))}" />
+							styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroup.area.role))}" />
 						<p:commandButton icon="ui-icon-close" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
 							oncomplete="atius_services_group_delete_dlg.show();" update=":atius-services-area-list-form-id:atius-services-group-delete-dlg-id"
-							styleClass="xp-button-icon" rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroup.area.role))}" />
+							styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroup.area.role))}" />
 					</div>
 					<h:outputText value="#{serviceGroup.description}" />
 				</p:dataGrid>

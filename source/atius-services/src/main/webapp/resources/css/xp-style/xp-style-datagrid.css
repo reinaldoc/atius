@@ -10,3 +10,7 @@
 .xp-style .xp-datagrid .ui-datagrid-content .ui-datagrid-column {
 	vertical-align: top;
 }
+
+.xp-style .xp-datagrid .ui-datagrid-content-empty {
+	margin: 15px 0 10px 12px;
+}
