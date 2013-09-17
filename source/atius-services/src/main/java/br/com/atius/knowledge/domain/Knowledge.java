@@ -31,7 +31,7 @@ public class Knowledge implements Serializable {
 	private String title;
 
 	@NotNull
-	@Size(min = 3, max = 20480)
+	@Size(min = 3, max = 102400)
 	private String description;
 
 	@ManyToMany

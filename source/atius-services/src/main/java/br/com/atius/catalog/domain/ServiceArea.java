@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -30,10 +31,12 @@ public class ServiceArea implements Serializable {
 
 	@NotNull
 	@NotEmpty(message = "{catalog.area.name}")
+	@Size(min = 3, max = 255)
 	private String name;
 
 	@NotNull
 	@NotEmpty(message = "{catalog.area.description}")
+	@Size(min = 3, max = 510)
 	private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

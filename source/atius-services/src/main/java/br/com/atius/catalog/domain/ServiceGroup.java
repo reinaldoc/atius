@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -29,10 +30,12 @@ public class ServiceGroup implements Serializable {
 
 	@NotNull
 	@NotEmpty(message = "{catalog.group.name}")
+	@Size(min = 3, max = 255)
 	private String name;
 
 	@NotNull
 	@NotEmpty(message = "{catalog.group.description}")
+	@Size(min = 3, max = 512)
 	private String description;
 
 	@Lob
