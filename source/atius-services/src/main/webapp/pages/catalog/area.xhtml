@@ -42,7 +42,7 @@
 						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}" />
 					<p:commandButton icon="ui-icon-close" action="#{serviceAreaEditMB.editById(serviceArea.id)}" oncomplete="atius_services_area_delete_dlg.show();"
 						update=":atius-services-area-list-form-id:atius-services-area-delete-dlg-id" styleClass="xp-button-icon"
-						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}" />
+						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
 					<p:commandButton icon="ui-icon-plus" value="Grupo" action="#{serviceGroupEditMB.editBean(serviceArea)}"
 						oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id"
 						styleClass="at-itembutton xp-right"
