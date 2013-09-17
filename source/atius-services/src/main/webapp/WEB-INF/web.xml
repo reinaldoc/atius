@@ -53,7 +53,7 @@
 
 	<!-- Session timeout -->
 	<session-config>
-		<session-timeout>30</session-timeout>
+		<session-timeout>720</session-timeout>
 	</session-config>
 
 	<!--  mime types -->
