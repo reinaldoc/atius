@@ -20,6 +20,7 @@ public class ServiceAreaListMB extends AbstractListPageBean<ServiceArea, Integer
 
 	@Override
 	protected List<ServiceArea> handleResultList(QueryConfig<ServiceArea> queryConfig) {
+		queryConfig.setSorting("name");
 		return bc.findAll();
 	}
 	
