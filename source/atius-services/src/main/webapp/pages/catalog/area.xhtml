@@ -51,7 +51,7 @@
 
 				<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Cadastre um grupo para esta área"
 					styleClass="xp-datagrid at-datagrid-area">
-					<div class="xp-block">
+					<div class="xp-block" style="line-height: 24px;">
 						<p:graphicImage value="#{serviceGroupEditMB.imageByParamId}" height="32" width="32" styleClass="xp-left" style="margin: 5px 10px 0 0;"
 							rendered="#{serviceGroup.image != null}">
 							<f:param name="id" value="#{serviceGroup.id}" />
