@@ -3,11 +3,24 @@
 
 	<ui:define name="lsrv-body-ui">
 
-		<h:form id="atius-services-group-list-form-id">
+		<ui:include src="../knowledge/dialog-edit.xhtml" />
+		<ui:include src="../knowledge/dialog-view.xhtml" />
+		<h:form id="atius-services-item-list-form-id">
 
 			<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 40px;">
 				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/group.jsf" ajax="false" immediate="true" styleClass="xp-button" />
 			</div>
+
+			<p:confirmDialog message="Deseja excluir o conhecimento: #{knowledgeEditMB.bean.title} ?" header="Atenção!" severity="alert"
+				id="atius-knowledge-delete-dlg-id" widgetVar="atius_knowledge_delete_dlg" closable="false">
+
+				<p:commandButton value="Sim" oncomplete="atius_knowledge_delete_dlg.hide()"
+					update=":atius-services-item-list-form-id:atius-services-item-knowledge-list-form-id" action="#{knowledgeEditMB.delete}"
+					actionListener="#{serviceItemEditMB.editById(serviceItemEditMB.bean.id)}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_services_subgroup_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
 
 			<div class="at-datalist-item at-datalist-item-div">
 				<h:outputText value="#{serviceItemEditMB.bean.group.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.group}" />
@@ -16,14 +29,35 @@
 				<span>#{serviceItemEditMB.bean.name}</span>
 			</div>
 
-			<div class="xp-block" style="margin: 0 0 0 40px;">
-				<h:outputText value="Serviço:" styleClass="xp-input-label" />
-				<h:outputText value="#{serviceItemEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input" />
-
-				<h:outputText value="Descrição:" styleClass="xp-input-label" />
-				<h:outputText value="#{serviceItemEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input"
-					style="height: 64px; width: 100%" rows="4" />
+			<div class="xp-block" style="margin: 15px 0 10px 60px;">
+				<h:outputText value="#{serviceItemEditMB.bean.description}" onkeypress="return event.keyCode!=13" />
 			</div>
+
+			<div class="at-datalist-item at-datalist-item-div">
+				<h:outputText value="Base de Conhecimento" />
+				<p:commandButton icon="ui-icon-plus" value="Conhecimento" action="#{knowledgeEditMB.editBean(serviceItemEditMB.bean)}"
+					oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id"
+					styleClass="at-itembutton xp-right"
+					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+			</div>
+
+			<h:panelGroup layout="block" styleClass="xp-block" style="margin: 0 0 0 40px;" id="atius-services-item-knowledge-list-form-id">
+				<p:dataGrid value="#{serviceItemEditMB.bean.knowledges}" var="knowledge" columns="1" emptyMessage="Cadastre um conhecimento para este serviço"
+					styleClass="xp-datagrid at-datagrid">
+					<div class="xp-block">
+						<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon" />
+						<p:commandLink value="#{knowledge.title}" actionListener="#{knowledgeEditMB.editById(knowledge.id)}"
+							update=":atius-knowledge-view-form-id:atius-knowledge-view-panel-id" oncomplete="atius_knowledge_view_dlg.show();"
+							styleClass="at-datagrid-item" />
+						<p:commandButton icon="ui-icon-pencil" action="#{knowledgeEditMB.editById(knowledge.id)}" oncomplete="atius_knowledge_edit_dlg.show();"
+							update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id" styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+						<p:commandButton icon="ui-icon-close" action="#{knowledgeEditMB.editById(knowledge.id)}" oncomplete="atius_knowledge_delete_dlg.show();"
+							update=":atius-services-item-list-form-id:atius-knowledge-delete-dlg-id" styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+					</div>
+				</p:dataGrid>
+			</h:panelGroup>
 
 		</h:form>
 

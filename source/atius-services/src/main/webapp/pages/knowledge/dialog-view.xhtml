@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-knowledge-view-form-id">
+
+		<p:dialog id="atius-knowledge-view-dlg-id" header="Conhecimento" widgetVar="atius_knowledge_view_dlg" modal="true" width="560" resizable="false"
+			closable="false">
+
+			<h:panelGroup id="atius-knowledge-view-panel-id">
+
+				<div class="xp-dialog">
+
+					<div class="at-datalist-item at-dialog-item-label">
+						<h:outputText value="#{knowledgeEditMB.bean.title}" style="width: 492px;" />
+					</div>
+
+					<div class="at-dialog-item-value" style="min-height: 120px; text-align: justify;">
+						<h:outputText value="#{knowledgeEditMB.bean.description}" escape="false" />
+					</div>
+
+				</div>
+
+				<p:commandLink value="Fechar" styleClass="xp-close" onclick="atius_knowledge_view_dlg.hide(); return false;" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

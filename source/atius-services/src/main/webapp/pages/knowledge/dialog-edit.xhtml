@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-knowledge-edit-form-id">
+
+		<p:dialog id="atius-knowledge-edit-dlg-id" header="Conhecimento" widgetVar="atius_knowledge_edit_dlg" modal="true" width="560" resizable="false"
+			closable="false">
+
+			<h:panelGroup id="atius-knowledge-edit-panel-id">
+
+				<div class="xp-dialog">
+
+					<h:outputText value="Título:" styleClass="xp-input-label" />
+					<h:inputText value="#{knowledgeEditMB.bean.title}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input"
+						style="width: 492px;" />
+
+					<h:outputText value="Descrição:" styleClass="xp-input-label" />
+					<p:editor value="#{knowledgeEditMB.bean.description}" onkeypress="return event.keyCode!=13" width="500" style="margin-bottom: 15px;" />
+
+				</div>
+
+				<xp:dialog-buttons id="atius-knowledge-edit-dlg-save-id" dialogId="atius-knowledge-edit-form-id:atius-knowledge-edit-dlg-id"
+					dialogWidgetVar="atius_knowledge_edit_dlg" updateMode="#{knowledgeEditMB.updateMode}" actionUpdater="#{knowledgeEditMB.update}"
+					actionInserter="#{knowledgeEditMB.insert}" actionCloser="#{serviceItemEditMB.editById(serviceItemEditMB.bean.id)}" updateOnClose=":lsrv-body-id"
+					actionNew="#{knowledgeEditMB.editBean(serviceItemEditMB.bean)}" hiddenNew="true"
+					updateOnNew=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id" insertMessage="Conhecimento cadastrado com sucesso!"
+					updateMessage="Conhecimento atualizado com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>
