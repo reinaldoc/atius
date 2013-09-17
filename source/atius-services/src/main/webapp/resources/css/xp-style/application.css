@@ -33,7 +33,7 @@
 }
 
 .xp-style .at-datalist-item-div {
-	color:	#4F4F4F;
+	color: #4F4F4F;
 	margin: 15px 0 0 40px;
 	padding: 0 0 2px;
 }
@@ -44,7 +44,7 @@
 	border-radius: 0 0 0 0;
 	box-shadow: 0 0 0;
 	font-size: 1em;
-	font-family: Arial,sans-serif;
+	font-family: Arial, sans-serif;
 }
 
 .xp-style .at-itembutton:hover {
@@ -59,7 +59,7 @@
 }
 
 .xp-style .at-datagrid .ui-datagrid-content-empty {
-	margin: 15px 0 10px 0;
+	margin: 15px 0 10px 12px;
 }
 
 .xp-style .at-datagrid-item {
@@ -75,4 +75,18 @@
 
 .xp-style .at-fileupload-hide {
 	display: none !important;
+}
+
+.xp-style .at-icon {
+	margin: 6px 10px 0 0;
+}
+
+.xp-style .at-dialog-item-label {
+	color: #4F4F4F;
+	margin: 0 0 7px;
+	padding: 0 0 2px;
+}
+
+.xp-style .at-dialog-item-value {
+	margin: 15px 13px 10px;
 }
