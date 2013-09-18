@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/resources/template/layout-services.xhtml">
+
+	<ui:define name="lsrv-body-ui">
+
+		<h:form id="atius-services-login-account-form-id">
+
+			<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 40px;">
+				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/area.jsf" ajax="false" immediate="true" styleClass="xp-button" />
+			</div>
+
+			<div class="at-datalist-item at-datalist-item-div">#{fuselageMB.userNameProperCase}</div>
+
+			<div class="xp-block" style="margin: 15px 0 100px 60px; line-height: 22px">
+
+				<div class="xp-block-line xp-left">
+					<h:outputText value="Unidade:" styleClass="xp-left" style="width: 100px;" />
+					<h:outputText value="#{organizationalPersonEditMB.bean.unidade}" style="width: 300px;" />
+				</div>
+
+				<div class="xp-block-line xp-left">
+					<h:outputText value="Cargo:" styleClass="xp-left" style="width: 100px;" />
+					<h:outputText value="#{organizationalPersonEditMB.bean.cargo}" style="width: 300px;" />
+				</div>
+
+				<div class="xp-block-line xp-left">
+					<h:outputText value="E-mail:" styleClass="xp-left" style="width: 100px;" />
+					<h:outputText value="#{organizationalPersonEditMB.bean.mail}" style="width: 300px;" />
+				</div>
+
+			</div>
+
+			<div class="at-datalist-item at-datalist-item-div">Serviços</div>
+
+			<div class="xp-block" style="margin: 15px 0 120px 60px;">
+
+				<div class="xp-block-line xp-left" style="line-height: 26px; color: #4F4F4F;">
+					<h:outputText value="E-mail redirecionado para: #{organizationalPersonEditMB.bean.redirectEmail}" styleClass="xp-left"
+						rendered="#{not empty organizationalPersonEditMB.bean.redirectEmail}" />
+					<h:outputText value="Não há redicionamento de E-mail ativado" styleClass="xp-left"
+						rendered="#{empty organizationalPersonEditMB.bean.redirectEmail}" />
+				</div>
+
+				<p:dataList value="#{groupByLoginListMB.resultList}" var="group" styleClass="xp-datalist at-datalist-nopadding">
+					<h:panelGroup layout="block" class="at-datalist-item-simple" rendered="#{not empty group.description}">
+						<h:outputText value="#{group.description} (#{group.cn})" />
+					</h:panelGroup>
+				</p:dataList>
+
+			</div>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

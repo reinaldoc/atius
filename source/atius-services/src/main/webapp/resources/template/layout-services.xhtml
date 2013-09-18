@@ -1,4 +1,5 @@
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
@@ -62,8 +63,8 @@
 						styleClass="at-serv-link xp-right" rendered="#{not securityContext.loggedIn}" />
 					<p:commandLink value="Logout" action="#{securityContext.logout}" styleClass="at-serv-link xp-right" rendered="#{securityContext.loggedIn}" />
 					<h:outputText value="|" styleClass="xp-right" style="margin: 0 7px 0" rendered="#{fuselageMB.userNameProperCase != 'null'}" />
-					<p:commandLink value="#{fuselageMB.userNameProperCase}" onclick="atius_services_login_dlg.show(); return false;"
-						update=":atius-services-login-form-id:atius-services-login-panel-id" styleClass="at-serv-link xp-right"
+					<p:commandLink value="#{fuselageMB.userNameProperCase}" actionListener="#{organizationalPersonEditMB.editById(fuselageMB.securityUser.name)}"
+						action="/pages/login/account.jsf" ajax="false" immediate="true" styleClass="at-serv-link xp-right"
 						rendered="#{fuselageMB.userNameProperCase != 'null'}" />
 				</h:form>
 			</ui:insert>
@@ -75,10 +76,12 @@
 			<ui:insert name="lsrv-menu-ui">
 				<h:form>
 					<ol>
-						<li class="at-list"><p:commandLink ajax="false" action="/pages/catalog/index.jsf" immediate="true" value="Catálogo de Serviços"
+						<li class="at-list"><p:commandLink ajax="false" action="/pages/catalog/area.jsf" immediate="true" value="Catálogo de Serviços"
 								styleClass="at-serv-link" /></li>
-						<li class="at-list"><p:commandLink ajax="false" action="/pages/catalog/index.jsf" immediate="true" value="Central de Serviços"
+						<!-- 
+						<li class="at-list"><p:commandLink ajax="false" action="/pages/catalog/area.jsf" immediate="true" value="Central de Serviços"
 								styleClass="at-serv-link" /></li>
+						-->
 						<li class="at-list"><p:commandLink ajax="false" action="/pages/knowledge/index.jsf" immediate="true" value="Banco de Soluções"
 								styleClass="at-serv-link" /></li>
 					</ol>

@@ -24,8 +24,12 @@
 	margin-right: 20px;
 }
 
+.xp-style .at-datalist-nopadding ul.ui-datalist-data {
+	padding: 0;
+}
+
 .xp-style .at-datalist-item {
-	border-bottom: 1px solid #EBEBEB;
+	border-bottom: 1px solid #E0E0EA;
 	font-size: 1.077em;
 	font-weight: bold;
 	display: block;
@@ -36,6 +40,11 @@
 	color: #4F4F4F;
 	margin: 15px 0 5px 40px;
 	padding: 0 0 2px;
+}
+
+.xp-style .at-datalist-item-simple {
+	display: block;
+	line-height: 26px;
 }
 
 .xp-style .at-itembutton {

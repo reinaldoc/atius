@@ -24,13 +24,15 @@
 
 	<ui:define name="lsrv-body-ui">
 
+		<ui:include src="dialog-view.xhtml" />
 		<h:form>
 			<p:dataGrid value="#{knowledgeListMB.resultList}" var="knowledge" columns="1" emptyMessage="Não há soluções cadastrados"
 				styleClass="xp-datagrid at-datagrid" style="margin: 10px 0 28px 0;">
 				<div class="xp-block">
-					<p:commandLink value="#{knowledge.title}" ajax="false" action="/index.jsf" immediate="true" styleClass="at-datagrid-item" />
+					<p:commandLink value="#{knowledge.title}" actionListener="#{knowledgeEditMB.editById(knowledge.id)}"
+						update=":atius-knowledge-view-form-id:atius-knowledge-view-panel-id" oncomplete="atius_knowledge_view_dlg.show();" styleClass="at-datagrid-item" />
 				</div>
-				<h:outputText value="#{knowledge.description}" />
+				<h:outputText value="#{knowledge.description}" escape="false" />
 			</p:dataGrid>
 		</h:form>
 

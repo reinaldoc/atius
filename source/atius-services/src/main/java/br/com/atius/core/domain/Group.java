@@ -12,6 +12,10 @@ public class Group extends Entry {
 
 	private String[] member;
 
+	private String[] memberOf;
+
+	private String description;
+
 	@Override
 	protected String[] objectClass() {
 		return null;
@@ -33,4 +37,44 @@ public class Group extends Entry {
 		this.member = member;
 	}
 
+	public String[] getMemberOf() {
+		return memberOf;
+	}
+
+	public void setMemberOf(String[] memberOf) {
+		this.memberOf = memberOf;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cn == null) ? 0 : cn.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Group other = (Group) obj;
+		if (cn == null) {
+			if (other.cn != null)
+				return false;
+		} else if (!cn.equals(other.cn))
+			return false;
+		return true;
+	}
 }
