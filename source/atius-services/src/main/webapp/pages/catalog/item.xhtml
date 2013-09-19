@@ -23,9 +23,13 @@
 			</p:confirmDialog>
 
 			<div class="at-datalist-item at-datalist-item-div">
+				<p:graphicImage value="#{serviceGroupEditMB.imageByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
+					rendered="#{serviceGroupEditMB.bean.image != null}">
+					<f:param name="id" value="#{serviceGroupEditMB.bean.id}" />
+				</p:graphicImage>
 				<h:outputText value="#{serviceItemEditMB.bean.group.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.group}" />
 				<h:outputText value="#{serviceItemEditMB.bean.subgroup.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.subgroup}" />
-				<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-carat-1-e xp-left" style="margin: 5px 3px 0 2px;" />
+				<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-carat-1-e xp-left" style="margin: 7px 3px 0 2px;" />
 				<span>#{serviceItemEditMB.bean.name}</span>
 			</div>
 
@@ -45,7 +49,7 @@
 				<p:dataGrid value="#{serviceItemEditMB.bean.knowledges}" var="knowledge" columns="1" emptyMessage="Cadastre um conhecimento para este serviço"
 					styleClass="xp-datagrid at-datagrid-knowledge">
 					<div class="xp-block">
-						<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon" />
+						<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item" />
 						<p:commandLink value="#{knowledge.title}" actionListener="#{knowledgeEditMB.editById(knowledge.id)}"
 							update=":atius-knowledge-view-form-id:atius-knowledge-view-panel-id" oncomplete="atius_knowledge_view_dlg.show();"
 							styleClass="at-datagrid-item" />

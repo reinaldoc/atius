@@ -37,7 +37,7 @@
 					<f:param name="id" value="#{serviceGroupEditMB.bean.id}" />
 				</p:graphicImage>
 				<span class="xp-left">#{serviceGroupEditMB.bean.area.name}</span>
-				<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-carat-1-e xp-left" style="margin: 5px 3px 0 2px;" />
+				<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-carat-1-e xp-left" style="margin: 7px 3px 0 2px;" />
 				<span>#{serviceGroupEditMB.bean.name}</span>
 				<p:commandButton icon="ui-icon-plus" value="Serviço" action="#{serviceItemEditMB.editBean(serviceGroupEditMB.bean)}"
 					oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id"
@@ -54,7 +54,7 @@
 					emptyMessage="Cadastre um subgrupo ou um serviço para este grupo" styleClass="xp-datagrid at-datagrid-group"
 					rendered="#{not empty serviceGroupEditMB.bean.items or (empty serviceGroupEditMB.bean.items and empty serviceGroupEditMB.bean.subgroups)}">
 					<div class="xp-block">
-						<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon" />
+						<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item" />
 						<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
 							ajax="false" immediate="true" styleClass="at-datagrid-item" />
 						<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
@@ -74,7 +74,7 @@
 				<p:dataList value="#{serviceGroupEditMB.bean.subgroups}" var="serviceSubgroup" styleClass="xp-datalist">
 
 					<div class="at-datalist-item">
-						<p:graphicImage value="#{serviceGroupEditMB.imageByParamId}" height="16" width="16" styleClass="xp-left at-icon"
+						<p:graphicImage value="#{serviceGroupEditMB.imageByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
 							rendered="#{serviceGroupEditMB.bean.image != null}">
 							<f:param name="id" value="#{serviceGroupEditMB.bean.id}" />
 						</p:graphicImage>
