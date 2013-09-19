@@ -84,6 +84,7 @@
 	font-size: 13px;
 	margin-bottom: 5px;
 	text-decoration: none;
+	line-height: 24px;
 }
 
 .xp-style .at-datagrid-item:hover {
@@ -99,11 +100,11 @@
 }
 
 .xp-style .at-icon-item-datagrid {
-	margin: 0px 8px 0px 0;
+	margin: 5px 8px 20px 0;
 }
 
 .xp-style .at-icon-item-list {
-	margin: 2px 8px 5px 0;
+	margin: 6px 8px 0px 0;
 }
 
 .xp-style .at-dialog-item-label {
