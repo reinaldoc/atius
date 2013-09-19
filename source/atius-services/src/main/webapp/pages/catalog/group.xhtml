@@ -96,7 +96,7 @@
 					<p:dataGrid value="#{serviceSubgroup.items}" var="serviceItem" columns="1" emptyMessage="Cadastre um serviço para este subgrupo"
 						styleClass="xp-datagrid at-datagrid-group">
 						<div class="xp-block">
-							<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon" />
+							<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item" />
 							<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
 								ajax="false" immediate="true" styleClass="at-datagrid-item" />
 							<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
