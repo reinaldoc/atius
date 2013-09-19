@@ -98,8 +98,12 @@
 	margin: 8px 7px 0 0;
 }
 
-.xp-style .at-icon-item {
-	margin: 1px 8px 5px 0;
+.xp-style .at-icon-item-datagrid {
+	margin: 0px 8px 0px 0;
+}
+
+.xp-style .at-icon-item-list {
+	margin: 2px 8px 5px 0;
 }
 
 .xp-style .at-dialog-item-label {

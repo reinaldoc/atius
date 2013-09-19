@@ -49,7 +49,7 @@
 				<p:dataGrid value="#{serviceItemEditMB.bean.knowledges}" var="knowledge" columns="1" emptyMessage="Cadastre um conhecimento para este serviço"
 					styleClass="xp-datagrid at-datagrid-knowledge">
 					<div class="xp-block">
-						<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item" />
+						<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item-list" />
 						<p:commandLink value="#{knowledge.title}" actionListener="#{knowledgeEditMB.editById(knowledge.id)}"
 							update=":atius-knowledge-view-form-id:atius-knowledge-view-panel-id" oncomplete="atius_knowledge_view_dlg.show();"
 							styleClass="at-datagrid-item" />
