@@ -116,3 +116,14 @@
 .xp-style .at-dialog-item-value {
 	margin: 15px 13px 10px;
 }
+
+.xp-style .at-footer-label {
+	list-style: none outside none;
+	font-size: 1.077em;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.xp-style .at-footer-item {
+	margin: 0 0 0 40px;
+}

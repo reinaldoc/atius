@@ -98,6 +98,13 @@
 
 	<div id="lsrv-bottom-id">
 		<div class="lsrv-child-id">
+			<h:form>
+				<ul>
+					<li class="at-footer-label">Carta de Serviços</li>
+					<li class="at-footer-item"><p:commandLink value="Imprimir" action="#{serviceAreaListMB.print}" process="@this" ajax="false"
+							styleClass="at-serv-link" /></li>
+				</ul>
+			</h:form>
 			<ui:insert name="lsrv-bottom-ui" />
 		</div>
 	</div>

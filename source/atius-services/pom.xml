@@ -22,6 +22,12 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>br.gov.frameworkdemoiselle.component</groupId>
+			<artifactId>demoiselle-report</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>atius</groupId>
 			<artifactId>atius-fonts</artifactId>
 			<version>1.0.0</version>
