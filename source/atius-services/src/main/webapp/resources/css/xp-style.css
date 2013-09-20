@@ -19,6 +19,13 @@
 @IMPORT url("xp-primefaces-dialog.css.jsf?ln=css/xp-style/xp-primefaces");
 
 /*
+	%% HTML tags %%
+*/
+img {
+	border: none;
+}
+
+/*
 	%% Body %%
 */
 body.xp-style {
