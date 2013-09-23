@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pontos_locais" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Catálogo de Serviços - Grupo de Serviço" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.3995221406292"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -12,13 +12,13 @@
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
 	<field name="name" class="java.lang.String"/>
-	<field name="description" class="java.util.Collection"/>
+	<field name="description" class="java.lang.String"/>
 	<field name="items" class="java.util.Collection"/>
 	<field name="subgroups" class="java.util.Collection"/>
 	<group name="services">
 		<groupExpression><![CDATA[$F{id}]]></groupExpression>
 		<groupHeader>
-			<band height="30">
+			<band height="55">
 				<line>
 					<reportElement x="0" y="11" width="304" height="1"/>
 					<graphicElement>
@@ -40,13 +40,20 @@
 					<textFieldExpression class="java.lang.String"><![CDATA["  Grupo: " + $F{name}]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement x="17" y="12" width="520" height="15"/>
+					<reportElement x="17" y="32" width="520" height="15"/>
 					<subreportParameter name="SUBREPORT_DIR">
 						<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($F{items},false)]]></dataSourceExpression>
 					<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "/catalog_service.jasper"]]></subreportExpression>
 				</subreport>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="17" y="16" width="520" height="13"/>
+					<textElement textAlignment="Justified">
+						<font fontName="SansSerif" size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{description}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 	</group>
