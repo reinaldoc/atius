@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -47,10 +48,12 @@ public class ServiceGroup implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "group_id")
+	@BatchSize(size = 3)
 	private List<ServiceSubgroup> subgroups = new ArrayList<ServiceSubgroup>();
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "group_id")
+	@BatchSize(size = 10)
 	private List<ServiceItem> items = new ArrayList<ServiceItem>();
 
 	public Integer getId() {
