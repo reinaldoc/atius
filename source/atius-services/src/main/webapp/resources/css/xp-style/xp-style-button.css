@@ -17,6 +17,14 @@
 	text-shadow: 0px 0px 0px;
 }
 
+.xp-style .xp-button:hover {
+	background: -moz-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: -webkit-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: -ie-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: linear-gradient(to bottom, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	box-shadow: 0 1px 1px 0 #64BEF1 inset;
+}
+
 .xp-style .xp-button .ui-icon {
 	background-image: url("/atius-services/javax.faces.resource/images/ui-icons_ffffff_256x240.png.jsf?ln=primefaces-aristo");
 }
@@ -48,14 +56,6 @@
 .xp-style .xp-button-small .ui-button-text {
 	padding: 0.2em 1em 0.4em 2.1em;
 	margin-bottom: -2px;
-}
-
-.xp-style .xp-button:hover {
-	background: -moz-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
-	background: -webkit-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
-	background: -ie-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
-	background: linear-gradient(to bottom, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
-	box-shadow: 0 1px 1px 0 #64BEF1 inset;
 }
 
 .xp-style .xp-close {

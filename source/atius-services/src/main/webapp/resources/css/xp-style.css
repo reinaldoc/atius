@@ -6,6 +6,8 @@
 
 @IMPORT url("xp-style-button.css.jsf?ln=css/xp-style");
 
+@IMPORT url("xp-style-confirm-dialog.css.jsf?ln=css/xp-style");
+
 @IMPORT url("xp-style-datagrid.css.jsf?ln=css/xp-style");
 
 @IMPORT url("xp-style-datalist.css.jsf?ln=css/xp-style");
@@ -13,6 +15,8 @@
 @IMPORT url("xp-style-fonts.css.jsf?ln=css/xp-style");
 
 @IMPORT url("xp-style-input.css.jsf?ln=css/xp-style");
+
+@IMPORT url("xp-style-menu.css.jsf?ln=css/xp-style");
 
 @IMPORT url("xp-primefaces-basic.css.jsf?ln=css/xp-style/xp-primefaces");
 
@@ -51,7 +55,7 @@ body.xp-style {
 	%% Fix qtooltip css %%
 */
 .xp-style .ui-tooltip .ui-tooltip-tip {
-/*	margin-right: 10px;
+	/*	margin-right: 10px;
 	margin-left: 10px;
 	bottom: -4px !important;
 	*/

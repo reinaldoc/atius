@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Confirm Dialog %%
+*/
+.xp-style .xp-confirm-dialog .ui-dialog-content {
+	margin: 7px 30px 0 15px;
+	max-width: 600px;
+}
+
+.xp-style .xp-confirm-dialog .ui-dialog-content .ui-icon {
+	margin: 0 10px 20px 0;
+}
+
+.xp-style .xp-confirm-dialog .ui-dialog-buttonpane {
+	text-align: center;
+}
+
+.xp-style .xp-confirm-dialog .ui-dialog-buttonpane .ui-button {
+	background: -moz-linear-gradient(top, #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	background: -webkit-linear-gradient(top, #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	background: -ie-linear-gradient(top, #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	background: linear-gradient(to bottom, #37AAEA, #117ED2) repeat scroll 0 0 transparent;
+	border-color: #1992DA #0C75BB #00589C;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 1px 0 #6FC5F5 inset;
+	font-family: arial;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-shadow: 0px 0px 0px;
+}
+
+.xp-style .xp-confirm-dialog .ui-dialog-buttonpane .ui-button:hover {
+	background: -moz-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: -webkit-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: -ie-linear-gradient(top, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	background: linear-gradient(to bottom, #2488D4, #1C5BAD) repeat scroll 0 0 transparent;
+	box-shadow: 0 1px 1px 0 #64BEF1 inset;
+}
+
