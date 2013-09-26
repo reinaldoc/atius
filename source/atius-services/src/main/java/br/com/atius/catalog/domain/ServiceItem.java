@@ -51,6 +51,18 @@ public class ServiceItem implements Serializable {
 	@JoinTable(name = "KNOWLEDGE_SERVICEITEM", joinColumns = { @JoinColumn(name = "SERVICE_ID") }, inverseJoinColumns = { @JoinColumn(name = "KNOWLEDGE_ID") })
 	private List<Knowledge> knowledges = new ArrayList<Knowledge>();
 
+	public ServiceItem() {
+
+	}
+
+	public ServiceItem(ServiceItem item) {
+		this.name = item.name;
+		this.description = item.description;
+		this.group = item.group;
+		this.subgroup = item.subgroup;
+		this.knowledges = item.knowledges;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -97,6 +109,31 @@ public class ServiceItem implements Serializable {
 
 	public void setKnowledges(List<Knowledge> knowledges) {
 		this.knowledges = knowledges;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ServiceItem other = (ServiceItem) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

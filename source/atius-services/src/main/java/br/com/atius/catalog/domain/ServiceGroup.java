@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -47,11 +48,13 @@ public class ServiceGroup implements Serializable {
 	private ServiceArea area;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OrderBy("name asc")
 	@JoinColumn(name = "group_id")
 	@BatchSize(size = 3)
 	private List<ServiceSubgroup> subgroups = new ArrayList<ServiceSubgroup>();
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OrderBy("name asc")
 	@JoinColumn(name = "group_id")
 	@BatchSize(size = 10)
 	private List<ServiceItem> items = new ArrayList<ServiceItem>();
@@ -110,6 +113,31 @@ public class ServiceGroup implements Serializable {
 
 	public void setItems(List<ServiceItem> items) {
 		this.items = items;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ServiceGroup other = (ServiceGroup) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }
