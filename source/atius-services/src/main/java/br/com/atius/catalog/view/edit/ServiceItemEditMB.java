@@ -3,7 +3,9 @@ package br.com.atius.catalog.view.edit;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
+import br.com.atius.catalog.business.ServiceGroupBC;
 import br.com.atius.catalog.business.ServiceItemBC;
+import br.com.atius.catalog.business.ServiceSubgroupBC;
 import br.com.atius.catalog.domain.ServiceGroup;
 import br.com.atius.catalog.domain.ServiceItem;
 import br.com.atius.catalog.domain.ServiceSubgroup;
@@ -20,15 +22,21 @@ public class ServiceItemEditMB extends AbstractEditPageBean<ServiceItem, Integer
 
 	@Inject
 	private ServiceItemBC bc;
-	
+
+	@Inject
+	private ServiceGroupBC serviceGroupBC;
+
+	@Inject
+	private ServiceSubgroupBC serviceSubgroupBC;
+
 	public void editBean(ServiceGroup serviceGroup) {
 		super.editBean();
-		getBean().setGroup(bc.loadGroup(serviceGroup.getId()));
+		getBean().setGroup(serviceGroupBC.load(serviceGroup.getId()));
 	}
 
 	public void editBean(ServiceSubgroup serviceSubgroup) {
 		super.editBean();
-		getBean().setSubgroup(bc.loadSubgroup(serviceSubgroup.getId()));
+		getBean().setSubgroup(serviceSubgroupBC.load(serviceSubgroup.getId()));
 	}
 
 	@Override
