@@ -56,6 +56,7 @@ public class ServiceItemClipboardEditMB extends AbstractEditPageBean<ServiceItem
 			if (operation == Operation.COPY)
 				getBean().setId(null);
 			bc.update(getBean());
+			editBean();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Faces.validationFailed();
@@ -71,6 +72,7 @@ public class ServiceItemClipboardEditMB extends AbstractEditPageBean<ServiceItem
 			if (operation == Operation.COPY)
 				getBean().setId(null);
 			bc.update(getBean());
+			editBean();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Faces.validationFailed();
