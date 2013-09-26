@@ -1,15 +1,13 @@
 package br.com.atius.catalog.view.edit;
 
-import java.io.ByteArrayInputStream;
-
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
+import br.com.atius.catalog.business.ServiceAreaBC;
 import br.com.atius.catalog.business.ServiceGroupBC;
+import br.com.atius.catalog.common.SessionCatalog;
 import br.com.atius.catalog.domain.ServiceArea;
 import br.com.atius.catalog.domain.ServiceGroup;
 import br.gov.frameworkdemoiselle.message.SeverityType;
@@ -17,18 +15,29 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.contrib.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 
-@SessionScoped
 @ViewController
 public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integer> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
+	private SessionCatalog sessionCatalog;
+
+	@Inject
 	private ServiceGroupBC bc;
+
+	@Inject
+	private ServiceAreaBC serviceAreaBC;
+
+	@PostConstruct
+	protected void init() {
+		if (sessionCatalog.getGroupId() != null)
+			editById(sessionCatalog.getGroupId());
+	}
 
 	public void editBean(ServiceArea serviceArea) {
 		super.editBean();
-		getBean().setArea(bc.loadArea(serviceArea.getId()));
+		getBean().setArea(serviceAreaBC.load(serviceArea.getId()));
 	}
 
 	@Override
@@ -47,6 +56,7 @@ public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integ
 	public String update() {
 		try {
 			bc.update(getBean());
+			sessionCatalog.evictGroupCache(getBean().getId());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.error.generic", SeverityType.ERROR);
@@ -78,16 +88,6 @@ public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integ
 
 	public void upload(FileUploadEvent event) {
 		getBean().setImage(event.getFile().getContents());
-	}
-
-	public StreamedContent getImageByParamId() {
-		try {
-			String id = Faces.getFacesContext().getExternalContext().getRequestParameterMap().get("id");
-			ServiceGroup group = bc.load(Integer.valueOf(id));
-			return new DefaultStreamedContent(new ByteArrayInputStream(group.getImage()), "image/png");
-		} catch (Exception e) {
-			return new DefaultStreamedContent();
-		}
 	}
 
 }
