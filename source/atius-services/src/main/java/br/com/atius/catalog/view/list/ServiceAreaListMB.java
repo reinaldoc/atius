@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import br.com.atius.catalog.business.ServiceAreaBC;
@@ -39,6 +40,7 @@ public class ServiceAreaListMB extends AbstractListPageBean<ServiceArea, Integer
 		return bc.findAll();
 	}
 
+	@RequestScoped
 	public String print() {
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
