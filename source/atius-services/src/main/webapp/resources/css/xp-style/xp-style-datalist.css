@@ -9,5 +9,9 @@
 
 .xp-style .xp-datalist .ui-datalist-content ul {
 	list-style: none outside none;
+	margin: 0;
 }
 
+.xp-style .xp-datalist-nopadding .ui-datalist-content ul {
+	padding: 0;
+}

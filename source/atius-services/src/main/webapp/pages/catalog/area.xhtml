@@ -3,35 +3,24 @@
 
 	<ui:define name="lsrv-body-ui">
 
+		<script type="text/javascript">
+			at_service_area_onload();
+		</script>
+
 		<ui:include src="area/dialog-edit.xhtml" />
 		<ui:include src="group/dialog-edit.xhtml" />
 		<h:form id="atius-services-area-list-form-id">
 
-			<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 0;">
+			<div class="lsrv-child-id" style="min-height: 30px; padding: 20px 12px 0 0; text-align: center;">
+
+				<h:inputText id="atius-services-area-input-search-id" value="#{sessionCatalog.search}" autocomplete="off" styleClass="at-input-search" />
+
+				<p:commandButton icon="ui-icon-search" value="Pesquisar" action="/pages/catalog/search.jsf" ajax="false" styleClass="xp-button" />
+
 				<p:commandButton icon="ui-icon-plus" value="Área" action="#{serviceAreaEditMB.editBean}" oncomplete="atius_services_area_edit_dlg.show();"
 					update=":atius-services-area-edit-form-id:atius-services-area-edit-panel-id" styleClass="xp-button xp-right"
 					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
 			</div>
-
-			<p:confirmDialog message="Deseja excluir a área: #{serviceAreaEditMB.bean.name} ?" header="Atenção!" severity="alert"
-				id="atius-services-area-delete-dlg-id" widgetVar="atius_services_area_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
-
-				<p:commandButton value="Sim" oncomplete="atius_services_area_delete_dlg.hide()" update=":lsrv-body-id, :growl-id"
-					action="#{serviceAreaEditMB.delete}" actionListener="#{serviceAreaListMB.list}" style="margin-right: 20px;" />
-
-				<p:commandButton value="Não" onclick="atius_services_area_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
-
-			</p:confirmDialog>
-
-			<p:confirmDialog message="Deseja excluir o grupo: #{serviceGroupEditMB.bean.name} ?" header="Atenção!" severity="alert"
-				id="atius-services-group-delete-dlg-id" widgetVar="atius_services_group_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
-
-				<p:commandButton value="Sim" oncomplete="atius_services_group_delete_dlg.hide()" update=":lsrv-body-id, :growl-id"
-					action="#{serviceGroupEditMB.delete}" actionListener="#{serviceAreaListMB.list}" style="margin-right: 20px;" />
-
-				<p:commandButton value="Não" onclick="atius_services_group_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
-
-			</p:confirmDialog>
 
 			<p:dataList value="#{serviceAreaListMB.resultList}" var="serviceArea" styleClass="xp-datalist">
 
@@ -63,9 +52,9 @@
 				<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Cadastre um grupo para esta área"
 					styleClass="xp-datagrid at-datagrid-area">
 					<div class="xp-block" style="line-height: 24px;">
-						<p:graphicImage value="#{sessionCatalog.groupImageByParamId}" height="32" width="32" styleClass="xp-left" style="margin: 5px 10px 0 0;"
+						<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="32" width="32" styleClass="xp-left" style="margin: 5px 10px 0 0;"
 							rendered="#{serviceGroup.image != null}">
-							<f:param name="id" value="#{serviceGroup.id}" />
+							<f:param name="id" value="#{serviceGroup.image.id}" />
 						</p:graphicImage>
 						<p:commandLink value="#{serviceGroup.name}" actionListener="#{sessionCatalog.setGroupId(serviceGroup.id)}" action="/pages/catalog/group.jsf"
 							ajax="false" immediate="true" styleClass="at-datagrid-item" />
@@ -94,6 +83,27 @@
 				</p:dataGrid>
 
 			</p:dataList>
+
+			<p:confirmDialog message="Deseja excluir a área: #{serviceAreaEditMB.bean.name} ?" header="Atenção!" severity="alert"
+				id="atius-services-area-delete-dlg-id" widgetVar="atius_services_area_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
+
+				<p:commandButton value="Sim" oncomplete="atius_services_area_delete_dlg.hide()" update=":lsrv-body-id, :growl-id"
+					action="#{serviceAreaEditMB.delete}" actionListener="#{serviceAreaListMB.list}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_services_area_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
+			<p:confirmDialog message="Deseja excluir o grupo: #{serviceGroupEditMB.bean.name} ?" header="Atenção!" severity="alert"
+				id="atius-services-group-delete-dlg-id" widgetVar="atius_services_group_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
+
+				<p:commandButton value="Sim" oncomplete="atius_services_group_delete_dlg.hide()" update=":lsrv-body-id, :growl-id"
+					action="#{serviceGroupEditMB.delete}" actionListener="#{serviceAreaListMB.list}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_services_group_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
 		</h:form>
 
 	</ui:define>

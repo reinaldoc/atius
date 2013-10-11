@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/resources/template/layout-services.xhtml">
+
+	<ui:define name="lsrv-body-ui">
+
+		<script type="text/javascript">
+			at_service_search_onload();
+		</script>
+
+		<ui:include src="item/dialog-edit.xhtml" />
+		<h:form id="atius-services-group-list-form-id">
+
+			<div class="lsrv-child-id" style="min-height: 45px; padding: 20px 12px 0 0; text-align: center;">
+				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/area.jsf" ajax="false" immediate="true"
+					styleClass="xp-button xp-left" style="margin-left: 41px;" />
+
+				<h:inputText id="atius-services-input-search-id" value="#{sessionCatalog.search}" autocomplete="off" styleClass="at-input-search"
+					onkeypress="if (event.keyCode==13) { atius_services_group_list_search.jq.click(); return false; }" />
+
+				<p:commandButton icon="ui-icon-search" value="Pesquisar" widgetVar="atius_services_group_list_search" action="/pages/catalog/search.jsf"
+					ajax="false" styleClass="xp-button" />
+			</div>
+
+			<p:confirmDialog message="Deseja excluir o serviço: #{serviceItemEditMB.bean.name} ?" header="Atenção!" severity="alert"
+				id="atius-services-group-delete-dlg-id" widgetVar="atius_services_item_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
+
+				<p:commandButton value="Sim" oncomplete="atius_services_item_delete_dlg.hide()"
+					update=":atius-services-group-list-form-id:atius-services-group-list-panel-id, :growl-id" action="#{serviceItemEditMB.delete}"
+					actionListener="#{serviceGroupEditMB.editById(serviceGroup.id)}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_services_item_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
+			<p:confirmDialog
+				message="O serviço '#{serviceItemClipboardEditMB.bean.name}' foi selecionado para #{serviceItemClipboardEditMB.operation == 0 ? 'cópia': 'ser movido'}, agora escolha o Grupo ou Subgrupo de destino e cole através do menu."
+				header="Atenção!" severity="info" id="atius-services-group-clipboard-dlg-id" widgetVar="atius_services_item_clipboard_dlg" closable="false"
+				styleClass="xp-confirm-dialog">
+
+				<p:commandButton value="OK" oncomplete="atius_services_item_clipboard_dlg.hide()"
+					update=":atius-services-group-list-form-id:atius-services-group-list-panel-id, :growl-id" />
+
+			</p:confirmDialog>
+
+			<h:panelGroup layout="block" id="atius-services-group-list-panel-id">
+
+				<p:dataList value="#{serviceItemListMB.resultList}" var="serviceItem" styleClass="xp-datalist">
+
+					<div class="at-datalist-item">
+						<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
+							rendered="#{(serviceItem.group != null and serviceItem.group.image != null) or  (serviceItem.subgroup != null and serviceItem.subgroup.group.image != null)}">
+							<f:param name="id" value="#{serviceItem.group != null ? serviceItem.group.image.id : serviceItem.subgroup.group.image.id }" />
+						</p:graphicImage>
+						<span class="xp-left">#{serviceItem.group != null ? serviceItem.group.area.name : serviceItem.subgroup.group.area.name}</span>
+						<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-carat-1-e xp-left" style="margin: 7px 3px 0 2px;" />
+						<span class="xp-left#{serviceItem.group != null ? 'nocss' : ''}">#{serviceItem.group != null ? serviceItem.group.name :
+							serviceItem.subgroup.group.name}</span>
+						<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-carat-1-e xp-left" style="margin: 7px 3px 0 2px;"
+							rendered="#{serviceItem.subgroup != null}" />
+						<h:outputText value="#{serviceItem.subgroup.name}" rendered="#{serviceItem.subgroup != null}" />
+
+					</div>
+					<div class="xp-block" style="margin-left: 20px; margin-top: 10px">
+						<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item-datagrid" />
+						<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
+							ajax="false" immediate="true" styleClass="at-datagrid-item" />
+
+						<p:commandButton id="group-item-menu" icon="ui-icon-wrench" styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+						<p:menu overlay="true" trigger="group-item-menu" my="left top" at="left bottom" styleClass="xp-menu"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}">
+							<p:menuitem icon="ui-icon-pencil" value="Editar serviço" action="#{serviceItemEditMB.editById(serviceItem.id)}"
+								oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id" />
+							<p:menuitem icon="ui-icon-close" value="Excluir serviço" action="#{serviceItemEditMB.editById(serviceItem.id)}"
+								oncomplete="atius_services_item_delete_dlg.show();" update=":atius-services-group-list-form-id:atius-services-group-delete-dlg-id" />
+							<p:menuitem icon="ui-icon-copy" value="Copiar serviço..." action="#{serviceItemClipboardEditMB.copy(serviceItem)}"
+								oncomplete="atius_services_item_clipboard_dlg.show();" update=":atius-services-group-list-form-id:atius-services-group-clipboard-dlg-id" />
+							<p:menuitem icon="ui-icon-scissors" value="Mover serviço..." action="#{serviceItemClipboardEditMB.move(serviceItem)}"
+								oncomplete="atius_services_item_clipboard_dlg.show();" update=":atius-services-group-list-form-id:atius-services-group-clipboard-dlg-id" />
+						</p:menu>
+						<!-- 
+						<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
+							update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id" styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+						<p:commandButton icon="ui-icon-close" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_delete_dlg.show();"
+							update=":atius-services-group-list-form-id:atius-services-group-delete-dlg-id" styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+							 -->
+					</div>
+					<h:outputText value="#{serviceItem.description}" styleClass="xp-block" style="margin-bottom: 15px;" />
+
+				</p:dataList>
+
+			</h:panelGroup>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

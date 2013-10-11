@@ -17,6 +17,11 @@
 		<view-id value="/pages/catalog/item.jsf" />
 	</url-mapping>
 
+	<url-mapping id="servicesearch">
+		<pattern value="/search" />
+		<view-id value="/pages/catalog/search.jsf" />
+	</url-mapping>
+
 	<url-mapping id="account">
 		<pattern value="/account" />
 		<view-id value="/pages/login/account.jsf" />
