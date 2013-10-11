@@ -15,16 +15,15 @@
 
 					<h:outputText value="Nome do grupo:" styleClass="xp-input-label" />
 					<h:commandLink onclick="atius_services_group_edit_fileupload.cfg.fileInput.click(); return false;">
-						<h:graphicImage value="javax.faces.resource/upload_image.png.jsf?ln=images" rendered="#{serviceGroupEditMB.bean.image == null}" styleClass="xp-left"
-							style="margin: -4px 8px 0 2px;" />
-						<p:graphicImage value="#{sessionCatalog.groupImageByParamId}" height="32" width="32" styleClass="xp-left" style="margin: -3px 10px 0 0;"
+						<h:graphicImage value="javax.faces.resource/upload_image.png.jsf?ln=images" rendered="#{serviceGroupEditMB.bean.image == null}"
+							styleClass="xp-left" style="margin: -4px 8px 0 2px;" />
+						<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="32" width="32" styleClass="xp-left" style="margin: -3px 10px 0 0;"
 							rendered="#{serviceGroupEditMB.bean.image != null}">
-							<f:param name="id" value="#{serviceGroupEditMB.bean.id}" />
+							<f:param name="id" value="#{serviceGroupEditMB.bean.image.id}" />
 						</p:graphicImage>
 					</h:commandLink>
 					<h:inputText value="#{serviceGroupEditMB.bean.name}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input"
 						style="width: 333px;" />
-
 
 					<h:outputText value="Descrição:" styleClass="xp-input-label" />
 					<h:inputTextarea value="#{serviceGroupEditMB.bean.description}" onkeypress="return event.keyCode!=13" styleClass="xp-input" rows="4" />

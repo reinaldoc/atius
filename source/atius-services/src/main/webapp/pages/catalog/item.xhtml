@@ -23,9 +23,9 @@
 			</p:confirmDialog>
 
 			<div class="at-datalist-item at-datalist-item-div">
-				<p:graphicImage value="#{sessionCatalog.groupImageByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
+				<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
 					rendered="#{serviceGroupEditMB.bean.image != null}">
-					<f:param name="id" value="#{serviceGroupEditMB.bean.id}" />
+					<f:param name="id" value="#{serviceGroupEditMB.bean.image.id}" />
 				</p:graphicImage>
 				<h:outputText value="#{serviceItemEditMB.bean.group.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.group}" />
 				<h:outputText value="#{serviceItemEditMB.bean.subgroup.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.subgroup}" />

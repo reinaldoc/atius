@@ -73,9 +73,9 @@
 			<h:panelGroup layout="block" id="atius-services-group-list-panel-id">
 
 				<div class="at-datalist-item at-datalist-item-div">
-					<p:graphicImage value="#{sessionCatalog.groupImageByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
+					<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
 						rendered="#{serviceGroupEditMB.bean.image != null}">
-						<f:param name="id" value="#{serviceGroupEditMB.bean.id}" />
+						<f:param name="id" value="#{serviceGroupEditMB.bean.image.id}" />
 					</p:graphicImage>
 					<span class="xp-left">#{serviceGroupEditMB.bean.area.name}</span>
 					<h:outputText styleClass="ui-button-icon-left ui-icon ui-icon-carat-1-e xp-left" style="margin: 7px 3px 0 2px;" />
@@ -145,9 +145,9 @@
 					<p:dataList value="#{serviceGroupEditMB.bean.subgroups}" var="serviceSubgroup" styleClass="xp-datalist">
 
 						<div class="at-datalist-item">
-							<p:graphicImage value="#{sessionCatalog.groupImageByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
+							<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
 								rendered="#{serviceGroupEditMB.bean.image != null}">
-								<f:param name="id" value="#{serviceGroupEditMB.bean.id}" />
+								<f:param name="id" value="#{serviceGroupEditMB.bean.image.id}" />
 							</p:graphicImage>
 							<h:outputText value="#{serviceSubgroup.name}" />
 

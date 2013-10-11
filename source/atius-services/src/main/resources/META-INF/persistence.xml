@@ -13,6 +13,7 @@
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityRole</class>
 		<class>br.gov.frameworkdemoiselle.fuselage.domain.SecurityResource</class>
 
+		<class>br.com.atius.core.domain.Repository</class>
 		<class>br.com.atius.catalog.domain.ServiceArea</class>
 		<class>br.com.atius.catalog.domain.ServiceGroup</class>
 		<class>br.com.atius.catalog.domain.ServiceSubgroup</class>

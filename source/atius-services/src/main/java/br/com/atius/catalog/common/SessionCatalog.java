@@ -12,8 +12,8 @@ import javax.inject.Named;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import br.com.atius.catalog.business.ServiceGroupBC;
-import br.com.atius.catalog.domain.ServiceGroup;
+import br.com.atius.core.business.RepositoryBC;
+import br.com.atius.core.domain.Repository;
 import br.gov.frameworkdemoiselle.util.Redirector;
 import br.gov.frameworkdemoiselle.util.contrib.Faces;
 
@@ -29,11 +29,13 @@ public class SessionCatalog implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private ServiceGroupBC serviceGroupBC;
+	private RepositoryBC repositoryBC;
 
 	private Integer groupId;
 
-	private Map<Integer, ServiceGroup> groupCache = new HashMap<Integer, ServiceGroup>();
+	private Map<Integer, Repository> repositoryCache = new HashMap<Integer, Repository>();
+
+	private String search;
 
 	public Integer getGroupId() {
 		return groupId;
@@ -59,21 +61,21 @@ public class SessionCatalog implements Serializable {
 	}
 
 	/**
-	 * Provide a streamed content to p:graphicImage from ServiceGroup id read
+	 * Provide a streamed content to p:graphicImage from Repository id read
 	 * from URL. Build a cache that require to be cleared by evictGroupCache
 	 * method
 	 * 
 	 * @return
 	 */
-	public StreamedContent getGroupImageByParamId() {
+	public StreamedContent getRepositoryDataByParamId() {
 		try {
 			Integer id = Integer.valueOf(Faces.getFacesContext().getExternalContext().getRequestParameterMap().get("id"));
-			ServiceGroup group = groupCache.get(id);
-			if (group == null) {
-				group = serviceGroupBC.load(Integer.valueOf(id));
-				groupCache.put(id, group);
+			Repository repository = repositoryCache.get(id);
+			if (repository == null) {
+				repository = repositoryBC.load(Integer.valueOf(id));
+				repositoryCache.put(id, repository);
 			}
-			return new DefaultStreamedContent(new ByteArrayInputStream(group.getImage()), "image/png");
+			return new DefaultStreamedContent(new ByteArrayInputStream(repository.getData()), repository.getContentType());
 		} catch (Exception e) {
 			return new DefaultStreamedContent();
 		}
@@ -81,10 +83,19 @@ public class SessionCatalog implements Serializable {
 
 	/**
 	 * Remove a element from a ServiceGroup cache
+	 * 
 	 * @param id
 	 */
-	public void evictGroupCache(Integer id) {
-		groupCache.remove(id);
+	public void evictRepository(Integer id) {
+		repositoryCache.remove(id);
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 }

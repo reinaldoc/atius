@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
@@ -19,6 +18,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import br.com.atius.core.domain.Repository;
 
 @Entity
 @Table(name = "SERVICEGROUP")
@@ -40,12 +41,13 @@ public class ServiceGroup implements Serializable {
 	@Size(min = 3, max = 512)
 	private String description;
 
-	@Lob
-	private byte[] image;
-
 	@OneToOne
 	@JoinColumn(name = "area_id")
 	private ServiceArea area;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "repository_id")
+	private Repository image;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("name asc")
@@ -58,6 +60,10 @@ public class ServiceGroup implements Serializable {
 	@JoinColumn(name = "group_id")
 	@BatchSize(size = 10)
 	private List<ServiceItem> items = new ArrayList<ServiceItem>();
+
+	public ServiceGroup() {
+
+	}
 
 	public Integer getId() {
 		return id;
@@ -83,20 +89,20 @@ public class ServiceGroup implements Serializable {
 		this.description = description;
 	}
 
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
 	public ServiceArea getArea() {
 		return area;
 	}
 
 	public void setArea(ServiceArea area) {
 		this.area = area;
+	}
+
+	public Repository getImage() {
+		return image;
+	}
+
+	public void setImage(Repository image) {
+		this.image = image;
 	}
 
 	public List<ServiceSubgroup> getSubgroups() {
