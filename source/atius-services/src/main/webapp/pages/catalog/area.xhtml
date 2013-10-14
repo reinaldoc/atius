@@ -22,20 +22,22 @@
 					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
 			</div>
 
-			<p:dataList value="#{serviceAreaListMB.resultList}" var="serviceArea" styleClass="xp-datalist">
+			<h:panelGroup layout="block" id="atius-services-area-list-panel-id">
 
-				<div class="at-datalist-item">
-					<h:outputText value="#{serviceArea.name}" />
-					<p:commandButton id="managearea" icon="ui-icon-wrench" styleClass="xp-button-icon"
-						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}" />
-					<p:menu overlay="true" trigger="managearea" my="left top" at="left bottom" styleClass="xp-menu"
-						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}">
-						<p:menuitem icon="ui-icon-pencil" value="Editar área" action="#{serviceAreaEditMB.editById(serviceArea.id)}"
-							oncomplete="atius_services_area_edit_dlg.show();" update=":atius-services-area-edit-form-id:atius-services-area-edit-panel-id" />
-						<p:menuitem icon="ui-icon-close" value="Excluir área" action="#{serviceAreaEditMB.editById(serviceArea.id)}"
-							oncomplete="atius_services_area_delete_dlg.show();" update=":atius-services-area-list-form-id:atius-services-area-delete-dlg-id" />
-					</p:menu>
-					<!-- 
+				<p:dataList value="#{serviceAreaListMB.resultList}" var="serviceArea" styleClass="xp-datalist">
+
+					<div class="at-datalist-item">
+						<h:outputText value="#{serviceArea.name}" />
+						<p:commandButton id="managearea" icon="ui-icon-wrench" styleClass="xp-button-icon"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}" />
+						<p:menu overlay="true" trigger="managearea" my="left top" at="left bottom" styleClass="xp-menu"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}">
+							<p:menuitem icon="ui-icon-pencil" value="Editar área" action="#{serviceAreaEditMB.editById(serviceArea.id)}"
+								oncomplete="atius_services_area_edit_dlg.show();" update=":atius-services-area-edit-form-id:atius-services-area-edit-panel-id" />
+							<p:menuitem icon="ui-icon-close" value="Excluir área" action="#{serviceAreaEditMB.editById(serviceArea.id)}"
+								oncomplete="atius_services_area_delete_dlg.show();" update=":atius-services-area-list-form-id:atius-services-area-delete-dlg-id" />
+						</p:menu>
+						<!-- 
 					<p:commandButton icon="ui-icon-pencil" action="#{serviceAreaEditMB.editById(serviceArea.id)}" oncomplete="atius_services_area_edit_dlg.show();"
 						update=":atius-services-area-edit-form-id:atius-services-area-edit-panel-id" styleClass="xp-button-icon"
 						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}" />
@@ -43,32 +45,32 @@
 						update=":atius-services-area-list-form-id:atius-services-area-delete-dlg-id" styleClass="xp-button-icon"
 						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN')}" />
 						 -->
-					<p:commandButton icon="ui-icon-plus" value="Grupo" action="#{serviceGroupEditMB.editBean(serviceArea)}"
-						oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id"
-						styleClass="at-itembutton xp-right"
-						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}" />
-				</div>
-
-				<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Cadastre um grupo para esta área"
-					styleClass="xp-datagrid at-datagrid-area">
-					<div class="xp-block" style="line-height: 24px;">
-						<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="32" width="32" styleClass="xp-left" style="margin: 5px 10px 0 0;"
-							rendered="#{serviceGroup.image != null}">
-							<f:param name="id" value="#{serviceGroup.image.id}" />
-						</p:graphicImage>
-						<p:commandLink value="#{serviceGroup.name}" actionListener="#{sessionCatalog.setGroupId(serviceGroup.id)}" action="/pages/catalog/group.jsf"
-							ajax="false" immediate="true" styleClass="at-datagrid-item" />
-
-						<p:commandButton id="managegroup" icon="ui-icon-wrench" styleClass="xp-button-icon"
+						<p:commandButton icon="ui-icon-plus" value="Grupo" action="#{serviceGroupEditMB.editBean(serviceArea)}"
+							oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id"
+							styleClass="at-itembutton xp-right"
 							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}" />
-						<p:menu overlay="true" trigger="managegroup" my="left top" at="left bottom" styleClass="xp-menu"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}">
-							<p:menuitem icon="ui-icon-pencil" value="Editar grupo" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
-								oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id" />
-							<p:menuitem icon="ui-icon-close" value="Excluir grupo" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
-								oncomplete="atius_services_group_delete_dlg.show();" update=":atius-services-area-list-form-id:atius-services-group-delete-dlg-id" />
-						</p:menu>
-						<!-- 
+					</div>
+
+					<p:dataGrid value="#{serviceArea.groups}" var="serviceGroup" columns="2" emptyMessage="Cadastre um grupo para esta área"
+						styleClass="xp-datagrid at-datagrid-area">
+						<div class="xp-block" style="line-height: 24px;">
+							<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="32" width="32" styleClass="xp-left" style="margin: 5px 10px 0 0;"
+								rendered="#{serviceGroup.image != null}">
+								<f:param name="id" value="#{serviceGroup.image.id}" />
+							</p:graphicImage>
+							<p:commandLink value="#{serviceGroup.name}" actionListener="#{sessionCatalog.setGroupId(serviceGroup.id)}" action="/pages/catalog/group.jsf"
+								ajax="false" immediate="true" styleClass="at-datagrid-item" />
+
+							<p:commandButton id="managegroup" icon="ui-icon-wrench" styleClass="xp-button-icon"
+								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}" />
+							<p:menu overlay="true" trigger="managegroup" my="left top" at="left bottom" styleClass="xp-menu"
+								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceArea.role))}">
+								<p:menuitem icon="ui-icon-pencil" value="Editar grupo" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
+									oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id" />
+								<p:menuitem icon="ui-icon-close" value="Excluir grupo" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
+									oncomplete="atius_services_group_delete_dlg.show();" update=":atius-services-area-list-form-id:atius-services-group-delete-dlg-id" />
+							</p:menu>
+							<!-- 
 						<p:commandButton icon="ui-icon-pencil" action="#{serviceGroupEditMB.editById(serviceGroup.id)}"
 							oncomplete="atius_services_group_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id"
 							styleClass="xp-button-icon"
@@ -78,11 +80,13 @@
 							styleClass="xp-button-icon"
 							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroup.area.role))}" />
 							 -->
-					</div>
-					<h:outputText value="#{serviceGroup.description}" />
-				</p:dataGrid>
+						</div>
+						<h:outputText value="#{serviceGroup.description}" />
+					</p:dataGrid>
 
-			</p:dataList>
+				</p:dataList>
+
+			</h:panelGroup>
 
 			<p:confirmDialog message="Deseja excluir a área: #{serviceAreaEditMB.bean.name} ?" header="Atenção!" severity="alert"
 				id="atius-services-area-delete-dlg-id" widgetVar="atius_services_area_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
