@@ -100,12 +100,17 @@
 		<div class="lsrv-child-id">
 			<h:form>
 				<ul>
-					<li class="at-footer-label">Carta de Serviços</li>
+					<li class="at-footer-label">Catálogo de Serviços</li>
 					<li class="at-footer-item"><p:commandLink value="Imprimir" action="#{serviceAreaListMB.print}" ajax="false" immediate="true"
+							styleClass="at-serv-link" /></li>
+					<li class="at-footer-item"><p:commandLink value="Imprimir da área"
+							update=":atius-services-area-print-form-id:atius-services-area-print-panel-id" immediate="true" onclick="atius_services_area_print_dlg.show();"
 							styleClass="at-serv-link" /></li>
 				</ul>
 			</h:form>
 			<ui:insert name="lsrv-bottom-ui" />
+
+			<ui:include src="../../pages/catalog/area/dialog-print.xhtml" />
 		</div>
 	</div>
 

@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-services-area-print-form-id">
+
+		<p:dialog id="atius-services-area-print-dlg-id" header="Imprimir Área de Serviço" widgetVar="atius_services_area_print_dlg" modal="true" width="440"
+			resizable="false" closable="false">
+
+			<h:panelGroup id="atius-services-area-print-panel-id">
+
+				<div class="xp-dialog" style="padding-bottom: 30px;">
+
+					<p:dataList value="#{serviceAreaListMB.resultList}" var="serviceArea" styleClass="xp-datalist xp-datalist-nopadding">
+
+						<div class="at-datalist-item">
+							<h:outputText value="#{serviceArea.name}" />
+							<p:commandButton icon="ui-icon-print" value="Imprimir" action="#{serviceAreaListMB.printArea(serviceArea.id)}" ajax="false" immediate="true"
+								styleClass="at-itembutton xp-right" />
+						</div>
+
+					</p:dataList>
+
+				</div>
+
+				<p:commandLink value="Fechar" styleClass="xp-close" onclick="atius_services_area_print_dlg.hide(); return false;" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

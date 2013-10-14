@@ -1,5 +1,6 @@
 package br.com.atius.catalog.view.list;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,23 @@ public class ServiceAreaListMB extends AbstractListPageBean<ServiceArea, Integer
 			params.put("SUBREPORT_DIR", Faces.getReportPath("catalog"));
 			list();
 			byte[] buffer = report.export(getResultList(), params, Type.PDF);
+			this.renderer.render(buffer, FileRenderer.ContentType.PDF, "catalog.pdf");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			Faces.validationFailed();
+			Faces.addI18nMessage("atius.error.generic", SeverityType.ERROR);
+		}
+		return null;
+	}
+
+	@RequestScoped
+	public String printArea(Integer id) {
+		try {
+			List<ServiceArea> result = new ArrayList<ServiceArea>();
+			result.add(bc.load(id));
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("SUBREPORT_DIR", Faces.getReportPath("catalog"));
+			byte[] buffer = report.export(result, params, Type.PDF);
 			this.renderer.render(buffer, FileRenderer.ContentType.PDF, "catalog.pdf");
 		} catch (RuntimeException e) {
 			e.printStackTrace();

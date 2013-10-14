@@ -33,7 +33,8 @@ public class ServiceAreaEditMB extends AbstractEditPageBean<ServiceArea, Integer
 	public String update() {
 		try {
 			bc.update(getBean());
-		} catch (RuntimeException e) {			Faces.validationFailed();
+		} catch (RuntimeException e) {
+			Faces.validationFailed();
 			Faces.addI18nMessage("atius.error.generic", SeverityType.ERROR);
 		}
 		return null;
