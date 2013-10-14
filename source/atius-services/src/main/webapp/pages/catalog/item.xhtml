@@ -7,8 +7,9 @@
 		<ui:include src="../knowledge/dialog-view.xhtml" />
 		<h:form id="atius-services-item-list-form-id">
 
-			<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 40px;">
-				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/group.jsf" ajax="false" immediate="true" styleClass="xp-button" />
+			<div class="lsrv-child-id" style="min-height: 45px; padding: 20px 12px 0 0;">
+				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="#{serviceItemEditMB.back}" ajax="false" immediate="true"
+					styleClass="xp-button xp-left" style="margin-left: 41px;" />
 			</div>
 
 			<p:confirmDialog message="Deseja excluir o conhecimento: #{knowledgeEditMB.bean.title} ?" header="Atenção!" severity="alert"

@@ -29,6 +29,8 @@ public class ServiceItemEditMB extends AbstractEditPageBean<ServiceItem, Integer
 	@Inject
 	private ServiceSubgroupBC serviceSubgroupBC;
 
+	private String previousPage = "/pages/catalog/area.jsf";
+
 	public void editBean(ServiceGroup serviceGroup) {
 		super.editBean();
 		getBean().setGroup(serviceGroupBC.load(serviceGroup.getId()));
@@ -82,6 +84,15 @@ public class ServiceItemEditMB extends AbstractEditPageBean<ServiceItem, Integer
 			Faces.addI18nMessage("atius.error.generic", SeverityType.ERROR);
 		}
 		return new ServiceItem();
+	}
+
+	public String back() {
+		return previousPage;
+	}
+
+	public String previousPage(String previousPage) {
+		this.previousPage = previousPage;
+		return "/pages/catalog/item.jsf";
 	}
 
 }

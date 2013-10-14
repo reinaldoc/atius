@@ -15,7 +15,7 @@
 					styleClass="xp-button xp-left" style="margin-left: 41px;" />
 
 				<h:inputText id="atius-services-input-search-id" value="#{sessionCatalog.search}" autocomplete="off" styleClass="at-input-search"
-					onkeypress="if (event.keyCode==13) { atius_services_group_list_search.jq.click(); return false; }" />
+					style="margin-left: -115px;" onkeypress="if (event.keyCode==13) { atius_services_group_list_search.jq.click(); return false; }" />
 
 				<p:commandButton icon="ui-icon-search" value="Pesquisar" widgetVar="atius_services_group_list_search" action="/pages/catalog/search.jsf"
 					ajax="false" styleClass="xp-button" />
@@ -42,7 +42,7 @@
 
 			</p:confirmDialog>
 
-			<h:panelGroup layout="block" id="atius-services-group-list-panel-id">
+			<h:panelGroup layout="block" id="atius-services-group-list-panel-id" style="margin-top: 15px;">
 
 				<p:dataList value="#{serviceItemListMB.resultList}" var="serviceItem" styleClass="xp-datalist">
 
@@ -62,8 +62,8 @@
 					</div>
 					<div class="xp-block" style="margin-left: 20px; margin-top: 10px">
 						<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item-datagrid" />
-						<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
-							ajax="false" immediate="true" styleClass="at-datagrid-item" />
+						<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}"
+							action="#{serviceItemEditMB.previousPage('/pages/catalog/search.jsf')}" ajax="false" immediate="true" styleClass="at-datagrid-item" />
 
 						<p:commandButton id="group-item-menu" icon="ui-icon-wrench" styleClass="xp-button-icon"
 							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />

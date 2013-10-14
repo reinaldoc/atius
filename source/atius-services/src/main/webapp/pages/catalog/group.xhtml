@@ -9,8 +9,9 @@
 		<ui:include src="item/dialog-edit.xhtml" />
 		<h:form id="atius-services-group-list-form-id">
 
-			<div class="xp-block" style="min-height: 30px; padding: 10px 12px 0 40px;">
-				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/area.jsf" ajax="false" immediate="true" styleClass="xp-button" />
+			<div class="lsrv-child-id" style="min-height: 45px; padding: 20px 12px 0 0;">
+				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/area.jsf" ajax="false" immediate="true"
+					styleClass="xp-button xp-left" style="margin-left: 41px;" />
 			</div>
 
 			<p:confirmDialog message="Deseja excluir o subgrupo: #{serviceSubgroupEditMB.bean.name} ?" header="Atenção!" severity="alert"
@@ -110,8 +111,8 @@
 						rendered="#{not empty serviceGroupEditMB.bean.items or (empty serviceGroupEditMB.bean.items and empty serviceGroupEditMB.bean.subgroups)}">
 						<div class="xp-block">
 							<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item-datagrid" />
-							<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
-								ajax="false" immediate="true" styleClass="at-datagrid-item" />
+							<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}"
+								action="#{serviceItemEditMB.previousPage('/pages/catalog/group.jsf')}" ajax="false" immediate="true" styleClass="at-datagrid-item" />
 
 							<p:commandButton id="group-item-menu" icon="ui-icon-wrench" styleClass="xp-button-icon"
 								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
@@ -185,8 +186,8 @@
 							styleClass="xp-datagrid at-datagrid-group">
 							<div class="xp-block">
 								<h:graphicImage value="javax.faces.resource/service.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item-datagrid" />
-								<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}" action="/pages/catalog/item.jsf"
-									ajax="false" immediate="true" styleClass="at-datagrid-item" />
+								<p:commandLink value="#{serviceItem.name}" actionListener="#{serviceItemEditMB.editById(serviceItem.id)}"
+									action="#{serviceItemEditMB.previousPage('/pages/catalog/group.jsf')}" ajax="false" immediate="true" styleClass="at-datagrid-item" />
 
 
 								<p:commandButton id="subgroup-item-menu" icon="ui-icon-wrench" styleClass="xp-button-icon"
