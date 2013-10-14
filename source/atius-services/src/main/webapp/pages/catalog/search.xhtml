@@ -22,23 +22,22 @@
 			</div>
 
 			<p:confirmDialog message="Deseja excluir o serviço: #{serviceItemEditMB.bean.name} ?" header="Atenção!" severity="alert"
-				id="atius-services-group-delete-dlg-id" widgetVar="atius_services_item_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
+				id="atius-services-item-delete-dlg-id" widgetVar="atius_services_item_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
 
 				<p:commandButton value="Sim" oncomplete="atius_services_item_delete_dlg.hide()"
 					update=":atius-services-group-list-form-id:atius-services-group-list-panel-id, :growl-id" action="#{serviceItemEditMB.delete}"
-					actionListener="#{serviceGroupEditMB.editById(serviceGroup.id)}" style="margin-right: 20px;" />
+					actionListener="#{serviceItemListMB.list}" style="margin-right: 20px;" />
 
-				<p:commandButton value="Não" onclick="atius_services_item_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+				<p:commandButton value="Não" onclick="atius_services_item_delete_dlg.hide(); return false;" style="margin-left: 20px;" />
 
 			</p:confirmDialog>
 
 			<p:confirmDialog
 				message="O serviço '#{serviceItemClipboardEditMB.bean.name}' foi selecionado para #{serviceItemClipboardEditMB.operation == 0 ? 'cópia': 'ser movido'}, agora escolha o Grupo ou Subgrupo de destino e cole através do menu."
-				header="Atenção!" severity="info" id="atius-services-group-clipboard-dlg-id" widgetVar="atius_services_item_clipboard_dlg" closable="false"
+				header="Atenção!" severity="info" id="atius-services-item-clipboard-dlg-id" widgetVar="atius_services_item_clipboard_dlg" closable="false"
 				styleClass="xp-confirm-dialog">
 
-				<p:commandButton value="OK" oncomplete="atius_services_item_clipboard_dlg.hide()"
-					update=":atius-services-group-list-form-id:atius-services-group-list-panel-id, :growl-id" />
+				<p:commandButton value="OK" oncomplete="atius_services_item_clipboard_dlg.hide(); return false;" />
 
 			</p:confirmDialog>
 
@@ -66,26 +65,19 @@
 							action="#{serviceItemEditMB.previousPage('/pages/catalog/search.jsf')}" ajax="false" immediate="true" styleClass="at-datagrid-item" />
 
 						<p:commandButton id="group-item-menu" icon="ui-icon-wrench" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItem.role))}" />
 						<p:menu overlay="true" trigger="group-item-menu" my="left top" at="left bottom" styleClass="xp-menu"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}">
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItem.role))}">
 							<p:menuitem icon="ui-icon-pencil" value="Editar serviço" action="#{serviceItemEditMB.editById(serviceItem.id)}"
-								oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id" />
+								oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id"
+								actionListener="#{serviceItemListMB.list}" />
 							<p:menuitem icon="ui-icon-close" value="Excluir serviço" action="#{serviceItemEditMB.editById(serviceItem.id)}"
-								oncomplete="atius_services_item_delete_dlg.show();" update=":atius-services-group-list-form-id:atius-services-group-delete-dlg-id" />
+								oncomplete="atius_services_item_delete_dlg.show();" update=":atius-services-group-list-form-id:atius-services-item-delete-dlg-id" />
 							<p:menuitem icon="ui-icon-copy" value="Copiar serviço..." action="#{serviceItemClipboardEditMB.copy(serviceItem)}"
-								oncomplete="atius_services_item_clipboard_dlg.show();" update=":atius-services-group-list-form-id:atius-services-group-clipboard-dlg-id" />
+								oncomplete="atius_services_item_clipboard_dlg.show();" update=":atius-services-group-list-form-id:atius-services-item-clipboard-dlg-id" />
 							<p:menuitem icon="ui-icon-scissors" value="Mover serviço..." action="#{serviceItemClipboardEditMB.move(serviceItem)}"
-								oncomplete="atius_services_item_clipboard_dlg.show();" update=":atius-services-group-list-form-id:atius-services-group-clipboard-dlg-id" />
+								oncomplete="atius_services_item_clipboard_dlg.show();" update=":atius-services-group-list-form-id:atius-services-item-clipboard-dlg-id" />
 						</p:menu>
-						<!-- 
-						<p:commandButton icon="ui-icon-pencil" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_edit_dlg.show();"
-							update=":atius-services-group-edit-form-id:atius-services-group-edit-panel-id" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
-						<p:commandButton icon="ui-icon-close" action="#{serviceItemEditMB.editById(serviceItem.id)}" oncomplete="atius_services_item_delete_dlg.show();"
-							update=":atius-services-group-list-form-id:atius-services-group-delete-dlg-id" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
-							 -->
 					</div>
 					<h:outputText value="#{serviceItem.description}" styleClass="xp-block" style="margin-bottom: 15px;" />
 

@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.atius.core.domain.Repository;
 import br.com.atius.knowledge.domain.Knowledge;
 
 @Entity
@@ -109,6 +110,22 @@ public class ServiceItem implements Serializable {
 
 	public void setKnowledges(List<Knowledge> knowledges) {
 		this.knowledges = knowledges;
+	}
+
+	public Repository getImage() {
+		if (group != null && group.getImage() != null)
+			return group.getImage();
+		else if (subgroup != null && subgroup.getGroup().getImage() != null)
+			return subgroup.getGroup().getImage();
+		return null;
+	}
+
+	public String getRole() {
+		if (group != null)
+			return group.getArea().getRole();
+		else if (subgroup != null)
+			return subgroup.getGroup().getArea().getRole();
+		return null;
 	}
 
 	@Override

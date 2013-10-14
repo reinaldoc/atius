@@ -25,8 +25,8 @@
 
 			<div class="at-datalist-item at-datalist-item-div">
 				<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
-					rendered="#{serviceGroupEditMB.bean.image != null}">
-					<f:param name="id" value="#{serviceGroupEditMB.bean.image.id}" />
+					rendered="#{serviceItemEditMB.bean.image != null}">
+					<f:param name="id" value="#{serviceItemEditMB.bean.image.id}" />
 				</p:graphicImage>
 				<h:outputText value="#{serviceItemEditMB.bean.group.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.group}" />
 				<h:outputText value="#{serviceItemEditMB.bean.subgroup.name}" styleClass="xp-left" rendered="#{not empty serviceItemEditMB.bean.subgroup}" />
@@ -43,7 +43,7 @@
 				<p:commandButton icon="ui-icon-plus" value="Conhecimento" action="#{knowledgeEditMB.editBean(serviceItemEditMB.bean)}"
 					oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id"
 					styleClass="at-itembutton xp-right"
-					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}" />
 			</div>
 
 			<h:panelGroup layout="block" styleClass="xp-block" style="margin: 0 0 0 40px;" id="atius-services-item-knowledge-list-form-id">
@@ -57,23 +57,14 @@
 
 
 						<p:commandButton id="manageknowledge" icon="ui-icon-wrench" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}" />
 						<p:menu overlay="true" trigger="manageknowledge" my="left top" at="left bottom" styleClass="xp-menu" style="width: 180px;"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}">
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
 							<p:menuitem icon="ui-icon-pencil" value="Editar conhecimento" action="#{knowledgeEditMB.editById(knowledge.id)}"
 								oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id" />
 							<p:menuitem icon="ui-icon-close" value="Excluir conhecimento" action="#{knowledgeEditMB.editById(knowledge.id)}"
 								oncomplete="atius_knowledge_delete_dlg.show();" update=":atius-services-item-list-form-id:atius-knowledge-delete-dlg-id" />
 						</p:menu>
-
-						<!-- 
-						<p:commandButton icon="ui-icon-pencil" action="#{knowledgeEditMB.editById(knowledge.id)}" oncomplete="atius_knowledge_edit_dlg.show();"
-							update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
-						<p:commandButton icon="ui-icon-close" action="#{knowledgeEditMB.editById(knowledge.id)}" oncomplete="atius_knowledge_delete_dlg.show();"
-							update=":atius-services-item-list-form-id:atius-knowledge-delete-dlg-id" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
-							 -->
 					</div>
 				</p:dataGrid>
 			</h:panelGroup>
