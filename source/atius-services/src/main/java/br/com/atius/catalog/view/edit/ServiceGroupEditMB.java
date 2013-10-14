@@ -58,6 +58,8 @@ public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integ
 	@Override
 	public String update() {
 		try {
+			if (getBean().getImage() != null)
+				getBean().getImage().setDescription("Imagem do grupo: " + getBean().getName());
 			bc.update(getBean());
 			sessionCatalog.evictRepository(getBean().getId());
 		} catch (RuntimeException e) {
@@ -90,7 +92,12 @@ public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integ
 	}
 
 	public void upload(FileUploadEvent event) {
-		getBean().setImage(new Repository(event.getFile().getContents(), event.getFile().getContentType()));
+		if (getBean().getImage() == null)
+			getBean().setImage(new Repository(event.getFile().getContents(), event.getFile().getContentType()));
+		else {
+			getBean().getImage().setData(event.getFile().getContents());
+			getBean().getImage().setContentType(event.getFile().getContentType());
+		}
 	}
 
 }
