@@ -2,6 +2,8 @@
 
 @IMPORT url("application.css.jsf?ln=css/xp-style");
 
+@IMPORT url("xp-style-accordion.css.jsf?ln=css/xp-style");
+
 @IMPORT url("xp-style-basic.css.jsf?ln=css/xp-style");
 
 @IMPORT url("xp-style-button.css.jsf?ln=css/xp-style");

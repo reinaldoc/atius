@@ -4,7 +4,6 @@
 	<ui:define name="lsrv-body-ui">
 
 		<ui:include src="../knowledge/dialog-edit.xhtml" />
-		<ui:include src="../knowledge/dialog-view.xhtml" />
 		<h:form id="atius-services-item-list-form-id">
 
 			<div class="lsrv-child-id" style="min-height: 45px; padding: 20px 12px 0 0;">
@@ -39,6 +38,7 @@
 			</div>
 
 			<div class="at-datalist-item at-datalist-item-div">
+				<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-title" />
 				<h:outputText value="Base de Conhecimento" />
 				<p:commandButton icon="ui-icon-plus" value="Conhecimento" action="#{knowledgeEditMB.editBean(serviceItemEditMB.bean)}"
 					oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id"
@@ -47,26 +47,42 @@
 			</div>
 
 			<h:panelGroup layout="block" styleClass="xp-block" style="margin: 0 0 0 40px;" id="atius-services-item-knowledge-list-form-id">
-				<p:dataGrid value="#{serviceItemEditMB.bean.knowledges}" var="knowledge" columns="1" emptyMessage="Cadastre um conhecimento para este serviço"
-					styleClass="xp-datagrid at-datagrid-knowledge">
-					<div class="xp-block">
-						<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item-list" />
-						<p:commandLink value="#{knowledge.title}" actionListener="#{knowledgeEditMB.editById(knowledge.id)}"
-							update=":atius-knowledge-view-form-id:atius-knowledge-view-panel-id" oncomplete="atius_knowledge_view_dlg.show();"
-							styleClass="at-datagrid-item" />
+				<p:accordionPanel value="#{serviceItemEditMB.bean.knowledges}" var="knowledge" dynamic="true" cache="true" activeIndex="100"
+					styleClass="xp-accordion">
+					<p:tab title="#{knowledge.title}">
+						<div class="xp-block">
+							<h:outputText value="#{knowledge.description}" escape="false" />
+							<!-- 
+							<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item-list" />
+							<p:commandLink value="#{knowledge.title}" actionListener="#{knowledgeEditMB.editById(knowledge.id)}"
+								update=":atius-knowledge-view-form-id:atius-knowledge-view-panel-id" oncomplete="atius_knowledge_view_dlg.show();"
+								styleClass="at-datagrid-item" />
 
 
-						<p:commandButton id="manageknowledge" icon="ui-icon-wrench" styleClass="xp-button-icon"
-							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}" />
-						<p:menu overlay="true" trigger="manageknowledge" my="left top" at="left bottom" styleClass="xp-menu" style="width: 180px;"
+							<p:commandButton id="manageknowledge" icon="ui-icon-wrench" styleClass="xp-button-icon"
+								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}" />
+							<p:menu overlay="true" trigger="manageknowledge" my="left top" at="left bottom" styleClass="xp-menu" style="width: 180px;"
+								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
+								<p:menuitem icon="ui-icon-pencil" value="Editar conhecimento" action="#{knowledgeEditMB.editById(knowledge.id)}"
+									oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id" />
+								<p:menuitem icon="ui-icon-close" value="Excluir conhecimento" action="#{knowledgeEditMB.editById(knowledge.id)}"
+									oncomplete="atius_knowledge_delete_dlg.show();" update=":atius-services-item-list-form-id:atius-knowledge-delete-dlg-id" />
+							</p:menu>
+							 -->
+
+						</div>
+						<h:panelGroup layout="block" styleClass="lsrv-child-id" style="min-height: 45px; padding: 5px 0 0;"
 							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
-							<p:menuitem icon="ui-icon-pencil" value="Editar conhecimento" action="#{knowledgeEditMB.editById(knowledge.id)}"
-								oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id" />
-							<p:menuitem icon="ui-icon-close" value="Excluir conhecimento" action="#{knowledgeEditMB.editById(knowledge.id)}"
-								oncomplete="atius_knowledge_delete_dlg.show();" update=":atius-services-item-list-form-id:atius-knowledge-delete-dlg-id" />
-						</p:menu>
-					</div>
-				</p:dataGrid>
+							<p:commandButton icon="ui-icon-pencil" value="Editar" action="#{knowledgeEditMB.editById(knowledge.id)}"
+								oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id"
+								styleClass="xp-button xp-left" />
+							<p:commandButton icon="ui-icon-close" value="Excluir" action="#{knowledgeEditMB.editById(knowledge.id)}"
+								oncomplete="atius_knowledge_delete_dlg.show();" update=":atius-services-item-list-form-id:atius-knowledge-delete-dlg-id"
+								styleClass="xp-button xp-left" style="margin-left: 10px;" />
+						</h:panelGroup>
+
+					</p:tab>
+				</p:accordionPanel>
 			</h:panelGroup>
 
 		</h:form>

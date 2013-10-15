@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+/*
+	%% Accordion %%
+*/
+.xp-style .xp-accordion .ui-accordion-header {
+	background: repeat scroll 0 0 transparent;
+}
+
+.xp-style .xp-accordion .ui-accordion-header a {
+	color: #245DC1;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+.xp-style .xp-accordion .ui-accordion-header a:hover {
+	text-decoration: underline;
+}
+
+.xp-style .xp-accordion .ui-accordion-header:hover {
+	box-shadow: 0 0 0 #FFFFFF;
+}
