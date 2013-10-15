@@ -79,7 +79,8 @@
 				</p:accordionPanel>
 			</h:panelGroup>
 
-			<h:panelGroup layout="block" styleClass="at-datalist-item at-datalist-item-div">
+			<h:panelGroup layout="block" styleClass="at-datalist-item at-datalist-item-div"
+				rendered="#{not empty serviceItemEditMB.bean.knowledges or fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
 				<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-title" />
 				<h:outputText value="Base de Conhecimento" />
 				<p:commandButton icon="ui-icon-plus" value="Conhecimento" action="#{knowledgeEditMB.editBean(serviceItemEditMB.bean)}"
@@ -88,7 +89,8 @@
 					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}" />
 			</h:panelGroup>
 
-			<h:panelGroup layout="block" styleClass="xp-block" style="margin: 0 0 0 40px;" id="atius-services-item-knowledge-list-form-id">
+			<h:panelGroup layout="block" styleClass="xp-block" style="margin: 0 0 0 40px;" id="atius-services-item-knowledge-list-form-id"
+				rendered="#{not empty serviceItemEditMB.bean.knowledges or fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
 				<p:accordionPanel value="#{serviceItemEditMB.bean.knowledges}" var="knowledge" dynamic="true" cache="true" activeIndex="100"
 					styleClass="xp-accordion">
 					<p:tab title="#{knowledge.title}">
