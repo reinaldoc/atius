@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.atius.core.domain.Repository;
+import br.com.atius.knowledge.domain.Faq;
 import br.com.atius.knowledge.domain.Knowledge;
 
 @Entity
@@ -54,6 +55,10 @@ public class ServiceItem implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "KNOWLEDGE_SERVICEITEM", joinColumns = { @JoinColumn(name = "SERVICE_ID") }, inverseJoinColumns = { @JoinColumn(name = "KNOWLEDGE_ID") })
 	private List<Knowledge> knowledges = new ArrayList<Knowledge>();
+
+	@ManyToMany
+	@JoinTable(name = "FAQ_SERVICEITEM", joinColumns = { @JoinColumn(name = "SERVICE_ID") }, inverseJoinColumns = { @JoinColumn(name = "FAQ_ID") })
+	private List<Faq> faqs = new ArrayList<Faq>();
 
 	public ServiceItem() {
 
@@ -113,6 +118,14 @@ public class ServiceItem implements Serializable {
 
 	public void setKnowledges(List<Knowledge> knowledges) {
 		this.knowledges = knowledges;
+	}
+
+	public List<Faq> getFaqs() {
+		return faqs;
+	}
+
+	public void setFaqs(List<Faq> faqs) {
+		this.faqs = faqs;
 	}
 
 	public Repository getImage() {

@@ -4,6 +4,7 @@
 	<ui:define name="lsrv-body-ui">
 
 		<ui:include src="../knowledge/dialog-edit.xhtml" />
+		<ui:include src="../knowledge/faq/dialog-edit.xhtml" />
 		<h:form id="atius-services-item-list-form-id">
 
 			<div class="lsrv-child-id" style="min-height: 45px; padding: 20px 12px 0 0;">
@@ -22,6 +23,17 @@
 
 			</p:confirmDialog>
 
+			<p:confirmDialog message="Deseja excluir a pergunta: #{faqEditMB.bean.question} ?" header="Atenção!" severity="alert"
+				id="atius-knowledge-faq-delete-dlg-id" widgetVar="atius_knowledge_faq_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
+
+				<p:commandButton value="Sim" oncomplete="atius_knowledge_faq_delete_dlg.hide()"
+					update=":atius-services-item-list-form-id:atius-services-item-knowledge-faq-list-form-id" action="#{faqEditMB.delete}"
+					actionListener="#{serviceItemEditMB.editById(serviceItemEditMB.bean.id)}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_knowledge_faq_delete_dlg.hide()" type="button" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
 			<div class="at-datalist-item at-datalist-item-div">
 				<p:graphicImage value="#{sessionCatalog.repositoryDataByParamId}" height="16" width="16" styleClass="xp-left at-icon-title"
 					rendered="#{serviceItemEditMB.bean.image != null}">
@@ -37,14 +49,44 @@
 				<h:outputText value="#{serviceItemEditMB.bean.description}" onkeypress="return event.keyCode!=13" />
 			</div>
 
-			<div class="at-datalist-item at-datalist-item-div">
+			<h:panelGroup layout="block" styleClass="at-datalist-item at-datalist-item-div"
+				rendered="#{not empty serviceItemEditMB.bean.faqs or fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
+				<h:graphicImage value="javax.faces.resource/faq.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-title" />
+				<h:outputText value="Perguntas frequentes (FAQ)" />
+				<p:commandButton icon="ui-icon-plus" value="Pergunta" action="#{faqEditMB.editBean(serviceItemEditMB.bean)}"
+					oncomplete="atius_knowledge_faq_edit_dlg.show();" update=":atius-knowledge-faq-edit-form-id:atius-knowledge-faq-edit-panel-id"
+					styleClass="at-itembutton xp-right"
+					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}" />
+			</h:panelGroup>
+
+			<h:panelGroup layout="block" styleClass="xp-block" style="margin: 0 0 0 40px;" id="atius-services-item-knowledge-faq-list-form-id"
+				rendered="#{not empty serviceItemEditMB.bean.faqs or fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
+				<p:accordionPanel value="#{serviceItemEditMB.bean.faqs}" var="faq" dynamic="true" cache="true" activeIndex="100" styleClass="xp-accordion">
+					<p:tab title="#{faq.question}">
+						<div class="xp-block">
+							<h:outputText value="#{faq.answer}" escape="false" />
+						</div>
+						<h:panelGroup layout="block" styleClass="lsrv-child-id" style="min-height: 45px; padding: 5px 0 0;"
+							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
+							<p:commandButton icon="ui-icon-pencil" value="Editar" action="#{faqEditMB.editById(faq.id)}" oncomplete="atius_knowledge_faq_edit_dlg.show();"
+								update=":atius-knowledge-faq-edit-form-id:atius-knowledge-faq-edit-panel-id" styleClass="xp-button xp-left" />
+							<p:commandButton icon="ui-icon-close" value="Excluir" action="#{faqEditMB.editById(faq.id)}"
+								oncomplete="atius_knowledge_faq_delete_dlg.show();" update=":atius-services-item-list-form-id:atius-knowledge-faq-delete-dlg-id"
+								styleClass="xp-button xp-left" style="margin-left: 10px;" />
+						</h:panelGroup>
+
+					</p:tab>
+				</p:accordionPanel>
+			</h:panelGroup>
+
+			<h:panelGroup layout="block" styleClass="at-datalist-item at-datalist-item-div">
 				<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-title" />
 				<h:outputText value="Base de Conhecimento" />
 				<p:commandButton icon="ui-icon-plus" value="Conhecimento" action="#{knowledgeEditMB.editBean(serviceItemEditMB.bean)}"
 					oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id"
 					styleClass="at-itembutton xp-right"
 					rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}" />
-			</div>
+			</h:panelGroup>
 
 			<h:panelGroup layout="block" styleClass="xp-block" style="margin: 0 0 0 40px;" id="atius-services-item-knowledge-list-form-id">
 				<p:accordionPanel value="#{serviceItemEditMB.bean.knowledges}" var="knowledge" dynamic="true" cache="true" activeIndex="100"
@@ -52,24 +94,6 @@
 					<p:tab title="#{knowledge.title}">
 						<div class="xp-block">
 							<h:outputText value="#{knowledge.description}" escape="false" />
-							<!-- 
-							<h:graphicImage value="javax.faces.resource/knowledge.png.jsf?ln=images" height="16" width="16" styleClass="xp-left at-icon-item-list" />
-							<p:commandLink value="#{knowledge.title}" actionListener="#{knowledgeEditMB.editById(knowledge.id)}"
-								update=":atius-knowledge-view-form-id:atius-knowledge-view-panel-id" oncomplete="atius_knowledge_view_dlg.show();"
-								styleClass="at-datagrid-item" />
-
-
-							<p:commandButton id="manageknowledge" icon="ui-icon-wrench" styleClass="xp-button-icon"
-								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}" />
-							<p:menu overlay="true" trigger="manageknowledge" my="left top" at="left bottom" styleClass="xp-menu" style="width: 180px;"
-								rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">
-								<p:menuitem icon="ui-icon-pencil" value="Editar conhecimento" action="#{knowledgeEditMB.editById(knowledge.id)}"
-									oncomplete="atius_knowledge_edit_dlg.show();" update=":atius-knowledge-edit-form-id:atius-knowledge-edit-panel-id" />
-								<p:menuitem icon="ui-icon-close" value="Excluir conhecimento" action="#{knowledgeEditMB.editById(knowledge.id)}"
-									oncomplete="atius_knowledge_delete_dlg.show();" update=":atius-services-item-list-form-id:atius-knowledge-delete-dlg-id" />
-							</p:menu>
-							 -->
-
 						</div>
 						<h:panelGroup layout="block" styleClass="lsrv-child-id" style="min-height: 45px; padding: 5px 0 0;"
 							rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceItemEditMB.bean.role))}">

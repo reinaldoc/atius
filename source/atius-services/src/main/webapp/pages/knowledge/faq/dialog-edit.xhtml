@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:xp="http://java.sun.com/jsf/composite/xp">
+
+	<h:form id="atius-knowledge-faq-edit-form-id">
+
+		<p:dialog id="atius-knowledge-faq-edit-dlg-id" header="Perguntas frequentes" widgetVar="atius_knowledge_faq_edit_dlg" modal="true" width="560"
+			resizable="false" closable="false">
+
+			<h:panelGroup id="atius-knowledge-faq-edit-panel-id">
+
+				<div class="xp-dialog">
+
+					<h:outputText value="Questão:" styleClass="xp-input-label" />
+					<h:inputText value="#{faqEditMB.bean.question}" autocomplete="off" onkeypress="return event.keyCode!=13" styleClass="xp-input"
+						style="width: 492px;" />
+
+					<h:outputText value="Resposta:" styleClass="xp-input-label" />
+					<p:editor value="#{faqEditMB.bean.answer}" onkeypress="return event.keyCode!=13" width="500" style="margin-bottom: 15px;" />
+
+				</div>
+
+				<xp:dialog-buttons id="atius-knowledge-faq-edit-dlg-save-id" dialogId="atius-knowledge-faq-edit-form-id:atius-knowledge-faq-edit-dlg-id"
+					dialogWidgetVar="atius_knowledge_faq_edit_dlg" updateMode="#{faqEditMB.updateMode}" actionUpdater="#{faqEditMB.update}"
+					actionInserter="#{faqEditMB.insert}" actionCloser="#{serviceItemEditMB.editById(serviceItemEditMB.bean.id)}" updateOnClose=":lsrv-body-id"
+					actionNew="#{faqEditMB.editBean(serviceItemEditMB.bean)}" hiddenNew="true"
+					updateOnNew=":atius-knowledge-faq-edit-form-id:atius-knowledge-faq-edit-panel-id" insertMessage="Pergunta cadastrada com sucesso!"
+					updateMessage="Pergunta atualizada com sucesso!" />
+
+			</h:panelGroup>
+
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>
