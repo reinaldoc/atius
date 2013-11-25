@@ -10,7 +10,7 @@
 		<ui:include src="item/dialog-edit.xhtml" />
 		<h:form id="atius-services-group-list-form-id">
 
-			<div class="lsrv-child-id" style="min-height: 45px; padding: 20px 12px 0 0; text-align: center;">
+			<div class="lsrv-child-id" style="min-height: 45px; padding: 20px 12px 10px 0; text-align: center;">
 				<p:commandButton icon="ui-icon-triangle-1-w" value="Voltar" action="/pages/catalog/area.jsf" ajax="false" immediate="true"
 					styleClass="xp-button xp-left" style="margin-left: 41px;" />
 
@@ -21,27 +21,7 @@
 					ajax="false" styleClass="xp-button" />
 			</div>
 
-			<p:confirmDialog message="Deseja excluir o serviço: #{serviceItemEditMB.bean.name} ?" header="Atenção!" severity="alert"
-				id="atius-services-item-delete-dlg-id" widgetVar="atius_services_item_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
-
-				<p:commandButton value="Sim" oncomplete="atius_services_item_delete_dlg.hide()"
-					update=":atius-services-group-list-form-id:atius-services-group-list-panel-id, :growl-id" action="#{serviceItemEditMB.delete}"
-					actionListener="#{serviceItemListMB.list}" style="margin-right: 20px;" />
-
-				<p:commandButton value="Não" onclick="atius_services_item_delete_dlg.hide(); return false;" style="margin-left: 20px;" />
-
-			</p:confirmDialog>
-
-			<p:confirmDialog
-				message="O serviço '#{serviceItemClipboardEditMB.bean.name}' foi selecionado para #{serviceItemClipboardEditMB.operation == 0 ? 'cópia': 'ser movido'}, agora escolha o Grupo ou Subgrupo de destino e cole através do menu."
-				header="Atenção!" severity="info" id="atius-services-item-clipboard-dlg-id" widgetVar="atius_services_item_clipboard_dlg" closable="false"
-				styleClass="xp-confirm-dialog">
-
-				<p:commandButton value="OK" oncomplete="atius_services_item_clipboard_dlg.hide(); return false;" />
-
-			</p:confirmDialog>
-
-			<h:panelGroup layout="block" id="atius-services-group-list-panel-id" style="margin-top: 15px;">
+			<h:panelGroup layout="block" id="atius-services-group-list-panel-id">
 
 				<p:dataList value="#{serviceItemListMB.resultList}" var="serviceItem" styleClass="xp-datalist">
 
@@ -84,6 +64,26 @@
 				</p:dataList>
 
 			</h:panelGroup>
+
+			<p:confirmDialog message="Deseja excluir o serviço: #{serviceItemEditMB.bean.name} ?" header="Atenção!" severity="alert"
+				id="atius-services-item-delete-dlg-id" widgetVar="atius_services_item_delete_dlg" closable="false" styleClass="xp-confirm-dialog">
+
+				<p:commandButton value="Sim" oncomplete="atius_services_item_delete_dlg.hide()"
+					update=":atius-services-group-list-form-id:atius-services-group-list-panel-id, :growl-id" action="#{serviceItemEditMB.delete}"
+					actionListener="#{serviceItemListMB.list}" style="margin-right: 20px;" />
+
+				<p:commandButton value="Não" onclick="atius_services_item_delete_dlg.hide(); return false;" style="margin-left: 20px;" />
+
+			</p:confirmDialog>
+
+			<p:confirmDialog
+				message="O serviço '#{serviceItemClipboardEditMB.bean.name}' foi selecionado para #{serviceItemClipboardEditMB.operation == 0 ? 'cópia': 'ser movido'}, agora escolha o Grupo ou Subgrupo de destino e cole através do menu."
+				header="Atenção!" severity="info" id="atius-services-item-clipboard-dlg-id" widgetVar="atius_services_item_clipboard_dlg" closable="false"
+				styleClass="xp-confirm-dialog">
+
+				<p:commandButton value="OK" oncomplete="atius_services_item_clipboard_dlg.hide(); return false;" />
+
+			</p:confirmDialog>
 
 		</h:form>
 
