@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import br.com.atius.catalog.business.ServiceGroupBC;
 import br.com.atius.catalog.business.ServiceSubgroupBC;
-import br.com.atius.catalog.domain.ServiceGroup;
 import br.com.atius.catalog.domain.ServiceSubgroup;
 import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
@@ -22,9 +21,9 @@ public class ServiceSubgroupEditMB extends AbstractEditPageBean<ServiceSubgroup,
 	@Inject
 	private ServiceGroupBC serviceGroupBC;
 
-	public void editBean(ServiceGroup serviceGroup) {
+	public void editBean(Integer groupId) {
 		super.editBean();
-		getBean().setGroup(serviceGroupBC.load(serviceGroup.getId()));
+		getBean().setGroup(serviceGroupBC.load(groupId));
 	}
 
 	@Override

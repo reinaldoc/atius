@@ -99,7 +99,7 @@
 						oncomplete="atius_services_item_edit_dlg.show();" update=":atius-services-item-edit-form-id:atius-services-item-edit-panel-id"
 						styleClass="at-itembutton xp-right"
 						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
-					<p:commandButton icon="ui-icon-plus" value="Subgrupo" action="#{serviceSubgroupEditMB.editBean(serviceGroupEditMB.bean)}"
+					<p:commandButton icon="ui-icon-plus" value="Subgrupo" action="#{serviceSubgroupEditMB.editBean(serviceGroupEditMB.bean.id)}"
 						oncomplete="atius_services_subgroup_edit_dlg.show();" update=":atius-services-subgroup-edit-form-id:atius-services-subgroup-edit-panel-id"
 						styleClass="at-itembutton xp-right"
 						rendered="#{fuselageMB.hasRole('ATIUS-CATALOG-ADMIN') or fuselageMB.hasRole('LDAPGROUP:'.concat(serviceGroupEditMB.bean.area.role))}" />
