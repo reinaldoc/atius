@@ -21,6 +21,8 @@ public class Repository implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ATIUS_ID")
 	private Integer id;
 
+	private String filename;
+
 	private String contentType;
 
 	@Lob
@@ -32,15 +34,10 @@ public class Repository implements Serializable {
 
 	}
 
-	public Repository(byte[] data, String contentType) {
+	public Repository(byte[] data, String contentType, String filename) {
 		this.data = data;
 		this.contentType = contentType;
-	}
-
-	public Repository(byte[] data, String contentType, String description) {
-		this.data = data;
-		this.contentType = contentType;
-		this.description = description;
+		this.filename = filename;
 	}
 
 	public Integer getId() {
@@ -49,6 +46,14 @@ public class Repository implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 
 	public String getContentType() {

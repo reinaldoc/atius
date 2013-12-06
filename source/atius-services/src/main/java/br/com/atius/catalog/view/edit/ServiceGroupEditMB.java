@@ -58,10 +58,11 @@ public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integ
 	@Override
 	public String update() {
 		try {
-			if (getBean().getImage() != null)
+			if (getBean().getImage() != null) {
+				sessionCatalog.evictRepository(getBean().getImage().getId());
 				getBean().getImage().setDescription("Imagem do grupo: " + getBean().getName());
+			}
 			bc.update(getBean());
-			sessionCatalog.evictRepository(getBean().getId());
 		} catch (RuntimeException e) {
 			Faces.validationFailed();
 			Faces.addI18nMessage("atius.error.generic", SeverityType.ERROR);
@@ -93,10 +94,12 @@ public class ServiceGroupEditMB extends AbstractEditPageBean<ServiceGroup, Integ
 
 	public void upload(FileUploadEvent event) {
 		if (getBean().getImage() == null)
-			getBean().setImage(new Repository(event.getFile().getContents(), event.getFile().getContentType()));
+			getBean().setImage(
+					new Repository(event.getFile().getContents(), event.getFile().getContentType(), event.getFile().getFileName()));
 		else {
 			getBean().getImage().setData(event.getFile().getContents());
 			getBean().getImage().setContentType(event.getFile().getContentType());
+			getBean().getImage().setFilename(event.getFile().getFileName());
 		}
 	}
 
