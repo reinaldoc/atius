@@ -14,8 +14,9 @@
 
 						<div class="at-datalist-item">
 							<h:outputText value="#{serviceArea.name}" />
-							<p:commandButton icon="ui-icon-print" value="Imprimir" action="#{serviceAreaListMB.printArea(serviceArea.id)}" ajax="false" immediate="true"
-								styleClass="at-itembutton xp-right" />
+							<p:commandButton icon="ui-icon-print" value="Imprimir" ajax="false" immediate="true" styleClass="at-itembutton xp-right">
+								<p:fileDownload value="#{serviceAreaListMB.printArea(serviceArea.id)}" />
+							</p:commandButton>
 						</div>
 
 					</p:dataList>

@@ -1,5 +1,6 @@
 package br.com.atius.catalog.view.list;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import br.com.atius.catalog.business.ServiceAreaBC;
 import br.com.atius.catalog.domain.ServiceArea;
@@ -42,7 +46,7 @@ public class ServiceAreaListMB extends AbstractListPageBean<ServiceArea, Integer
 	}
 
 	@RequestScoped
-	public String print() {
+	public StreamedContent print() {
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
 			// params.put("logo", Faces.getReportPath("images/AELIS2012.jpg"));
@@ -50,7 +54,7 @@ public class ServiceAreaListMB extends AbstractListPageBean<ServiceArea, Integer
 			params.put("SUBREPORT_DIR", Faces.getReportPath("catalog"));
 			list();
 			byte[] buffer = report.export(getResultList(), params, Type.PDF);
-			this.renderer.render(buffer, FileRenderer.ContentType.PDF, "catalog.pdf");
+			return new DefaultStreamedContent(new ByteArrayInputStream(buffer), "application/pdf", "catalog.pdf");
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Faces.validationFailed();
@@ -60,14 +64,14 @@ public class ServiceAreaListMB extends AbstractListPageBean<ServiceArea, Integer
 	}
 
 	@RequestScoped
-	public String printArea(Integer id) {
+	public StreamedContent printArea(Integer id) {
 		try {
 			List<ServiceArea> result = new ArrayList<ServiceArea>();
 			result.add(bc.load(id));
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("SUBREPORT_DIR", Faces.getReportPath("catalog"));
 			byte[] buffer = report.export(result, params, Type.PDF);
-			this.renderer.render(buffer, FileRenderer.ContentType.PDF, "catalog.pdf");
+			return new DefaultStreamedContent(new ByteArrayInputStream(buffer), "application/pdf", "catalog.pdf");
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			Faces.validationFailed();
